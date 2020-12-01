@@ -1,0 +1,26 @@
+{
+  "name": "ascentcreative/cms",
+  "description": "Core CMS Elements",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Ascent Creative",
+      "email": "info@ascent-creative.co.uk"
+    }
+  ],
+  "require": {
+    "laravel/fortify": "^1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "AscentCreative\\CMS\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+        "providers": [
+            "AscentCreative\\CMS\\CMSServiceProvider"
+        ]
+    }
+}
+}
