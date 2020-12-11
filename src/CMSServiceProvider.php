@@ -33,10 +33,11 @@ class CMSServiceProvider extends ServiceProvider
   // register the components
   public function bootComponents() {
 
-      Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
-      Blade::component('cms-form-input', 'AscentCreative\CMS\View\Components\Form\Input');
-      Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
-      Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
+    Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
+    Blade::component('cms-form-input', 'AscentCreative\CMS\View\Components\Form\Input');
+    Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
+    Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
+    Blade::component('cms-form-pivotlist', 'AscentCreative\CMS\View\Components\Form\PivotList');
 
 
   }
