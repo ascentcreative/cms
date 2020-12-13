@@ -1,5 +1,10 @@
 // ******
 // Custom form component to enter & edit pivot records
+// Expects incoming Pivot Table data from Laravel Eloquent
+// Allows for setting of fields on the Pivot Record:
+// - AddToAll - A field name and fixed value. Used when a siingle pivot table differentiates between different types (i.e. a role type where a single pivot may record different roles)
+// - PivotField - An editable field value to collect for each pivot row
+// - SortField - Captures the sort order of the pivot rows
 // ******
 // Code (c) Kieran Metcalfe / Ascent Creative 2020
 
@@ -7,14 +12,11 @@
 $.ascent = $.ascent?$.ascent:{};
 
 var PivotList = {
-		
+        
 		rowCount: 0,
 
 		_init: function () {
             
-            
-         //alert('ok');
-
 			var self = this;
 			this.widget = this;
 			
@@ -27,20 +29,17 @@ var PivotList = {
             var obj = this.element;
             
             // build the basic UI
-            var outer = $('<div class="pivotlist"></div>');
-
+            // wrap the main element in a new DIV, transfer the ID and remove initial element.
+            var outer = $('<div class="pivotlist bg-light p-3"></div>');
             obj.wrap(outer);
-
-            
-
             outer = obj.closest('.pivotlist');
-
+            outer.attr('id', obj.attr('id'));
+            this.element = outer;
             obj.remove();
-			
+            
+            // read in options and process
             var opts = self.options;
             
-            //console.log(opts.data);
-
 			if(opts.width) {
 				
 				if (typeof opts.width === 'string' && opts.width.slice(-1) == '%') {
@@ -55,17 +54,17 @@ var PivotList = {
 			
 			if (!opts.placeholder) {
 				opts.placeholder = '';
-			}
-			
-			$(outer).append('<UL class="pivotlist-list"></UL>');
-			
-			$(outer).find(".pivotlist-list").append('<LI class="emptyDisp">No items selected</LI>');
-			
-			$(outer).append('<DIV class="inputbar"><DIV class="inputwrap"><INPUT type="text" id="' + thisID + '-input" spellcheck="false" placeholder="' + opts.placeholder + '"/></DIV><!--<A href="#" id="' + thisID + '-addlink">Add</A>--></DIV>');
+            }
+            
+
+			// create the UL and autocomplete fields
+			$(outer).append('<UL class="pivotlist-list list-group py-2"></UL>');
+			$(outer).find(".pivotlist-list").append('<LI class="emptyDisp list-group-item border-0">No items selected</LI>');
+			$(outer).append('<DIV class="inputbar d-flex align-items-center"><INPUT type="text" id="' + thisID + '-input" class="flex-fill mr-2 form-control" spellcheck="false" placeholder="' + opts.placeholder + '"/><A href="#" id="' + thisID + '-addlink" class="btn-sm btn-primary">Add</A></DIV>');
 		
 			// autocomplete and events
 			$("#" + thisID + "-input").autocomplete({
-				source: opts.autocompleteURL,
+				source: opts.optionRoute, //opts.autocompleteURL,
 			    minLength: 2,
 			    select: function( event, ui ) {
 			    	
@@ -75,17 +74,15 @@ var PivotList = {
 						// check for duplicates (across all source fields)
 						alert ("That item has already been added.")
 			    		} else {
-			    			self.createBlock('', ui.item.id, ui.item.label);
+			    			self.createBlock('', ui.item.id, ui.item.label, ui.item);
 			    			console.log(event);
 			    			$("#" + thisID + "-input").val('');
 			    		}
 			     	
 			     	
 			     	return false;
-			   
-			    //	$("#" + thisID + "-input").data('idModel', ui.item.id);
-			    	//$("#" + thisID + "-input").data('display', ui.item.label);
-    			},
+    
+                },
     			
 			});
 			
@@ -121,33 +118,22 @@ var PivotList = {
 				return false;
 			});
 			
-			
-			this.element.children('.idLinkField').each(function() {
-				
-				aryName = $(this).attr('id').split('-');
-			
-				self.createBlock($('#' + aryName[0] + '-' + aryName[1] + '-' + 'idLink')[0].value, $('#' + aryName[0] + '-' + aryName[1] + '-' + 'idModel')[0].value, $('#' + aryName[0] + '-' + aryName[1] + '-' + 'display')[0].value, aryName[1]);
-				
-				// remove fields
-				$('#' + aryName[0] + '-' + aryName[1] + '-' + 'idModel').remove();
-				$('#' + aryName[0] + '-' + aryName[1] + '-' + 'display').remove();
-				$('#' + aryName[0] + '-' + aryName[1] + '-' + 'idLink').remove();
-				
-			}); 
-			
-			if (opts.allowItemDrag) {
+            // create items for incoming data 
+        	for(item in opts.data) {
 	
-				$("#" + thisID + " .HQLinkList-list").sortable({
+				self.createBlock('', opts.data[item].id, opts.data[item].name, opts.data[item]);
+			
+			}
+            
+            if (opts.allowItemDrag) {
+	
+				$("#" + thisID + " .pivotlist-list").sortable({
 					axis: "y",
 					connectWith: '#' + thisID + ' ul',
 					containment: '#' + thisID,
 				
 				update: function(event, ui) {
-					
-					console.log(opts);
-					//alert (thisID);
 					opts.widget.updateData();
-					
 				},
 				
 				stop: function(event, ui) {
@@ -157,46 +143,62 @@ var PivotList = {
 			}); 
 			}
 			
-			$(".HQLinkList-list").disableSelection();
-			
 			opts.widget = this;
 			
 			
 		},
 		
-		createBlock: function (idLink, idModel, display) {
-			
-			console.log(idLink + ' : ' + idModel + ' : ' + display);
-			
-			var thisID = (this.element)[0].id;
-			var fldName = thisID.split('-')[1];
+		createBlock: function (idLink, idModel, display, item) {
+            
+            var thisID = (this.element)[0].id;
+			var fldName = thisID; //.split('-')[1];
 			var widget = this.widget;
 			
-			idx = $("#" + thisID + " .HQLinkList-list LI.link").length; // + 1;
+			idx = $("#" + thisID + " .pivotlist-list LI.link").length; // + 1;
 			
 			liStr = display;
-		//	liStr += '<INPUT type="hidden" class="sourceOrder" name="' + fldName + '[' + idx + '][sourceOrder]" value="' + idx + '">';
-			liStr += '<INPUT type="hidden" class="idModel" name="' + fldName + '[' + idx + '][idModel]" value="' + idModel + '">';
-			liStr += '<INPUT type="hidden" class="display" name="' + fldName + '[' + idx + '][display]" value="' + display + '">';
-			liStr += '<INPUT type="hidden" class="idLink" name="' + fldName + '[' + idx + '][idLink]" value="' + idLink + '">';
-			liStr += '<A href="#" class="deleteLink">x</A>';
+		    liStr += '<INPUT type="hidden" class="id" name="' + fldName + '[' + idModel + ']" value="' + idModel + '">';
+            
+            // write in any set values for the pivot table
+            for(key in this.options.addToAll) {
+                liStr += '<INPUT type="hidden" class="ata-' + key + '" name="' + fldName + '[' + idModel + '][' + key + ']" value="' + this.options.addToAll[key] + '">';
+            }
+            
+            // if a pivot table sort field is set, create the field
+            if (this.options.sortField) {
+                liStr += '<INPUT type="hidden" class="sortField" name="' + fldName + '[' + idModel + '][' + this.options.sortField + ']" value="' + idx + '">';
+            }
+            
+            // pivotField is a user-editable field on the pivot table.
+            // if set, this displays a text field on the pivot row which can be given a value. Also reads the incoming value from the data.
+            if(this.options.pivotField) {
+               pivotval = '';
+                if(item.pivot) {
+                    pivotval = item.pivot[this.options.pivotField];
+                }
+               liStr += '<div class="pivotlist-pivotfieldwrap form-inline">';
+               if (this.options.pivotFieldLabel) {
+                   liStr += '<label class="mr-2">' + this.options.pivotFieldLabel + '</label>';
+               }
+               liStr += '<INPUT type="text" class="pivotField form-control w-25" name="' + fldName + '[' + idModel + '][' + this.options.pivotField + ']" value="' + pivotval + '">';
+               liStr += '</div>';
+            }
+
+            // the delete link for the item
+        	liStr += '<A href="#" class="deleteLink text-danger"><i class="bi-x-square-fill text-danger fs-1"/></A>';
 			
-			safeid = idModel.replace('~', '_');
+			safeid = idModel; //.replace('~', '_');
+            
+            // add the created LI to the List
+			$("#" + thisID + " .pivotlist-list").append('<LI class="link list-group-item border mb-2 d-flex justify-content-between align-items-center" id="' + safeid + '">' + liStr + '</LI>');
+			// if not already hidden, hide the placeholder 'No Items' element
+			$("#" + thisID + " .pivotlist-list LI.emptyDisp").hide();
 			
 			
-			$("#" + thisID + " .HQLinkList-list").append('<LI class="link" id="' + safeid + '">' + liStr + '</LI>');
-			
-			$("#" + thisID + " .HQLinkList-list LI.emptyDisp").hide();
-			
-			
-			
+			// Code the operation of the delete link:
 			$("#" + thisID + " LI#" + safeid + " A.deleteLink").click(function (event) {
 				
-				
 				pSrc = $(this).parents(".linklist");
-				
-				//$(pSrc).find("LI.link#" + safeid).remove();
-				
 				$(this).parents("LI.link").remove();
 				
 				if(pSrc.find("LI.link").length > 0) {
@@ -205,7 +207,7 @@ var PivotList = {
 					pSrc.find("LI.emptyDisp").show();
 				}
 				
-				widget.updateData();
+				widget.updateData(); // call method to update the data in the widget (i.e. update sort indeces etc)
 				return false;
 				
 			});
@@ -214,46 +216,23 @@ var PivotList = {
 		
 		updateData: function() {
 			
-			
-			
 			thisID = (this.widget.element)[0].id;
 			
-		//	alert('updating ' + thisID);
-			
-			// update the sortOrder fields so they're ready for saving into the database
-			// (or at least, the data heading to the database is ordered correctly...);
-			//$(this).find(".sourceOrder").each(function(i) {
-			//	this.value = i+1;
-			//});
-			
-			
-			
+			// show or hide the 'No Items' block as needed by the amount of data in the widget
 			if($(this.widget.element).find("LI.link").length > 0) {
 				$(this.widget.element).find("LI.emptyDisp").hide();
 			} else {
 				$(this.widget.element).find("LI.emptyDisp").show();
 			}
-			
-			
-			// need to ensure all field names start with the right element id
-			// i.e. if drag and drop between fields keeps the hidden fields linked to the old element id
-			// data will be sent and processed incorrectly
-			
-			$(this.widget.element).find('LI.link').each(function(i) {
-		//		alert(i);
-				console.log(i);
-				// regex match - does the field name begin with the right string
-				fldName = thisID.split('-')[1];
-				//alert(this.id);
-				$(this).find('.idModel')[0].name = fldName + '[' + i + '][idModel]';
-				$(this).find('.display')[0].name = fldName + '[' + i + '][display]';
-				$(this).find('.idLink')[0].name = fldName + '[' + i + '][idLink]';
-				//if (!this.name.match("^" + fldName)) {
-			//		nameAry = this.name.split('[');
-			//		this.name = fldName + '[' + (i+1) + '][' + nameAry[2];
-				//}
-				
-			});
+	
+            // update the sortFields (if specified) so the posted data records the order of the items
+            if (this.options.sortField) {
+
+                $(this.widget.element).find('LI.link').each(function(i) {
+                    $(this).find('.sortField').val(i);
+                });
+
+            }
 			
 			
 		}

@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// For complete reference see:
 	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
 	
-	config.skin = "moono";
+	config.skin = "bootstrapck";
 	config.width = 800;
 	//config.height = 600;
 	config.contentsCss = '/css/fck_editorarea.css';

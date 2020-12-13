@@ -15,9 +15,16 @@
         $(document).ready(function() {
             
             $('#{{$name}}').pivotlist({
+                optionRoute: '{{$optionRoute}}',
                 labelField: '{{$labelField}}',
                 data: @json($value),
-                placeholder: 'Type a few characters...'
+                placeholder: 'Type a few characters to search...',
+                allowItemDrag: 1,
+                addToAll: @json($addToAll),
+                sortField: '{{$sortField}}',
+                pivotField: '{{$pivotField}}',
+                pivotFieldLabel: '{{$pivotFieldLabel}}'
+
 
             });
 
@@ -29,8 +36,7 @@
 @section('name'){{$name}}@overwrite
 
 @section('element')
- 
-   
-    <input type="{{$type}}" name="{{$name}}" id="{{$name}}" value="" class="form-control"/>
+
+    <input name="{{$name}}" id="{{$name}}" value="" class="form-control"/>
 
 @overwrite

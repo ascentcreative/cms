@@ -7,25 +7,78 @@ use Illuminate\View\Component;
 class PivotList extends Component
 {
 
-    public $type;
     public $label;
     public $name;
     public $value;
+
+    public $optionRoute;
     public $labelField;
+    public $addToAll;
+    public $sortField;
+    public $pivotField;
+    public $pivotFieldLabel;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value, $labelField)
+    public function __construct($label, $name, $value, $optionRoute, $labelField, $addToAll=null, $sortField=null, $pivotField=null, $pivotFieldLabel=null)
     {
-        $this->type = $type;
+     
+        /*
+          The Label to display next to the component
+          */
         $this->label = $label;
+
+        /* 
+        The field name (to match model property name)
+        */
         $this->name = $name;
+        
+        /*
+        The value to set the component with on form load
+        */
         $this->value = $value;
+        
+        /*
+        The URL to which the type-ahead/automplete terms will be sent
+        */
+        $this->optionRoute = $optionRoute;
+
+        /*
+        The field from the autocomplete data to be used as the label for the individual elements
+        */
         $this->labelField = $labelField;
 
+        /*
+        [OPTIONAL] 
+        An array of fieldname=>value - this will be set on all items when the data is submitted.
+        Useful where the pivot rows are classified by different types/roles
+        */
+        $this->addToAll = $addToAll;
+
+        /*
+        [OPTIONAL]
+        The name of the pivot table field which controls the sort order of the elements. 
+        Specifying this makes the list draggable/sortable. The indexes are written to this field and
+        submitted to the server
+        */
+        $this->sortField = $sortField;
+
+        /* 
+        [OPTIONAL]
+        The fieldname of a text field to add to the elements. Allows extra user input to be given. 
+        The entered value will be written the field of this name in the pivot table.
+        */
+        $this->pivotField = $pivotField;
+
+        /*
+        [OPTIONAL]
+        A text label for the above pivotField
+        */
+        $this->pivotFieldLabel = $pivotFieldLabel;
+     
     }
 
     /**
