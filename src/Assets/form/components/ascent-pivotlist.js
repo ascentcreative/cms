@@ -30,7 +30,7 @@ var PivotList = {
             
             // build the basic UI
             // wrap the main element in a new DIV, transfer the ID and remove initial element.
-            var outer = $('<div class="pivotlist bg-light p-3"></div>');
+            var outer = $('<div class="pivotlist p-3" style="background: #eee"></div>');
             obj.wrap(outer);
             outer = obj.closest('.pivotlist');
             outer.attr('id', obj.attr('id'));
@@ -156,7 +156,7 @@ var PivotList = {
 			
 			idx = $("#" + thisID + " .pivotlist-list LI.link").length; // + 1;
 			
-			liStr = display;
+			liStr = '<div class="pivotlist-item-label flex-fill">' + display + '</div>';
 		    liStr += '<INPUT type="hidden" class="id" name="' + fldName + '[' + idModel + ']" value="' + idModel + '">';
             
             // write in any set values for the pivot table
