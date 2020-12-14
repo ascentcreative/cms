@@ -17,13 +17,14 @@ class PivotList extends Component
     public $sortField;
     public $pivotField;
     public $pivotFieldLabel;
+    public $pivotFieldPlaceholder;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $optionRoute, $labelField, $addToAll=null, $sortField=null, $pivotField=null, $pivotFieldLabel=null)
+    public function __construct($label, $name, $value, $optionRoute, $labelField, $addToAll=null, $sortField=null, $pivotField=null, $pivotFieldLabel=null, $pivotFieldPlaceholder=null)
     {
      
         /*
@@ -78,6 +79,12 @@ class PivotList extends Component
         A text label for the above pivotField
         */
         $this->pivotFieldLabel = $pivotFieldLabel;
+
+        /*
+        [OPTIONAL]
+        Text to show in the pivotField when no value ahs been entered
+        */
+        $this->pivotFieldPlaceholder = $pivotFieldPlaceholder;
      
     }
 

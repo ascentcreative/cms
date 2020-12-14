@@ -73,13 +73,13 @@ var PivotList = {
 			    		if (  $("#" + thisID + " #" + ui.item.id).length > 0 ) {
 						// check for duplicates (across all source fields)
 						alert ("That item has already been added.")
-			    		} else {
+			    		} else { 
 			    			self.createBlock('', ui.item.id, ui.item.label, ui.item);
 			    			console.log(event);
 			    			$("#" + thisID + "-input").val('');
-			    		}
-			     	
-			     	
+						}
+						
+						
 			     	return false;
     
                 },
@@ -173,14 +173,14 @@ var PivotList = {
             // if set, this displays a text field on the pivot row which can be given a value. Also reads the incoming value from the data.
             if(this.options.pivotField) {
                pivotval = '';
-                if(item.pivot) {
+                if(item.pivot && item.pivot[this.options.pivotField] != null) {
                     pivotval = item.pivot[this.options.pivotField];
                 }
                liStr += '<div class="pivotlist-pivotfieldwrap form-inline">';
                if (this.options.pivotFieldLabel) {
                    liStr += '<label class="mr-2">' + this.options.pivotFieldLabel + '</label>';
                }
-               liStr += '<INPUT type="text" class="pivotField form-control w-25" name="' + fldName + '[' + idModel + '][' + this.options.pivotField + ']" value="' + pivotval + '">';
+               liStr += '<INPUT type="text" class="pivotField form-control w-25" placeholder="' + this.options.pivotFieldPlaceholder + '" name="' + fldName + '[' + idModel + '][' + this.options.pivotField + ']" value="' + pivotval + '">';
                liStr += '</div>';
             }
 

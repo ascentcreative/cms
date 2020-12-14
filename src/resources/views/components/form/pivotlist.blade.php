@@ -23,8 +23,8 @@
                 addToAll: @json($addToAll),
                 sortField: '{{$sortField}}',
                 pivotField: '{{$pivotField}}',
-                pivotFieldLabel: '{{$pivotFieldLabel}}'
-
+                pivotFieldLabel: '{{$pivotFieldLabel}}',
+                pivotFieldPlaceholder: '{{$pivotFieldPlaceholder}}'
 
             });
 
