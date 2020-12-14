@@ -6,7 +6,7 @@
 @section('element')
 
     <select name="{{$name}}" class="form-control">
-        <option>Please Select:</option>
+        <option value="">Please Select:</option>
 
         <?php 
         
