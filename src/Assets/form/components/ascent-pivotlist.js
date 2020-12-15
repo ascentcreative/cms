@@ -30,7 +30,7 @@ var PivotList = {
             
             // build the basic UI
             // wrap the main element in a new DIV, transfer the ID and remove initial element.
-            var outer = $('<div class="pivotlist p-3" style="background: #eee"></div>');
+            var outer = $('<div class="pivotlist p-3 bg-light border" style="xbackground: #eee"></div>');
             obj.wrap(outer);
             outer = obj.closest('.pivotlist');
             outer.attr('id', obj.attr('id'));
@@ -58,8 +58,8 @@ var PivotList = {
             
 
 			// create the UL and autocomplete fields
-			$(outer).append('<UL class="pivotlist-list list-group py-2"></UL>');
-			$(outer).find(".pivotlist-list").append('<LI class="emptyDisp list-group-item border-0">No items selected</LI>');
+			$(outer).append('<UL class="pivotlist-list list-group pb-2"></UL>');
+			$(outer).find(".pivotlist-list").append('<LI class="emptyDisp list-group-item border-0 bg-transparent">No items selected</LI>');
 			$(outer).append('<DIV class="inputbar d-flex align-items-center"><INPUT type="text" id="' + thisID + '-input" class="flex-fill mr-2 form-control" spellcheck="false" placeholder="' + opts.placeholder + '"/><A href="#" id="' + thisID + '-addlink" class="btn-sm btn-primary">Add</A></DIV>');
 		
 			// autocomplete and events
@@ -185,7 +185,7 @@ var PivotList = {
             }
 
             // the delete link for the item
-        	liStr += '<A href="#" class="deleteLink text-danger"><i class="bi-x-square-fill text-danger fs-1"/></A>';
+        	liStr += '<A href="#" class="deleteLink text-danger" tabindex="-1"><i class="bi-x-square-fill text-danger fs-1"/></A>';
 			
 			safeid = idModel; //.replace('~', '_');
             
