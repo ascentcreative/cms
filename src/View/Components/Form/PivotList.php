@@ -3,6 +3,7 @@
 namespace AscentCreative\CMS\View\Components\Form;
 
 use Illuminate\View\Component;
+use Illuminate\Database\Eloquent\Collection;
 
 class PivotList extends Component
 {
@@ -10,6 +11,8 @@ class PivotList extends Component
     public $label;
     public $name;
     public $value;
+
+    public $dataval;
 
     public $optionRoute;
     public $labelField;
@@ -24,7 +27,9 @@ class PivotList extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $optionRoute, $labelField, $addToAll=null, $sortField=null, $pivotField=null, $pivotFieldLabel=null, $pivotFieldPlaceholder=null)
+    public function __construct($label, $name, $value, $optionRoute, $optionModel, $labelField, 
+                                $addToAll=null, $sortField=null, 
+                                $pivotField=null, $pivotFieldLabel=null, $pivotFieldPlaceholder=null)
     {
      
         /*
@@ -40,7 +45,10 @@ class PivotList extends Component
         /*
         The value to set the component with on form load
         */
-        $this->value = $value;
+        //$this->value = $value;
+
+
+     
         
         /*
         The URL to which the type-ahead/automplete terms will be sent
@@ -85,7 +93,73 @@ class PivotList extends Component
         Text to show in the pivotField when no value ahs been entered
         */
         $this->pivotFieldPlaceholder = $pivotFieldPlaceholder;
-     
+
+        // can something here fill in the missing display-only data?
+        // i.e. if we tell the component which model it's displaying, and the label property
+        // the code can fetch that on load. 
+        // this will keep the transmitted data to a minimum and match the format required for the sync
+        // 
+
+        $this->optionModel = $optionModel;
+
+      
+          // format incoming value data
+        
+          if (is_object($value) && $value instanceof Collection) {
+
+                $data = array();
+                foreach($value as $idx=>$itm) {
+                    // id is the key for our array
+                
+                    $row = $itm->pivot;
+
+                    $cls = $this->optionModel;
+                    $lbl = $this->labelField;
+                    $cls = $cls::find($itm->id);
+                    
+                    $row['id'] = $itm->id;
+                    $row['label'] = $cls->$labelField;
+                    
+                    $data[] = $row;
+
+                }
+                
+                $this->value = $data;
+
+
+        } else if (is_array($value)) { 
+
+            // incoming data is an array, so is in a different format 
+            // to the Eloquent Collection above. Most likely from a validation 
+            // failure elswhere on the form (i.e. formatted for Pivot Sync, rather than 
+            // data from the query). 
+  
+            $data = array();
+            foreach($value as $idx=>$row) {
+
+                $cls = $this->optionModel;
+                $lbl = $this->labelField;
+                $cls = $cls::find($idx);
+                    
+                $row['id'] = $idx;
+                $row['label'] = $cls->$labelField;
+
+                $data[] = $row;
+            }
+
+            $this->value = $data;
+
+        } else {
+            echo 'Unexpected Data Type';
+        }
+        
+    }
+
+
+    public function getDataAttribute() {
+
+            return array(1,2,3);
+
     }
 
     /**

@@ -6,7 +6,7 @@
             {{ $slot }}
         </small>
         @if($errors->first($name))
-            <small class="alert alert-danger form-text" role="alert">
+            <small class="validation-error alert alert-danger form-text" role="alert">
                 {{ $errors->first($name) }}
             </small>
         @endif

@@ -121,7 +121,7 @@ var PivotList = {
             // create items for incoming data 
         	for(item in opts.data) {
 	
-				self.createBlock('', opts.data[item].id, opts.data[item].name, opts.data[item]);
+				self.createBlock('', item, opts.data[item].label, opts.data[item]);
 			
 			}
             
@@ -149,6 +149,9 @@ var PivotList = {
 		},
 		
 		createBlock: function (idLink, idModel, display, item) {
+
+			console.log(idModel);
+			console.log(item);
             
             var thisID = (this.element)[0].id;
 			var fldName = thisID; //.split('-')[1];
@@ -157,37 +160,39 @@ var PivotList = {
 			idx = $("#" + thisID + " .pivotlist-list LI.link").length; // + 1;
 			
 			liStr = '<div class="pivotlist-item-label flex-fill">' + display + '</div>';
-		    liStr += '<INPUT type="hidden" class="id" name="' + fldName + '[' + idModel + ']" value="' + idModel + '">';
+		    liStr += '<INPUT type="hidden" class="id" name="' + fldName + '[' + item.id + ']" value="' + item.id + '">';
             
             // write in any set values for the pivot table
             for(key in this.options.addToAll) {
-                liStr += '<INPUT type="hidden" class="ata-' + key + '" name="' + fldName + '[' + idModel + '][' + key + ']" value="' + this.options.addToAll[key] + '">';
+                liStr += '<INPUT type="hidden" class="ata-' + key + '" name="' + fldName + '[' + item.id + '][' + key + ']" value="' + this.options.addToAll[key] + '">';
             }
             
             // if a pivot table sort field is set, create the field
             if (this.options.sortField) {
-                liStr += '<INPUT type="hidden" class="sortField" name="' + fldName + '[' + idModel + '][' + this.options.sortField + ']" value="' + idx + '">';
-            }
+                liStr += '<INPUT type="hidden" class="sortField" name="' + fldName + '[' + item.id + '][' + this.options.sortField + ']" value="' + idx + '">';
+			}
+			
+		//	liStr += '<INPUT type="hidden" class="BREAKME" name="' + fldName + '[' + idModel + '][breakme]" value="' + idx + '">';
+            
             
             // pivotField is a user-editable field on the pivot table.
             // if set, this displays a text field on the pivot row which can be given a value. Also reads the incoming value from the data.
             if(this.options.pivotField) {
-               pivotval = '';
-                if(item.pivot && item.pivot[this.options.pivotField] != null) {
-                    pivotval = item.pivot[this.options.pivotField];
-                }
-               liStr += '<div class="pivotlist-pivotfieldwrap form-inline">';
+				var pivotval = item[this.options.pivotField] != null? item[this.options.pivotField] : '';
+			   
+				liStr += '<div class="pivotlist-pivotfieldwrap form-inline">';
                if (this.options.pivotFieldLabel) {
                    liStr += '<label class="mr-2">' + this.options.pivotFieldLabel + '</label>';
                }
-               liStr += '<INPUT type="text" class="pivotField form-control w-25" placeholder="' + this.options.pivotFieldPlaceholder + '" name="' + fldName + '[' + idModel + '][' + this.options.pivotField + ']" value="' + pivotval + '">';
+               liStr += '<INPUT type="text" class="pivotField form-control w-25" placeholder="' + this.options.pivotFieldPlaceholder + '" name="' + fldName + '[' + item.id + '][' + this.options.pivotField + ']" value="' + pivotval + '">';
                liStr += '</div>';
             }
+
 
             // the delete link for the item
         	liStr += '<A href="#" class="deleteLink text-danger" tabindex="-1"><i class="bi-x-square-fill text-danger fs-1"/></A>';
 			
-			safeid = idModel; //.replace('~', '_');
+			safeid = item.id; //.replace('~', '_');
             
             // add the created LI to the List
 			$("#" + thisID + " .pivotlist-list").append('<LI class="link list-group-item border mb-2 d-flex justify-content-between align-items-center" id="' + safeid + '">' + liStr + '</LI>');
