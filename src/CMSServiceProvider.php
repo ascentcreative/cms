@@ -26,6 +26,7 @@ class CMSServiceProvider extends ServiceProvider
 
     $this->loadViewsFrom(__DIR__.'/resources/views', 'cms');
 
+    $this->loadRoutesFrom(__DIR__.'/routes/web.php');
     
 
   }
@@ -38,6 +39,7 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
     Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
     Blade::component('cms-form-pivotlist', 'AscentCreative\CMS\View\Components\Form\PivotList');
+    Blade::component('cms-form-biblereflist', 'AscentCreative\CMS\View\Components\Form\BibleRefList');
 
 
   }
