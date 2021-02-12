@@ -112,12 +112,14 @@ abstract class AdminBaseController extends Controller
     }
 
 
-
-
-    public abstract function commitModel(Request $request, Model $model);
-
+    /* implement tthis method to specify input validation rules to be applied before attempting to commit the model to the database */
     public abstract function rules(Request $request, $model);
 
+
+    /* implement this method with the code which reads data from the request into the Model and commits it to the database */
+    public abstract function commitModel(Request $request, Model $model);
+
+    
 
     /**
      * Remove the specified resource from storage.
