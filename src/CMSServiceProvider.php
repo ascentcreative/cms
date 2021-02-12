@@ -27,8 +27,9 @@ class CMSServiceProvider extends ServiceProvider
     $this->loadViewsFrom(__DIR__.'/resources/views', 'cms');
 
     $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-    
 
+    $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    
   }
 
   // register the components
