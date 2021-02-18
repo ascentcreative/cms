@@ -140,7 +140,8 @@ class PivotList extends Component
                 $cls = $this->optionModel;
                 $lbl = $this->labelField;
                 $cls = $cls::find($idx);
-                    
+
+                $row = array();    
                 $row['id'] = $idx;
                 $row['label'] = $cls->$labelField;
 
