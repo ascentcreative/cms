@@ -141,6 +141,7 @@ class PivotList extends Component
                 $lbl = $this->labelField;
                 $cls = $cls::find($idx);
                     
+                $row = array();
                 $row['id'] = $idx;
                 $row['label'] = $cls->$labelField;
 
