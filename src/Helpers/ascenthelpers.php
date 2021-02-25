@@ -1,7 +1,10 @@
 <?php 
 
-use MatthiasMullie\Minify;
+use MatthiasMullie\Minify; // thanks to Mr Mullie for the Minification Engine...
 // new version using minification
+// to be fair, there's no actual autversioning, as the approach for that doesn't work with Artisan.
+// Maybe I should set this up so that both AV and Min can be specified as needed, BUT also disabled on a server level (config)
+// i.e. better for dev when you don't a) need a versioned file, and b) minification makes debugging <tricky class=""></tricky>
 function autoVersion($file, $min=true) {
 
 		// if not set to minify, just return the filename
@@ -47,14 +50,7 @@ function autoVersion($file, $min=true) {
 		          
 		    }
 		    
-		    
-		 //   $cfg = Zend_Registry::get('config');
-		 //   require_once($cfg->corebasepath . '/Mullie/init.php');
-		    
-		////    echo $file;
-		  //  echo $tgt;
-		    
-		 //   exit();
+			// perform the actual minification of the files:
 		    
 		    if ($ext == 'js') {
 		        $minify = new Minify\JS($_SERVER['DOCUMENT_ROOT'] . $file);
@@ -82,12 +78,10 @@ function autoVersion($file, $min=true) {
 }
 
 
-
-
 function controller() {
 	
-// work out the current controller...
-$ctrl = explode('@', Route::current()->getAction()['controller']);
-return $ctrl[0];
+	// work out the current controller...
+	$ctrl = explode('@', Route::current()->getAction()['controller']);
+	return $ctrl[0];
 
 }
