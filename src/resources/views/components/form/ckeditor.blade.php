@@ -5,8 +5,8 @@
 
 @once
     @push('scripts')
-        @script('/vendor/ascent/cms/ckeditor/ckeditor.js')
-        @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js')
+        @script('/vendor/ascent/cms/ckeditor/ckeditor.js', false)
+        @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js', false)
     @endpush
 @endonce
 

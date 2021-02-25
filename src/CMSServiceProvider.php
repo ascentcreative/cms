@@ -52,12 +52,12 @@ class CMSServiceProvider extends ServiceProvider
   public function bootDirectives() {
 
 
-    Blade::directive('script', function ($file) {
-      return "<SCRIPT src=" . autoVersion($file) . "></SCRIPT>";
+    Blade::directive('script', function ($file, $min=true) {
+      return '<SCRIPT src="<?php echo autoVersion(' . $file . ', ' . $min . '); ?>"></SCRIPT>';
     });
 
     Blade::directive('style', function ($file) {
-      return "<LINK rel=\"stylesheet\" href=\"" . autoVersion($file) . "\"/>";
+      return '<LINK rel="stylesheet" href="<?php echo autoVersion(' . $file . '); ?>"/>';
     });
 
     Blade::directive('autoVersion', function($file){

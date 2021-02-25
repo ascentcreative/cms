@@ -2,11 +2,11 @@
 
 @once
     @push('styles')
-        @style(/vendor/ascent/cms/form/components/ascent-biblereflist.css)
+        @style('/vendor/ascent/cms/form/components/ascent-biblereflist.css')
     @endpush
 
     @push('scripts')
-        @script(/vendor/ascent/cms/form/components/ascent-biblereflist.js)
+        @script('/vendor/ascent/cms/form/components/ascent-biblereflist.js')
     @endpush
 @endonce
 
