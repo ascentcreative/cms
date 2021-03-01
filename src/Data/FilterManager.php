@@ -50,8 +50,6 @@ class FilterManager {
 
     public function getFilterOptions($rel, $filters) {
 
-      //  unset($filters['page']);
-
         $cls = get_class($this->_model::first()->$rel()->getRelated());
 
         $fn = function (Builder $sub) use ($rel, $filters) {
