@@ -18,38 +18,50 @@ class FilterManager {
 
     public function filter($filters, $sort) {
 
+        // ignore pagination
+      //  unset($filters['page']);
+
         $qry = $this->_model::orderBy('title');
         
         foreach($filters as $rel=>$vals) {
 
-            if (!is_array($vals)) {
-                $vals = array($vals);
-            }
+            if ($rel != 'page') {
 
-            $table = $this->_model::first()->$rel()->getRelated()->getTable();
-            
-            $qry->whereHas($rel, function (Builder $sub) use ($table, $vals) {
-                $sub->whereIn($table . '.id', $vals);
-            });
+                if (!is_array($vals)) {
+                    $filtervals = array($vals);
+                } else {
+                    $filtervals = $vals;
+                }
+
+                $table = $this->_model::first()->$rel()->getRelated()->getTable();
+                
+                $qry->whereHas($rel, function (Builder $sub) use ($table, $filtervals) {
+                    $sub->whereIn($table . '.id', $filtervals);
+                }); 
+
+            }
 
         }
 
-        return $qry->get();
+        return $qry;
 
     }
 
 
     public function getFilterOptions($rel, $filters) {
 
+      //  unset($filters['page']);
+
         $cls = get_class($this->_model::first()->$rel()->getRelated());
 
         $fn = function (Builder $sub) use ($rel, $filters) {
 
             foreach($filters as $key=>$vals) {
+
                 // need to ignore the filters for the request relationships as they'll skew the results
                 // trust me...
 
-                if ($key != $rel) {
+                if ($key != $rel && $key != 'page') {
                     $table = $this->_model::first()->$key()->getRelated()->getTable(); 
                     
                     $sub->whereHas($key, function (Builder $sub2) use ($table, $vals) {
@@ -66,7 +78,7 @@ class FilterManager {
 
         $qry = $cls::whereHas('songs', $fn)->withCount(['songs' => $fn]);
 
-        return $qry->orderBy('songs_count', 'desc')->get();
+        return $qry->orderBy('songs_count', 'desc');
 
     }
 
