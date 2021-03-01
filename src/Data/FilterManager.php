@@ -14,17 +14,15 @@ class FilterManager {
         $this->_model = $model;
     }
 
-
-
     public function filter($filters, $sort) {
-
-        // ignore pagination
-      //  unset($filters['page']);
 
         $qry = $this->_model::orderBy('title');
         
         foreach($filters as $rel=>$vals) {
 
+            // ignore pagination parameters
+            // probably need more robust error handling to 
+            // only process relationships we know about...
             if ($rel != 'page') {
 
                 if (!is_array($vals)) {
