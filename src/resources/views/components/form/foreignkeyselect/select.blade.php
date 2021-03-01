@@ -10,7 +10,8 @@
 
         <?php 
         
-        $opts = $model::orderBy($labelField)->get(); 
+        //$opts = $model::orderBy($labelField)->get(); 
+       $opts = $query->orderBy($labelField)->get();
         
         ?>
 
