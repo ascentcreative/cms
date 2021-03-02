@@ -84,7 +84,7 @@ class BibleReferenceParser {
             $this->aryBooks[] = array('2 Corinthians', '2 Cor', '2-corinthians', '2 Co', 'II Co', '2Co', 'II Cor', '2Cor', 'II Corinthians', '2Corinthians', '2nd Corinthians', 'Second Corinthians');
             $this->aryBooks[] = array('Galatians', 'Gal', 'galatians', 'Ga');
             $this->aryBooks[] = array('Ephesians', 'Eph', 'ephesians', 'Ephes');
-            $this->aryBooks[] = array('Philippians', 'Phil', 'philippians', 'Php');
+            $this->aryBooks[] = array('Philippians', 'Phil', 'philippians', 'Php', 'Phillipians', 'phillipians'); // included a couple of common typos
             $this->aryBooks[] = array('Colossians', 'Col', 'colossians');
             $this->aryBooks[] = array('1 Thessalonians', '1 Thess', '1-thessalonians', '1 Th', 'I Th', '1Th', 'I Thes', '1Thes', 'I Thess', '1Thess', 'I Thessalonians', '1Thessalonians', '1st Thessalonians', 'First Thessalonians');
             $this->aryBooks[] = array('2 Thessalonians', '2 Thess', '2-thessalonians', '2 Th', 'II Th', '2Th', 'II Thes', '2Thes', 'II Thess', '2Thess', 'II Thessalonians', '2Thessalonians', '2nd Thessalonians', 'Second Thessalonians');
