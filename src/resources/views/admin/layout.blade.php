@@ -56,7 +56,7 @@
 
                 @includeFirst(['admin.sidebar.footer', 'cms::admin.sidebar.footer'])
 
-                <div style="margin-top: 20px; color: #777; font-size: 10px; text-align: center;">Powered by Ascent CMS 3.0</div>
+             {{--}}   <div style="margin-top: 20px; color: #777; font-size: 10px; text-align: center;">Powered by Ascent CMS 3.0</div> --}}
 
             </div>
 
