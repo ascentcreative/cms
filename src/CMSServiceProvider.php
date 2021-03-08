@@ -80,6 +80,10 @@ class CMSServiceProvider extends ServiceProvider
     
       ], 'public');
 
+      $this->publishes([
+        __DIR__.'/config/cms.php' => config_path('cms.php'),
+      ]);
+
     }
 
 

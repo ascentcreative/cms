@@ -1,0 +1,113 @@
+:root {
+    font-size: 13px !important;
+}
+
+body {
+    background: #edeef0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body > section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cms-wrap {
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.cms-sidebar {
+    background: #333334;
+    color: #ccc;
+    padding: 20px;
+    min-width: 20rem;
+    flex-grow: 0;
+
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.cms-sidebar-content {
+    flex-grow: 1;
+    padding: 20px 10px;
+    margin-top: 20px;
+}
+
+.cms-sidebar-content UL {
+    list-style: none;
+    margin: 0 0px 20px;
+    padding: 0;
+}
+
+.cms-sidebar-content UL A {
+    color: #ececec;
+    display: block;
+    padding: 3px 3px 3px 2rem;
+    border-radius: 10px;
+
+}
+
+.cms-sidebar-content UL LI {
+    padding: 2px 0;
+    position: relative;
+   
+}
+
+.cms-sidebar-content UL LI A:hover {
+    background: rgba(255,255,255,0.05);
+    text-decoration: none;
+}
+
+.cms-sidebar-content UL LI i {
+    position: absolute;
+    padding: 3px;
+    left: 3px;
+    font-size: 1rem;
+}
+
+.cms-sidebar-content > .cms-sidebar-menu-sectionlabel {
+
+    font-weight: 500;
+    color: #777;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+
+}
+
+
+.cms-screenwrap {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.cms-screen {
+    max-width: 1200px;
+    width: 100%;
+
+}
+
+.cms-screenblock {
+    padding: 1.4rem 2rem;
+    margin-bottom: 1rem;
+}
+
+body .cms-screen .shadow {
+    box-shadow: 0 .125rem 0.5rem rgba(0,0,0,.15)!important;
+}
+ 
+
+H1, H2 {
+    font-weight: 300;
+}
+
+.cms-screenblock table th {
+    border-top: 0px solid !important;
+}
+
