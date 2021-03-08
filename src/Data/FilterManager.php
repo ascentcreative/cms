@@ -46,7 +46,7 @@ class FilterManager {
     }
 
 
-    public function getFilterOptions($rel, $filters) {
+    public function getFilterOptions($rel, $filters, $sort=null) {
 
         $cls = get_class($this->_model::first()->$rel()->getRelated());
 
@@ -74,7 +74,15 @@ class FilterManager {
 
         $qry = $cls::whereHas('songs', $fn)->withCount(['songs' => $fn]);
 
-        return $qry->orderBy('songs_count', 'desc');
+        if (is_null($sort)) {
+            return $qry->orderBy('songs_count', 'desc');
+        } else {
+            foreach($sort as $field) {
+                $qry->orderBy($field);
+            }
+            return $qry;
+        }
+        
 
     }
 
