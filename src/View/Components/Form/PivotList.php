@@ -22,6 +22,7 @@ class PivotList extends Component
     public $pivotFieldLabel;
     public $pivotFieldPlaceholder;
 
+    public $class;
     /**
      * Create a new component instance.
      *
@@ -29,7 +30,8 @@ class PivotList extends Component
      */
     public function __construct($label, $name, $value, $optionRoute, $optionModel, $labelField, 
                                 $addToAll=null, $sortField=null, 
-                                $pivotField=null, $pivotFieldLabel=null, $pivotFieldPlaceholder=null)
+                                $pivotField=null, $pivotFieldLabel=null, $pivotFieldPlaceholder=null,
+                                $class="")
     {
      
         /*
@@ -153,6 +155,9 @@ class PivotList extends Component
         } else {
             echo 'Unexpected Data Type';
         }
+
+
+        $this->class = $class;
         
     }
 

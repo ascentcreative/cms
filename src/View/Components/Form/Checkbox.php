@@ -4,7 +4,7 @@ namespace AscentCreative\CMS\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class Input extends Component
+class Checkbox extends Component
 {
 
     public $type;
@@ -14,7 +14,6 @@ class Input extends Component
 
     public $wrapper;
     public $class;
-
 
     /**
      * Create a new component instance.
@@ -40,6 +39,6 @@ class Input extends Component
      */
     public function render()
     {
-        return view('cms::components.form.input');
+        return view('cms::components.form.checkbox');
     }
 }

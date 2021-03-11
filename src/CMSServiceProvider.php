@@ -4,6 +4,7 @@ namespace AscentCreative\CMS;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Routing\Router;
 
 
 class CMSServiceProvider extends ServiceProvider
@@ -19,7 +20,6 @@ class CMSServiceProvider extends ServiceProvider
     // Register the helpers php file which includes convenience functions:
     require_once (__DIR__.'/Helpers/ascenthelpers.php');
 
-
     $this->bootDirectives();
     $this->bootComponents();
     $this->bootPublishes();
@@ -29,6 +29,9 @@ class CMSServiceProvider extends ServiceProvider
     $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 
     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+    $router = $this->app->make(Router::class);
+    $router->aliasMiddleware('cms-nocache', \AscentCreative\CMS\Middleware\NoCache::class);
     
   }
 
@@ -37,6 +40,8 @@ class CMSServiceProvider extends ServiceProvider
 
     Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
     Blade::component('cms-form-input', 'AscentCreative\CMS\View\Components\Form\Input');
+    Blade::component('cms-form-button', 'AscentCreative\CMS\View\Components\Form\Button');
+    Blade::component('cms-form-checkbox', 'AscentCreative\CMS\View\Components\Form\Checkbox');
     Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
     Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
     Blade::component('cms-form-pivotlist', 'AscentCreative\CMS\View\Components\Form\PivotList');

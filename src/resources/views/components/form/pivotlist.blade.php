@@ -1,4 +1,4 @@
-@extends('cms::components.form.bootstrapformgroup')
+@extends('cms::components.form.wrapper.bootstrapformgroup')
 
 @once
     @push('styles')
