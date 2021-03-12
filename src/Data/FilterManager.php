@@ -16,30 +16,119 @@ class FilterManager {
 
     public function filter($filters, $sort) {
 
-        $qry = $this->_model::orderBy('title');
+        if (!isset($filters['sort'])){
+            $filters['sort'] = 'rank';
+        }
+
+        $qry = $this->_model::select('songs.*'); //orderBy('title');
         
         foreach($filters as $rel=>$vals) {
 
             // ignore pagination parameters
             // probably need more robust error handling to 
             // only process relationships we know about...
-            if ($rel != 'page') {
+            if ($rel != 'page' && $rel != '_token') {
 
-                if (!is_array($vals)) {
-                    $filtervals = array($vals);
-                } else {
-                    $filtervals = $vals;
+
+                // for now, just hard code this for the song model. 
+                // we'll abstract it later when we understand how it works!
+
+                switch($rel) {
+
+                    case 'keyword':
+                        // this is a 'LIKE' text search in a number of other fields:
+                        // Title, First Line, Lyrics
+                        // SIDENOTE - what about Authors, Themes?, Bible Books? (maybe search those if the specific filters aren't set?)
+                        //echo 'a';
+
+                        if ($vals != '') {
+
+                            $qry->where(function($qry) use($vals) {
+
+                                $targets = ['title', 'firstline', 'lyrics.text', 'ccli'];
+
+                                foreach($targets as $srch) {
+                                    if (strstr($srch, '.') !== false) {
+
+                                        // relationship...
+                                        // Last part of the string is the property
+                                        $parts = explode('.', $srch);
+                                        $prop = array_pop($parts);
+                                        $srch = join('.', $parts);
+                    
+                                        $qry->orWhereHas($srch, function($query) use ($prop, $vals) { 
+                                            $query->where($prop, 'LIKE', '%' . $vals . '%');
+                                        });
+                    
+                                    } else {
+                                        $qry->orWhere($srch, 'LIKE', '%' . $vals . '%');
+                                    }
+                                }
+                            });
+
+                        }
+                            
+
+                        break;
+
+                    case 'bible':
+                        // not implemented...
+                        break;
+
+                    case 'sort':
+                        // not implemented ...
+
+                        switch ($vals) {
+                            case 'rank':
+                                $qry->join('popularity', 'songs.muma', '=', 'popularity.muma')
+                                    ->orderBy(request()->sort ?? 'rank');
+                                break;
+
+                            case 'date':
+                                $qry->orderBy('created_at', 'desc');
+                                break;
+
+                               
+                        }
+                       
+                       
+                        break;
+
+                    default:
+                   // echo 'b';
+
+                        // Default is just using 'id in (xyz)' on a defined table. 
+                        // (Themes, writers etc)
+
+                        if (!is_array($vals)) {
+                            $filtervals = array($vals);
+                        } else {
+                            $filtervals = $vals;
+                        }
+        
+                        $table = $this->_model::first()->$rel()->getRelated()->getTable();
+                        
+                        $qry->whereHas($rel, function (Builder $sub) use ($table, $filtervals) {
+                            $sub->whereIn($table . '.id', $filtervals);
+                        }); 
+
+                        break;
+
                 }
 
-                $table = $this->_model::first()->$rel()->getRelated()->getTable();
-                
-                $qry->whereHas($rel, function (Builder $sub) use ($table, $filtervals) {
-                    $sub->whereIn($table . '.id', $filtervals);
-                }); 
+               
 
             }
 
         }
+
+
+    //    echo $qry->toSql();
+
+      //  dd($qry->toSql());
+
+        // add a default sort (which will run second to any override sorting statements above)
+        $qry->orderBy('title');
 
         return $qry;
 

@@ -29,8 +29,6 @@ abstract class AdminBaseController extends Controller
 
         $short = (new \ReflectionClass($this::$modelClass))->getShortName();
 
-       
-
         $modelName = $short ?? $this->modelName;
 
         $modelNameHuman = join(' ', preg_split('/(?=[A-Z])/',$modelName));
