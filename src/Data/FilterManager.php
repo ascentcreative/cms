@@ -71,8 +71,32 @@ class FilterManager {
 
                         break;
 
-                    case 'bible':
+                    case 'biblerefs':
                         // not implemented...
+                        if ($vals['book'] != '') {
+                        $table = $this->_model::first()->$rel()->getRelated()->getTable();
+                        
+                        $qry->whereHas($rel, function (Builder $sub) use ($table, $vals) {
+
+                            $sc = str_pad ( $vals['startChapter'] , 3 , "0", STR_PAD_LEFT ); 
+	                        $sv = str_pad ( $vals['startVerse'] , 3 , "0", STR_PAD_LEFT );
+	                        $ec = str_pad ( $vals['endChapter'] , 3 , "0", STR_PAD_LEFT ); 
+	                        $ev = str_pad ( $vals['endVerse'] , 3 , "0", STR_PAD_LEFT );
+
+                            $start = $sc . ":" . $sv;
+                            $end = $ec . ":" . $ev;
+
+                            
+                                $sub->where('book', $vals['book']); 
+                                if ($start != '000:000' && $end != '000:000') {
+                                    $sub->whereRaw("? <= concat(LPAD(endChapter, 3, '0'), ':', LPAD(endVerse, 3, '0'))", $start)
+                                    ->whereRaw("? >= concat(LPAD(startChapter, 3, '0'), ':', LPAD(startVerse, 3, '0'))", $end);
+                                }
+                            
+                        }); 
+
+                    }
+
                         break;
 
                     case 'sort':
