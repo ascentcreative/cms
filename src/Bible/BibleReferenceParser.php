@@ -31,7 +31,7 @@ class BibleReferenceParser {
             $this->aryBooks[] = array('Nehemiah', 'Neh', 'nehemiah', 'Ne');
             $this->aryBooks[] = array('Esther', 'Esth', 'esther', 'Es');
             $this->aryBooks[] = array('Job', 'Job', 'job', 'Jb');
-            $this->aryBooks[] = array('Psalms', 'Psalm', 'psalms', 'Pslm', 'Ps', 'Psalms', 'Psa', 'Psm', 'Pss');
+            $this->aryBooks[] = array('Psalm', 'Psalm', 'psalms', 'Pslm', 'Ps', 'Psalms', 'Psa', 'Psm', 'Pss', 'Psalms');
             $this->aryBooks[] = array('Proverbs', 'Prov', 'proverbs', 'Pr', 'Prv');
             $this->aryBooks[] = array('Ecclesiastes', 'Eccles', 'ecclesiastes', 'Ec', 'Qoh', 'Qoheleth');
             $this->aryBooks[] = array('Song of Songs', 'Song', 'song-of-songs', 'So', 'Canticle of Canticles', 'Canticles', 'Song of Solomon', 'SOS');
@@ -239,11 +239,17 @@ class BibleReferenceParser {
         
     
         function parseBibleRef($ref) {	
+
+            $ref = str_replace("vv", ":", $ref);
+            $ref = str_replace("v", ":", $ref);
             
+
             $ref = str_replace(": ", ":", $ref);
             $ref = str_replace(" :", ":", $ref);
             $ref = str_replace("- ", "-", $ref);
             $ref = str_replace(" -", "-", $ref);
+
+            
         
             $parsed = array();
         
