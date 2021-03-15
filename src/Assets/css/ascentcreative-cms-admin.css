@@ -25,7 +25,8 @@ body > section {
     background: #333334;
     color: #ccc;
     padding: 20px;
-    min-width: 20rem;
+    /*min-width: 20rem;*/
+    min-width: 200px;
     flex-grow: 0;
 
     display: flex;
@@ -47,10 +48,18 @@ body > section {
 
 .cms-sidebar-content UL A {
     color: #ececec;
-    display: block;
-    padding: 3px 3px 3px 2rem;
+    display: flex;
+    padding: 0px 3px; /*3px 3px 3px; */
+    margin-bottom: 1px;
     border-radius: 10px;
 
+    align-items: center;
+}
+
+.cms-sidebar-content UL A .label {
+    display: block;
+    flex-grow: 1;
+    padding-left: 3px;
 }
 
 .cms-sidebar-content UL LI {
@@ -65,9 +74,10 @@ body > section {
 }
 
 .cms-sidebar-content UL LI i {
-    position: absolute;
+    xposition: absolute;
     padding: 3px;
-    left: 3px;
+    xleft: 3px;
+    
     font-size: 1rem;
 }
 

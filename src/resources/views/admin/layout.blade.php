@@ -62,7 +62,7 @@
 
         </div>
 
-        <div class="col-auto cms-screenwrap" style="padding: 20px">
+        <div class="col-autos cms-screenwrap" style="padding: 20px">
 
             @yield('main')
 
