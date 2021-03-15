@@ -32,6 +32,12 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
     });
 
+    Route::get('/modal/{path}', function($path) {
+
+        return view($path); // assumed to extend cms::modal blade
+
+    });
+
 
 });
 
