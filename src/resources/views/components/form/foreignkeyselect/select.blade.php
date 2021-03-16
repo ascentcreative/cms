@@ -1,4 +1,4 @@
-@extends('cms::components.form.bootstrapformgroup')
+@extends('cms::components.form.wrapper.bootstrapformgroup')
 
 @section('label'){{$label}}@overwrite
 @section('name'){{$name}}@overwrite
@@ -10,7 +10,8 @@
 
         <?php 
         
-        $opts = $model::orderBy($labelField)->get(); 
+        //$opts = $model::orderBy($labelField)->get(); 
+       $opts = $query->orderBy($labelField)->get();
         
         ?>
 

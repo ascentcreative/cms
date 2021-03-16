@@ -12,18 +12,24 @@ class Input extends Component
     public $name;
     public $value;
 
+    public $wrapper;
+    public $class;
+
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value)
+    public function __construct($type, $label, $name, $value, $wrapper="bootstrapformgroup", $class='')
     {
         $this->type = $type;
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
+
+        $this->wrapper = $wrapper;
+        $this->class = $class;
 
     }
 

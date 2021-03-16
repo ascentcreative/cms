@@ -1,12 +1,12 @@
-@extends('cms::components.form.bootstrapformgroup')
+@extends('cms::components.form.wrapper.bootstrapformgroup')
 
 @once
     @push('styles')
-        @style(/vendor/ascent/cms/form/components/ascent-pivotlist.css)
+        @style('/vendor/ascent/cms/form/components/ascent-pivotlist.css')
     @endpush
 
     @push('scripts')
-        @script(/vendor/ascent/cms/form/components/ascent-pivotlist.js)
+        @script('/vendor/ascent/cms/form/components/ascent-pivotlist.js')
     @endpush
 @endonce
 

@@ -1,12 +1,12 @@
-@extends('cms::components.form.bootstrapformgroup')
+@extends('cms::components.form.wrapper.bootstrapformgroup')
 
 @section('label'){{$label}}@overwrite
 @section('name'){{$name}}@overwrite
 
 @once
     @push('scripts')
-        @script('/vendor/ascent/cms/ckeditor/ckeditor.js')
-        @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js')
+        @script('/vendor/ascent/cms/ckeditor/ckeditor.js', false)
+        @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js', false)
     @endpush
 @endonce
 

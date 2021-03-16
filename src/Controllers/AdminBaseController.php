@@ -4,6 +4,7 @@ namespace AscentCreative\CMS\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
  
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,34 @@ abstract class AdminBaseController extends Controller
     static $modelClass = 'DEFINE_ME';
     static $bladePath = 'define.me';
 
+    public $modelName = null; // override if the class name doesn't parse nicely.
+    public $modelPlural = null; // override this if the auto-plural fails spectacularly...
+
+    public $pageSize = 15;
+    public $indexSort = array();
+    public $indexSearchFields = array();
+
+    /**
+     * Creates an array of the generic data points used by the view
+     * (i.e. model name, plural, etc)
+     */
+    public function prepareViewData() {
+
+        $short = (new \ReflectionClass($this::$modelClass))->getShortName();
+
+        $modelName = $short ?? $this->modelName;
+
+        $modelNameHuman = join(' ', preg_split('/(?=[A-Z])/',$modelName));
+
+        return array(
+            'modelInject' => Str::lower($modelName),
+            'modelName' => $modelNameHuman,
+            'modelPlural' => (Str::pluralStudly($modelNameHuman) ?? $this->modelPlural)
+        );
+
+    }
+
+
      /**
      * Display a listing of the resource.
      *
@@ -21,8 +50,57 @@ abstract class AdminBaseController extends Controller
     public function index()
     {
 
+        // get the items for the view
+        $items = ($this::$modelClass)::query();
+        
+        // prepare any defined filters...
 
-        return view($this::$bladePath . '.index');
+       if(isset($_GET['search'])) {
+
+            foreach($this->indexSearchFields as $srch) {
+
+                $val = $_GET['search'];
+               // echo $_GET['search'];
+                if (strstr($srch, '.') !== false) {
+
+                    // relationship...
+                    // Last part of the string is the property
+                    $parts = explode('.', $srch);
+                    $prop = array_pop($parts);
+                    $srch = join('.', $parts);
+
+                    $items->orWhereHas($srch, function($query) use ($prop, $val) { 
+                        $query->where($prop, 'LIKE', '%' . $val . '%');
+                    });
+
+                } else {
+                    $items->orWhere($srch, 'LIKE', '%' . $val . '%');
+                }
+
+
+            }
+
+        } 
+       
+        // prepare any defined sorters...
+
+        if (!is_array($this->indexSort)) {
+            $this->indexSort = array($this->indexSort);
+        }
+        foreach($this->indexSort as $sort) {
+            if (is_array($sort)) {
+                $col = $sort[0];
+                $dir = $sort[1];
+            } else {
+                $col = $sort;
+                $dir = 'asc';
+            }
+            $items = $items->orderBy($col, $dir);
+        }
+        
+        $items = $items->paginate($this->pageSize)->withQueryString();
+
+        return view($this::$bladePath . '.index', $this->prepareViewData())->with('models', $items);
     }
 
     /**
@@ -85,7 +163,7 @@ abstract class AdminBaseController extends Controller
             $model = $cls::find($id);
         }
        
-        return view($this::$bladePath . '.edit')->withModel($model);
+        return view($this::$bladePath . '.edit', $this->prepareViewData())->withModel($model);
 
     }
 
@@ -117,7 +195,15 @@ abstract class AdminBaseController extends Controller
 
 
     /* implement this method with the code which reads data from the request into the Model and commits it to the database */
-    public abstract function commitModel(Request $request, Model $model);
+    public function commitModel(Request $request, Model $model) {
+        
+        // this *Should* be all that's needed.
+        // can be overridden for any custom processing. 
+        // But, the Extender HasX traits should be handling their data in all this.
+        $model->fill($request->all());
+        $model->save();
+
+    }
 
     
 

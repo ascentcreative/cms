@@ -1,6 +1,6 @@
 <div class="form-group row">
-    <label for="@yield('name')" class="col-sm-1 col-form-label">@yield('label'):</label>
-    <div class="col-sm-10">
+    <label for="@yield('name')" class="col-2 col-form-label">@yield('label'):</label>
+    <div class="col">
         @yield('element')
         <small class="form-text text-muted">
             {{ $slot }}

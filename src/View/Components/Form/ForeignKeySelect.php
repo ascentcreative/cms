@@ -18,9 +18,14 @@ class ForeignKeySelect extends Component
     public $name;
     public $value;
 
-    public $model;
+  //  public $model;
+    public $query;
     public $labelField;
     public $idField;
+    
+
+    public $wrapper;
+    public $class;
 
 
     /**
@@ -28,7 +33,7 @@ class ForeignKeySelect extends Component
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value, $model, $labelField="title", $idField="id")
+    public function __construct($type, $label, $name, $value, $query, $labelField="title", $idField="id", $wrapper='bootstrapformgroup', $class='')
     {
         $this->type = $type;
         $this->label = $label;
@@ -36,9 +41,15 @@ class ForeignKeySelect extends Component
         $this->value = $value;
 
         // foreign model / table info:
-            $this->model = $model;
+          //  $this->model = $model;
+
+            $this->query = $query; // Builder instance allowing filters to be applied to the dataset
+
             $this->labelField = $labelField;
             $this->idField = $idField;
+
+            $this->wrapper = $wrapper;
+            $this->class = $class;
         
 
     }
