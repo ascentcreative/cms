@@ -1,4 +1,4 @@
-<div class="form-group row">
+<div class="form-group row element-wrapper">
     <label for="@yield('name')" class="col-2 col-form-label">@yield('label'):</label>
     <div class="col">
         @yield('element')
