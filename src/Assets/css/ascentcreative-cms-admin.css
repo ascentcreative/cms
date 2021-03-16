@@ -74,9 +74,8 @@ body > section {
 }
 
 .cms-sidebar-content UL LI i {
-    xposition: absolute;
+   
     padding: 3px;
-    xleft: 3px;
     
     font-size: 1rem;
 }
