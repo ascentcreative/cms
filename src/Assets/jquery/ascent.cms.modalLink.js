@@ -13,6 +13,8 @@ var ModalLink = {
         
         // We're calling this on click, so just launch straight into the business end...
 
+        alert('running');
+
         // get the href and fire off a request
         $.get($(this.element).attr('href'))
 
