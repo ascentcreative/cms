@@ -29,6 +29,10 @@ var ModalLink = {
                 $('body').append(data);
                 $('#ajaxModal').modal();
 
+                $('#ajaxModal').on('hidden.bs.modal', function() {
+                    $(this).remove();
+                })
+
             })
             .fail(function(data) {
 
