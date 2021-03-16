@@ -19,24 +19,36 @@ var ModalLink = {
 
        // window.location.href = $(this.element).attr('href');
 
-      
-        $.get(self.targetPath).done(function(data, xhr, request) {
+        // run a type check:
+        $.ajax({
+            type: 'HEAD',
+            url: self.targetPath
+        }).done(function(data, xhr, request) {
 
-            var cType = request.getResponseHeader('content-type');
+            // check the response is one a modal can handle!
+            //console.log(request.getAllResponseHeaders());
+            console.log(request.getResponseHeader('content-type'));
+       //     return false;
 
-            if(cType.indexOf('text/html') != -1) {
-                self.showResponseModal(data);
-            } else {
+         //   if(request.getResponseHeader('content-type').indexOf('text/html') != -1) {
+
+         console.log(request);
+                // fire off the live request
+                $.get(self.targetPath).done(function(data) {
+                    self.showResponseModal(data);
+                }).fail(function() {
+                    // hopefully this won't ever fail as we did the HEAD first
+                });
+
+          //  } else {
 
                 window.location.href = self.targetPath;
-                
-            }
 
+          //  }
 
 
         }).fail(function(data) {
-            // hopefully this won't ever fail as we did the HEAD first
-      
+
             console.log(data);
             switch(data.status) {
                 case 401:
@@ -45,6 +57,7 @@ var ModalLink = {
                     $.get(self.loginPath + '?intended=' + self.targetPath).done(function(data) {
                         self.showResponseModal(data);
                     }).fail(function(data) {
+                        // hopefully this won't ever fail as we did the HEAD first
                         console.log('FAIL WITHIN FAIL!');
                         console.log(data.responseText);
 
