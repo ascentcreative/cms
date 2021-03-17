@@ -22,14 +22,42 @@
                  headers: {
                     'Accept' : "application/json"
                  },
-                data: $('#form_register').serialize()
-            })
-                .done(function(data, xhr, request) {
+                data: $('#form_register').serialize(),
+                statusCode: {
+                    302: function(data, xhr, request) {
+
+                        console.log(data);
+                        console.log(xhr);
+                        console.log(request);
+
+                        $('body').modalLink({
+                            target: data.responseJSON
+                        });
+
+                        //$('.modal').modal('hide');
+
+                    },
+                    422: function(data, xhr, request) {
+                        for(name in data.responseJSON.errors) { 
+
+                            console.log(name + " --- " + data.responseJSON.errors[name]);
+
+                            $('INPUT[name="' + name + '"]').parents('.element-wrapper').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
+                                data.responseJSON.errors[name] + 
+                            '</small>');
+
+                        }
+                    }
+                }
+            });
+             /*   .done(function(data, xhr, request) {
 
                     if(request.status == 201) {
                         
+                       // console.log('requesting: ' + $('#form_register input[name="intended"]').val());
+
                         $('body').modalLink({
-                            target: $('input[name="intended"]').val()
+                            target: $('#form_register input[name="intended"]').val()
                         });
 
                         $('.modal').modal('hide');
@@ -59,7 +87,7 @@
 
                     }
 
-                });
+                });*/
             return false;
 
          

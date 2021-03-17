@@ -29,8 +29,6 @@
                             target: $('#form_login input[name="intended"]').val()
                         });
 
-                        //window.location.href = $('#form_login input[name="intended"]').val()
-                        $('.modal').modal('hide');
                     }
 
                 })

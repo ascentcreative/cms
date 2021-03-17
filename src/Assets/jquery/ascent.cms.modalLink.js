@@ -38,6 +38,8 @@ var ModalLink = {
             } else {
 
                 window.location.href = self.targetPath;
+                // close any open modals!
+                $('.modal').modal('hide');
                 
             }
 
