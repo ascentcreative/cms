@@ -63,7 +63,7 @@ var ModalLink = {
                     break;
 
                 default:
-                    alert('There was an error...');
+                    alert('An unexpected error occurred:\n' + data.responseJSON.message );
                     break;
 
             }
@@ -72,38 +72,38 @@ var ModalLink = {
            
         return false;
 
-        // get the href and fire off a request
-        $.get($(this.element).attr('href'))
+        // // get the href and fire off a request
+        // $.get($(this.element).attr('href'))
 
-            .done(function(data, status, request) {
+        //     .done(function(data, status, request) {
 
-                console.log(request.getAllResponseHeaders());
-                //if ()
-                self.showResponseModal(data);               
+        //         console.log(request.getAllResponseHeaders());
+        //         //if ()
+        //         self.showResponseModal(data);               
 
-            })
-            .fail(function(data) {
+        //     })
+        //     .fail(function(data) {
 
-                // error: function(data) {
-                console.log(data);
-                switch(data.status) {
-                    case 401:
-                        alert('Ah - unaiutheorissed');
-                        break;
+        //         // error: function(data) {
+        //         console.log(data);
+        //         switch(data.status) {
+        //             case 401:
+        //                 alert('Ah - unaiutheorissed');
+        //                 break;
 
-                    default:
-                        alert('There was an error...');
-                        break;
+        //             default:
+        //                 alert('There was an error...');
+        //                 break;
 
-                }
+        //         }
 
                
 
-            });
+        //     });
 
-        //});
+        // //});
 
-        return false; // stop the link firing normally!
+        // return false; // stop the link firing normally!
         
     },
 
@@ -127,6 +127,13 @@ var ModalLink = {
 
         // fire up the new modal
         $('#ajaxModal').modal();
+         // if we removed the fade class, re-add it now so this one fades out nicely!
+         if (inFlow) {
+            $('body .modal').addClass('fade');
+        }
+
+
+        // handler to remove the HTML for this modal when it's done with
         $('#ajaxModal').on('hidden.bs.modal', function() {
             $(this).remove();
         });
