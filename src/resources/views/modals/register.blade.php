@@ -6,11 +6,16 @@
 
      {{-- Prevent the form submittting normally - need to ajax it --}}
      <SCRIPT>
+
+         $(document).ready(function () {
+            $('A#btn-login').addClass('modal-link').attr('href', '/modal/cms::modals.login?intended=' + $('#form_register input[name="intended"]').val());
+         })
+
+
         $('#form_register').submit(function() {
 
             $('.validation-error').remove();
 
-            
             $.ajax({
                 type: 'POST',
                 url: '/register', 
@@ -22,7 +27,11 @@
                 .done(function(data, xhr, request) {
 
                     if(request.status == 201) {
-                        window.location.href = $('#form_register input[name="intended"]').val()
+                        
+                        $('body').modalLink({
+                            target: $('input[name="intended"]').val()
+                        });
+
                         $('.modal').modal('hide');
                         
                     }
@@ -54,23 +63,6 @@
             return false;
 
          
-        });
-
-
-        /* {{-- Also need to do registration in popup? --}} */
-        $('A#btn-login').on('click', function() {
-           
-            $.get('/modal/cms::modals.login?intended=' + $('input[name="intended"]').val())
-                .done(function(data) {
-
-                    $('#ajaxModal .modal-dialog').html($(data).find('.modal-content'));
-                    //$('.modal').replaceWith(data);
-                    
-                })
-                .fail(function(data) {
-                    alert('Login Load Fail');
-                });
-            return false;
         });
 
     </SCRIPT>

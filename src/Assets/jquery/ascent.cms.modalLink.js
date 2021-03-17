@@ -13,12 +13,21 @@ var ModalLink = {
         var thisID = (this.element)[0].id;
         var obj = this.element;
 
-        this.targetPath = $(this.element).attr('href');
+        
         
         // We're calling this on click, so just launch straight into the business end...
 
        // window.location.href = $(this.element).attr('href');
 
+        if (this.options.target) {
+            this.targetPath = this.options.target
+        } else {
+            this.targetPath = $(this.element).attr('href');
+        }
+
+        //$('#ajaxModal').hide();
+
+        console.log(self.targetPath);
       
         $.get(self.targetPath).done(function(data, xhr, request) {
 
@@ -100,13 +109,29 @@ var ModalLink = {
 
     showResponseModal: function(data) {
 
-      //  console.log(data);
+        /* if we're already in a modal, detect it and remove the existing modal */
+        inFlow = false;
+        if($('body .modal').length > 0) {
+            inFlow = true; // take note - we'll need this later
+            $('body .modal, body .modal-backdrop').remove(); // kill the calling modal
+        }
+        
+        // add the newly supplied modal
         $('body').append(data);
-        $('#ajaxModal').modal();
+        
+        if (inFlow) {
+            // if we were already in a flow of modals, remove the fade class
+            // stops the backdrop glitching
+            $('body .modal').removeClass('fade');
+        }
 
+        // fire up the new modal
+        $('#ajaxModal').modal();
         $('#ajaxModal').on('hidden.bs.modal', function() {
             $(this).remove();
         });
+
+        // all done
 
     }
 
@@ -126,10 +151,15 @@ $.extend($.ascent.ModalLink, {
 // });
 
 // or this? Allows for dynamically added ones. Try this frist...
-$(document).on('click', 'A.modalLink, A.modal-link', function() {
+$(document).on('click', 'A.modalLink, A.modal-link', function(e) {
 
-    $(this).modalLink();
+    console.log('captured');
+
     
+    $(this).modalLink();
+
+    
+    e.stopPropagation();
     return false; // stop the link firing normally!
 
 });

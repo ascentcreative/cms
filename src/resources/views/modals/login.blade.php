@@ -6,6 +6,9 @@
 
     {{-- Prevent the form submittting normally - need to ajax it --}}
     <SCRIPT>
+
+        $('A#btn-register').addClass('modal-link').attr('href', '/modal/cms::modals.register?intended=' + $('#form_login input[name="intended"]').val());
+
         $('#form_login').submit(function() {
 
             $('.validation-error').remove();
@@ -21,7 +24,12 @@
                 .done(function(data, xhr, request) {
 
                     if(request.status == 201) {
-                        window.location.href = $('#form_login input[name="intended"]').val()
+
+                        $('body').modalLink({
+                            target: $('#form_login input[name="intended"]').val()
+                        });
+
+                        //window.location.href = $('#form_login input[name="intended"]').val()
                         $('.modal').modal('hide');
                     }
 
@@ -55,8 +63,8 @@
         });
 
 
-        /* {{-- Also need to do registration in popup? --}} */
-        $('A.button#btn-register').on('click', function() {
+         /* {{-- Also need to do registration in popup? --}} */
+     /*   $('A.button#btn-register').on('click', function() {
             //alert('intercepted');
             $.get('/modal/cms::modals.register?intended=' + $('#form_login input[name="intended"]').val())
                 .done(function(data) {
@@ -69,7 +77,7 @@
                     alert('Reg Load Fail');
                 });
             return false;
-        });
+        }); */
 
     </SCRIPT>
 
