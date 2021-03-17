@@ -1,5 +1,5 @@
 <div class="modal fade text-left" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered {{$modalSize ?? ''}}" role="document">
+    <div class="modal-dialog {{-- modal-dialog-centered --}} {{$modalSize ?? ''}}" role="document">
       <div class="modal-content">
 
         @if($modalShowHeader ?? false)
