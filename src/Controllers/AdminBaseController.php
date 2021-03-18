@@ -208,6 +208,25 @@ abstract class AdminBaseController extends Controller
     
 
     /**
+     * Confirms the deletion action
+     * (Doesn't actually do it...)
+     */
+    public function delete($id=null) {
+
+        $cls = $this::$modelClass;
+        
+        if (is_null($id)) {
+            $model = new $cls();
+        } else {
+            $model = $cls::find($id);
+        }
+
+        return view('cms::admin.modals.confirmdelete', $this->prepareViewData())->withModel($model);
+
+    }
+
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -215,7 +234,21 @@ abstract class AdminBaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $cls = $this::$modelClass;
+        
+        if (is_null($id)) {
+            $model = new $cls();
+        } else {
+            $model = $cls::find($id);
+        }
+
+        if($model) {
+            $model->delete();
+        }
+        
+        return redirect(url()->previous());
+
     }
 
 

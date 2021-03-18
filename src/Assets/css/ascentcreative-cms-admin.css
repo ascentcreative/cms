@@ -120,3 +120,21 @@ H1, H2 {
     border-top: 0px solid !important;
 }
 
+
+
+
+/** bootstrap overrides **/
+
+.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: #f7f7f7;
+}
+
+.dropleft A.dropdown-toggle.dropdown-toggle-dots::before, 
+A.dropdown-toggle.dropdown-toggle-dots::after {
+    content: '...';
+    transform: rotate(-90deg);
+    border: 0;
+    font-weight: 900;
+    color: #ccc;
+}

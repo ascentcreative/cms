@@ -36,6 +36,7 @@
     @script('/js/jquery-3.5.1.min.js')
     @script('/js/jquery-ui.min.js')
     @script('/js/bootstrap.bundle.min.js')
+    @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
     @stack('scripts')
 
 </body>

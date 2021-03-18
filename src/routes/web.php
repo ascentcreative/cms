@@ -17,8 +17,10 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
         Route::resource('/menus', MenuController::class);
         Route::resource('/menuitems', MenuItemController::class);
-        Route::resource('/pages', PageController::class);
 
+        Route::get('/pages/{page}/delete', [AscentCreative\CMS\Controllers\Admin\PageController::class, 'delete']);
+        Route::resource('/pages', PageController::class);
+       
 
         Route::fallback(function () {
            return view('cms::admin.errors.404');

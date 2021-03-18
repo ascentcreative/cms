@@ -29,7 +29,8 @@ var ModalLink = {
 
         console.log(self.targetPath);
       
-        $.get(self.targetPath).done(function(data, xhr, request) {
+        $.get({ url: self.targetPath
+        }).done(function(data, xhr, request) {
 
             var cType = request.getResponseHeader('content-type');
 
@@ -52,6 +53,7 @@ var ModalLink = {
             switch(data.status) {
                 case 401:
                    
+                    console.log(data);
                     //fire off a request to the login form instaead.
                     $.get(self.loginPath + '?intended=' + self.targetPath).done(function(data) {
                         self.showResponseModal(data);
