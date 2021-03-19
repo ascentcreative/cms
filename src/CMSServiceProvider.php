@@ -6,12 +6,17 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Routing\Router;
 
+use AscentCreative\CMS\Helpers\HeadTitle;
 
 class CMSServiceProvider extends ServiceProvider
 {
   public function register()
   {
     //
+    $this->app->singleton(HeadTitle::class, function() {
+      return new HeadTitle();
+    });
+
 
   }
 

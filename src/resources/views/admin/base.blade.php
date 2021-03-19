@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{config('app.name')}}</title>
+    <title>{{ headTitle()->add('Admin')->render(' :: ') }}</title>
     <link rel="alternate icon" href="/img/favicon.png">
  
     @style('/css/bootstrap.min.css') 

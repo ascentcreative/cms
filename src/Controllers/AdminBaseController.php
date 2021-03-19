@@ -21,6 +21,11 @@ abstract class AdminBaseController extends Controller
     public $indexSort = array();
     public $indexSearchFields = array();
 
+    public function __construct() {
+        //parent::__construct();
+       
+    }
+
     /**
      * Creates an array of the generic data points used by the view
      * (i.e. model name, plural, etc)
@@ -33,11 +38,15 @@ abstract class AdminBaseController extends Controller
 
         $modelNameHuman = join(' ', preg_split('/(?=[A-Z])/',$modelName));
 
-        return array(
+        $out = array(
             'modelInject' => Str::lower($modelName),
             'modelName' => $modelNameHuman,
             'modelPlural' => (Str::pluralStudly($modelNameHuman) ?? $this->modelPlural)
         );
+
+        headTitle()->add($out['modelPlural']);
+
+        return $out;
 
     }
 

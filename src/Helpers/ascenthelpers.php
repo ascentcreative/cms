@@ -85,3 +85,10 @@ function controller() {
 	return $ctrl[0];
 
 }
+
+
+function headTitle() {
+
+	return app(\AscentCreative\CMS\Helpers\HeadTitle::class);
+
+}
