@@ -11,7 +11,7 @@
           </div>
         @endif
 
-        <div class="modal-body">
+        <div class="modal-body {{ ($modalBodyPadded ?? true) ? 'modal-body-padded' : ''}}">
           
             @yield('modalContent')
            
