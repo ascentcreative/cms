@@ -47,4 +47,8 @@ class Page extends Base
 
     }
 
+    public function getUrlAttribute() {
+        return '/' . $this->slug;
+    }
+
 }

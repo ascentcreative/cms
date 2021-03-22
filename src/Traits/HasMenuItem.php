@@ -11,40 +11,164 @@ trait HasMenuItem {
 
     use Extender;
 
+    public static function bootHasMenuItem() {
+  
+      static::deleted(function ($model) {
+        $model->deleteMenuItem();
+      });
+
+      static::saving(function($model) { 
+        $model->captureMenuItem();
+      });
+
+      static::saved(function($model) { 
+        $model->savedMenuItem();
+      });
+
+    }
+
     public function initializeHasMenuItem() {
         $this->fillable[] = '_menuitem';
     }
 
     /* define the relationship */
     public function menuitem() {
+
         return $this->morphOne(MenuItem::class, 'linkable');
     }
 
 
-    public function captureMenuItem($key) {
+    public function captureMenuItem() {
 
-        session([$key . '._menuitem' => $this->_menuitem]);
+        echo 'pre save';
 
-        unset($this->attributes['_menuitem']);
+        session(['extenders._menuitem' => $this->_menuitem]);
+        unset($this->attributes['_menuitem']);     
+       
+    }
+
+    public function savedMenuItem() {
+        echo 'done save...';
+
+        $data = session()->pull('extenders._menuitem');
+
+        if(!is_null($data)) {
+
+            if (is_null($data['menu_id'])) {
+
+                $item = $this->menuitem; 
+                $item->delete();
+
+            } else {
+
+                $item = $this->menuitem;
+                
+                if ($item && $item->menu_id != $data['menu_id']) {
+                    $item->delete();
+                    $item = null;
+                } 
+
+                if (is_null($item)) {
+                    $item = $this->menuitem()->updateOrCreate([], ['menu_id'=>$data['menu_id']] );
+                }
+                
+               
+
+                $item->title = $this->title;
+
+                $context = MenuItem::find($data['context_id']); 
+
+                if ($context) {
+
+                    switch($data['context_type']) {
+                        case 'first-child':
+                            $item->prependToNode($context);
+                            break;
+                        case 'before':
+                            $item->beforeNode($context);
+                            break;
+                        case 'after':
+                            $item->afterNode($context);
+                            break;
+                    }
+
+                } 
+
+                $item->save();
+
+            }
+
+        }
 
     }
 
     public function saveMenuItem($key) {
+        
+        echo 'in Save';
 
         $data = session()->pull($key . '._menuitem');
 
-        if(!is_null($data)) {
+        //dd($data);
 
-            $item = $this->menuitem()->updateOrCreate([], ['menu_id'=>'1']);
+        // if(!is_null($data)) {
 
-            $context = MenuItem::find($data['context_id']); 
+        //     if (is_null($data['menu_id'])) {
+
+        //         $item = $this->menuitem; 
+        //         $item->delete();
+
+        //     } else {
+
+        //         $item = $this->menuitem;
+                
+        //         if ($item && $item->menu_id != $data['menu_id']) {
+        //             $item->delete();
+        //             $item = null;
+        //         } 
+
+        //         if (is_null($item)) {
+        //             $item = $this->menuitem()->updateOrCreate([], ['menu_id'=>$data['menu_id']] );
+        //         }
+                
+               
+
+        //         $item->title = $this->title;
+
+        //         $context = MenuItem::find($data['context_id']); 
+
+        //         if ($context) {
+
+        //             switch($data['context_type']) {
+        //                 case 'first-child':
+        //                     $item->prependToNode($context);
+        //                     break;
+        //                 case 'before':
+        //                     $item->beforeNode($context);
+        //                     break;
+        //                 case 'after':
+        //                     $item->afterNode($context);
+        //                     break;
+        //             }
+
+        //         } 
+
+        //         $item->save();
+
+        //     }
+
+        // }
+
+    }
+
+
+    protected function deleteMenuItem() {
         
-            $item->appendToNode($context);  
+        $item = $this->menuitem;
 
-            $item->save();
-
+        if (!is_null($item)) {
+            $item->delete();
         }
-
+        
     }
 
     

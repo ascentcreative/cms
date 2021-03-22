@@ -1,24 +1,27 @@
+@php
+    
+$mi = $model->menuitem;
 
-<?php
+@endphp
 
-    $val = '';
-    $hi = $model->menuitem;
-    if($hi) {
-        $val = $hi->context_id;
-        $val2 = $hi->context_type;
-    } 
+<x-cms-form-nestedset label="Menu" 
 
-?>
+    name="_menuitem"
 
+    scopeFieldName="_menuitem[menu_id]"
+    relationshipFieldName="_menuitem[context_type]"
+    relationFieldName="_menuitem[context_id]"
+    :scopeData="AscentCreative\CMS\Models\Menu::query()"
+    scopeKey="menu_id"
+    :nestedSetData="AscentCreative\CMS\Models\MenuItem::query()"
 
+    scopeValue="{{ old('_menuitem.menu_id', $mi->menu_id ?? '') }}"
+    relationshipValue="{{ old('_menuitem.context_type', $mi ? $mi->context['position'] : '' ) }}"
+    relationValue="{{ old('_menuitem.context_id', $mi ? $mi->context['reference'] : '' ) }}"
 
-<x-cms-form-foreignkeyselect type="select" name="_menuitem[context_id]" label="Attach to:" 
-model="AscentCreative\CMS\Models\MenuItem" :query="AscentCreative\CMS\Models\MenuItem::scoped( ['menu_id' => 1] )->orderBy('_lft')" value="{{ old('_menuitem.context_id', '') }}">
-</x-cms-form-foreignkeyselect>
+    nullScopeLabel="[Do not include in Menus]"
 
-<select name="_menuitem[context_type]">
-<option value="first-child">First Child Of</option>
-<option value="before">Sibling Before</option> 
-<option value="after">Sibling After</option>
-</select>
+    >
+
+</x-cms-form-nestedset>
 
