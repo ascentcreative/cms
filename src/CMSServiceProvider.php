@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Routing\Router;
 
 use AscentCreative\CMS\Helpers\HeadTitle;
+use AscentCreative\CMS\Helpers\AdminMenu;
 
 class CMSServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,14 @@ class CMSServiceProvider extends ServiceProvider
       return new HeadTitle();
     });
 
+    $this->app->singleton(AdminMenu::class, function() {
+        return new AdminMenu();
+      });
+
+
+    $this->mergeConfigFrom(
+        __DIR__.'/config/cms.php', 'cms'
+    );
 
   }
 
@@ -51,6 +60,9 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
     Blade::component('cms-form-pivotlist', 'AscentCreative\CMS\View\Components\Form\PivotList');
     Blade::component('cms-form-biblereflist', 'AscentCreative\CMS\View\Components\Form\BibleRefList');
+
+    Blade::component('cms-form-menuposition', 'AscentCreative\CMS\View\Components\Form\MenuPosition');
+    Blade::component('cms-form-nestedset', 'AscentCreative\CMS\View\Components\Form\NestedSet');
 
 
   }
