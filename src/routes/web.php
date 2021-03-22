@@ -16,11 +16,17 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         });
 
         Route::resource('/menus', MenuController::class);
+
+        Route::get('/menuitems/{menuitem}/delete', [AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'delete']);
         Route::resource('/menuitems', MenuItemController::class);
 
         Route::get('/pages/{page}/delete', [AscentCreative\CMS\Controllers\Admin\PageController::class, 'delete']);
         Route::resource('/pages', PageController::class);
        
+
+        Route::get('/users/{user}/delete', [AscentCreative\CMS\Controllers\Admin\UserController::class, 'delete']);
+        Route::resource('/users', UserController::class);
+
 
         Route::fallback(function () {
            return view('cms::admin.errors.404');
