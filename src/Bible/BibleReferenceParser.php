@@ -240,8 +240,6 @@ class BibleReferenceParser {
     
         function parseBibleRef($ref) {	
 
-            $ref = str_replace("vv", ":", $ref);
-            $ref = str_replace("v", ":", $ref);
             
 
             $ref = str_replace(": ", ":", $ref);
@@ -256,6 +254,10 @@ class BibleReferenceParser {
             $split = explode(" ", $ref);
         
             $nums = array_pop($split);
+
+
+            $nums = str_replace("vv", ":", $nums);
+            $nums = str_replace("v", ":", $nums);
         
             $bkName = join(" ", $split);
             
