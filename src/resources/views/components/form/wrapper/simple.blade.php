@@ -1,4 +1,4 @@
-<div class="simple-form-element element-wrapper {{$class}}">
+<div class="simple-form-element element-wrapper {{$class}}" id="{{$name}}-wrapper">
 
     @hasSection('label')
     <label for="@yield('name')">@yield('label'):</label>
