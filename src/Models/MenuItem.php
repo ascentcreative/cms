@@ -31,6 +31,14 @@ class MenuItem extends Base
         }
     }
 
+    public function getItemUrlAttribute() {
+        if (is_null($this->url)) {
+            return $this->linkable->url;
+        } else {
+            return $this->url;
+        }
+    }
+
     public function linkable() {
         return $this->morphTo();
     }
