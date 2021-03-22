@@ -37,11 +37,16 @@ class MenuItemController extends AdminBaseController
     public function commitModel(Request $request, Model $model)
     {
 
-       // $model->fill($request->all());
-       $model->menu_id = 2;
+    
+      //  dd($request->all());
+      
+      $model->fill($request->all());
+       $model->menu_id = $request->menu_id;
        $model->title = $request->title;
 
        $context = MenuItem::find($request->context_id);
+
+        
 
        if($context) {
           
@@ -61,7 +66,7 @@ class MenuItemController extends AdminBaseController
         }
 
        $model->save();
-       
+
     }
     
 
