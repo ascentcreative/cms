@@ -120,7 +120,17 @@ H1, H2 {
     border-top: 0px solid !important;
 }
 
+/* .cms-screenblock-main, .cms-screenblock-main .form-control {
+    xfont-size: 1.2rem;
+    xfont-weight: 700;
+} */
 
+.cms-headbar {
+    background: rgba(255,255,255,0.5);
+    padding: 10px;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+}
 
 
 /** bootstrap overrides **/
@@ -128,6 +138,23 @@ H1, H2 {
 .table-hover tbody tr:hover {
     color: #212529;
     background-color: #f7f7f7;
+}
+
+table.menuitems {
+    width: 100%;
+}
+
+table.menuitems td {
+    width: 50%;
+}
+
+table.menuitems tr:first-child td {
+    border: 0px;
+    
+}
+
+table.menuitems tr:hover {
+    background-color:rgba(0,0,0,0.05);
 }
 
 .dropleft A.dropdown-toggle.dropdown-toggle-dots::before, 
