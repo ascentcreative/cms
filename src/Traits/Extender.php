@@ -4,64 +4,78 @@ namespace AscentCreative\CMS\Traits;
 
 trait Extender {
 
+    /**
+     * 
+     * To extend a model:
+     * 
+     * 1) Create a new Trait representing the relationship - convention is "Has[ForeignModel]". This trait must use 'Extender'
+     * 
+     * 2) The 'Initialize[TraitName]' method is called automatically by Eloquent Models. 
+     * Use this to add the extender's fields to 'fillable' (so they can be filled en-masse)
+     * Normally, use a single parent field like _foreignmodel, and arrayfield any constituent ones
+     * 
+     * 3) Create a boot[TraitName] function. Set up delete, saving and saved handlers:
+     * 
+     *   - Delete - deletes the foreign models on deletion of the extended model
+     *   - Saving (Capture) - remove the _foreignmodel fields from the model and put in the session. Normally extenders._foreignmodel
+     *   - Saved - The model has updated, so now we write the _foreignmodel fields to relevant model and link them up. Ensure data is PULLed from the session
+     * 
+     * 4) Maybe step 2 could be called by a 'created' handler instead?
+     * 
+     * 5) This trait auto-includes blades to add to the model's edit screens at 'admin.trait.[traitname]' and 'cms::trait.[traitname]'. 
+     *      Other paths can be added to config/cms.php
+     *      
+     */
 
 
-    public function save(array $options = []) {
+    protected $_requestedTraitBlades = [];
 
-        // create a unique identifier
-        // we're going to dump the incoming Trait data into the session so the model itself can save safely
-        $sessionid = uniqid();
+    public function getTraitBlades($trait=null) {
 
-        foreach(class_uses($this) as $trait) {
+        if (!is_null($trait)) {
 
-            // chuck all the incoming data into the session...
-            if (array_search('AscentCreative\CMS\Traits\Extender', class_uses($trait)) !== false) {
-                $fn = $this->getTraitFunction('capture', $trait);
-                $this->$fn($sessionid);
+            $this->_requestedTraitBlades[] = strtolower($trait);
+
+            $aryPaths = array();
+            foreach(config('cms.traitbladepaths') as $path) {
+                $aryPaths[] = $path . '.' . strtolower($trait);
             }
+
+            return $aryPaths;
+
+        } else {
+
+
+            $blades = array();
+            foreach(class_uses($this) as $trait) {
+
+                if (array_search('AscentCreative\CMS\Traits\Extender', class_uses($trait)) !== false) {
+
+
+                    $ary = explode('\\', $trait);
+                    $basename = array_pop($ary);
+
+
+                    if(array_search(strtolower($basename), $this->_requestedTraitBlades) === false) {
+
+                        $aryPaths = array();
+                        foreach(config('cms.traitbladepaths') as $path) {
+                            $aryPaths[] = $path . '.' . strtolower($basename);
+                        }
+
+                        $blades[$basename] = $aryPaths;
+
+                    }
+                    
+                }
+
+            }
+
+            return $blades;
 
         }
 
-        // Save the model
-        parent::save($options);
-
-     //   dd(session()->all());
-
-        // Ok, now the model's been saved, we can associate the data from the session
-        foreach(class_uses($this) as $trait) {
-
-            // grab all the data back from the session and create the associated models
-            if (array_search('AscentCreative\CMS\Traits\Extender', class_uses($trait)) !== false) {
-                $fn = $this->getTraitFunction('save', $trait);
-                $this->$fn($sessionid);
-            }
-
-        }
-        //dd(session()->all());
-
-        // finally, kill off that data. Let's not leave it lying around in the session
-        session()->pull($sessionid);
-
-    }
-
-
-    public function getTraitBlades() {
-
-        $blades = array();
-        foreach(class_uses($this) as $trait) {
-
-            // chuck all the incoming data into the session...
-            if (array_search('AscentCreative\CMS\Traits\Extender', class_uses($trait)) !== false) {
-
-                $ary = explode('\\', $trait);
-                $basename = array_pop($ary);
-                $blades[] = 'cms::trait.' . strtolower($basename);
-                
-            }
-
-        }
-
-        return $blades;
+        
 
     }
 
@@ -78,6 +92,9 @@ trait Extender {
         return $fn . $trimmed;
 
     }
+
+
+
 
 
 }
