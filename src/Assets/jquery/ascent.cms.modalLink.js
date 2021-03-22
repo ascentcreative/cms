@@ -14,7 +14,6 @@ var ModalLink = {
         var obj = this.element;
 
         
-        
         // We're calling this on click, so just launch straight into the business end...
 
        // window.location.href = $(this.element).attr('href');
@@ -76,38 +75,7 @@ var ModalLink = {
            
         return false;
 
-        // // get the href and fire off a request
-        // $.get($(this.element).attr('href'))
-
-        //     .done(function(data, status, request) {
-
-        //         console.log(request.getAllResponseHeaders());
-        //         //if ()
-        //         self.showResponseModal(data);               
-
-        //     })
-        //     .fail(function(data) {
-
-        //         // error: function(data) {
-        //         console.log(data);
-        //         switch(data.status) {
-        //             case 401:
-        //                 alert('Ah - unaiutheorissed');
-        //                 break;
-
-        //             default:
-        //                 alert('There was an error...');
-        //                 break;
-
-        //         }
-
-               
-
-        //     });
-
-        // //});
-
-        // return false; // stop the link firing normally!
+      
         
     },
 
@@ -154,22 +122,10 @@ $.extend($.ascent.ModalLink, {
 		
 }); 
 
-// this way?
-// $(document).ready(function() {
-
-//     $('A.modalLink').modalLink();
-
-// });
-
-// or this? Allows for dynamically added ones. Try this frist...
+/* Assign this behaviour by link class */
 $(document).on('click', 'A.modalLink, A.modal-link', function(e) {
 
-    console.log('captured');
-
-    
     $(this).modalLink();
-
-    
     e.stopPropagation();
     return false; // stop the link firing normally!
 
