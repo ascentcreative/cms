@@ -6,10 +6,11 @@
   
         <tr>
             
-           {{--}} <th colspan="2">Actions</th>--}}
+            <th width="">Name</th>
 
-            <th width="">Menu Name</th>
+            <th></th>
 
+           
           
         </tr>
 
@@ -22,15 +23,9 @@
     
         <tr class="indexitem">
 
-            <td class="title"><a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">{{$item->itemtitle}}</a></td>
+            <td class="title"><a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">{{$item->name}}</a></td>
 
-            <td>{{ $item->depth }}</td>
-
-            <td>
-
-                
-              
-            </td>
+            <td class="title">{{ obscure($item->email) }}</td>
 
             <td width="0"> 
                 <div class="btn-group dropleft">
@@ -45,4 +40,3 @@
      @endforeach
 
 @endsection
-

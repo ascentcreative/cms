@@ -45,7 +45,7 @@
 
     </table>
 
-    @if($models instanceof \Illuminate\Pagination\LengthAwarePaginator )
+    @if($models instanceof \Illuminate\Pagination\LengthAwarePaginator && $models->lastPage() > 1 )
         
         <div class="cms-screen-paginator">
             

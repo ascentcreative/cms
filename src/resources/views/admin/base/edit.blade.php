@@ -1,6 +1,5 @@
 @extends('cms::admin.screen')
 
-
 @section('screen-start')
         
     {{-- OPEN FORM TAG --}}
@@ -41,7 +40,7 @@
 @section('headbar')
 
     <nav class="navbar">
-    <BUTTON type="button" class="btn btn-primary btn-sm" onclick="$(this).parents('form')[0].submit()" class="button">Submit</BUTTON>
+    <BUTTON type="button" class="btn btn-primary btn-sm" onclick="$(this).parents('form')[0].submit()" class="button">Save {{$modelName}}</BUTTON>
     </nav>
 
 @endsection
@@ -54,7 +53,7 @@
     @if(method_exists($model, 'getTraitBlades')) 
         @foreach($model->getTraitBlades() as $blade)
             <div class="cms-screenblock bg-white rounded shadow" style="">
-                @include($blade)
+                @includefirst($blade)
             </div>
         @endforeach
     @endif
