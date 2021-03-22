@@ -6,7 +6,7 @@
 @section('element')
 
     <select name="{{$name}}" class="form-control">
-        <option value="">Please Select:</option>
+        <option value="">{{$nullItemLabel}}</option>
 
         <?php 
         
@@ -15,7 +15,6 @@
         
         ?>
 
-        
         @foreach ($opts as $opt)
 
         <option value="{{ $opt->$idField }}" @if ($value == $opt->$idField)
