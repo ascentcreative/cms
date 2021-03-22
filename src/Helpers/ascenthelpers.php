@@ -87,8 +87,28 @@ function controller() {
 }
 
 
+function obscure($str) {
+
+    if (strstr($str, '@')) {
+        $ary = explode('@', $str);
+        $words = explode('.', $ary[0]);
+        $out = array();
+        foreach($words as $word) {
+            $out[] = substr($word, 0, 1) . str_repeat('*', strlen($word)-2) . substr($word, -1, 1);
+        }
+        return join('.', $out) . '@' . $ary[1];
+    }
+
+}
+
+
+/* Singleton Accessors */
+
 function headTitle() {
-
 	return app(\AscentCreative\CMS\Helpers\HeadTitle::class);
+}
 
+
+function adminMenu() {
+	return app(\AscentCreative\CMS\Helpers\AdminMenu::class);
 }
