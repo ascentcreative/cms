@@ -16,6 +16,8 @@ class Menu extends Base
 {
     use HasFactory;
 
+    public $fillable = ['title'];
+
     /*
      * MUTATORS
      * 
