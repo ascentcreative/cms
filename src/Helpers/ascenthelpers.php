@@ -112,3 +112,15 @@ function headTitle() {
 function adminMenu() {
 	return app(\AscentCreative\CMS\Helpers\AdminMenu::class);
 }
+
+function menu($slug, $maxDepth=0) {
+
+    $menu = AscentCreative\CMS\Models\Menu::where('slug', $slug)->first();
+
+    if (!$menu) {
+        return '';
+    } else {
+        return($menu->render($maxDepth));
+    }
+
+}
