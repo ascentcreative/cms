@@ -240,15 +240,11 @@ class BibleReferenceParser {
     
         function parseBibleRef($ref) {	
 
-            
-
             $ref = str_replace(": ", ":", $ref);
             $ref = str_replace(" :", ":", $ref);
             $ref = str_replace("- ", "-", $ref);
             $ref = str_replace(" -", "-", $ref);
 
-            
-        
             $parsed = array();
         
             $split = explode(" ", $ref);
