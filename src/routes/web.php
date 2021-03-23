@@ -2,6 +2,12 @@
 
 Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(function () {
 
+    Route::get('/contact', 'ContactController@showform');
+    Route::get('/contact/submit', 'ContactController@submit');
+    Route::get('/contact/confirm', function() {
+       return view('cms::public.contact.showconfirm');
+    });
+
     Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'can:administer'])->group(function() {
 
         
@@ -16,6 +22,8 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         });
 
         Route::resource('/menus', MenuController::class);
+
+        Route::resource('/settings', SettingsController::class);
 
         Route::get('/menuitems/{menuitem}/delete', [AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'delete']);
         Route::resource('/menuitems', MenuItemController::class);

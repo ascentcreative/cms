@@ -7,7 +7,11 @@ return [
  
 
     // list of paths to try for Model Extender trait blades. Will be checked in the order specified.
-    'traitbladepaths' => ['admin.trait', 'cms::trait']
+    'traitbladepaths' => ['admin.trait', 'cms::trait'],
 
+    // recaptcha keys
+    'recaptcha_sitekey' => env('RECAPTCHA_SITEKEY', '6Lf_PYsaAAAAANe6Uv_tzWjLVO-qwgfC9WWKkQ2u'),
+    'recaptcha_secret' => env('RECAPTCHA_SECRET', '6Lf_PYsaAAAAAAm5qVKdE95rI3YYc7yMSzY3ce0U'),
+    'recaptcha_threshold' => env('RECAPTCHA_THRESHOLD', 0.5),
 
 ];
