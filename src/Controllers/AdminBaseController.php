@@ -21,6 +21,8 @@ abstract class AdminBaseController extends Controller
     public $indexSort = array();
     public $indexSearchFields = array();
 
+    public $allowDeletions = true;
+
     public function __construct() {
         //parent::__construct();
        
@@ -150,10 +152,17 @@ abstract class AdminBaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id=null)
     {
-        //
-        echo 'here';
+        $cls = $this::$modelClass;
+        
+        if (is_null($id)) {
+            $model = new $cls();
+        } else {
+            $model = $cls::find($id);
+        }
+       
+        return view($this::$bladePath . '.show', $this->prepareViewData())->withModel($model);
     }
 
     /**
@@ -222,15 +231,23 @@ abstract class AdminBaseController extends Controller
      */
     public function delete($id=null) {
 
-        $cls = $this::$modelClass;
-        
-        if (is_null($id)) {
-            $model = new $cls();
-        } else {
-            $model = $cls::find($id);
-        }
+        if ($this->allowDeletions) {
 
-        return view('cms::admin.modals.confirmdelete', $this->prepareViewData())->withModel($model);
+            $cls = $this::$modelClass;
+            
+            if (is_null($id)) {
+                $model = new $cls();
+            } else {
+                $model = $cls::find($id);
+            }
+
+            return view('cms::admin.modals.confirmdelete', $this->prepareViewData())->withModel($model);
+
+        } else {
+
+            return view('cms::admin.modals.nodelete', $this->prepareViewData()); 
+
+        }
 
     }
 
@@ -244,16 +261,20 @@ abstract class AdminBaseController extends Controller
     public function destroy($id)
     {
         
-        $cls = $this::$modelClass;
-        
-        if (is_null($id)) {
-            $model = new $cls();
-        } else {
-            $model = $cls::find($id);
-        }
+        if($this->allowDeletions) {
 
-        if($model) {
-            $model->delete();
+            $cls = $this::$modelClass;
+            
+            if (is_null($id)) {
+                $model = new $cls();
+            } else {
+                $model = $cls::find($id);
+            }
+
+            if($model) {
+                $model->delete();
+            }
+
         }
         
         return redirect(url()->previous());
