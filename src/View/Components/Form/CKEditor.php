@@ -11,9 +11,11 @@ class CKEditor extends Component
     public $label;
     public $name;
     public $value;
+    public $height;
 
     public $wrapper;
     public $class;
+
 
 
     /**
@@ -21,7 +23,7 @@ class CKEditor extends Component
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value,
+    public function __construct($type, $label, $name, $value, $height=400,
                         $wrapper='bootstrapformgroup', $class=''        
                     )
     {
@@ -29,6 +31,7 @@ class CKEditor extends Component
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
+        $this->height = $height;
 
         $this->wrapper = $wrapper;
         $this->class = $class;
