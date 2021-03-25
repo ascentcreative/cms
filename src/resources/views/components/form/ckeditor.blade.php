@@ -27,7 +27,6 @@
             removePlugins : 'elementspath',
             extraPlugins: 'font,richcombo,snippet,photogallery,justify,panel,button,floatpanel,panelbutton,colorbutton,colordialog',
             contentsCss: [ '/css/fck_editorarea.css','/css/buttons.css' ]
-           
              }
 
         ) });
