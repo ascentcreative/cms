@@ -20,7 +20,7 @@
               
         CKEDITOR.replace($('textarea#{{$name}}')[0], 
 
-        { width : " . $width . ", height : " . $element->getHeight() . ", 
+        { width : '100%', height : '{{ $height }}', 
             extraAllowedContent : 'form; form[*]; form(*); input; input(*); input[*]; p[style]; script; script(*); script[*]; iframe; code; embed; iframe[*]; embed[*]; span(*); div(*); div(codesnippet)[*]; div[*]; codesnippet; codesnippet[contenteditable]; codesnippet[partial]; codesnippet[*]', filebrowserBrowseUrl:roxyFileman,
             filebrowserImageBrowseUrl:roxyFileman+'?type=image',
             removeDialogTabs: 'link:upload;image:upload',
