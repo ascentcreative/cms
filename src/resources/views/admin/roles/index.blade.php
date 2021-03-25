@@ -25,12 +25,6 @@
 
             <td class="title"><a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">{{$item->name}}</a></td>
 
-            <td class="title">{{ obscure($item->email) }}</td>
-
-            <td>
-                {!! $item->getRoleNames() !!}
-            </td>
-
             <td>
                 {!! $item->getPermissionNames() !!}
             </td>

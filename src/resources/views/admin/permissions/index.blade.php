@@ -6,7 +6,7 @@
   
         <tr>
             
-            <th width="">Name</th>
+            <th width="">Permission Name</th>
 
             <th></th>
 
@@ -25,16 +25,7 @@
 
             <td class="title"><a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">{{$item->name}}</a></td>
 
-            <td class="title">{{ obscure($item->email) }}</td>
-
-            <td>
-                {!! $item->getRoleNames() !!}
-            </td>
-
-            <td>
-                {!! $item->getPermissionNames() !!}
-            </td>
-
+            
             <td width="0"> 
                 <div class="btn-group dropleft">
                     <A class="dropdown-toggle dropdown-toggle-dots" href="#" data-toggle="dropdown" ></A>

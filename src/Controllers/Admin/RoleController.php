@@ -8,22 +8,20 @@ use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserController extends AdminBaseController
+class RoleController extends AdminBaseController
 {
 
-    static $modelClass = 'App\Models\User';
-    static $bladePath = "cms::admin.users";
+    static $modelClass = 'Spatie\Permission\Models\Role';
+    static $bladePath = "cms::admin.roles";
 
 
     public function commitModel(Request $request, Model $model) {
 
+        $model->guard_name = 'web';
         // Save the Cheerleader (User)
         parent::commitModel($request, $model); 
 
-        // Save the World (Permissions & Roles)
-        print_r($request->roles);
-
-        $model->syncRoles($request->roles);
+        // $model->syncRoles($request->roles);
         $model->syncPermissions($request->permissions);
 
     }
@@ -33,8 +31,7 @@ class UserController extends AdminBaseController
     public function rules($request, $model=null) {
 
        return [
-            'name' => 'required',
-            'email' => 'required|email'
+            'name' => 'required'
         ]; 
 
     }

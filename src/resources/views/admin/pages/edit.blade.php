@@ -33,20 +33,47 @@
 
 </div>
 
-<div class="cms-screenblock bg-white rounded shadow" style="">
+<div class="cms-screenblock-tabs bg-white rounded shadow" style="">
 
-    <x-cms-form-ckeditor type="text" label="Page Content" name="content" value="{{ old('content', $model->content) }}" height="600">
 
-    </x-cms-form-ckeditor>
+    <ul class="nav nav-tabs px-3 pt-3 bg-light" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" id="main-tab" data-toggle="tab" href="#page" role="tab" aria-controls="page" aria-selected="true">Page Content</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="headimg-tab" data-toggle="tab" href="#headimg" role="tab" aria-controls="headimg" aria-selected="false">Header Image</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="menuitem-tab" data-toggle="tab" href="#menuitem" role="tab" aria-controls="menuitem" aria-selected="false">Menu Position</a>
+        </li>
+    </ul>
 
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane show p-3" id="page" role="tabpanel" aria-labelledby="page-tab">
+
+            <x-cms-form-ckeditor type="text" label="Page Content" name="content" value="{{ old('content', $model->content) }}" height="500">
+
+            </x-cms-form-ckeditor>
+        
+
+        </div>
+
+        <div class="tab-pane show p-3" id="headimg" role="tabpanel" aria-labelledby="headimg-tab">
+
+            @includeFirst($model->getTraitBlades('HasHeaderImage'))
+
+        </div>
+
+        <div class="tab-pane show p-3" id="menuitem" role="tabpanel" aria-labelledby="meuitem-tab">
+
+            @includeFirst($model->getTraitBlades('HasMenuItem'))
+
+        </div>
+
+    </div>
+
+    
 </div>
 
-{{--
-@foreach($model->getExtenders() as $extender)
-<div class="cms-screenblock bg-white rounded shadow" style="">
-    @include($extender->editBladePath)
-</div>
-@endforeach
---}}
 
 @endsection

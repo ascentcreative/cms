@@ -35,6 +35,12 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::get('/users/{user}/delete', [AscentCreative\CMS\Controllers\Admin\UserController::class, 'delete']);
         Route::resource('/users', UserController::class);
 
+        Route::get('/roles/{role}/delete', [AscentCreative\CMS\Controllers\Admin\RoleController::class, 'delete']);
+        Route::resource('/roles', RoleController::class);
+
+        Route::get('/permissions/{permission}/delete', [AscentCreative\CMS\Controllers\Admin\PermissionController::class, 'delete']);
+        Route::resource('/permissions', PermissionController::class);
+
 
         Route::fallback(function () {
            return view('cms::admin.errors.404');
