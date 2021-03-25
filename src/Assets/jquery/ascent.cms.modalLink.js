@@ -28,7 +28,13 @@ var ModalLink = {
 
         console.log(self.targetPath);
       
-        $.get({ url: self.targetPath
+     //   $.get({ url: self.targetPath
+        $.ajax({
+            type: 'GET',
+            url: self.targetPath,
+            headers: {
+                'Accept' : "application/json"
+            }
         }).done(function(data, xhr, request) {
 
             var cType = request.getResponseHeader('content-type');
@@ -36,6 +42,7 @@ var ModalLink = {
             if(cType.indexOf('text/html') != -1) {
                 self.showResponseModal(data);
             } else {
+             //   alert(cType);
 
                 window.location.href = self.targetPath;
                 // close any open modals!
