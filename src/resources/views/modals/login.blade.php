@@ -9,56 +9,56 @@
 
         $('A#btn-register').addClass('modal-link').attr('href', '/modal/cms::modals.register?intended=' + $('#form_login input[name="intended"]').val());
 
-        $('#form_login').submit(function() {
+        // $('#form_login').submit(function() {
 
-            $('.validation-error').remove();
+        //     $('.validation-error').remove();
 
-            $.ajax({
-                type: 'POST',
-                url: '/login', 
-                 headers: {
-                    'Accept' : "application/json"
-                 },
-                data: $('#form_login').serialize()
-            })
-                .done(function(data, xhr, request) {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '/login', 
+        //          headers: {
+        //             'Accept' : "application/json"
+        //          },
+        //         data: $('#form_login').serialize()
+        //     })
+        //         .done(function(data, xhr, request) {
 
-                    if(request.status == 201) {
+        //             if(request.status == 201) {
 
-                        $('body').modalLink({
-                            target: $('#form_login input[name="intended"]').val()
-                        });
+        //                 $('body').modalLink({
+        //                     target: $('#form_login input[name="intended"]').val()
+        //                 });
 
-                    }
+        //             }
 
-                })
+        //         })
 
-                .fail(function(data, xhr, request) {
+        //         .fail(function(data, xhr, request) {
 
-                    if(data.status == 422) {
+        //             if(data.status == 422) {
 
-                        for(name in data.responseJSON.errors) { 
+        //                 for(name in data.responseJSON.errors) { 
 
-                            console.log(name + " --- " + data.responseJSON.errors[name]);
+        //                     console.log(name + " --- " + data.responseJSON.errors[name]);
 
-                            $('INPUT[name="' + name + '"]').parents('.element-wrapper').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
-                                data.responseJSON.errors[name] + 
-                             '</small>');
+        //                     $('INPUT[name="' + name + '"]').parents('.element-wrapper').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
+        //                         data.responseJSON.errors[name] + 
+        //                      '</small>');
 
-                        }
+        //                 }
                       
                       
-                    } else {
+        //             } else {
 
-                        alert('An unknown error occured while logging in.');
+        //                 alert('An unknown error occured while logging in.');
 
-                    }
+        //             }
 
-                });
-            return false;
+        //         });
+        //     return false;
 
          
-        });
+        // });
 
 
          /* {{-- Also need to do registration in popup? --}} */
