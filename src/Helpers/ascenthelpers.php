@@ -73,7 +73,8 @@ function autoVersion($file, $min=true) {
 		    
 		}
 		
-		return '/min' . $tgt; 
+        // prepend the current hostname, and ensure the current protocol is used.
+		return '//' . $_SERVER['HTTP_HOST'] . '/min' . $tgt; 
 		
 }
 
