@@ -5,6 +5,6 @@
 
 @section('element')
 
-    <button name="{{$name}}" value="{{$value}}">{{$label}}</button>
+    <button name="{{$name}}" value="{{$value}}" class="{{$class}}">{{$label}}</button>
 
 @overwrite
