@@ -1,4 +1,7 @@
 <div class="modal fade text-left" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    @stack('styles')
+
     <div class="modal-dialog @if($modalCenterVertical ?? false) modal-dialog-centered @endif {{$modalSize ?? ''}}" role="document">
       <div class="modal-content">
 
@@ -33,4 +36,7 @@
 
       </div>
     </div>
+
+    @stack('scripts')
+
   </div>
