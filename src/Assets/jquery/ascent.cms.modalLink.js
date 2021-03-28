@@ -139,6 +139,10 @@ var ModalLink = {
                         console.log(xhr);
                         console.log(request);
 
+                        if(data.getResponseHeader('fireEvent')) {
+                            $(document).trigger(data.getResponseHeader('fireEvent'));
+                        }
+
                         $('body').modalLink({
                             target: data.responseJSON
                         });
