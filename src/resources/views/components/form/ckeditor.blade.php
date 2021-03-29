@@ -18,33 +18,28 @@
       $(document).ready(function(){ 
 
               
-        CKEDITOR.replace($('textarea#{{$name}}')[0], 
+        var ck = CKEDITOR.replace($('textarea#{{$name}}')[0], 
 
-        { width : '100%', height : '{{ $height }}', 
-            extraAllowedContent : 'form; form[*]; form(*); input; input(*); input[*]; p[style]; script; script(*); script[*]; iframe; code; embed; iframe[*]; embed[*]; span(*); div(*); div(codesnippet)[*]; div[*]; codesnippet; codesnippet[contenteditable]; codesnippet[partial]; codesnippet[*]', filebrowserBrowseUrl:roxyFileman,
-            filebrowserImageBrowseUrl:roxyFileman+'?type=image',
-            removeDialogTabs: 'link:upload;image:upload',
-            removePlugins : 'elementspath',
-            extraPlugins: 'font,richcombo,snippet,photogallery,justify,panel,button,floatpanel,panelbutton,colorbutton,colordialog',
-            contentsCss: [ '/css/fck_editorarea.css','/css/buttons.css' ]
-             }
+            { width : '100%', height : '{{ $height }}', 
+                extraAllowedContent : 'form; form[*]; form(*); input; input(*); input[*]; p[style]; script; script(*); script[*]; iframe; code; embed; iframe[*]; embed[*]; span(*); div(*); div(codesnippet)[*]; div[*]; codesnippet; codesnippet[contenteditable]; codesnippet[partial]; codesnippet[*]', filebrowserBrowseUrl:roxyFileman,
+                filebrowserImageBrowseUrl:roxyFileman+'?type=image',
+                removeDialogTabs: 'link:upload;image:upload',
+                removePlugins : 'elementspath',
+                extraPlugins: 'font,richcombo,snippet,photogallery,justify,panel,button,floatpanel,panelbutton,colorbutton,colordialog',
+                contentsCss: [ '/css/fck_editorarea.css','/css/buttons.css' ]
+            }
 
-        ) });
+        );
 
-           
+        ck.on('change', function(e) {
+            // update the Textarea and fire off a change event (used by Form Dirty checks);
+            ck.updateElement();
+            $(ck.element.$).change();
 
+        });
+        
+    });
 
-for (var idCKE in CKEDITOR.instances) {
-
-
-   CKEDITOR.instances[idCKE].on('change', function(event) { 
-        CKEDITOR.instances[idCKE].updateElement();
-        $(CKEDITOR.instances[idCKE].element.$).change();
-       
-});
-
-
- } 	
 
     </script>
 @endpush
