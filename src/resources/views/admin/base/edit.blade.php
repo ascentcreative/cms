@@ -1,13 +1,40 @@
 @extends('cms::admin.screen')
 
+{{-- FORM DIRTY CHECKS: --}}
+@push('scripts')
+    @script('/vendor/ascent/cms/jquery/areyousure/jquery.are-you-sure.js')
+    @script('/vendor/ascent/cms/jquery/areyousure/ays-beforeunload-shim.js')
+
+    <script language="javascript">
+        $(document).ready(function() {
+            $('#frm_edit').areYouSure( {'message':'Your edits have not been saved!'} );
+        });
+        $(document).on('formDirty', function() {
+            console.log('element data changed');
+            $('#frm_edit').trigger('checkform.areYouSure');
+        });
+    </script>
+
+    {{-- ensure first tab shows... (Might need to change this to show buried validation fails --}}
+    <script>
+
+        $(document).ready(function() {
+            $('#myTab li:first-child a').tab('show');
+        });
+
+    </script>
+
+@endpush
+
+
 @section('screen-start')
         
     {{-- OPEN FORM TAG --}}
     @if ($model->id)
-        <form action="{{ action([controller(), 'update'], [$modelInject => $model->id]) }}" method="POST" enctype="application/x-www-form-urlencoded">
+        <form action="{{ action([controller(), 'update'], [$modelInject => $model->id]) }}" id="frm_edit" method="POST" enctype="application/x-www-form-urlencoded">
          @method('PUT')
     @else
-        <form action="{{ action([controller(), 'store']) }}" method="POST" enctype="application/x-www-form-urlencoded">
+        <form action="{{ action([controller(), 'store']) }}" method="POST" id="frm_edit" enctype="application/x-www-form-urlencoded">
     @endif
 
     @csrf
@@ -40,7 +67,8 @@
 @section('headbar')
 
     <nav class="navbar">
-    <BUTTON type="button" class="btn btn-primary btn-sm" onclick="$(this).parents('form')[0].submit()" class="button">Save {{$modelName}}</BUTTON>
+        <BUTTON type="button" class="btn btn-primary btn-sm" onclick="$(this).parents('form')[0].submit()" class="button">Save {{$modelName}}</BUTTON>
+        <A href="{{ url()->previous() }}" class="btn btn-primary btn-sm">Close {{$modelName}}</A>
     </nav>
 
 @endsection
