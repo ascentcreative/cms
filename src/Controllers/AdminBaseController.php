@@ -4,6 +4,7 @@ namespace AscentCreative\CMS\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
  
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,8 @@ abstract class AdminBaseController extends Controller
     public $pageSize = 15;
     public $indexSort = array();
     public $indexSearchFields = array();
+
+    public $ignoreScopes = array();
 
     public $allowDeletions = true;
 
@@ -38,7 +41,7 @@ abstract class AdminBaseController extends Controller
 
         $modelName = $short ?? $this->modelName;
 
-        $modelNameHuman = join(' ', preg_split('/(?=[A-Z])/',$modelName));
+        $modelNameHuman = trim(join(' ', preg_split('/(?=[A-Z])/',$modelName)));
 
         $out = array(
             'modelInject' => Str::lower($modelName),
@@ -53,6 +56,26 @@ abstract class AdminBaseController extends Controller
     }
 
 
+    /**
+     * Prepare a model::query()
+     * Applies any necessary steps (such as global scope removal)
+     */
+
+     private function prepareModelQuery() {
+
+        $cls = $this::$modelClass;
+
+        $qry = $cls::query();
+        // remove any scopes as rewquested:
+        foreach($this->ignoreScopes as $scopeName) {
+            $qry->withoutGlobalScope($scopeName);
+        }
+
+        return $qry;
+        
+
+     }
+
      /**
      * Display a listing of the resource.
      *
@@ -62,7 +85,7 @@ abstract class AdminBaseController extends Controller
     {
 
         // get the items for the view
-        $items = ($this::$modelClass)::query();
+        $items = $this->prepareModelQuery();
         
         // prepare any defined filters...
 
@@ -178,7 +201,8 @@ abstract class AdminBaseController extends Controller
         if (is_null($id)) {
             $model = new $cls();
         } else {
-            $model = $cls::find($id);
+            $items = $this->prepareModelQuery();
+            $model = $items->find($id);
         }
        
         return view($this::$bladePath . '.edit', $this->prepareViewData())->withModel($model);
@@ -195,8 +219,8 @@ abstract class AdminBaseController extends Controller
     public function update(Request $request, $id)
     {
 
-        $cls = $this::$modelClass;
-        $model = $cls::find($id);
+        $qry = $this->prepareModelQuery();
+        $model = $qry->find($id);
 
         $validatedData = $request->validate(
             $this->rules($request, $model)
@@ -238,7 +262,8 @@ abstract class AdminBaseController extends Controller
             if (is_null($id)) {
                 $model = new $cls();
             } else {
-                $model = $cls::find($id);
+                $qry = $this->prepareModelQuery();
+                $model = $qry->find($id);
             }
 
             return view('cms::admin.modals.confirmdelete', $this->prepareViewData())->withModel($model);
@@ -268,7 +293,8 @@ abstract class AdminBaseController extends Controller
             if (is_null($id)) {
                 $model = new $cls();
             } else {
-                $model = $cls::find($id);
+                $qry = $this->prepareModelQuery();
+                $model = $qry->find($id);
             }
 
             if($model) {
@@ -277,8 +303,10 @@ abstract class AdminBaseController extends Controller
 
         }
         
+       
         return redirect(url()->previous());
-
+       
+    
     }
 
 
