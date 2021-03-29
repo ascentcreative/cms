@@ -121,7 +121,7 @@ var ModalLink = {
 
         /* grab forms... */
 
-        $('#ajaxModal FORM').submit(function() {
+        $('#ajaxModal FORM').not('.no-ajax').submit(function() {
 
             $('.validation-error').remove();
 
