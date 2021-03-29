@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered {{$modalSize ?? ''}}" role="document">
 
 
-<form action="{{ action([controller(), 'destroy'], [$modelInject => $model->id]) }}" method="POST">
+<form action="{{ action([controller(), 'destroy'], [$modelInject => $model->id]) }}" method="POST" class='no-ajax'>
     @csrf
     @method('DELETE')
 
