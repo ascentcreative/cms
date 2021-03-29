@@ -7,11 +7,7 @@
 
     <script language="javascript">
         $(document).ready(function() {
-            $('#frm_edit').areYouSure( {'message':'Your edits have not been saved!'} );
-        });
-        $(document).on('formDirty', function() {
-            console.log('element data changed');
-            $('#frm_edit').trigger('checkform.areYouSure');
+            $('#frm_edit').areYouSure();            
         });
     </script>
 
@@ -67,8 +63,8 @@
 @section('headbar')
 
     <nav class="navbar">
-        <BUTTON type="button" class="btn btn-primary btn-sm" onclick="$(this).parents('form')[0].submit()" class="button">Save {{$modelName}}</BUTTON>
-        <A href="{{ url()->previous() }}" class="btn btn-primary btn-sm">Close {{$modelName}}</A>
+        <BUTTON type="submit" class="btn btn-primary bi-check-circle-fill" class="button">Save {{$modelName}}</BUTTON>
+        <A href="{{ url()->previous() }}" class="btn btn-primary bi-x-circle-fill">Close {{$modelName}}</A>
     </nav>
 
 @endsection
