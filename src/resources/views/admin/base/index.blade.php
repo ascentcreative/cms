@@ -7,14 +7,7 @@
 
     <nav class="navbar">
 
-        <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary btn-sm">Create</a>
-
-        <form class="form-inline" method="get">
-            
-            <input type"text" name="search" class="form-control" value="{{ isset($_GET['search'])?$_GET['search']:'' }}"/>
-            <button>
-
-        </form>
+        <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary">Create</a>
 
     </nav>
 
@@ -24,7 +17,18 @@
 
 @section('screen')
 
+{{-- <div class="cms-screenblock bg-white rounded shadow"> --}}
+    <form class="form-inline" method="get">
+            
+        <input type"text" name="search" class="form-control" placeholder="Search {{$modelPlural}}" value="{{ isset($_GET['search'])?$_GET['search']:'' }}"/>
+        <a href="{{ action([controller(), 'index']) }}" class="bi-x-circle-fill"></a>
+
+    </form>
+{{-- </div> --}}
+
 <div class="cms-screenblock bg-white rounded shadow" style="">
+
+   
 
     @if($models->count() > 0)
         
