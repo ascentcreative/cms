@@ -25,13 +25,14 @@ class BlockSelect extends Component
     public $wrapper;
     public $class;
 
+    public $blockblade;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $options, $maxSelect=-1, $wrapper='bootstrapformgroup', $class='')
+    public function __construct($label, $name, $value, $options, $maxSelect=-1, $blockblade='', $wrapper='bootstrapformgroup', $class='')
     {
 
         $this->label = $label;
@@ -42,6 +43,7 @@ class BlockSelect extends Component
 
         $this->wrapper = $wrapper;
         $this->class = $class;
+        $this->blockblade = $blockblade;
 
     }
 
