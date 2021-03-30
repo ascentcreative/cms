@@ -26,9 +26,16 @@ abstract class AdminBaseController extends Controller
 
     public $allowDeletions = true;
 
+    private $_filters = array();
+
     public function __construct() {
         //parent::__construct();
-       
+       //$this->registerFilters();
+    }
+
+    public function registerFilters($filters) {
+        // does nothing - override me...
+        $this->_filters = $filters;
     }
 
     /**
@@ -87,7 +94,7 @@ abstract class AdminBaseController extends Controller
         // get the items for the view
         $items = $this->prepareModelQuery();
         
-        // prepare any defined filters...
+        // apply search string:
 
        if(isset($_GET['search'])) {
 
@@ -115,6 +122,14 @@ abstract class AdminBaseController extends Controller
             }
 
         } 
+
+        // prepare any defined filters...
+
+        if (is_array($this->_filters)) {
+            foreach($this->_filters as $filter) {
+                $items = $filter->applyFilter($items);
+            }
+        }
        
         // prepare any defined sorters...
 
