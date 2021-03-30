@@ -17,6 +17,10 @@
 
 }
 
+.cms-blockselect-option:last-child {
+    margin-bottom: 0;
+}
+
 .cms-blockselect-option INPUT {
     display: none;
 }
