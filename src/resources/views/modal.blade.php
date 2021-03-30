@@ -2,7 +2,7 @@
 
     @stack('styles')
 
-    <div class="modal-dialog @if($modalCenterVertical ?? false) modal-dialog-centered @endif {{$modalSize ?? ''}}" role="document">
+    <div class="modal-dialog @if($modalCenterVertical ?? true) modal-dialog-centered @endif {{$modalSize ?? ''}}" role="document">
       <div class="modal-content">
 
         @if($modalShowHeader ?? false)
