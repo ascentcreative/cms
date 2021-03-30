@@ -5,6 +5,13 @@
 
 @section('headbar')
 
+    <form class="form-inline" method="get" id="frm_filter">
+        <input type"text" name="search" class="form-control" placeholder="Search {{$modelPlural}}" value="{{ isset($_GET['search'])?$_GET['search']:'' }}"/>
+        @isset(request()->search)
+            <a href="{{ action([controller(), 'index']) }}" class="bi-x-circle-fill"></a>
+        @endisset
+    </form>
+
     <nav class="navbar">
 
         <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary">Create</a>
@@ -16,15 +23,13 @@
 
 
 @section('screen')
-
-{{-- <div class="cms-screenblock bg-white rounded shadow"> --}}
+{{-- 
+<div class="cms-screenblock bg-white rounded shadow">
     <form class="form-inline" method="get">
-            
         <input type"text" name="search" class="form-control" placeholder="Search {{$modelPlural}}" value="{{ isset($_GET['search'])?$_GET['search']:'' }}"/>
         <a href="{{ action([controller(), 'index']) }}" class="bi-x-circle-fill"></a>
-
     </form>
-{{-- </div> --}}
+</div> --}}
 
 <div class="cms-screenblock bg-white rounded shadow" style="">
 
