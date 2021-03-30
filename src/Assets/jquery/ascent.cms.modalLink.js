@@ -120,6 +120,7 @@ var ModalLink = {
         // all done
 
         /* grab forms... */
+        var self = this;
 
         $('#ajaxModal FORM').not('.no-ajax').submit(function() {
 
@@ -133,6 +134,9 @@ var ModalLink = {
                  },
                 data: $(this).serialize(),
                 statusCode: {
+                    200: function(data, xhr, request) {
+                        self.showResponseModal(data);
+                    },
                     302: function(data, xhr, request) {
 
                         console.log(data);
