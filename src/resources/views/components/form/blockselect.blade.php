@@ -6,8 +6,14 @@
 @section('element')
 
     <div class="cms-blockselect" data-max-select="{{$maxSelect}}">
-    @foreach($options as $opt)
-        <label for="{{$name}}-{{ Str::slug($opt) }}" class="cms-blockselect-option"><input type="{{$maxSelect==1?'radio':'checkbox'}}" name="{{$name}}{{$maxSelect!=1?'[]':''}}" id="{{$name}}-{{ Str::slug($opt) }}" value="{{$opt}}"/>{{$opt}}</label>
+    @foreach($options as $key=>$opt)
+        <label for="{{$name}}-{{ Str::slug($key) }}" class="cms-blockselect-option"><input type="{{$maxSelect==1?'radio':'checkbox'}}" name="{{$name}}{{$maxSelect!=1?'[]':''}}" id="{{$name}}-{{ Str::slug($key) }}" value="{{$key}}"/>
+            @if($blockblade)
+                @include($blockblade, ['option'=>$opt])
+            @else
+                {{$opt}}
+            @endif
+        </label>
     @endforeach
     </div>
 
