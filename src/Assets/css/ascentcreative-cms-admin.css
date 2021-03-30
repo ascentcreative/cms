@@ -139,6 +139,14 @@ H1, H2 {
 
 /** bootstrap overrides **/
 
+.navbar > * {
+    margin-left: 10px;
+}
+
+button::before, A.btn::before {
+    margin-right: 10px;
+}
+
 .table-hover tbody tr:hover {
     color: #212529;
     background-color: #f7f7f7;
