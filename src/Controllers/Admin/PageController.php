@@ -14,6 +14,7 @@ class PageController extends AdminBaseController
     static $modelClass = 'AscentCreative\CMS\Models\Page';
     static $bladePath = "cms::admin.pages";
 
+    public $indexSearchFields = ['title', 'content'];
 
     public function commitModel(Request $request, Model $model)
     {
