@@ -15,7 +15,12 @@ class PageController extends Controller
 
   public function show(Page $page) {
 
-    return view('cms::public.pages.show')->withModel($page);
+    if (request()->wantsJson()) {
+        return view('cms::public.pages.modal')->withModel($page);
+    } else {
+        return view('cms::public.pages.show')->withModel($page);
+    }
+    
 
   }
 
