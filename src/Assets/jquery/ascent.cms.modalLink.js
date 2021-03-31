@@ -26,7 +26,7 @@ var ModalLink = {
 
         //$('#ajaxModal').hide();
 
-        console.log(self.targetPath);
+        //console.log(self.targetPath);
       
      //   $.get({ url: self.targetPath
         $.ajax({
