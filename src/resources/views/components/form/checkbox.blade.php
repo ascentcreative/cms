@@ -7,8 +7,7 @@
 
     <label for="{{$name}}" class="flex-label">
         <input type="checkbox" id="{{$name}}" name="{{$name}}" value="{{$value}}" {{ old('emailsignup') == 1 ? 'checked' : '' }}/>
-        <div class="flex-label-text">{{$label}}</div>
+        <div class="flex-label-text">@if($labelescape){{$label}}@else{!! $label !!}@endif</div>
     </label>
-   
 
 @overwrite
