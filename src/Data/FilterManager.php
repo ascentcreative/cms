@@ -45,7 +45,7 @@ class FilterManager {
 
                             $qry->where(function($qry) use($vals) {
 
-                                $targets = ['title', 'firstline', 'lyrics.text', 'ccli'];
+                                $targets = ['title', 'firstline', 'lyrics.text', 'ccli', 'writers.firstname', 'writers.lastname'];
 
                                 foreach($targets as $srch) {
                                     if (strstr($srch, '.') !== false) {
@@ -149,7 +149,7 @@ class FilterManager {
 
     //    echo $qry->toSql();
 
-      //  dd($qry->toSql());
+      // dd($qry->toSql());
 
         // add a default sort (which will run second to any override sorting statements above)
         $qry->orderBy('title');
