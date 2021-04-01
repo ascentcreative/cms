@@ -1,9 +1,9 @@
 @extends('cms::modal')
-{{-- 
+
 @php
-    $modalSize = 'modal-lg';
+    $modalSize = 'modal-md';
     
-@endphp --}}
+@endphp
 
 @section('modalContent')
 
