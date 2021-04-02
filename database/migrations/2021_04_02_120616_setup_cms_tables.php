@@ -34,7 +34,7 @@ class SetupCMSTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('cms_menuitems', function(Blueprint $table) {
+        Schema::create('cms_menu_items', function(Blueprint $table) {
             $table->id();
             $table->integer('_lft')->nullable();
             $table->integer('_rgt')->nullable();
