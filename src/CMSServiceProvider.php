@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Routing\Router;
 use Laravel\Fortify\Fortify;
-use Illuminate\Support\Facades\Schema;
 
 use AscentCreative\CMS\Helpers\HeadTitle;
 use AscentCreative\CMS\Helpers\AdminMenu;
@@ -33,8 +32,6 @@ class CMSServiceProvider extends ServiceProvider
 
   public function boot()
   {
-
-    Schema::defaultStringLength(191);
 
     $this->bootFortify();
 
