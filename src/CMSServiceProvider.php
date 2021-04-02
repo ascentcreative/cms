@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Routing\Router;
 use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Schema;
 
 use AscentCreative\CMS\Helpers\HeadTitle;
 use AscentCreative\CMS\Helpers\AdminMenu;
