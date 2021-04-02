@@ -7,9 +7,9 @@
     <title>{{ headTitle()->add('Admin')->render(' :: ') }}</title>
     <link rel="alternate icon" href="/img/favicon.png">
  
-    @style('/css/bootstrap.min.css') 
+    @style('/vendor/ascent/cms/css/bootstrap.min.css') 
     @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css") 
-    @style('/js/jquery-ui.min.css') 
+    @style('/vendor/ascent/cms/js/jquery-ui.min.css') 
     @style('/vendor/ascent/cms/css/ascentcreative-cms-admin.css') 
 
     @style('/css/admin.css') 
@@ -34,9 +34,9 @@
 
     </footer>
 
-    @script('/js/jquery-3.5.1.min.js')
-    @script('/js/jquery-ui.min.js')
-    @script('/js/bootstrap.bundle.min.js')
+    @script('/vendor/ascent/cms/js/jquery-3.5.1.min.js')
+    @script('/vendor/ascent/cms/js/jquery-ui.min.js')
+    @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
     @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
     @stack('scripts')
 
