@@ -50,6 +50,11 @@ class CMSServiceProvider extends ServiceProvider
 
     $router = $this->app->make(Router::class);
     $router->aliasMiddleware('cms-nocache', \AscentCreative\CMS\Middleware\NoCache::class);
+
+    $this->commands([
+        \AscentCreative\CMS\Commands\CreateAdminUser::class,
+
+    ]);
     
   }
 
