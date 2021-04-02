@@ -33,6 +33,8 @@ class CMSServiceProvider extends ServiceProvider
   public function boot()
   {
 
+    Schema::defaultStringLength(191);
+
     $this->bootFortify();
 
     // Register the helpers php file which includes convenience functions:
