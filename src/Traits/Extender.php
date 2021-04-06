@@ -34,13 +34,18 @@ trait Extender {
 
         if (!is_null($trait)) {
 
+            // only return the blade if the Model actually uses the trait.
+            // currently, code will resolve the trait name and return the blades (and their data then won't be saved)
+
+            // however, we also need to recurse the model's ancestry to get and check against all traits... 
+           
             $this->_requestedTraitBlades[] = strtolower($trait);
 
             $aryPaths = array();
             foreach(config('cms.traitbladepaths') as $path) {
                 $aryPaths[] = $path . '.' . strtolower($trait);
             }
-
+        
             return $aryPaths;
 
         } else {
