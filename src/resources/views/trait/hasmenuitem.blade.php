@@ -4,6 +4,11 @@ $mi = $model->menuitem;
 
 @endphp
 
+
+<x-cms-form-input type="text" label="Menu Item Title" name="_menuitem[title]" value="{{ old('_menuitem.title', $mi->title ?? '')}}"></x-cms-form-input>
+
+
+
 <x-cms-form-nestedset label="Menu" 
 
     name="_menuitem"
@@ -24,4 +29,5 @@ $mi = $model->menuitem;
     >
 
 </x-cms-form-nestedset>
+
 
