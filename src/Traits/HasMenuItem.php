@@ -57,8 +57,10 @@ trait HasMenuItem {
             if (is_null($data['menu_id'])) {
 
                 $item = $this->menuitem; 
-                $item->delete();
-
+                if($item) {
+                    $item->delete();
+                }
+                
             } else {
 
                 $item = $this->menuitem;
@@ -74,7 +76,7 @@ trait HasMenuItem {
                 
                
 
-                $item->title = $this->title;
+                $item->title = $data['title'];
 
                 $context = MenuItem::find($data['context_id']); 
 
