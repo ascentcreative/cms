@@ -10,8 +10,11 @@
        @endsection
 
        @section('contentmain')
-        {!! $model->content !!}
-        @endsection
+
+          {{-- @renderStack( $model->content) --}}
+          @include('cms::stack.render', ['content' => $model->content])
+       
+       @endsection
 
         {{--}}
         {{ $model->headerimage }}--}}

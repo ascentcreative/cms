@@ -14,7 +14,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.contentsCss = '/css/fck_editorarea.css';
 	config.extraAllowedContent = 'div(codesnippet)[*]; codesnippet[contenteditable]; codesnippet[partial]';
 	config.disallowedContent = 'div[dir]';
-	config.extraPlugins = 'font,richcombo,justify,ac_snippet,colorbutton,floatpanel,button,panel,panelbutton';
+	config.extraPlugins = 'font,richcombo,justify,colorbutton,floatpanel,button,panel,panelbutton';
 	config.basicEntities = false;
 	
 	

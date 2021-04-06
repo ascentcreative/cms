@@ -1,0 +1,57 @@
+/* .stack-edit {
+
+} */
+
+
+.block-edit {
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    background-color: #f7f7f7;
+    border-radius: 5px; 
+    margin-bottom: 10px;
+    overflow: hidden;
+
+    display: flex;
+}
+
+.block-edit .block-handle {
+    min-width: 30px;
+    background: #ccc;
+    /* xheight: 100%; */
+    flex: 0 0;
+    margin: -20px 20px -20px -20px ;
+}
+
+.block-edit .block-content {
+    flex-basis: 100%;
+
+    display: flex;
+
+}
+
+.block-edit .block-settings {
+    width: 50px;
+    flex: 0 0;
+}
+
+
+.blockitem {
+    padding: 5px;
+    border: 1px solid white;
+}
+
+.blockitem .blockitem-content {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.blockitem .blockitem-handle {
+    padding: 3px 10px;
+   /* x height: 10px; */
+    background: #ccc;
+}
+
+
+

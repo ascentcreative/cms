@@ -42,9 +42,17 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::resource('/permissions', PermissionController::class);
 
 
+        /** Content Stack */
+        Route::get('/stackblock/make/{type}/{name}/{key}', function($type, $name, $key) {
+            return view('cms::stack.block.make')->with('type', $type)->with('name', $name)->with('key', $key)->with('value', null);
+           // return view('cms::stack.block.' . $type . '.edit')->with('name', $name . '[' . $key . ']')->with('value', null);
+        });
+
+
         Route::fallback(function () {
            return view('cms::admin.errors.404');
         });
+
 
     });
 

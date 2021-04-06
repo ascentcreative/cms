@@ -28,10 +28,18 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane show p-3" id="page" role="tabpanel" aria-labelledby="page-tab">
 
-            <x-cms-form-ckeditor type="text" label="Page Content" name="content" value="{{ old('content', $model->content) }}" height="500">
+            {{-- <x-cms-form-ckeditor type="text" label="Page Content" name="content" value="{{ old('content', $model->content) }}" height="500">
 
             </x-cms-form-ckeditor>
-        
+         --}}
+
+            {{-- <x-cms-form-wysiwyg label="TESTING" name="content{{uniqid()}}" :value="old('content', $model->content)" wrapper="none"/> --}}
+
+            <x-cms-form-stack label="TESTING" 
+                    name="content" 
+                    :value="old('content', $model->content)" 
+                    wrapper="none"/>
+
 
         </div>
 
