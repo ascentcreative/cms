@@ -25,17 +25,16 @@ class CMSServiceProvider extends ServiceProvider
 
 
     $this->mergeConfigFrom(
-        __DIR__.'/config/cms.php', 'cms'
+        __DIR__.'/../config/cms.php', 'cms'
     );
 
     $this->mergeConfigFrom(
-        __DIR__.'/config/cms.models.php', 'cms.models'
+        __DIR__.'/../config/cms.models.php', 'cms.models'
     );
 
     /* Model facades */
 
     $aliases = array();
-
 
     // For each model:
     // 1) Set up an alias for the Facade (allows Page::method() calls)
@@ -80,9 +79,9 @@ class CMSServiceProvider extends ServiceProvider
     $this->bootPublishes();
   
 
-    $this->loadViewsFrom(__DIR__.'/resources/views', 'cms');
+    $this->loadViewsFrom(__DIR__.'/../resources/views', 'cms');
 
-    $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+    $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
