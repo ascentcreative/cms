@@ -14,4 +14,11 @@ return [
     'recaptcha_secret' => env('RECAPTCHA_SECRET', '6Lf_PYsaAAAAAAm5qVKdE95rI3YYc7yMSzY3ce0U'),
     'recaptcha_threshold' => env('RECAPTCHA_THRESHOLD', 0.5),
 
+
+    'aliases' => [
+
+        'Page' => AscentCreative\CMS\Facades\PageFacade::class,
+
+    ]
+
 ];

@@ -28,6 +28,43 @@ class CMSServiceProvider extends ServiceProvider
         __DIR__.'/config/cms.php', 'cms'
     );
 
+    $this->mergeConfigFrom(
+        __DIR__.'/config/cms.models.php', 'cms.models'
+    );
+
+    /* Model facades */
+
+    $aliases = array();
+
+
+    // For each model:
+    // 1) Set up an alias for the Facade (allows Page::method() calls)
+    $aliases['Page'] = \AscentCreative\CMS\Facades\PageFacade::class;
+
+    // 2) resolve the key in getFacadeAccessor()
+    $this->app->bind('page',function(){
+        $cls = config('cms.models.page');
+        return new $cls();
+    });
+
+    // 3) Use Interface/Implementation binding to allow TypeHinting to resolve the right class.
+    $this->app->bind(\AscentCreative\CMS\Models\Page::class, $cls = config('cms.models.page'));
+
+
+    $this->app->bind('menu',function(){
+        $cls = config('cms.models.menu');
+        return new $cls();
+    });
+
+    // print_r(config('cms.models'));
+
+    // \Illuminate\Database\Eloquent\Relations\Relation::morphMap(config('cms.models'));
+
+    // bind the aliases...
+    $loader = \Illuminate\Foundation\AliasLoader::getInstance($aliases);
+
+    //this->bootAliases();
+
   }
 
   public function boot()
@@ -41,6 +78,7 @@ class CMSServiceProvider extends ServiceProvider
     $this->bootDirectives();
     $this->bootComponents();
     $this->bootPublishes();
+  
 
     $this->loadViewsFrom(__DIR__.'/resources/views', 'cms');
 
@@ -116,10 +154,22 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-menuposition', 'AscentCreative\CMS\View\Components\Form\MenuPosition');
     Blade::component('cms-form-nestedset', 'AscentCreative\CMS\View\Components\Form\NestedSet');
 
+    Blade::component('cms-form-wysiwyg', 'AscentCreative\CMS\View\Components\Form\Wysiwyg');
+
+
+    Blade::component('cms-form-stack', 'AscentCreative\CMS\View\Components\Form\Stack');
+    Blade::component('cms-form-stackblock', 'AscentCreative\CMS\View\Components\Form\StackBlock');
+    Blade::component('cms-form-stackblock-rowitem', 'AscentCreative\CMS\View\Components\Form\StackBlock\RowItem');
+
 
   }
 
 
+//   public function bootAliases() {
+
+//     $loader = \Illuminate\Foundation\AliasLoader::getInstance(config('cms.aliases'));
+
+//   }
 
 
   // create custom / convenience Blade @Directives 
@@ -142,6 +192,11 @@ class CMSServiceProvider extends ServiceProvider
       return controller();
     });
 
+
+    // Blade::directive('renderStack', function($content) {
+    //     return view('cms::stack.render')->with('content', $content);
+    // });
+
     //
   }
 
@@ -156,6 +211,10 @@ class CMSServiceProvider extends ServiceProvider
 
       $this->publishes([
         __DIR__.'/config/cms.php' => config_path('cms.php'),
+      ]);
+
+      $this->publishes([
+        __DIR__.'/config/cms.models.php' => config_path('cms.models.php'),
       ]);
 
     }

@@ -44,7 +44,8 @@ abstract class AdminBaseController extends Controller
      */
     public function prepareViewData() {
 
-        $short = (new \ReflectionClass($this::$modelClass))->getShortName();
+        $ary = explode('\\', $this::$modelClass);
+        $short = array_pop($ary);
 
         $modelName = $short ?? $this->modelName;
 
@@ -176,8 +177,8 @@ abstract class AdminBaseController extends Controller
             $this->rules($request)
         );
 
-        $cls = $this::$modelClass;
-        $model = new $cls();
+       // $cls = $this::$modelClass;
+        $model = ($this::$modelClass)::make(); //new $cls();
         $this->commitModel($request, $model);
         return redirect()->to($request->_postsave);
   
@@ -192,13 +193,18 @@ abstract class AdminBaseController extends Controller
      */
     public function show($id=null)
     {
+
         $cls = $this::$modelClass;
         
         if (is_null($id)) {
-            $model = new $cls();
+         
+            $model = ($this::$modelClass)::make(); //new $cls();
+       
         } else {
             $model = $cls::find($id);
         }
+
+        echo '2';
        
         return view($this::$bladePath . '.show', $this->prepareViewData())->withModel($model);
     }
@@ -211,10 +217,10 @@ abstract class AdminBaseController extends Controller
      */
     public function edit($id=null)
     {
-        $cls = $this::$modelClass;
+        $cls = ($this::$modelClass);
         
         if (is_null($id)) {
-            $model = new $cls();
+            $model = ($this::$modelClass)::make(); //new $cls();
         } else {
             $items = $this->prepareModelQuery();
             $model = $items->find($id);

@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 class PageController extends AdminBaseController
 {
 
-    static $modelClass = 'AscentCreative\CMS\Models\Page';
+   // static $modelClass = 'AscentCreative\CMS\Models\Page';
+
+    static $modelClass = 'Page';
     static $bladePath = "cms::admin.pages";
 
     public $indexSearchFields = ['title', 'content'];
@@ -21,7 +23,7 @@ class PageController extends AdminBaseController
 
       
     //    MenuItem::linkThis($this, $request->context_id, $request->context_type);
-
+      //  dd(request()->all());
       
       // $model->fillExtenders($request->all());
        $model->fill($request->all());

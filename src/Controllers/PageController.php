@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
  
 use Illuminate\Database\Eloquent\Model;
 
-use AscentCreative\CMS\Models\Page;
-
-
 class PageController extends Controller
 {
 
-  public function show(Page $page) {
+    /* even though the page model is defined here, the bindings swap the class at runtime */
+    public function show(\AscentCreative\CMS\Models\Page $page) {
 
     if (request()->wantsJson()) {
         return view('cms::public.pages.modal')->withModel($page);
@@ -21,7 +19,6 @@ class PageController extends Controller
         return view('cms::public.pages.show')->withModel($page);
     }
     
-
   }
 
 }
