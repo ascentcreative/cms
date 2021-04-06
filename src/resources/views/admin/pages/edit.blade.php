@@ -28,7 +28,7 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane show p-3" id="page" role="tabpanel" aria-labelledby="page-tab">
 
-            @switch(config('cms.content_editor') == 'ckeditor')
+            @switch(config('cms.content_editor'))
 
                 @case('ckeditor')
                     <x-cms-form-ckeditor type="text" label="Page Content" name="content" value="{{ old('content', $model->content) }}" height="500">
@@ -44,8 +44,11 @@
                 @break
 
             @endswitch
+
             {{-- 
          --}}
+
+         
 
             {{-- <x-cms-form-wysiwyg label="TESTING" name="content{{uniqid()}}" :value="old('content', $model->content)" wrapper="none"/> --}}
 

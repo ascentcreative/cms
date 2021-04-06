@@ -13,7 +13,7 @@
 
           {{-- @renderStack( $model->content) --}}
 
-            @switch(config('cms.content_editor') == 'ckeditor')
+            @switch(config('cms.content_editor'))
 
                 @case('ckeditor')
                     {!! $model->content !!}

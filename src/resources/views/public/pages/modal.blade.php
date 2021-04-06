@@ -16,7 +16,19 @@
 
        @section('modalContent')
             <div style="max-height: 50vh; overflow-y: scroll">
-                {!! $model->content !!}
+                
+                @switch(config('cms.content_editor'))
+
+                    @case('ckeditor')
+                        {!! $model->content !!}
+                    @break
+
+                    @case('stack')
+                        @include('cms::stack.render', ['content' => $model->content])
+                    @break
+
+                @endswitch
+          
             </div>
         @endsection
 
