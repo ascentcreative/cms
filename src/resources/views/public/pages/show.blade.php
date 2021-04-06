@@ -12,7 +12,19 @@
        @section('contentmain')
 
           {{-- @renderStack( $model->content) --}}
-          @include('cms::stack.render', ['content' => $model->content])
+
+            @switch(config('cms.content_editor') == 'ckeditor')
+
+                @case('ckeditor')
+                    {!! $model->content !!}
+                @break
+
+                @case('stack')
+                     @include('cms::stack.render', ['content' => $model->content])
+                @break
+
+            @endswitch
+          
        
        @endsection
 
