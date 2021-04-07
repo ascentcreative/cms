@@ -139,15 +139,9 @@ var ModalLink = {
                     },
                     302: function(data, xhr, request) {
 
-                        console.log(data);
-                        console.log(xhr);
-                        console.log(request);
-
                         if(data.getResponseHeader('fireEvent')) {
                             $(document).trigger(data.getResponseHeader('fireEvent'));
                         }
-
-                        alert(data.responseJSON);
 
                         switch(data.responseJSON) {
 
@@ -158,7 +152,6 @@ var ModalLink = {
 
                             default:
 
-                                alert('redirecting...');
                                 $('body').modalLink({
                                     target: data.responseJSON
                                 });
