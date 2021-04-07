@@ -7,7 +7,7 @@ var ModalLink = {
     targetPath: '',
     
     _init: function () {
-        
+
         var self = this;
         this.widget = this;
         var thisID = (this.element)[0].id;
@@ -147,9 +147,27 @@ var ModalLink = {
                             $(document).trigger(data.getResponseHeader('fireEvent'));
                         }
 
-                        $('body').modalLink({
-                            target: data.responseJSON
-                        });
+                        alert(data.responseJSON);
+
+                        switch(data.responseJSON) {
+
+                            case 'reload':
+                            case 'refresh':
+                                window.location.reload();
+                                break;
+
+                            default:
+
+                                alert('redirecting...');
+                                $('body').modalLink({
+                                    target: data.responseJSON
+                                });
+
+                                break;
+
+                        }
+
+                       
 
                         //$('.modal').modal('hide');
 
