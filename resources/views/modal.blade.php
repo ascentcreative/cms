@@ -16,6 +16,11 @@
 
         <div class="modal-body {{ ($modalBodyPadded ?? true) ? 'modal-body-padded' : ''}}">
           
+            @if(!($modalShowHeader ?? false))
+                <A class="bi-x" style="position: absolute; top: 10px; right: 10px; font-size: 30px; color: #777; cursor: pointer;" data-dismiss="modal"></a>
+            @endif
+
+
             @yield('modalContent')
            
         </div>
