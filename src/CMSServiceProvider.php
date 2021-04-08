@@ -92,7 +92,37 @@ class CMSServiceProvider extends ServiceProvider
         \AscentCreative\CMS\Commands\CreateAdminUser::class,
 
     ]);
+
+    $this->resolveMenuItem();
     
+  }
+
+
+  /**
+   * 
+   */
+  public function resolveMenuItem() {
+
+    /**
+     * do the logic here so it only executes once?
+     * then pass it into the view composer
+     */
+   // $result = $model;
+
+    $menuitem = \AscentCreative\CMS\Models\MenuItem::where('url', '/' . request()->path())->first();
+
+   // echo view()->get('model');
+
+    view()->composer('*', function ($view) use ($menuitem) {
+
+       // $result = $view->model;
+
+       // dd($view);
+
+        $view->with('menuitem', $menuitem);
+
+    });
+
   }
 
   // fortify commands
@@ -159,6 +189,10 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-stack', 'AscentCreative\CMS\View\Components\Form\Stack');
     Blade::component('cms-form-stackblock', 'AscentCreative\CMS\View\Components\Form\StackBlock');
     Blade::component('cms-form-stackblock-rowitem', 'AscentCreative\CMS\View\Components\Form\StackBlock\RowItem');
+
+
+    Blade::component('cms-form-croppie', 'AscentCreative\CMS\View\Components\Form\Croppie');
+
 
 
   }
