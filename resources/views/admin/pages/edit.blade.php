@@ -18,7 +18,7 @@
           <a class="nav-link" id="main-tab" data-toggle="tab" href="#page" role="tab" aria-controls="page" aria-selected="true">Page Content</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="headimg-tab" data-toggle="tab" href="#headimg" role="tab" aria-controls="headimg" aria-selected="false">Header Image</a>
+            <a class="nav-link" id="headimg-tab" data-toggle="tab" href="#headimg" role="tab" aria-controls="headimg" aria-selected="false">Images</a>
           </li>
         <li class="nav-item">
           <a class="nav-link" id="menuitem-tab" data-toggle="tab" href="#menuitem" role="tab" aria-controls="menuitem" aria-selected="false">Menu Position</a>
@@ -59,7 +59,7 @@
 
         <div class="tab-pane show p-3" id="headimg" role="tabpanel" aria-labelledby="headimg-tab">
 
-            @includeFirst($model->getTraitBlades('HasHeaderImage'))
+            @includeFirst($model->getTraitBlades('HasImages'))
 
         </div>
 

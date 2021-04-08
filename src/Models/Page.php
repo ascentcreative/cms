@@ -4,6 +4,7 @@ namespace AscentCreative\CMS\Models;
 
 
 use AscentCreative\CMS\Traits\HasHeaderImage;
+use AscentCreative\CMS\Traits\HasImages;
 use AscentCreative\CMS\Traits\HasMenuItem;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,13 +19,10 @@ use Illuminate\Support\Str;
  */
 class Page extends Base
 {
-    use HasFactory, HasHeaderImage, HasMenuItem; 
+    use HasFactory, HasImages, HasMenuItem; //HasHeaderImage; 
 
     public $fillable = ['title', 'content'];
     
-    public $extenders = ['MenuItem'];
-
-
     /*
      * MUTATORS
      * 
