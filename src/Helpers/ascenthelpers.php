@@ -103,6 +103,29 @@ function obscure($str) {
 }
 
 
+function imageUrl($spec, $models) {
+
+    if(!is_array($models)) {
+        $models = [$models];
+    }
+
+    foreach($models as $model) {
+
+        if(!is_null($model)) {
+            $hi = \AscentCreative\CMS\Models\Image::getSpecForModel($model, $spec);
+            if($hi) {
+                return $hi->image;
+            }
+        }
+
+    }
+   
+    
+}
+
+
+
+
 /* Singleton Accessors */
 
 function headTitle() {
