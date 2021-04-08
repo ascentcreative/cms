@@ -1,0 +1,230 @@
+// ******
+// Wrapper Widget which utilises the Croppie image cropper library from https://github.com/Foliotek/Croppie
+// ******
+// Code (c) Kieran Metcalfe / Ascent Creative 2021
+
+
+$.ascent = $.ascent?$.ascent:{};
+
+var CroppieUpload = {
+        
+    // Default options.
+    options: {
+        targetWidth: 400,
+        targetHeight: 400,
+        previewScale: 1,
+        popover: true,
+        endpoint: '/cms/croppieupload',
+        filedestination: '/upload/default'
+    },
+
+    _init: function () {
+        
+        var self = this;
+        this.widget = this;
+        
+        var thisID = (this.element)[0].id;
+        
+        var obj = this.element;
+
+        // incoming options
+        vpw = self.options.targetWidth * self.options.previewScale;
+		vph = self.options.targetHeight * self.options.previewScale;
+
+
+        /**
+         * Configure the UI
+         */
+        obj.wrap('<DIV class="croppieupload empty"></DIV>');
+		this.root = $(obj).parent('.croppieupload');
+        this.root.append('<DIV class="cu_trigger"><DIV class="cu_message">Click to upload an image</DIV></DIV><INPUT type="file" id="cu_file"/>');
+        this.root.append('<DIV class="cu_actions"><A href="" class="button cu_remove nochevron">Remove</A><A href="" class="button cu_change nochevron">Change</A></DIV>');
+			
+        // "remove" link action:
+        this.root.find('.cu_remove').click(function() {
+            if (confirm('Remove Image?')) {
+                self.clearValue();
+            }
+            return false;
+        });	
+
+        // "change" link action:
+        this.root.find('.cu_change').click(function() {
+            $(this).parents(".croppieupload").find('INPUT#cu_file').trigger("click");
+            return false;
+        });	
+
+        if(obj.val()) {
+            this.setValue(obj.val(), vpw, vph);
+        }
+
+        $(this.root).find('.cu_trigger').click(function() {
+            $(this).parents(".croppieupload").find('INPUT#cu_file').trigger("click");
+        });
+
+        // when a file is selected, read the contents:
+        this.root.find('#cu_file').change(function() { 
+			self.readFile(this);
+        });
+
+        var opts = self.options;
+
+    },
+
+    setValue: function(url, vpw, vph) {
+		
+        self = this;
+
+        console.log('setting to: ' + url);
+			
+        this.element.val(url);
+
+        console.log(this.element.val());
+
+        this.root.css('width', (vpw==0?400:vpw) + 'px').css('height', (vph==0?200:vph) + 'px').css('background-size', '100%');
+        this.root.css('background-image', "url('" + url + "')");
+        this.root.removeClass('empty');
+        
+    },
+
+    clearValue: function() {
+			
+        this.root.css('background-image', 'none');
+        this.root.addClass('empty');
+        this.element.val('');
+        
+    },		
+
+    readFile: function (input) {
+			
+        var self = this;
+        
+        if (input.files && input.files[0]) {
+             
+            console.log('reading input...');
+             
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                
+                img = new Image;
+                img.onload = function() {
+                    self.startCroppie(e.target.result, img.width, img.height);
+                };
+                img.src = e.target.result;
+                                
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+
+        }
+        else {
+            
+            alert("Sorry - your browser doesn't support the FileReader API");
+            
+        }
+
+    },
+
+    startCroppie: function(url, filewidth, fileheight) {
+			
+        var self = this;
+        
+        // needs to be converted to a bootstrap modal ideally, but maybe just use the CSS from the old version for now...
+        $('BODY').append('<DIV class="cu_curtain"></DIV>');
+        
+        $('.cu_curtain').append('<DIV class="cu_wrap"><DIV class="croppie"></DIV><DIV class="cudlg_actions"><A href="" class="button cu_cancel nochevron">Cancel</A><A href="" class="button cu_result nochevron">OK</A></DIV>');
+        
+        console.log(self.options);
+        
+        vpw = self.options.targetWidth * self.options.previewScale;
+        if (vpw == 0) {
+            vpw = vph * (filewidth / fileheight);
+        }
+        
+        vph = self.options.targetHeight * self.options.previewScale;
+        if (vph == 0) {
+            vph = vpw * (fileheight / filewidth);
+        }
+        
+
+        $('.cu_wrap .croppie').croppie({
+            
+            viewport: {
+                width: vpw,
+                height: vph
+            },
+            boundary: {
+                width: vpw + 100,
+                height: vph + 100
+            },
+            enableExif: true
+            
+        });
+        
+        $('.cu_wrap .croppie').croppie('bind', {
+            url: url
+        }).then(function(){
+            console.log('jQuery bind complete');
+        });
+        
+        $('.cu_cancel').click(function() {
+            $('.cu_curtain').remove();
+            return false;
+        });
+
+        
+        $('.cu_result').click(function() {
+            
+            $('.cu_wrap .croppie').croppie('result', {
+                
+                type: 'blob',
+                size: {width: self.options.targetWidth, height: self.options.targetHeight},
+                format: 'jpeg',
+                quality: 0.75
+                
+            }).then(function (resp) {
+                
+                var fd = new FormData();
+                fd.append('destination', self.options.filedestination);
+                fd.append('randomisefilename', 1);
+                fd.append('payload', resp, 'myfile.jpg');
+
+                console.log(fd);
+
+                $.ajax({
+                    type: 'POST',
+                    url: self.options.endpoint,
+                    data: fd,
+                    processData: false,
+                    contentType: false
+                }).done(function(data) {
+                    
+                    //console.log(data);
+                    
+                    //parsed = $.parseJSON(data);
+                    
+                    //console.log(parsed);
+                    
+                    self.setValue(data['path'], vpw, vph);
+                    $('.cu_curtain').remove();
+                    
+                });
+                        
+            });
+            
+            return false;
+            
+        });
+        
+    }
+    
+
+
+}
+
+$.widget('ascent.croppieupload', CroppieUpload);
+$.extend($.ascent.CroppieUpload, {
+		 
+		
+}); 

@@ -75,6 +75,27 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     });
 
 
+    Route::post('/cms/croppieupload', function() {
+
+        //Storage::put('file.jpg', $contents);
+
+        // print_r(request()->all());
+
+        // print_r(request()->file('payload'));
+        
+        //$path = request()->file('payload')->store(request()->destination);
+
+        $path = Storage::disk('public')->putFile(request()->destination, request()->file('payload'));
+
+        // echo $path;
+
+        return response()->json([
+            'path' => '/storage/' . $path,
+        ]);
+
+    })->middleware('auth');
+
+
 });
 
 
