@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ headTitle()->add('Admin')->render(' :: ') }}</title>
     <link rel="alternate icon" href="/img/favicon.png">
  
@@ -39,6 +40,13 @@
     @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
     @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
     @stack('scripts')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
 </body>
 </html>
