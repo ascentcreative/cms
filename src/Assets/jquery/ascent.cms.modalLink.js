@@ -124,6 +124,8 @@ var ModalLink = {
 
         $('#ajaxModal FORM').not('.no-ajax').submit(function() {
 
+            var form = this;
+       
             $('.validation-error').remove();
 
             $.ajax({
@@ -135,7 +137,15 @@ var ModalLink = {
                 data: $(this).serialize(),
                 statusCode: {
                     200: function(data, xhr, request) {
-                        self.showResponseModal(data);
+                        if(data) {
+                            self.showResponseModal(data);
+                        } else {
+                            switch($(form).attr('data-onsuccess')) {
+                                case 'refresh':
+                                    window.location.reload();
+                                    break;
+                            }
+                        }
                     },
                     302: function(data, xhr, request) {
 
