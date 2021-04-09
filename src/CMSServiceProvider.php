@@ -128,6 +128,17 @@ class CMSServiceProvider extends ServiceProvider
   // fortify commands
   public function bootFortify() {
 
+
+        // Override a couple of Fortify controllers as we want to 
+        // return content in Json responses.
+        $this->app->singleton(
+            \Laravel\Fortify\Http\Controllers\ProfileInformationController::class, 
+            \AscentCreative\CMS\Fortify\Controllers\ProfileInformationController::class);
+
+        $this->app->singleton(
+            \Laravel\Fortify\Http\Controllers\PasswordController::class, 
+            \AscentCreative\CMS\Fortify\Controllers\PasswordController::class);
+
       // register new LoginResponse
       $this->app->singleton(
         \Laravel\Fortify\Contracts\RegisterResponse::class,
