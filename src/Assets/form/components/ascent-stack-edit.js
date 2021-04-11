@@ -11,6 +11,7 @@ var StackEdit = {
 		rowCount: 0,
 
 		_init: function () {
+
             
 			var self = this;
 			this.widget = this;
@@ -28,6 +29,18 @@ var StackEdit = {
                 handle: '.block-handle',
                 update: function(event, ui) {
                     // reapply field indexes to represent reordering
+                    $(self.element).find('.block-edit').each(function(idx) {
+
+                       $(this).find('INPUT, SELECT, TEXTAREA').each(function(fldidx) {
+                            console.log(idx + ' / ' + fldidx);
+                            var ary = $(this).attr('name').split(/(\[|\])/);
+                            ary[2] = idx;
+                            $(this).attr('name', ary.join(''));
+                            
+                       });
+
+                    });
+
                 }
             });
 
@@ -41,16 +54,10 @@ var StackEdit = {
                 
                 // remove the top level wrapper (which is just the field name):
                 for(fld in data) {
-                  
-                    //console.log(data['fld'])
-
-                    console.log(JSON.stringify(data[fld]));
+              
                     $(self.element).find('.stack-output').val(
                         JSON.stringify(data[fld])
                     );
-
-                    console.log($.parseJSON($(self.element).find('.stack-output').val()));
-    
 
                 }
 //                return false;
