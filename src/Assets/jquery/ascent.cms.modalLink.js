@@ -137,6 +137,11 @@ var ModalLink = {
                 data: $(this).serialize(),
                 statusCode: {
                     200: function(data, xhr, request) {
+
+                        if(request.getResponseHeader('fireEvent')) {
+                            $(document).trigger(request.getResponseHeader('fireEvent'));
+                        }
+
                         if(data) {
                             self.showResponseModal(data);
                         } else {
@@ -144,6 +149,9 @@ var ModalLink = {
                                 case 'refresh':
                                     window.location.reload();
                                     break;
+
+                                default:
+                                    $('#ajaxModal').modal('hide');
                             }
                         }
                     },
@@ -185,9 +193,19 @@ var ModalLink = {
                             '</small>');
 
                         }
+                    },
+                    500: function(data, xhr, request) {
+
+                        alert('An unexpected error occurred');
+                    
+
                     }
                 }
-            });
+            }); /*.fail(function(data, xhr, request) {
+                alert('fail');
+                self.showResponseModal(data);
+
+            }); */
 
 
             return false;
