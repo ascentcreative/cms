@@ -7,7 +7,7 @@
 
 .cms-blockselect-option {
 
-    flex: 0 0 49%;
+    flex: 0 0 100%;
     border: 2px solid #ccc;
     padding: 10px;
     margin-bottom: 2%;
@@ -16,6 +16,22 @@
     text-align: center;
     cursor: pointer;
 
+}
+
+.cms-blockselect-columns-2 .cms-blockselect-option {
+    flex: 0 0 49%;
+}
+
+.cms-blockselect-columns-3 .cms-blockselect-option {
+    flex: 0 0 32%;
+}
+
+.cms-blockselect-columns-4 .cms-blockselect-option {
+    flex: 0 0 24%;
+}
+
+.cms-blockselect-columns-5 .cms-blockselect-option {
+    flex: 0 0 19%;
 }
 
 .cms-blockselect-option:last-child {
