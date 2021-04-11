@@ -17,9 +17,10 @@ class BlockSelect extends Component
     public $name;
     public $value;
 
+    public $columns;
     public $options;
     public $maxSelect;
-
+    public $maxHeight;
   //
 
     public $wrapper;
@@ -32,14 +33,17 @@ class BlockSelect extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $options, $maxSelect=-1, $blockblade='', $wrapper='bootstrapformgroup', $class='')
+    public function __construct($label, $name, $value, $options, $columns=2, $maxSelect=-1, $maxHeight=null, $blockblade='', $wrapper='bootstrapformgroup', $class='')
     {
 
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
         $this->options = $options;
+
+        $this->columns = $columns;
         $this->maxSelect = $maxSelect;
+        $this->maxHeight = $maxHeight;
 
         $this->wrapper = $wrapper;
         $this->class = $class;
