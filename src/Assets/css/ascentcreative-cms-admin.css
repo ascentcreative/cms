@@ -31,7 +31,7 @@ body > section {
 
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    /* height: 100vh; */
     
 }
 
@@ -177,4 +177,32 @@ A.dropdown-toggle.dropdown-toggle-dots::after {
     border: 0;
     font-weight: 900;
     color: #ccc;
+}
+
+
+/* convenience classes */
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-evenly {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+/* Bootstrap Overrides */
+
+/* MODAL - fade in only, not slide down */
+BODY .modal.fade#ajaxModal .modal-dialog {
+    transform: none;
 }
