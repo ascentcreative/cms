@@ -36,6 +36,12 @@ var BlockSelect = {
    
         });
         
+    }, 
+
+    setOptions: function($opts) {
+
+        // replace the existing options with the provided array
+
     }
 
 }
