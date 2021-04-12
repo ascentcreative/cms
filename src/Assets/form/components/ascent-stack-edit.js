@@ -26,6 +26,7 @@ var StackEdit = {
             
             // make the stack sortable (drag & drop)
            $(this.element).find('.stack-blocks').sortable({
+                axis: 'y',
                 handle: '.block-handle',
                 update: function(event, ui) {
                     // reapply field indexes to represent reordering
