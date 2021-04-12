@@ -33,6 +33,10 @@
     flex: 0 0;
 }
 
+.ui-sortable-helper {
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 20%);
+}
+
 
 .blockitem {
     /* padding: 5px; */
