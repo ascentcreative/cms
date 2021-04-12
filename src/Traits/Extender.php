@@ -30,7 +30,7 @@ trait Extender {
 
     protected $_requestedTraitBlades = [];
 
-    public function getTraitBlades($trait=null) {
+    public function getTraitBlades($trait=null, $key=null) {
 
         if (!is_null($trait)) {
 

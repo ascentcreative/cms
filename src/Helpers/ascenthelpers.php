@@ -124,6 +124,12 @@ function imageUrl($spec, $models) {
 }
 
 
+function embedVideo($url) {
+
+    return view('cms::helpers.embedvideo')->with('url', $url);
+
+}
+
 
 
 /* Singleton Accessors */

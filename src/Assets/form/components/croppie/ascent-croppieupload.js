@@ -7,6 +7,9 @@
 $.ascent = $.ascent?$.ascent:{};
 
 var CroppieUpload = {
+
+    vpw: 0,
+    vph: 0,
         
     // Default options.
     options: {
@@ -28,8 +31,8 @@ var CroppieUpload = {
         var obj = this.element;
 
         // incoming options
-        vpw = self.options.targetWidth * self.options.previewScale;
-		vph = self.options.targetHeight * self.options.previewScale;
+        this.vpw = self.options.targetWidth * self.options.previewScale;
+		this.vph = self.options.targetHeight * self.options.previewScale;
 
 
         /**
@@ -55,7 +58,7 @@ var CroppieUpload = {
         });	
 
         if(obj.val()) {
-            this.setValue(obj.val(), vpw, vph);
+            this.setValue(obj.val(), this.vpw, this.vph);
         }
 
         $(this.root).find('.cu_trigger').click(function() {
@@ -72,6 +75,8 @@ var CroppieUpload = {
     },
 
     setValue: function(url, vpw, vph) {
+
+        console.log('croppie - set value: ' + vpw + ', ' + vph);
 		
         self = this;
 
@@ -127,6 +132,8 @@ var CroppieUpload = {
     },
 
     startCroppie: function(url, filewidth, fileheight) {
+
+         console.log('startCroppie: ' + filewidth + ', ' + fileheight);
 			
         var self = this;
         
@@ -136,27 +143,34 @@ var CroppieUpload = {
         $('.cu_curtain').append('<DIV class="cu_wrap"><DIV class="croppie"></DIV><DIV class="cudlg_actions"><A href="" class="button cu_cancel nochevron">Cancel</A><A href="" class="button cu_result nochevron">OK</A></DIV>');
         
         console.log(self.options);
+
+        console.log('startCroppie: ' + self.options.targetWidth + ', ' + self.options.targetHeight + ', ' + self.options.previewScale);
         
-        vpw = self.options.targetWidth * self.options.previewScale;
-        if (vpw == 0) {
-            vpw = vph * (filewidth / fileheight);
+        this.vpw = self.options.targetWidth * self.options.previewScale;
+
+        console.log('vpw: ' + this.vpw + ', vph: ' + this.vph);
+
+        if (this.vpw == 0) {
+            this.vpw = this.vph * (filewidth / fileheight);
         }
         
-        vph = self.options.targetHeight * self.options.previewScale;
-        if (vph == 0) {
-            vph = vpw * (fileheight / filewidth);
+        this.vph = self.options.targetHeight * self.options.previewScale;
+        console.log('vph: ' + this.vph);
+        if (this.vph == 0) {
+            this.vph = this.vpw * (fileheight / filewidth);
         }
         
+        console.log('startCroppie: ' + this.vpw + ', ' + this.vph);
 
         $('.cu_wrap .croppie').croppie({
             
             viewport: {
-                width: vpw,
-                height: vph
+                width: this.vpw,
+                height: this.vph
             },
             boundary: {
-                width: vpw + 100,
-                height: vph + 100
+                width: this.vpw + 100,
+                height: this.vph + 100
             },
             enableExif: true
             
@@ -206,7 +220,7 @@ var CroppieUpload = {
                     
                     //console.log(parsed);
                     
-                    self.setValue(data['path'], vpw, vph);
+                    self.setValue(data['path'], this.vpw, this.vph);
                     $('.cu_curtain').remove();
                     
                 });

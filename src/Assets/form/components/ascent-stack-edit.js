@@ -63,9 +63,8 @@ var StackEdit = {
 
                 if (confirm("Delete this block?")) {
                     $(this).parents('.block-edit').remove();
+                    self.updateBlockIndexes();
                 }
-
-                self.updateBlockIndexes();
 
                 return false;
             }); 
@@ -99,7 +98,7 @@ var StackEdit = {
             // reapply field indexes to represent reordering
             $(this.element).find('.block-edit').each(function(idx) {
 
-                $(this).find('INPUT, SELECT, TEXTAREA').each(function(fldidx) {
+                $(this).find('INPUT:not([type=file]), SELECT, TEXTAREA').each(function(fldidx) {
                     var ary = $(this).attr('name').split(/(\[|\])/);
                     ary[2] = idx;
                     $(this).attr('name', ary.join(''));
