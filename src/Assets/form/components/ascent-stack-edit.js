@@ -28,19 +28,12 @@ var StackEdit = {
            $(this.element).find('.stack-blocks').sortable({
                 axis: 'y',
                 handle: '.block-handle',
+                start: function(event, ui) {
+                    $(ui.placeholder).css('height', $(ui.item).height() + 'px');
+                },
                 update: function(event, ui) {
-                    // reapply field indexes to represent reordering
-                    $(self.element).find('.block-edit').each(function(idx) {
-
-                       $(this).find('INPUT, SELECT, TEXTAREA').each(function(fldidx) {
-                            console.log(idx + ' / ' + fldidx);
-                            var ary = $(this).attr('name').split(/(\[|\])/);
-                            ary[2] = idx;
-                            $(this).attr('name', ary.join(''));
-                            
-                       });
-
-                    });
+                    
+                    self.updateBlockIndexes();
 
                 }
             });
@@ -65,7 +58,18 @@ var StackEdit = {
 
             });
 
-			
+            $(this.element).on('click', '.block-delete', function() {
+                console.log('delete me');
+
+                if (confirm("Delete this block?")) {
+                    $(this).parents('.block-edit').remove();
+                }
+
+                self.updateBlockIndexes();
+
+                return false;
+            }); 
+            
             // capture the click event of the add block button
             // (test for now - adds a new row block. Will need to be coded to ask user what block to add)
             $(this.element).find('.stack-add-block').on('click', function() {
@@ -79,6 +83,8 @@ var StackEdit = {
                 $.get('/admin/stackblock/make/' + type + '/' + field + '/' + idx, function(data) {
                    // $(self.element).find('.stack-output').before(data);
                    $(self.element).find('.stack-blocks').append(data);
+                   self.updateBlockIndexes();
+                
                 });
 
                 return false;
@@ -86,7 +92,29 @@ var StackEdit = {
             });
 
 
-		}
+		},
+
+        updateBlockIndexes: function() {
+
+            // reapply field indexes to represent reordering
+            $(this.element).find('.block-edit').each(function(idx) {
+
+                $(this).find('INPUT, SELECT, TEXTAREA').each(function(fldidx) {
+                    var ary = $(this).attr('name').split(/(\[|\])/);
+                    ary[2] = idx;
+                    $(this).attr('name', ary.join(''));
+                    $(this).change();
+
+                  
+                   // $('#frm_edit').addClass('dirty'); //trigger('checkform.areYouSure');
+                    
+                });
+
+            });
+
+            
+
+        }   
 
 }
 
