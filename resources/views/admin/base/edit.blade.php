@@ -9,6 +9,10 @@
         $(document).ready(function() {
             $('#frm_edit').areYouSure();            
         });
+
+        $(document).on('change', function() {
+            $('#frm_edit').addClass('dirty'); // belt and braces...
+        });
     </script>
 
     {{-- ensure first tab shows... (Might need to change this to show buried validation fails --}}
