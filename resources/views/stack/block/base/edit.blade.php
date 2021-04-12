@@ -13,6 +13,8 @@
 
         <div class="controls">
             <button></button>
+
+            <A href="#" class="block-delete bi-trash"></A>
         </div>
 
         <div style="display: none">
