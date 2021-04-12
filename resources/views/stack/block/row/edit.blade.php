@@ -2,34 +2,43 @@
 
 @php 
 
+$unid = 'sbe-' . uniqid();
+
 // set a default value
 
-if(is_null($value) || $value == '') {
+// if(is_null($value) || $value == '') {
 
-    $obj =  [  'items' =>   [
-            (object) [
-                        'type'=>'text'
-            ]]
-    ];
+//     $obj =  [  'items' =>   [
+//             (object) [
+//                         'type'=>'text'
+//             ]]
+//     ];
 
-    $value = (object) $obj;
+//     $value = (object) $obj;
 
-}
+// }
 
 @endphp
 
-
 @section('block-content')
 
-    <div class="items" style="width: 100%; display: flex; position: relative;">
+    {{-- @dd($value) --}}
+
+    <div class="items" id="{{ $unid }}" style="width: 100%; display: flex; flex-wrap: wrap; position: relative;">
 
         @if($value)
             @isset($value->items)
                 @foreach($value->items as $key=>$item)
-                    <x-cms-form-stackblock-rowitem name="{{ $name }}[items][{{$key}}]" :value="$item" />
+                    {{-- @dd($item) --}}
+                    <x-cms-form-stackblock-rowitem type="{{ $item->type }}" name="{{ $name }}[items][{{$key}}]" :value="$item" />
                 @endforeach
             @endisset
         @endif
+        
+        <div class="placeholder" @if( count((array) ($value->items ?? [])) > 0) style="display: none" @endif/>
+            Add an item:
+            <A href="#" class="block-add-item-text">Text</A> | <a href="#" class="block-add-item-image">Image</a> | <a href="#" class="block-add-item-video">video</a>
+        </div>
 
     </div>
 
@@ -38,6 +47,18 @@ if(is_null($value) || $value == '') {
 
 @overwrite
 
+@section('block-actions')
+
+    <div class="btn-group dropleft">
+        <A href="#" class="block-add-item bi-plus-circle-fill" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></A>
+        <div class="dropdown-menu">
+            <A href="#" class="block-add-item-text dropdown-item bi-card-text"> Text</A>
+            <A href="#" class="block-add-item-image dropdown-item bi-card-image"> Image</A>
+            <A href="#" class="block-add-item-video dropdown-item bi-camera-reels-fill"> Video</A>
+        </div>
+    </div>
+
+@endsection
 
 @section('block-settings') 
 
@@ -48,93 +69,11 @@ if(is_null($value) || $value == '') {
 
 @push('scripts')
 <script>
-
-     $('.items').sortable({
-         handle: '.blockitem-handle',
-         axis: 'x',
-         forcePlaceholderSize: true,
-         revert: 100,
-         start: function(event, ui) {
-            console.log('start');
-//            console.log($(ui.element)); //.parents('.items').find('.ui-sortable-placeholder'));
-
-            $(ui.placeholder).css('height', $(ui.item).height() + 'px');
-
-         //   $(ui.element).parents('.items').find('.ui-sortable-placeholder').css('background-color', 'green !important');
-
-         },
-         update: function(event, ui) {
-
-            console.log($(ui.element).parents('.items').find('.ui-sortable-placeholder'));
-            // reapply field indexes to represent reordering
-            $('.items').each(function(rowidx) {
-
-                $(this).find('.blockitem').each(function(idx) {
-
-                    $(this).find('INPUT, SELECT, TEXTAREA').each(function(fldidx) {
-                        //  console.log(idx + ' / ' + fldidx);
-                        var ary = $(this).attr('name').split(/(\[|\])/);
-                        ary[10] = idx; // need to careful not to break the index used here... can we be cleveredr about it?
-                        $(this).attr('name', ary.join(''));
-
-                        $(this).change();
-                        
-                    });
-
-                });
-
-            });
-
-        }
-
-     });
-
-
-
-    $('.blockitem').resizable({
-        handles: 'e',
-        placeholder: 'ui-state-highlight',
-        start: function(event, ui){
-            // sibTotalWidth = ui.originalSize.width + ui.originalElement.next().outerWidth();
-            console.log(ui.size);
-
-            var colcount = 12; // change this to alter the number of cols in the row.
-
-            var colsize = $(ui.element).parents('.items').width() / colcount;
-            // set the grid correctly - allows for window to be resized bewteen...
-            $(ui.element).resizable('option', 'grid', [ colsize, 0 ]);
-            
-            // calc the max possible width for this item (to prevent dragging larger than the row)
-            // get the col counts of items in the row
-            var filled = 0;
-            $(ui.element).parents('.items').find('.blockitem').each(function() {
-                filled += parseInt($(this).find('.item-col-count').val());
-                console.log(filled);
-            });
-            // subtract the col count of this item
-            filled -= $(ui.element).find('.item-col-count').val();
-
-            // the difference is the max number of cols this can fill
-            empty = (colcount - filled);
-
-            console.log(empty);
-
-            // multiply to get a total max width.
-            $(ui.element).resizable('option', 'maxWidth', colsize * (colcount - filled));
-
-
-        },
-
-        resize: function(event, ui) {
-           
-            console.log(ui.size.width + " :: " + $(ui.element).parents('.items').width());
-
-            // calculate the number of cols currently occupied and write to the col-count field
-            cols = (ui.size.width / $(ui.element).parents('.items').width()) * 12; // need to pull this from the same parameter as in 'start' - should probably widgetise this code...
-            $(ui.element).find('.item-col-count').val(cols);
-            
-        }
+    $(document).ready(function() {
+        $('#{{ $unid }}').parents('.block-edit').stackblockedit();
     });
+
 </script>
 @endpush
+
 
