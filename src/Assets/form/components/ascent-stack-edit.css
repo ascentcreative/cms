@@ -40,7 +40,9 @@
 
 .blockitem {
     /* padding: 5px; */
-}
+    background-color: #f7f7f7;
+    border-radius: 5px;
+} 
 
 .blockitem .blockitem-content {
     border: 1px solid #ccc;
@@ -52,6 +54,15 @@
 .blockitem .blockitem-handle {
     padding: 3px 10px;
     background: #ccc;
+}
+
+.ui-sortable-placeholder {
+    border-radius: 10px;
+    background: #ececec;
+    visibility: visible !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 
