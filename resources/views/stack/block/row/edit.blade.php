@@ -49,29 +49,29 @@ if(is_null($value) || $value == '') {
 @push('scripts')
 <script>
 
-    //  $('.items').sortable({
-    //      handle: '.blockitem-handle',
-    //      update: function(event, ui) {
-    //         // reapply field indexes to represent reordering
-    //         $('.items').each(function(rowidx) {
+     $('.items').sortable({
+         handle: '.blockitem-handle',
+         update: function(event, ui) {
+            // reapply field indexes to represent reordering
+            $('.items').each(function(rowidx) {
 
-    //             $(this).find('.blockitem').each(function(idx) {
+                $(this).find('.blockitem').each(function(idx) {
 
-    //                 $(this).find('INPUT, SELECT, TEXTAREA').each(function(fldidx) {
-    //                     //  console.log(idx + ' / ' + fldidx);
-    //                     var ary = $(this).attr('name').split(/(\[|\])/);
-    //                     ary[10] = idx;
-    //                     $(this).attr('name', ary.join(''));
+                    $(this).find('INPUT, SELECT, TEXTAREA').each(function(fldidx) {
+                        //  console.log(idx + ' / ' + fldidx);
+                        var ary = $(this).attr('name').split(/(\[|\])/);
+                        ary[10] = idx;
+                        $(this).attr('name', ary.join(''));
                         
-    //                 });
+                    });
 
-    //             });
+                });
 
-    //         });
+            });
 
-    //     }
+        }
 
-    //  });
+     });
 
 
     // $('.blockitem').resizable({
