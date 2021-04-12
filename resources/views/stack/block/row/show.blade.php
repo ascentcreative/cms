@@ -1,11 +1,24 @@
 {{-- @dump($data) --}}
 
-<div class="row" style="padding: 20px">
+<div class="row" style="padding: 20px 0">
 @foreach($data->items as $item) 
 
-    <div class="col-md-{{$item->cols->width}} @if($item->cols->width < 6) hyphenbreak @endif">
+    <div class="col-md-{{$item->cols->width}} xcol-sm-{{$item->cols->width * 2}} @if($item->cols->width < 6) hyphenbreak @endif">
 
-        {!! $item->content !!}
+        @switch($item->type)
+            @case('text')
+                {!! $item->content !!}
+                @break
+
+            @case('image')
+                <IMG src="{{ $item->image }}" width="100%"/>
+                @break
+
+            @case('video')
+                {{ embedVideo('https://youtu.be/VkDL6nFPHKU') }}
+                @break
+
+        @endswitch
 
     </div>
 
