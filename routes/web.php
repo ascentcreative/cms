@@ -47,6 +47,10 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             return view('cms::stack.block.make')->with('type', $type)->with('name', $name)->with('key', $key)->with('value', null);
            // return view('cms::stack.block.' . $type . '.edit')->with('name', $name . '[' . $key . ']')->with('value', null);
         });
+        Route::get('/stackblock/newitem/{type}/{name}/{cols}', function($type, $name, $cols) {
+            return view('cms::stack.block.row.makeitem')->with('type', $type)->with('name', $name)->with('cols', $cols); //->with('key', $key)->with('value', null);
+           // return view('cms::stack.block.' . $type . '.edit')->with('name', $name . '[' . $key . ']')->with('value', null);
+        });
 
 
         Route::fallback(function () {
