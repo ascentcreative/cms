@@ -42,6 +42,7 @@
     /* padding: 5px; */
     background-color: #f7f7f7;
     border-radius: 5px;
+    overflow: hidden;
 } 
 
 .blockitem .blockitem-content {
@@ -49,11 +50,66 @@
     border-radius: 5px;
     padding: 0px;
     overflow: hidden;
+    margin: 5px 15px 5px 5px;
+    position: relative;
 }
 
+
+
 .blockitem .blockitem-handle {
-    padding: 3px 10px;
+  
+    position: absolute;
+    top: 5px; 
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    z-index: 100;
+
+}
+
+
+.blockitem .blockitem-delete {
+  
+    position: absolute;
+    bottom: 5px; 
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    z-index: 100;
+    color: inherit;
+
+}
+
+
+
+.blockitem .ui-resizable-handle {
+    /* xbackground: #333 !important; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: inherit;
+
+    
+
+}
+
+.blockitem .ui-resizable-handle:after {
+
+    content: '';
+    display: block;
+    height: 80%;
+    width: 2px;
     background: #ccc;
+    cursor: ew-resize !important
+
+}
+
+.blockitem .ui-resizable-e {
+    right: 0px;
+    width: 10px;
 }
 
 .ui-sortable-placeholder {
@@ -66,4 +122,6 @@
 }
 
 
-
+.controls A {
+    color: #333;
+}

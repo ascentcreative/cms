@@ -12,6 +12,7 @@ class RowItem extends Component
  //   public $type;
     public $name;
     public $value;
+    public $type;
   
   //  public $wrapper;
   //  public $class;
@@ -23,10 +24,10 @@ class RowItem extends Component
      *
      * @return void
      */
-    public function __construct(/*$type,*/ $name, $value)
+    public function __construct($type, $name, $value)
     {
        
-       // $this->type = $type;
+        $this->type = $type;
         $this->name = $name;
         $this->value = $value;
     
