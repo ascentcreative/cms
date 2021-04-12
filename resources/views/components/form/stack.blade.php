@@ -16,13 +16,13 @@
                     (object)[
                                 'type'=>'row',
                                 'bgcolor'=>'',
-                                'items'=> [
-                                    (object) [
-                                        'type'=>'text',
-                                        'content'=>''
-                                    ]
+                                // 'items'=> [
+                                //     (object) [
+                                //         'type'=>'text',
+                                //         'content'=>''
+                                //     ]
 
-                                ]
+                                // ]
                     ]
             ];
 
@@ -68,6 +68,7 @@
     @push('scripts')
         @script('/vendor/ascent/cms/js/jquery.serializejson.js')
         @script('/vendor/ascent/cms/form/components/ascent-stack-edit.js')
+        @script('/vendor/ascent/cms/form/components/ascent-stack-block-edit.js')
     @endpush
 @endonce
 
