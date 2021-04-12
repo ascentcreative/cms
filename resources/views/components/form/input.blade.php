@@ -5,6 +5,6 @@
 
 @section('element')
 
-    <input type="{{$type}}" name="{{$name}}" value="{{$value}}" class="form-control"/>
+    <input type="{{$type}}" name="{{$name}}" value="{!! $value !!}" class="form-control"/>
 
 @overwrite
