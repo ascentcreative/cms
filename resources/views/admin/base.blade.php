@@ -12,6 +12,7 @@
     @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css") 
     @style('/vendor/ascent/cms/js/jquery-ui.min.css') 
     @style('/vendor/ascent/cms/css/ascentcreative-cms-admin.css') 
+    @style('/vendor/ascent/cms/css/ascent-cms-core.css') 
 
     @style('/css/admin.css') 
    
