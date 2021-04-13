@@ -41,7 +41,7 @@ var CroppieUpload = {
         obj.wrap('<DIV class="croppieupload empty"></DIV>');
 		this.root = $(obj).parent('.croppieupload');
         this.root.append('<DIV class="cu_trigger"><DIV class="cu_message">Click to upload an image</DIV></DIV><INPUT type="file" id="cu_file"/>');
-        this.root.append('<DIV class="cu_actions"><A href="" class="button cu_remove nochevron">Remove</A><A href="" class="button cu_change nochevron">Change</A></DIV>');
+        this.root.append('<DIV class="cu_actions"><A href="" class="button cu_remove nochevron btn-primary btn-sm">Remove</A><A href="" class="button cu_change nochevron btn-primary btn-sm">Change</A></DIV>');
 			
         // "remove" link action:
         this.root.find('.cu_remove').click(function() {
