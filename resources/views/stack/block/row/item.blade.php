@@ -1,22 +1,35 @@
 <div class="blockitem" style="width: {{ (100 / 12) * ($value->cols->width ?? 12) }}%;">
 
-    <div class="blockitem-content" style="">
+    <div class="blockitem-content" style="background-color: white; height: 100%;">
 
-        <div class="blockitem-handle bi-arrow-left-right"></div>
+        <div class="blockitem-handle bi-arrows-move xbi-arrow-left-right"></div>
         <a href="" class="blockitem-delete bi-trash"></a>
         
         @switch($type)
             
             @case('text')
-                <x-cms-form-wysiwyg label="" name="{{ $name }}[content]" value="{!! isset($value->content) ? $value->content : ''  !!}" wrapper="none"/>
+                    <x-cms-form-wysiwyg label="" name="{{ $name }}[content]" value="{!! isset($value->content) ? $value->content : ''  !!}" wrapper="none"/>
                 @break
 
             @case('image')
-                <x-cms-form-croppie width="800" label="" name="{{ $name }}[image]" value="{!! isset($value->image) ? $value->image : ''  !!}" wrapper="none"/>
+                <div class="imageitem" style="padding: 10px; width: 100%; padding-right: 30px;">
+                        <x-cms-form-croppie width="800" label="" name="{{ $name }}[image]" value="{!! isset($value->image) ? $value->image : ''  !!}" wrapper="none"/>
+                </div>
                 @break
 
             @case('video')
-                VIDEO UI
+                
+                    <div class="videoitem" style="padding: 10px; width: 100%; padding-right: 30px;">
+
+                        {{ embedVideo('https://youtu.be/VkDL6nFPHKU') }}
+
+                        <div class="text-center pt-2">
+                            <button class="button btn-sm btn btn-primary text-small">Change</button> <button class="button btn-sm btn btn-primary text-small">Options</button>
+                        </div>
+
+                    </div>
+                    
+
                 @break
         
         @endswitch
