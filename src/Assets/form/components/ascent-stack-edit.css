@@ -123,26 +123,18 @@
 
 
 .blockitem .ui-resizable-handle {
-    /* xbackground: #333 !important; */
-
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: inherit;
-
-    
-
 }
 
 .blockitem .ui-resizable-handle:after {
-
     content: '';
     display: block;
     height: 80%;
     width: 2px;
     background: #ccc;
-    xcursor: ew-resize !important
-
 }
 
 .blockitem .ui-resizable-e {
