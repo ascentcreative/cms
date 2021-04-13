@@ -16,6 +16,7 @@ class PageController extends AdminBaseController
     static $modelClass = 'Page';
     static $bladePath = "cms::admin.pages";
 
+    public $indexSort = 'title';
     public $indexSearchFields = ['title', 'content'];
 
     public function commitModel(Request $request, Model $model)
