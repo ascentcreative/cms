@@ -6,6 +6,9 @@
 
 $.ascent = $.ascent?$.ascent:{};
 
+// fix for sometimes null sender... set in 'over', unset in 'stop'
+var sender = null;
+
 var StackBlockEdit = {
         
 		itemCount: 0,
@@ -30,10 +33,8 @@ var StackBlockEdit = {
                     $(this).parents('.blockitem').remove();
 
                     $(row).trigger('change');
-                    if($(row).find('.blockitem').length == 0) {
-                        $(row).find('.placeholder').show();
-                    }
                     
+                    self.updateBlockIndexes();
                 }
 
                 return false; 
@@ -41,35 +42,77 @@ var StackBlockEdit = {
 
          
             $(this.element).find('.items').sortable({
+                connectWith: '.items',
+                //containment: '.stack-edit',
                 handle: '.blockitem-handle',
-                axis: 'x',
+                // axis: 'x',
                 forcePlaceholderSize: true,
-                revert: 100,
+                xevert: 100,
                 start: function(event, ui) {
                     $(ui.placeholder).css('height', $(ui.item).height() + 'px');
+                    sender = this;
+                },
+                over: function(event, ui) {
+                    console.log('over');
+                   
+                     // will it fit? 
+                     empty = self.getEmptyCount();
+                   
+                     if(sender == this) {
+                        empty += parseInt($(ui.item).find('.item-col-count').val());
+                     }
+                  
+                     if(parseInt($(ui.item).find('.item-col-count').val()) <= empty) {
+                         // ok
+                         //self.updateBlockIndexes();
+                         $(ui.placeholder).show();
+                     } else {
+                        // alert('Too Big - No Space');
+                         $(this).addClass('drop-not-allowed');
+                         $(ui.placeholder).hide();
+
+                     }
+                },
+                out: function(event, ui) {
+                    $(this).removeClass('drop-not-allowed');
+                    
+                },
+                receive: function(event, ui) {
+                    console.log('receive');
+
+                    // receiving an item from another list:
+
+                    // will it fit? 
+                    empty = self.getEmptyCount();
+                    // at this point, the size of the dropped element is included...
+                    empty += parseInt($(ui.item).find('.item-col-count').val());
+              
+                    if(parseInt($(ui.item).find('.item-col-count').val()) <= empty) {
+                        // ok
+                        self.updateBlockIndexes();
+                    } else {
+                       // alert('Too Big - No Space');
+                        $(ui.sender).sortable('cancel');
+                    }
+
+                   
+                   
+                },
+                remove: function(event, ui) {
+                    console.log('remove');
+                    self.updateBlockIndexes();
                 },
                 update: function(event, ui) {
-
-                    console.log($(ui.element).parents('.items').find('.ui-sortable-placeholder'));
-                    // reapply field indexes to represent reordering
-                    $('.items').each(function(rowidx) {
-
-                        $(this).find('.blockitem').each(function(idx) {
-
-                            $(this).find('INPUT:not([type=file]), SELECT, TEXTAREA').each(function(fldidx) {
-                                //  console.log(idx + ' / ' + fldidx);
-                                var ary = $(this).attr('name').split(/(\[|\])/);
-                                ary[10] = idx; // need to careful not to break the index used here... can we be cleveredr about it?
-                                $(this).attr('name', ary.join(''));
-
-                                $(this).change();
-                                
-                            });
-
-                        });
-
-                    });
-
+                    console.log('update');
+                    self.updateBlockIndexes();
+                },
+                stop: function(event, ui) {
+                    console.log('stop');
+                   // if ($(ui.item).hasClass('number') && $(ui.placeholder).parent()[0] != this) {
+                  //  $(this).sortable('cancel');
+                    //}
+                    sender = null;
+                  
                 }
 
             });
@@ -100,6 +143,16 @@ var StackBlockEdit = {
              });
 
 		},
+    
+        getEmptyCount: function() {
+            var empty = 12;
+            
+            $(this.element).find('.item-col-count').each(function() {
+                empty -= parseInt($(this).val());
+            });
+
+            return empty;
+        },
 
         loadBlockTemplate: function(type) {
 
@@ -135,8 +188,6 @@ var StackBlockEdit = {
 
                 self.initBlockItem(newItem);
 
-                $(self.element).find('.placeholder').hide();
-
                 self.updateBlockIndexes();
              
              });
@@ -145,11 +196,24 @@ var StackBlockEdit = {
 
         updateBlockIndexes: function() {
 
+            if($(this.element).find('.blockitem').length == 0) {
+                $(this.element).find('.placeholder').show();
+            } else {
+                $(this.element).find('.placeholder').hide();
+            }
+
+            var self = this;
+
             // reapply field indexes to represent reordering
             $(this.element).find('.blockitem').each(function(idx) {
 
                 $(this).find('INPUT:not([type=file]), SELECT, TEXTAREA').each(function(fldidx) {
                     var ary = $(this).attr('name').split(/(\[|\])/);
+
+                    // we're allowing drops from other blocks, so need to update ary[2] also...
+                    blockidx = $(self.element).parent().children().index(self.element);
+                    ary[2] = blockidx;
+
                     ary[10] = idx;
                     $(this).attr('name', ary.join(''));
                     $(this).change();
@@ -181,6 +245,9 @@ var StackBlockEdit = {
                     var colsize = $(ui.element).parents('.items').width() / colcount;
                     // set the grid correctly - allows for window to be resized bewteen...
                     $(ui.element).resizable('option', 'grid', [ colsize, 0 ]);
+
+                    // min width = 3 cols
+                    $(ui.element).resizable('option', 'minWidth', (colsize * 3) -1);
                     
 
                     /**
