@@ -9,9 +9,9 @@
 
 @section('element')
 
-   <div class="wysiwyg-editor" style="width: 100%">
+   <div class="wysiwyg-editor" style="width: 100%; height: 100%;">
 
-       <div contenteditable="true" id="edit-{{ $unid }}" style="width: 100%; padding: 20px; background: white;">
+       <div contenteditable="true" id="edit-{{ $unid }}" style="width: 100%; height: 100%; padding: 20px; background: white;">
            {!! $value !!}
         </div>
 
