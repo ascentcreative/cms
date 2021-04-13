@@ -46,9 +46,7 @@ var StackBlockEdit = {
                 forcePlaceholderSize: true,
                 revert: 100,
                 start: function(event, ui) {
-                    console.log('start');
                     $(ui.placeholder).css('height', $(ui.item).height() + 'px');
-
                 },
                 update: function(event, ui) {
 
@@ -58,7 +56,7 @@ var StackBlockEdit = {
 
                         $(this).find('.blockitem').each(function(idx) {
 
-                            $(this).find('INPUT, SELECT, TEXTAREA').each(function(fldidx) {
+                            $(this).find('INPUT:not([type=file]), SELECT, TEXTAREA').each(function(fldidx) {
                                 //  console.log(idx + ' / ' + fldidx);
                                 var ary = $(this).attr('name').split(/(\[|\])/);
                                 ary[10] = idx; // need to careful not to break the index used here... can we be cleveredr about it?
@@ -172,7 +170,7 @@ var StackBlockEdit = {
                 placeholder: 'ui-state-highlight',
                 create: function( event, ui ) {
                     // Prefers an another cursor with two arrows
-                    $(".ui-resizable").css("cursor","ew-resize");
+                    $(".ui-resizable-handle").css("cursor","ew-resize");
                 },
                 start: function(event, ui){
                     // sibTotalWidth = ui.originalSize.width + ui.originalElement.next().outerWidth();
