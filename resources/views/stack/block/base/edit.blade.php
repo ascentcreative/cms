@@ -1,7 +1,7 @@
 
 <div class="block-edit">
 
-    <div class="block-handle">
+    <div class="block-handle bi-arrow-down-up">
 
     </div>
 
@@ -11,7 +11,7 @@
 
     <div class="block-settings">
 
-        <div class="controls" style="display: flex; flex-direction: column; align-items: center; padding: 10px 0 10px 10px; font-size: 1.5rem; height:100%;">
+        <div class="controls">
          
             <div style="flex-basis: 100%; flex-shrink: 1">
             @yield('block-actions')
