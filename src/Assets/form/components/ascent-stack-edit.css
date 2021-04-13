@@ -4,7 +4,7 @@
 
 
 .block-edit {
-    padding: 20px; 
+    /* padding: 20px;  */
     background-color: #f7f7f7;
     border-radius: 5px; 
     margin-bottom: 10px;
@@ -13,14 +13,37 @@
     display: flex;
 }
 
+.ui-sortable-placeholder.block-edit {
+    margin-bottom: 10px;
+}
+
 .block-edit .block-handle {
-    min-width: 30px;
+    min-width: 20px;
     background: #ccc;
     flex: 0 0;
-    margin: -20px 20px -20px -20px ;
+    margin: -0px 00px -0px 0px ;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
 } 
 
+.block-edit .block-handle:before {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.block-edit.ui-sortable-helper,
+.block-edit.ui-sortable-helper .block-handle {
+    cursor: grabbing !important;
+}
+
 .block-edit .block-content {
+
+    margin: 10px;
     flex-basis: 100%;
 
     display: flex;
@@ -31,6 +54,15 @@
     
     width: 50px;
     flex: 0 0;
+}
+
+.block-edit .block-settings .controls {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 10px 10px 10px 0px; 
+    font-size: 1.4rem; 
+    height:100%;
 }
 
 .ui-sortable-helper {
@@ -65,7 +97,13 @@
     height: 20px;
     border-radius: 100px;
     z-index: 100;
+    cursor: grab;
 
+}
+
+.blockitem.ui-sortable-helper,
+.blockitem.ui-sortable-helper .blockitem-handle {
+    cursor: grabbing !important;
 }
 
 
@@ -103,7 +141,7 @@
     height: 80%;
     width: 2px;
     background: #ccc;
-    cursor: ew-resize !important
+    xcursor: ew-resize !important
 
 }
 
