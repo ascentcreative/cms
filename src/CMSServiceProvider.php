@@ -69,7 +69,6 @@ class CMSServiceProvider extends ServiceProvider
   public function boot()
   {
 
-  
     $this->bootFortify();
 
     // Register the helpers php file which includes convenience functions:
@@ -96,7 +95,7 @@ class CMSServiceProvider extends ServiceProvider
 
     // for web requests, work out what the menu item might be.
     if (!app()->runningInConsole()) {
-       $this->resolveMenuItem();
+    $this->resolveMenuItem();
     }
     
   }
