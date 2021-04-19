@@ -93,6 +93,7 @@ class CMSServiceProvider extends ServiceProvider
 
     ]);
 
+    // for web requests, work out what the menu item might be.
     if (!app()->runningInConsole()) {
     $this->resolveMenuItem();
     }
