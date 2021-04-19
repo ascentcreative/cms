@@ -11,7 +11,11 @@
             @if($blockblade)
                 @include($blockblade, ['option'=>$opt])
             @else
-                {{$opt}}
+                @if($optionLabelField)
+                    {{$opt->$optionLabelField}} 
+                @else
+                    {{$opt}}
+                @endif
             @endif
         </label>
     @endforeach
