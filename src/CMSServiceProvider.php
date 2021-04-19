@@ -93,7 +93,9 @@ class CMSServiceProvider extends ServiceProvider
 
     ]);
 
+    if (!app()->runningInConsole()) {
     $this->resolveMenuItem();
+    }
     
   }
 
