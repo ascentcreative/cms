@@ -9,18 +9,23 @@
     <?php 
         
        $opts = $query->orderBy($labelField)->get();
-        
+
         ?>
 
         @foreach ($opts as $opt)
       
-            <div style="">
+            <label style="display: block">
                 <input type="checkbox" name="{{$name}}[]" value="{{ $opt->$idField }}" xclass="form-control" 
-                @if (array_search($opt->$idField, $value->toArray() ) !== false)
+
+                @if(array_search($opt->$idField, array_keys($value->keyBy($idField)->toArray())) !== false)
+
+                {{-- @if (array_search($opt->$idField, $value->toArray() ) !== false) --}}
                     checked="checked"
                 @endif 
+
+
                 /> {{ $opt->$labelField }}
-            </div>
+            </label>
 
        
         @endforeach

@@ -16,7 +16,7 @@
 <div class="cms-screenblock bg-white rounded shadow" style="">
 
 
-    <x-cms-form-foreignkeyselect type="checkbox" name="permissions" label="Permissions" :value="old('permissions', $model->getPermissionNames())"
+    <x-cms-form-foreignkeyselect type="checkbox" name="permissions" label="Permissions" :value="old('permissions', $model->permissions)"
         :query="\Spatie\Permission\Models\Permission::query()" labelField="name" idField="name"
         >
     </x-cms-form-foreignkeyselect>
