@@ -206,3 +206,15 @@ A.dropdown-toggle.dropdown-toggle-dots::after {
 BODY .modal.fade#ajaxModal .modal-dialog {
     transform: none;
 }
+
+
+
+/* JqueryUI Overrides */
+.ui-front {
+    z-index: 1200 /* allow for UIs in Modals */
+}
+
+.ui-widget {
+    font-family: inherit !important;
+    font-size: inherit !important;
+}
