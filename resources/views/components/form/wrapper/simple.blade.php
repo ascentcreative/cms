@@ -19,4 +19,5 @@
             @endif
 
         @endif
+        <div class="error-display"></div>
 </div> 

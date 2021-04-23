@@ -184,12 +184,12 @@ var ModalLink = {
 
                     },
                     422: function(data, xhr, request) {
-                        for(name in data.responseJSON.errors) { 
+                        for(fldname in data.responseJSON.errors) { 
 
-                            console.log(name + " --- " + data.responseJSON.errors[name]);
+                            console.log(fldname + " --- " + data.responseJSON.errors[fldname]);
 
-                            $('INPUT[name="' + name + '"]').parents('.element-wrapper').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
-                                data.responseJSON.errors[name] + 
+                            $('[name="' + fldname + '"]').parents('.element-wrapper').find('.error-display').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
+                                data.responseJSON.errors[fldname] + 
                             '</small>');
 
                         }
