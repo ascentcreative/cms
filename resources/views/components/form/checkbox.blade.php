@@ -4,11 +4,14 @@
 @section('name'){{$name}}@overwrite
 
 @section('element')
-
-    {{-- @dump($value)
+      {{-- 
+    @dump($uncheckedValue)
+    @dump($value)
     @dump($checkedValue)
     @dump($value == $checkedValue) --}}
-
+    @if(!is_null($uncheckedValue))
+        <input type="hidden" id="{{$name}}-unchecked" name="{{$name}}" value="{{$uncheckedValue}}"/>
+    @endif
     <div style="display: flex; align-items: center; height: 100%;">
         <input type="checkbox" id="{{$name}}" name="{{$name}}" value="{{$checkedValue}}"
         
