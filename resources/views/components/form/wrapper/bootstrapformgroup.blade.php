@@ -2,6 +2,7 @@
     <label for="@yield('name')" class="col-2 col-form-label">@yield('label'):</label>
     <div class="col">
         @yield('element')
+        <div class="error-display"></div>
         @if($slot)
             <small class="form-text text-muted">
                 {{ $slot }}
