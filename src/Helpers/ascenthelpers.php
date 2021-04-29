@@ -131,6 +131,11 @@ function embedVideo($url) {
 }
 
 
+function cookieManager() {
+    return view("cms::cookiemanager.setup");
+}
+
+
 
 /* Singleton Accessors */
 

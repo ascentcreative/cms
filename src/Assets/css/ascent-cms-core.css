@@ -8,16 +8,21 @@
     content: '';
     display: block;
 
-	
-
     padding-bottom: 56.25%;
     /* 16/9 ratio */
-    padding-top: 30px;
-    /* IE6 workaround*/
+
     height: 0;
     overflow: hidden;
     
     width: 100%;
+}
+
+.embed-container.spotify:before {
+    padding-bottom: 80px;
+}
+
+.embed-container.apple-music:before {
+    padding-bottom: 150px;
 }
 
 .embed-container IFRAME {
@@ -26,4 +31,136 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+/* COOKIE MANAGER */
+
+#acm_wrap {
+	
+	display: none;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	
+	
+	max-height: 90%;
+	
+	
+	
+	z-index: 1000;
+	
+}
+
+#acm_prompt {
+	
+	/* max-width: 600px; */
+	width: 100%;
+	margin: 0px auto;
+	background: rgba(0,0,0,0.9);
+	color: white;
+	padding: 30px;
+	
+	
+	max-height: 700px;
+	overflow-y: auto;
+	
+	
+}
+
+#acm_summary {
+    display: flex;
+    align-items: center;
+}
+
+#acm_details {
+	
+	display:none;
+	
+}
+
+#acm_prompt.acm_formopen #acm_details {
+	display: block;
+}
+
+#acm_prompt.acm_formopen #acm_choose {
+	display: none;
+}
+
+.acm_cookietype {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 20px;
+	text-align: left;
+	display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.acm_cookietype * {
+	cursor: pointer;
+}
+
+
+.acm_cookietype.acm_selected {
+	background-color: #b6cc43;
+}
+
+.acm_cookietype.acm_mandatory {
+	background-color: rgba(241, 133, 0, 0.9);
+}
+	
+.acm_cookietype.acm_selected, .acm_cookietype.acm_mandatory {
+
+	background-image: url('/ascentcore/cookiemgr/cookiemgr-selected.png');
+}
+
+
+.acm_cookietype H3 {
+	margin-bottom: 0;
+}
+
+.acm_cookietype P {
+	margin: 0;
+}
+
+
+
+.acm_status_badge {
+    width: 100px;
+    padding: 5px 10px;
+    font-weight: 700;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    background: #333;
+    color: white;
+    margin-left: 20px;
+    border-radius: 5px;
+
+    text-align: center;
+
+}
+
+.acm_status_badge:after {
+    content: 'disabled';
+}
+
+
+.acm_selected .acm_status_badge:after {
+    content: "enabled";
+}
+
+.acm_mandatory .acm_status_badge:after {
+    content: "mandatory";
+}
+
+.acm_ct_title {
+    flex-grow: 1;
+    font-weight: 700;
+}
+
+.acm_ct_desc {
+    flex-basis: 100%;
+    font-size: 0.8rem;
 }
