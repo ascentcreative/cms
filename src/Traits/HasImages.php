@@ -55,7 +55,7 @@ trait HasImages {
 
     /* define the relationship */
     public function images() {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function imageBySpec($specName) {
@@ -110,6 +110,20 @@ trait HasImages {
 
     }
 
+
+    protected function deleteImages() {
+        
+        $images = $this->images->all();
+
+      // dd($images);
+
+        foreach($images as $img) {
+            if (!is_null($img)) {
+                $img->delete();
+            }
+        }
+        
+    }
 
 
 }
