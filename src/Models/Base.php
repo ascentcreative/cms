@@ -6,6 +6,8 @@ use AscentCreative\CMS\Traits\HasExtenders;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+
 use Illuminate\Support\Str;
 
 
@@ -15,7 +17,7 @@ use Illuminate\Support\Str;
  */
 class Base extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     public function getTable()
     {
