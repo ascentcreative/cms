@@ -19,6 +19,8 @@ class Base extends Model
 {
     use HasFactory, LogsActivity;
 
+    protected static $logFillable = true;
+
     public function getTable()
     {
         return ($this->table ?? 'cms_' . Str::snake(Str::pluralStudly(class_basename($this))));
