@@ -23,6 +23,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
         Route::resource('/menus', MenuController::class);
 
+       
         Route::resource('/settings', SettingsController::class);
 
         Route::get('/menuitems/{menuitem}/delete', [AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'delete']);
@@ -40,6 +41,14 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
         Route::get('/permissions/{permission}/delete', [AscentCreative\CMS\Controllers\Admin\PermissionController::class, 'delete']);
         Route::resource('/permissions', PermissionController::class);
+
+
+
+        Route::resource('/stacks', StackController::class);
+        Route::post('/stacks/updateblockorder', [AscentCreative\CMS\Controllers\Admin\StackController::class, 'updateblockorder']);
+        Route::get('/blocks/{block}/delete', [AscentCreative\CMS\Controllers\Admin\BlockController::class, 'delete']);
+        Route::resource('/blocks', BlockController::class);
+
 
 
         /** Content Stack */
@@ -81,17 +90,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
     Route::post('/cms/croppieupload', function() {
 
-        //Storage::put('file.jpg', $contents);
-
-        // print_r(request()->all());
-
-        // print_r(request()->file('payload'));
-        
-        //$path = request()->file('payload')->store(request()->destination);
-
-        $path = Storage::disk('public')->putFile(request()->destination, request()->file('payload'));
-
-        // echo $path;
+       $path = Storage::disk('public')->putFile(request()->destination, request()->file('payload'));
 
         return response()->json([
             'path' => '/storage/' . $path,
