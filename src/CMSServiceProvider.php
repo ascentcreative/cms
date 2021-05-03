@@ -186,6 +186,8 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-button', 'AscentCreative\CMS\View\Components\Form\Button');
     Blade::component('cms-form-checkbox', 'AscentCreative\CMS\View\Components\Form\Checkbox');
     Blade::component('cms-form-textarea', 'AscentCreative\CMS\View\Components\Form\Textarea');
+    Blade::component('cms-form-statictext', 'AscentCreative\CMS\View\Components\Form\StaticText');
+
 
     Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
     Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
