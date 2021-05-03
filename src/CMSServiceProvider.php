@@ -181,7 +181,9 @@ class CMSServiceProvider extends ServiceProvider
   // register the components
   public function bootComponents() {
 
+    
     Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
+    Blade::component('cms-form-hidden', 'AscentCreative\CMS\View\Components\Form\Hidden');
     Blade::component('cms-form-input', 'AscentCreative\CMS\View\Components\Form\Input');
     Blade::component('cms-form-button', 'AscentCreative\CMS\View\Components\Form\Button');
     Blade::component('cms-form-checkbox', 'AscentCreative\CMS\View\Components\Form\Checkbox');
