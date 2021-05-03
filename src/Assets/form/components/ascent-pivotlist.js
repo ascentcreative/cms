@@ -34,6 +34,7 @@ var PivotList = {
             obj.wrap(outer);
             outer = obj.closest('.pivotlist');
             outer.attr('id', obj.attr('id'));
+            outer.attr('name', obj.attr('name'));
             this.element = outer;
             obj.remove();
             
@@ -154,22 +155,26 @@ var PivotList = {
 			console.log(item);
             
             var thisID = (this.element)[0].id;
+            var thisName = (this.element).attr('name');
+
+            console.log(thisName);
+
 			var fldName = thisID; //.split('-')[1];
 			var widget = this.widget;
 			
 			idx = $("#" + thisID + " .pivotlist-list LI.link").length; // + 1;
 			
 			liStr = '<div class="pivotlist-item-label flex-fill">' + display + '</div>';
-		    liStr += '<INPUT type="hidden" class="id" name="' + fldName + '[' + item.id + ']" value="' + item.id + '">';
+		    liStr += '<INPUT type="hidden" class="id" name="' + thisName + '[' + item.id + ']" value="' + item.id + '">';
             
             // write in any set values for the pivot table
             for(key in this.options.addToAll) {
-                liStr += '<INPUT type="hidden" class="ata-' + key + '" name="' + fldName + '[' + item.id + '][' + key + ']" value="' + this.options.addToAll[key] + '">';
+                liStr += '<INPUT type="hidden" class="ata-' + key + '" name="' + thisName + '[' + item.id + '][' + key + ']" value="' + this.options.addToAll[key] + '">';
             }
             
             // if a pivot table sort field is set, create the field
             if (this.options.sortField) {
-                liStr += '<INPUT type="hidden" class="sortField" name="' + fldName + '[' + item.id + '][' + this.options.sortField + ']" value="' + idx + '">';
+                liStr += '<INPUT type="hidden" class="sortField" name="' + thisName + '[' + item.id + '][' + this.options.sortField + ']" value="' + idx + '">';
 			}
 			
 		//	liStr += '<INPUT type="hidden" class="BREAKME" name="' + fldName + '[' + idModel + '][breakme]" value="' + idx + '">';
@@ -184,7 +189,7 @@ var PivotList = {
                if (this.options.pivotFieldLabel) {
                    liStr += '<label class="mr-2">' + this.options.pivotFieldLabel + '</label>';
                }
-               liStr += '<INPUT type="text" class="pivotField form-control w-25" placeholder="' + this.options.pivotFieldPlaceholder + '" name="' + fldName + '[' + item.id + '][' + this.options.pivotField + ']" value="' + pivotval + '">';
+               liStr += '<INPUT type="text" class="pivotField form-control w-25" placeholder="' + this.options.pivotFieldPlaceholder + '" name="' + thisName + '[' + item.id + '][' + this.options.pivotField + ']" value="' + pivotval + '">';
                liStr += '</div>';
             }
 
