@@ -36,12 +36,42 @@
 
 </div>
 
-<div class="cms-screenblock bg-white rounded shadow" style="">
+<div class="cms-screenblock-tabs bg-white rounded shadow" style="">
 
-    {{-- Load the edit blade for the template --}}
-    @includeFirst(['contentstack.' . $template->slug . '.edit', 'cms::contentstack.' . $template->slug . '.edit']) 
+    <ul class="nav nav-tabs px-3 pt-3 bg-light" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" id="block-tab" data-toggle="tab" href="#block" role="tab" aria-controls="block" aria-selected="true">Block Content</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="settiings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+        </li>
+    </ul>
 
-  
+    <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane show p-3" id="block" role="tabpanel" aria-labelledby="block-tab">
+            {{-- Load the edit blade for the template --}}
+            @includeFirst(['contentstack.' . $template->slug . '.edit', 'cms::contentstack.' . $template->slug . '.edit']) 
+
+        </div>
+
+        <div class="tab-pane show p-3" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+
+            @php $data = json_decode($model->data); @endphp
+
+            <x-cms-form-colour name="data[bgcolor]" label="Background Colour" :value="old('data.bgcolor', $data->bgcolor ?? '')" />
+
+            <x-cms-form-croppie label="Background Image" name="data[bgimage]" :value="old('data.bgimage', $data->bgimage ?? '')"  width="2000" height="600">
+            </x-cms-form-croppie>
+
+        </div>
+
+    </div>
+
+   
+    
+
+   
 
 </div>
 
