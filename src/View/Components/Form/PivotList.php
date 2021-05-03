@@ -10,6 +10,7 @@ class PivotList extends Component
 
     public $label;
     public $name;
+    public $id;
     public $value;
 
     public $dataval;
@@ -43,6 +44,7 @@ class PivotList extends Component
         The field name (to match model property name)
         */
         $this->name = $name;
+        $this->id = str_replace(array('[', ']'), array('--', ''), $name);
         
         /*
         The value to set the component with on form load
@@ -129,7 +131,7 @@ class PivotList extends Component
                 $this->value = $data;
 
 
-        } else if (is_array($value)) { 
+        } else if (is_array($value) || is_object($value)) { 
 
             // incoming data is an array, so is in a different format 
             // to the Eloquent Collection above. Most likely from a validation 
