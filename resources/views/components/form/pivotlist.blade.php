@@ -14,7 +14,7 @@
     <script language="javascript">
         $(document).ready(function() {
             
-            $('#{{$name}}').pivotlist({
+            $('#{{$id}}').pivotlist({
                 optionRoute: '{{$optionRoute}}',
                 labelField: '{{$labelField}}',
                 data: @json($value),
@@ -37,6 +37,6 @@
 
 @section('element')
 
-    <input name="{{$name}}" id="{{$name}}" value="" class="form-control"/>
+    <input name="{{$name}}" id="{{$id}}" value="" class="form-control"/>
 
 @overwrite
