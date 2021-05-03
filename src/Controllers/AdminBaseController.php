@@ -203,8 +203,6 @@ abstract class AdminBaseController extends Controller
         } else {
             $model = $cls::find($id);
         }
-
-        echo '2';
        
         return view($this::$bladePath . '.show', $this->prepareViewData())->withModel($model);
     }
