@@ -159,3 +159,15 @@ function menu($slug, $maxDepth=0) {
     }
 
 }
+
+function contentstack($stackName) { 
+ 
+    $stack = AscentCreative\CMS\Models\Stack::where('name', $stackName)->first();
+
+    if ($stack) {
+        return view('cms::contentstack', ['stack'=>$stack]);
+    } else {
+        throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
+    }
+
+}
