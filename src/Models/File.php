@@ -9,9 +9,9 @@ class File extends Base
 {
     use HasFactory;
 
-    public $fillable = ['filepath', 'orginalname', 'mimetype'];
+    public $fillable = ['disk', 'filepath', 'orginalname', 'mimetype'];
 
-    public $hidden = ['filepath'];
+    public $hidden = ['disk', 'filepath'];
 
 }
 
