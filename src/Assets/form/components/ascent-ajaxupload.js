@@ -62,7 +62,7 @@ var AjaxUpload = {
                       var percentComplete = (evt.loaded / evt.total) * 100;
                       //Do something with upload progress
                       //prog.find('PROGRESS').attr('value', percentComplete);
-                      self.updateProgress(percentComplete);
+                      self.updateUI('Uploading...', percentComplete);
                       console.log(percentComplete);
 
                     }
