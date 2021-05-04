@@ -136,6 +136,11 @@ function cookieManager() {
 }
 
 
+// converts a field name to a legal ID (i.e. removes [])
+function nameToId($name) {
+    return str_replace(array('[', ']'), array('--'. ''), $name);
+}
+
 
 /* Singleton Accessors */
 
