@@ -5,6 +5,8 @@ namespace AscentCreative\CMS\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Storage;
+
 class File extends Base
 {
     use HasFactory;
@@ -12,6 +14,13 @@ class File extends Base
     public $fillable = ['disk', 'filepath', 'orginalname', 'mimetype'];
 
     public $hidden = ['disk', 'filepath'];
+
+
+    public function getFullpathAttribute() {
+
+        return Storage::disk($this->disk)->path($this->filepath);
+
+    }
 
 }
 
