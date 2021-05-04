@@ -96,7 +96,24 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             'path' => '/storage/' . $path,
         ]);
 
-    })->middleware('auth');
+    })->middleware('auth', 'can:uploadfiles');
+
+
+
+    Route::post('/cms/ajaxupload', function() {
+
+        $payload = request()->file('payload');
+        
+        $path = Storage::disk('public')->putFile('ajaxuplods', $payload);
+
+        $file = new AscentCreative\CMS\Models\File();
+        $file->filepath = $path;
+        $file->original_name = $payload->getClientOriginalName();
+        $file->save();
+        return $file;
+
+
+    })->middleware('auth', 'can:uploadfiles');
 
 
 });
