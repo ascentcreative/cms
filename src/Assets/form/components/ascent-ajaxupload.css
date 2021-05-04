@@ -60,3 +60,11 @@
     bottom: 0;
 
 }
+
+.ajaxupload .ajaxupload-reset {
+    display: none;
+}
+
+.ajaxupload.has-file .ajaxupload-reset {
+    display: inline-block;
+}

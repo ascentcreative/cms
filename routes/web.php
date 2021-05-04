@@ -102,12 +102,19 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
     Route::post('/cms/ajaxupload', function() {
 
+        $disk = request()->disk;
+        $path = request()->path;
         $payload = request()->file('payload');
         
-        $path = Storage::disk('public')->putFile('ajaxuplods', $payload);
-
+        if ((bool) request()->preserveFilename) {
+            $filepath = Storage::disk($disk)->putFileAs($path, $payload, $payload->getClientOriginalName());
+        } else {
+            $filepath = Storage::disk($disk)->putFile($path, $payload);
+        }
+        
         $file = new AscentCreative\CMS\Models\File();
-        $file->filepath = $path;
+        $file->disk = $disk;
+        $file->filepath = $filepath;
         $file->original_name = $payload->getClientOriginalName();
         $file->save();
         return $file;

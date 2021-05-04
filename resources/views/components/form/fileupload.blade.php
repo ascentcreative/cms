@@ -5,16 +5,18 @@
 
 @section('element')
 
-  
-
     <div class="ajaxupload form-control" id="{{nameToId($name)}}"">
+
         <input type="hidden" name="{{$name}}" class="ajaxupload-value" id="{{nameToId($name)}}-value" value="{{ $value }}">
         <input type="file" class="ajaxupload-file"  id="{{nameToId($name)}}-upload">
         <label class="ajaxupload-ui" for="{{ nameToId($name) }}-upload">
             <div class="ajaxupload-display">
+                
+                <A href="#" onclick="return false;" class="ajaxupload-reset bi-x-square-fill text-lg text-danger" style="font-size: 1.2rem; padding-right: 20px;"></A>
+
                 <div class="ajaxupload-progress"></div>
                 <div class="ajaxupload-text">
-                
+                    
                     @if($value) 
                         @php
                             $file = AscentCreative\CMS\Models\File::find($value);
@@ -23,11 +25,13 @@
                     @else
                         Choose file
                     @endif
+                    
                 </div>
+
             </div>
         </label>
+        
     </div>
-
 
 @overwrite
 
@@ -44,7 +48,9 @@
     <script>
         $(document).ready(function() {
             $('#{{ nameToId($name) }}').ajaxupload({
-
+                disk: '{{ $disk }}',
+                path: '{{ $path }}',
+                preserveFilename: {{ $preserveFilename ? 'true':'false' }}
             });
         });
     </script>

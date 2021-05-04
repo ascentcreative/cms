@@ -9,6 +9,12 @@ $.ascent = $.ascent?$.ascent:{};
 
 var AjaxUpload = {
         
+    options: {
+        disk: 'public',
+        path: 'ajaxuploads',
+        preserveFilename: false,
+        placeholder: 'Choose file'
+    },
     
     _init: function () {
         
@@ -23,15 +29,24 @@ var AjaxUpload = {
         
         var obj = this.element;
         
-        
+    
         upl = $(this.element).find('input[type="file"]');
 
-        console.log(upl);
+        if($(this.element).find('.ajaxupload-value').val() != '') {
+            $(this.element).addClass('has-file');
+        }
+
+        $(this.element).find('.ajaxupload-reset').on('click', function() {
+            self.reset();
+        });
 
         upl.on('change', function() {
            
             var formData = new FormData(); 
             formData.append('payload', this.files[0]); 
+            formData.append('disk', self.options.disk);
+            formData.append('path', self.options.path);
+            formData.append('preserveFilename', self.options.preserveFilename?1:0);
 
             $.ajax({
                 xhr: function()
@@ -69,8 +84,9 @@ var AjaxUpload = {
                      // prog.remove();
                      // upl.remove();
 
-                    self.updateUI(data.original_name + ' : Upload Complete', 0, false);
-                    $(self.element).find('.ajaxupload-value').val(data.id);
+                   // self.updateUI(data.original_name + ' : Upload Complete', 0, 'value');
+                    //$(self.element).find('.ajaxupload-value').val(data.id);
+                    self.setValue(data.id, data.original_name);
 
                     console.log(data);
 
@@ -83,27 +99,25 @@ var AjaxUpload = {
                           
                     //   }
 
-                      
-                      
                   
               }).fail(function (data) {
 
                 switch(data.status) {
                     case 403:
-                       // alert('You do not have permission to upload files');
+                        alert('You do not have permission to upload files');
 
-                        self.updateUI('You do not have permission to upload files', 0, true);
+                     //   self.updateUI('You do not have permission to upload files', 0, 'error');
 
                         break;
 
                     case 413:
-                        //alert('The file is too large for the server to accept');
-                        self.updateUI('The file is too large for the server to accept', 0, true);
+                        alert('The file is too large for the server to accept');
+                        //self.updateUI('The file is too large for the server to accept', 0, 'error');
                         break;
 
                     default:
-                        //alert('An unexpected error occurred');
-                        self.updateUI('An unexpected error occurred', 0, true);
+                        alert('An unexpected error occurred');
+                        //self.updateUI('An unexpected error occurred', 0, 'error');
                         break;
                 }
 
@@ -116,13 +130,19 @@ var AjaxUpload = {
 
     },
 
-    updateUI: function(text, pct=0, error=false) {
+    setValue: function(value, text) {
+        $(this.element).find('.ajaxupload-value').val(value);
+        $(this.element).addClass('has-file');
+        this.updateUI(text, 0);
+    },
 
-        if(error) {
-            $(this.element).addClass('alert-danger');
-        } else {
-            $(this.element).removeClass('alert-danger');
-        }
+    reset: function() {
+        $(this.element).find('.ajaxupload-value').val('');
+        $(this.element).removeClass('has-file');
+        this.updateUI(this.options.placeholder, 0);
+    },
+
+    updateUI: function(text, pct=0) {
 
         var bar = $(this.element).find('.ajaxupload-progress');
         console.log(bar);
@@ -133,14 +153,7 @@ var AjaxUpload = {
 
     },
 
-    updateProgress: function(pct) {
-
-        var bar = $(this.element).find('.ajaxupload-progress');
-        console.log(bar);
-        console.log( (100 - pct) + '%');
-        bar.css('right', (100 - pct) + '%');
-
-    }
+   
 
 }
 

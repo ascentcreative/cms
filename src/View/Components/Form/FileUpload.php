@@ -12,6 +12,9 @@ class FileUpload extends Component
     public $name;
     public $value;
 
+    public $disk;
+    public $path;
+    public $preserveFilename;
     public $wrapper;
     public $class;
 
@@ -21,13 +24,16 @@ class FileUpload extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($label, $name, $value, $disk='public', $path='ajaxuploads', $preserveFilename=false, $wrapper="bootstrapformgroup", $class='')
     {
         
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
 
+        $this->preserveFilename = $preserveFilename;
+        $this->disk = $disk;
+        $this->path = $path; 
         $this->wrapper = $wrapper;
         $this->class = $class;
 
