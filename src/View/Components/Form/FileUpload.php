@@ -18,18 +18,21 @@ class FileUpload extends Component
     public $wrapper;
     public $class;
 
+    public $accept;
+
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $disk='public', $path='ajaxuploads', $preserveFilename=false, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($label, $name, $value, $disk='public', $path='ajaxuploads', $preserveFilename=false, $wrapper="bootstrapformgroup", $class='', $accept=[])
     {
         
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
+        $this->accept = $accept;
 
         $this->preserveFilename = $preserveFilename;
         $this->disk = $disk;

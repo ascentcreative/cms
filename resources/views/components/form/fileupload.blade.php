@@ -8,7 +8,7 @@
     <div class="ajaxupload form-control" id="{{nameToId($name)}}"">
 
         <input type="hidden" name="{{$name}}" class="ajaxupload-value" id="{{nameToId($name)}}-value" value="{{ $value }}">
-        <input type="file" class="ajaxupload-file"  id="{{nameToId($name)}}-upload">
+        <input type="file" class="ajaxupload-file" accept="{{ join(',', $accept) }}" id="{{nameToId($name)}}-upload">
         <label class="ajaxupload-ui" for="{{ nameToId($name) }}-upload">
             <div class="ajaxupload-display">
                 
