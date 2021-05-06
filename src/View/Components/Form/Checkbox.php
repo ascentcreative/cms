@@ -14,7 +14,8 @@ class Checkbox extends Component
     public $checkedValue;
     public $uncheckedValue;
 
-    public $labelescape;
+    public $labelEscape;
+    public $labelAfter;
     public $wrapper;
     public $class;
 
@@ -23,7 +24,7 @@ class Checkbox extends Component
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value, $labelescape=true, $checkedValue=1, $uncheckedValue=null, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($type, $label, $name, $value, $labelEscape=true, $labelAfter=false, $checkedValue=1, $uncheckedValue=null, $wrapper="bootstrapformgroup", $class='')
     {
         $this->type = $type;
         $this->label = $label;
@@ -33,7 +34,8 @@ class Checkbox extends Component
         $this->uncheckedValue = $uncheckedValue;
 
         $this->wrapper = $wrapper;
-        $this->labelescape = $labelescape;
+        $this->labelEscape = $labelEscape;
+        $this->labelAfter = $labelAfter;
         $this->class = $class;
 
     }

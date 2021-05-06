@@ -1,14 +1,16 @@
 @extends('cms::components.form.wrapper.' . $wrapper)
 
-@section('label'){{$label}}@overwrite
+@section('label')
+@if($labelAfter)
+
+@else
+    {{$label}}
+@endif
+@overwrite
 @section('name'){{$name}}@overwrite
 
 @section('element')
-      {{-- 
-    @dump($uncheckedValue)
-    @dump($value)
-    @dump($checkedValue)
-    @dump($value == $checkedValue) --}}
+
     @if(!is_null($uncheckedValue))
         <input type="hidden" id="{{$name}}-unchecked" name="{{$name}}" value="{{$uncheckedValue}}"/>
     @endif
@@ -20,7 +22,12 @@
         @endif
         
         />
-        {{-- <div class="flex-label-text">@if($labelescape){{$label}}@else{!! $label !!}@endif</div> --}}
+
+
+
+        @if($labelAfter)
+            <label class="flex-label-text pl-3 mb-0" for="{{$name}}">@if($labelEscape){{$label}}@else{!! $label !!}@endif</label>
+        @endif
     </div>
 
 @overwrite
