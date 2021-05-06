@@ -10,7 +10,7 @@ class Block extends Base
 {
     use HasFactory;
 
-    public $fillable = ['stack_id', 'blocktemplate_id', 'name', 'data', 'sort'];
+    public $fillable = ['stack_id', 'blocktemplate_id', 'name', 'data', 'sort', 'published', 'start_date', 'end_date'];
 
     public function stack() {
         return $this->belongsTo(Stack::class);
@@ -22,6 +22,26 @@ class Block extends Base
 
     public function setDataAttribute($data) {
         $this->attributes['data'] = json_encode($data);
+    }
+
+    public function scopeLive($query) {
+        
+        $query->where('published', '1');
+
+        $query->where(function($q) {
+            $q->whereNull('start_date')
+                ->orWhereRaw('start_date < now()' );
+        });
+
+        $query->where(function($q) {
+            $q->whereNull('end_date')
+                ->orWhereRaw('end_date > now()' );
+        });
+
+        return $query;
+
+
+
     }
 
 }

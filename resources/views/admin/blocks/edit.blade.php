@@ -33,6 +33,10 @@
 
     <x-cms-form-hidden name="blocktemplate_id" value="{{ old('blocktemplate_id', $model->blocktemplate_id ?? request()->blocktemplate_id ) }}" />
 
+    <x-cms-form-checkbox type="" name="published" label="Published?" checkedValue="1" uncheckedValue="0" value="{{ old('published', $model->published) }}" />
+
+    
+
 
 </div>
 

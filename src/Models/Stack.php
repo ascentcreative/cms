@@ -15,5 +15,9 @@ class Stack extends Base
         return $this->hasMany(Block::class)->orderBy('sort');
     }
 
+    public function liveblocks() {
+        return $this->blocks()->live();
+    }
+
 }
 
