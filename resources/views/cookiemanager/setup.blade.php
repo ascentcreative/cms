@@ -33,23 +33,25 @@
 
 @if(!$match)
 <DIV id="acm_wrap">
-    <DIV id="acm_prompt">
-        <div class="centered flex flex-between flex-align-top">
+    <DIV id="acm_prompt" class="centered">
+        {{-- <div class="centered flex flex-between flex-align-top"> --}}
             <DIV id="acm_summary">
-                <DIV id="acm_header">
+                <DIV id="acm_message">
                     <H4>Cookie Preferences</H4>
-                    @if($count == 0) 
-                        We use cookies on this site, and we need to know you're happy with that.
-                    @else
-                        Our cookies have changed - please review your settings.
-                    @endif
+                    <div>
+                        @if($count == 0) 
+                            We use cookies on this site, and we need to know you're happy with that.
+                        @else
+                            Our cookies have changed - please review your settings.
+                        @endif
+                    </div>
                  </DIV> 
             </DIV>
-            <div class="text-center">
+            <div id="acm_action" class="text-center">
                 <div><A class="button nochevron acm_acceptall">Accept All Cookies</A></div>
                 <div class="text-small text-white pt-2"><A id="acm_chooser" class="acm_manage" href="#" data-toggle="modal" data-target="#acm_modal">Let me choose</A></div>
             </div>
-        </DIV>
+        {{-- </DIV> --}}
     </DIV>
 </DIV> 
 @endif

@@ -42,13 +42,11 @@
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-	
-	
-	max-height: 90%;
-	
-	
-	
+
+    max-height: 90%;
 	z-index: 1000;
+
+    background: rgba(0,0,0,0.9);
 	
 }
 
@@ -57,26 +55,39 @@
 	/* max-width: 600px; */
 	width: 100%;
 	margin: 0px auto;
-	background: rgba(0,0,0,0.9);
-	color: white;
-	padding: 30px;
 	
+	color: white;
 	
 	max-height: 700px;
 	overflow-y: auto;
+
+    display: flex;
+    flex-wrap: wrap;
 	
-	
+    justify-content: space-between;
 }
 
 #acm_summary {
     display: flex;
     align-items: center;
+   
+
+    padding: 20px 50px;
+    flex-basis: 60%;
+    flex-grow: 1;
+
 }
 
 #acm_details {
-	
 	display:none;
-	
+}
+
+
+#acm_action {
+    padding: 20px 50px;
+    flex-basis: 35%;
+    flex-grow: 1;
+    min-width: 200px;
 }
 
 #acm_prompt.acm_formopen #acm_details {
