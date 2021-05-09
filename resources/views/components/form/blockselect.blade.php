@@ -9,11 +9,9 @@
     <div class="cms-blockselect cms-blockselect-columns-{{$columns}}" data-max-select="{{$maxSelect}}" @isset($maxHeight) style="max-height: {{$maxHeight}}; overflow-y: scroll"@endisset>
     @foreach($options as $key=>$opt)
         <label for="{{$name}}-{{ Str::slug($key) }}" class="cms-blockselect-option">
-            <input type="{{$maxSelect==1?'radio':'checkbox'}}" name="{{$name}}{{$maxSelect!=1?'[]':''}}" id="{{$name}}-{{ Str::slug($key) }}" value="{{$key}}"
+            <input type="checkbox" name="{{$name}}{{$maxSelect!=1?'[]':''}}" id="{{$name}}-{{ Str::slug($key) }}" value="{{$key}}"
 
                 @if(in_array($key, $value)) checked @endif
-
-               {{-- @if($value == $key || (is_array($value) && in_array($key, $value)) ) checked @endif --}}
             />
 
             @if($blockblade)
