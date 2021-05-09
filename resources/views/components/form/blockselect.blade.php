@@ -31,10 +31,12 @@
 
 @overwrite
 
-@push('styles')
-    @style('/vendor/ascent/cms/form/components/ascent-blockselect.css')
-@endpush
+@once
+    @push('styles')
+        @style('/vendor/ascent/cms/form/components/ascent-blockselect.css')
+    @endpush
 
-@push('scripts')
-    @script('/vendor/ascent/cms/form/components/ascent-blockselect.js')
-@endpush
+    @push('scripts')
+        @script('/vendor/ascent/cms/form/components/ascent-blockselect.js')
+    @endpush
+@endonce
