@@ -16,6 +16,7 @@ var BlockSelect = {
         $(this.element).on('change', '.cms-blockselect-option INPUT', function() {
 
             if($(this).is(':checked')) {
+                
                 $(this).parents('.cms-blockselect-option').addClass('selected');
 
                 self.trackOrder.push($(this).attr('id'));
@@ -31,10 +32,19 @@ var BlockSelect = {
 
                 self.trackOrder.splice(self.trackOrder.indexOf($(this).attr('id')), 1);    
             }
-
-            
    
         });
+
+
+        $(this.element).find('INPUT:checked').each(function() {
+
+            $(this).parents('.cms-blockselect-option').addClass('selected');
+
+            self.trackOrder.push($(this).attr('id'));
+
+        });
+           
+
         
     }, 
 
