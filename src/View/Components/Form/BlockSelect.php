@@ -29,6 +29,7 @@ class BlockSelect extends Component
     public $blockblade;
 
     public $optionLabelField;
+    public $optionKeyField;
 
 
     /**
@@ -36,13 +37,23 @@ class BlockSelect extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $options, $columns=2, $maxSelect=-1, $maxHeight=null, $optionLabelField='', $blockblade='', $wrapper='bootstrapformgroup', $class='')
+    public function __construct($label, $name, $value=[], $options, $columns=2, $maxSelect=-1, $maxHeight=null, 
+                            $optionLabelField='', $optionKeyField=null, $valueField=null, $blockblade='', $wrapper='bootstrapformgroup', $class='')
     {
 
         $this->label = $label;
         $this->name = $name;
-        $this->value = $value;
-        $this->options = $options;
+
+        // ensure the value is an array.
+        // extract fields from the Elqouent collection if needed:
+        if(!is_null($valueField) && ($value instanceof \Illuminate\Database\Eloquent\Collection)) {
+            $this->value = $value->transform( function($item) use ($valueField) { 
+                return $item->$valueField;
+            })->toArray();
+        } else {
+            $this->value = $value;
+        }
+        
 
         $this->columns = $columns;
         $this->maxSelect = $maxSelect;
@@ -54,6 +65,15 @@ class BlockSelect extends Component
 
         $this->optionLabelField = $optionLabelField;
 
+        // map the options array if needed.
+        // (the component blade will read the label field to extract that)
+        if(!is_null($optionKeyField)) {
+            $this->options = $options->keyBy($optionKeyField);
+        } else {
+            $this->options = $options;
+        }
+
+        
     }
 
     /**
