@@ -38,20 +38,20 @@ class SetupCMSImageTables extends Migration
             $table->timestamps();
         });
 
-        ImageSpec::create([
-            'title'=>'Header',
-            'width'=>2000,
-            'height'=>600,
-            'quality'=>0.6
-        ]);
+        // ImageSpec::create([
+        //     'title'=>'Header',
+        //     'width'=>2000,
+        //     'height'=>600,
+        //     'quality'=>0.6
+        // ]);
         
 
-        ImageSpec::create([
-            'title'=>'Thumbnail',
-            'width'=>400,
-            'height'=>400,
-            'quality'=>0.6
-        ]);
+        // ImageSpec::create([
+        //     'title'=>'Thumbnail',
+        //     'width'=>400,
+        //     'height'=>400,
+        //     'quality'=>0.6
+        // ]);
 
     }
 
