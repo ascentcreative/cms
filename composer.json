@@ -14,7 +14,8 @@
     "kalnoy/nestedset": "^5.0",
     "spatie/laravel-permission": "^4.0",
     "doctrine/dbal": "^3.0",
-    "spatie/laravel-activitylog": "^3.17"
+    "spatie/laravel-activitylog": "^3.17",
+    "spatie/laravel-settings": "^2.1"
   },
   "autoload": {
     "psr-4": {
