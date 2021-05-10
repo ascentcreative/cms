@@ -148,6 +148,10 @@ function headTitle() {
 	return app(\AscentCreative\CMS\Helpers\HeadTitle::class);
 }
 
+function metadata($model=null) {
+    return view("cms::metadata.render")->with(['model'=>$model]);
+}
+
 
 function adminMenu() {
 	return app(\AscentCreative\CMS\Helpers\AdminMenu::class);

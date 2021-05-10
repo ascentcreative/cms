@@ -23,6 +23,9 @@
         <li class="nav-item">
           <a class="nav-link" id="menuitem-tab" data-toggle="tab" href="#menuitem" role="tab" aria-controls="menuitem" aria-selected="false">Menu Position</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" id="metadata-tab" data-toggle="tab" href="#metadata" role="tab" aria-controls="metadata" aria-selected="false">Metadata</a>
+        </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
@@ -63,9 +66,15 @@
 
         </div>
 
-        <div class="tab-pane show p-3" id="menuitem" role="tabpanel" aria-labelledby="meuitem-tab">
+        <div class="tab-pane show p-3" id="menuitem" role="tabpanel" aria-labelledby="menuitem-tab">
 
             @includeFirst($model->getTraitBlades('HasMenuItem'))
+
+        </div>
+
+        <div class="tab-pane show p-3" id="metadata" role="tabpanel" aria-labelledby="metadata-tab">
+
+            @includeFirst($model->getTraitBlades('HasMetadata'))
 
         </div>
 
