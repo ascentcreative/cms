@@ -1,5 +1,13 @@
 @extends('cms::admin.base.edit')
 
+@section('screen-start')
+        
+    {{-- OPEN FORM TAG --}}
+    <form action="/admin/settings" method="POST" id="frm_edit" enctype="application/x-www-form-urlencoded">
+    @csrf
+
+@overwrite
+
 
 @push('scripts')
     @script('/vendor/ascent/cms/jquery/areyousure/jquery.are-you-sure.js')
@@ -23,20 +31,29 @@
 @endpush
 
 
+
+
+
+
+
 @section('editform')
 
-<div class="cms-screenblock cms-screenblock-main bg-white rounded shadow" style="">
-   
-    <x-cms-form-input type="text" name="name" label="Key Name" value="{{ old('name', $model->name) }}">
-        Take care when changing this value - it could break functionality on the website.
-    </x-cms-form-input>
+    <div class="cms-screenblock cms-screenblock-main bg-white rounded shadow" style="">
+    
+        <x-cms-form-input type="text" name="site_name" label="Site Name" value="{{ old('site_name', $model->site_name) }}">
+            Shows in the tab label for all pages of the site
+        </x-cms-form-input>
 
-</div>
+    </div>
 
-<div class="cms-screenblock bg-white rounded shadow" style="">
+    <div class="cms-screenblock bg-white rounded shadow" style="">
 
-    <x-cms-form-textarea name="value" label="Value(s)" value="{{ old('value', '') }}"/>
+        {{-- <x-cms-form-textarea name="value" label="Value(s)" value="{{ old('value', '') }}"/> --}}
 
-</div>
+        
+
+
+
+    </div>
 
 @endsection

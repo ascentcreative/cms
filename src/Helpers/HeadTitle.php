@@ -8,6 +8,9 @@ class HeadTitle {
 
     public function __construct() {
 
+        // this line is a test for spatie/laravel-settings
+        //$this->_elements[] = app(\AscentCreative\CMS\Settings\SiteSettings::class)->site_name ?? config('app.name');
+        
         $this->_elements[] = config('app.name');
 
     }

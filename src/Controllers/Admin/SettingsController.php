@@ -2,39 +2,41 @@
 
 namespace AscentCreative\CMS\Controllers\Admin;
 
-use AscentCreative\CMS\Controllers\AdminBaseController;
+
+use App\Http\Controllers\Controller;
+
+use AscentCreative\CMS\Settings\SiteSettings;
 
 use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SettingsController extends AdminBaseController
+class SettingsController extends Controller
 {
 
-    static $modelClass = 'AscentCreative\CMS\Models\Setting';
-    static $bladePath = "cms::admin.settings";
+   public function edit() {
 
-    
+        $settings = app(SiteSettings::class);
 
-    public function commitModel(Request $request, Model $model) {
+       return view('cms::admin.settings.edit')->with('model', $settings)->with('modelName','Settings');
+   }
 
-        $model->fill([
-            'name' => request()->name,
-            'value' => json_encode(request()->value)
-         //   $request->all())
-        ]);
-        $model->save();
+   public function store(Request $request) { //}, SiteSettings $settings) {
 
-    }
+        $settings = app(SiteSettings::class);
 
+        // $settings->site_name = $request->input('site_name');
+        // $settings->site_active = $request->boolean('site_active');
+       
+        $settings->fill($request->all());
 
-    public function rules($request, $model=null) {
+        $settings->save();
 
-        return [
-         //    'title' => 'required',
-         ]; 
- 
-     }
+        session()->flash("Settings Updated");
+        
+        return redirect()->back();
+
+   }
 
 
 }

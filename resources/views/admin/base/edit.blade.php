@@ -30,7 +30,7 @@
 @section('screen-start')
         
     {{-- OPEN FORM TAG --}}
-    @if ($model->id)
+    @if (isset($model->id) && $model->id)
         <form action="{{ action([controller(), 'update'], [$modelInject => $model->id]) }}" id="frm_edit" method="POST" enctype="application/x-www-form-urlencoded">
          @method('PUT')
     @else
@@ -54,7 +54,7 @@
 
 @section('screentitle')
    
-    @if ($model->id)
+    @if (isset($model->id) && $model->id)
         Edit {{$modelName}}
     @else
         Create {{$modelName}}
