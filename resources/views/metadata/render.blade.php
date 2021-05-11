@@ -8,6 +8,6 @@
 <meta name="description" content="{{ $desc }}" />
 
 <meta name="og:description" content="{{ $desc }}" />
-
+<meta name="og:updated_time" content="{{ $model ? $model->updated_at->toAtomString() : '' }}" />
 
 <meta name="twitter:description" content="{{ $desc }}" />
