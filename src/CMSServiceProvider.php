@@ -95,7 +95,7 @@ class CMSServiceProvider extends ServiceProvider
 
     // for web requests, work out what the menu item might be.
     if (!app()->runningInConsole()) {
-    $this->resolveMenuItem();
+        $this->resolveMenuItem();
     }
     
   }
@@ -114,13 +114,7 @@ class CMSServiceProvider extends ServiceProvider
 
     $menuitem = \AscentCreative\CMS\Models\MenuItem::where('url', '/' . request()->path())->first();
 
-   // echo view()->get('model');
-
     view()->composer('*', function ($view) use ($menuitem) {
-
-       // $result = $view->model;
-
-       // dd($view);
 
         $view->with('menuitem', $menuitem);
 
