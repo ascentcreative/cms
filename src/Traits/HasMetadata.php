@@ -41,8 +41,6 @@ trait HasMetadata {
 
     public function captureMetadata() {
 
-        echo 'pre save';
-
         session(['extenders._metadata' => $this->_metadata]);
         unset($this->attributes['_metadata']);     
        
@@ -52,13 +50,15 @@ trait HasMetadata {
 
     public function saveMetadata() {
         
-        echo 'in Save';
-
+     
         $data = session()->pull('extenders._metadata');
 
-        $md = $this->metadata()->updateOrCreate([], ['keywords'=>$data['keywords'], 'description'=>$data['description']] );
+        if(!is_null($data)) {
+            $md = $this->metadata()->updateOrCreate([], ['keywords'=>$data['keywords'], 'description'=>$data['description']] );
+            $md->save();
+        }
         
-        $md->save();
+       
 
     }
 

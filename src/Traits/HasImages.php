@@ -98,8 +98,6 @@ trait HasImages {
 
                 $spec = ImageSpec::where('slug', $specSlug)->first();
 
-                print_r($image);
-
                 $ary[$spec->id] = $image;
                 //$ary[]
 
