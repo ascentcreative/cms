@@ -149,7 +149,7 @@ function headTitle() {
 }
 
 function metadata($model=null) {
-    return view("cms::metadata.render")->with(['model'=>$model]);
+    return view()->first(["metadata.tags", "cms::metadata.tags"])->with(['model'=>$model]);
 }
 
 

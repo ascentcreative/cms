@@ -10,12 +10,13 @@ use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Support\Str;
 
 use AscentCreative\CMS\Traits\HasImages;
+use AscentCreative\CMS\Traits\HasMetadata;
 
 
 class MenuItem extends Base
 {
    
-    use HasFactory, NodeTrait, HasImages; //HasHeaderImage;
+    use HasFactory, NodeTrait, HasImages, HasMetadata; //HasHeaderImage;
 
     public $fillable = ['menu_id', 'title', 'url', 'newWindow'];
 
