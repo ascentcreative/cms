@@ -11,10 +11,6 @@
 
        @section('contentmain')
 
-            {{ $model->metaDescription }}
-
-          {{-- @renderStack( $model->content) --}}
-
             @switch(config('cms.content_editor'))
 
                 @case('ckeditor')
