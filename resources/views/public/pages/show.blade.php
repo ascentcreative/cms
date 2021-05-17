@@ -1,15 +1,15 @@
-@extends(config('cms.wrapper_blade')) 
+@extends(config('cms.page_wrapper_blade')) 
 
 
 {{--@section(config('cms.wrapper_blade_section'))--}}
 
   {{--}}  <div class="centered">--}}
         
-        @section('contenthead')
+        @section('pagehead')
         <H1>{{ $model->title }}</H1>
        @endsection
 
-       @section('contentmain')
+       @section('pagecontent')
 
             @switch(config('cms.content_editor'))
 
