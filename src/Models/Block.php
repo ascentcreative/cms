@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
+use Illuminate\Support\Str;
+
+
 class Block extends Base
 {
     use HasFactory;
 
-    public $fillable = ['stack_id', 'blocktemplate_id', 'name', 'data', 'sort', 'published', 'start_date', 'end_date'];
+    public $fillable = ['stack_id', 'blocktemplate_id', 'name', 'slug', 'data', 'sort', 'published', 'start_date', 'end_date'];
 
     public function stack() {
         return $this->belongsTo(Stack::class);
@@ -40,7 +43,29 @@ class Block extends Base
 
         return $query;
 
+    }
 
+
+
+    /*
+     * MUTATORS
+     * 
+     * setTitleAttribute: takes the incoming title and sets the slug accordingly
+     */
+    public function setNameAttribute($value) {
+        // set the title so the value doesn't get lost
+        $this->attributes['name'] = $value;
+
+        if (!isset($this->attributes['slug']) || $this->attributes['slug']==='') {
+            
+            $slug = Str::slug(($value), '-');
+
+            // check to see if any other slugs exist that are the same & count them
+            $count = static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+
+            $this->attributes['slug'] = $count ? "{$slug}-{$count}" : $slug;
+
+        }
 
     }
 
