@@ -59,7 +59,7 @@ class Menu extends Base
             return '';
         }
 
-        $out = "<UL>";
+        $out = '<UL class="menu menu-' . $this->slug . '">';
 
         foreach($items as $item) {
 
