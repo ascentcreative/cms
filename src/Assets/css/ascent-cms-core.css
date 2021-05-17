@@ -175,3 +175,39 @@
     flex-basis: 100%;
     font-size: 0.8rem;
 }
+
+
+
+.flex{
+    display: flex;
+    /* gap: 5%; */
+    flex-wrap: wrap;
+}
+
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+}
+
+.flex-align-top, .flex-align-start {
+    align-items: flex-start;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
