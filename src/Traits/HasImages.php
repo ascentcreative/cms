@@ -61,8 +61,6 @@ trait HasImages {
     public function imageBySpec($specName) {
         $spec = ImageSpec::where('slug', $specName)->first();
 
-        print_r($this->images()->toSql());
-
         if ($this->images()) {
             return $this->images()->where('image_spec_id', $spec->id)->first();
         }
