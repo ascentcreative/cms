@@ -39,6 +39,7 @@ class StackBlock extends Component
      */
     public function render()
     {
-        return view('cms::stack.block.' . $this->type . '.edit');
+        // Allows for block blades to be in either the main project or loaded from the cms package
+        return view('cms::stack.block.router'); 
     }
 }

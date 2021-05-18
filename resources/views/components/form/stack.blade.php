@@ -43,7 +43,27 @@
         @endforeach
         </div>
 
-        <button class="stack-add-block">Add Block</button>
+
+        <div class="btn-group dropright">
+            <A class="btn btn-secondary btn-sm dropdown-toggle" href="#" data-toggle="dropdown" >Add Block</A>
+            <div class="dropdown-menu dropdown-menu-right" style="">
+
+                <a class="stack-add-block dropdown-item text-sm btn-delete" href="#" data-block-type="row" data-block-field="content">Text/Image/Video Row</a>
+
+                <a class="stack-add-block dropdown-item text-sm btn-delete" href="#" data-block-type="accommodation-list" data-block-field="content">Accommodation List</a>
+
+                {{-- @foreach(\AscentCreative\CMS\Models\BlockTemplate::orderBy('name')->get() as $template)
+                <a class="dropdown-item text-sm btn-delete" href="{{ action([AscentCreative\CMS\Controllers\Admin\BlockController::class, 'create'], ['stack_id' => $item->id, 'blocktemplate_id'=>$template->id]) }}">
+                <b>{{ $template->name }}</b>
+                <br/>
+                <span class="text-sm text-muted">{{ $template->description }}</span>
+
+                </a> 
+                @endforeach --}}
+            </div>
+      </div>    
+
+        {{--  --}}
 
 
     {{-- 

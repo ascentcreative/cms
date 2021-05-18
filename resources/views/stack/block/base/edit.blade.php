@@ -31,7 +31,7 @@
         </div>
 
         {{-- required hidden fields --}}
-        <INPUT type="hidden" name="{{$name}}[type]" value="row" />
+        <INPUT type="hidden" name="{{$name}}[type]" value="{{$type}}" />
 
     </div>
 

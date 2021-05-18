@@ -73,8 +73,10 @@ var StackEdit = {
             // (test for now - adds a new row block. Will need to be coded to ask user what block to add)
             $(this.element).find('.stack-add-block').on('click', function() {
 
-                var type = 'row';
-                var field = 'content';
+                //var type = 'row';\
+            
+                var type = $(this).attr('data-block-type');
+                var field = $(this).attr('data-block-field'); //'content';
                 var idx = $(self.element).find('.block-edit').length;
 
             //    alert(idx);
@@ -85,6 +87,9 @@ var StackEdit = {
                    self.updateBlockIndexes();
                 
                 });
+
+             //   alert('hide...');
+                $('.btn.dropdown-toggle').dropdown('hide');
 
                 return false;
 
