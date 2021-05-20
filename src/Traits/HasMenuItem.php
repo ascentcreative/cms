@@ -22,7 +22,9 @@ trait HasMenuItem {
       });
 
       static::saved(function($model) { 
-        $model->savedMenuItem();
+          if (request()->_method == 'PUT') {
+            $model->savedMenuItem();
+          }
       });
 
     }

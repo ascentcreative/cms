@@ -43,7 +43,9 @@ trait HasImages {
         });
   
         static::saved(function($model) { 
-          $model->saveImages();
+            if (request()->_method == 'PUT') {
+                $model->saveImages();
+            }
         });
   
       }

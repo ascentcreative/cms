@@ -22,7 +22,9 @@ trait HasMetadata {
       });
 
       static::saved(function($model) { 
-        $model->saveMetadata();
+          if(request()->_method == 'PUT') {
+            $model->saveMetadata();
+          }
       });
 
     }
