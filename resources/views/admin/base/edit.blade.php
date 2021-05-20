@@ -31,10 +31,10 @@
         
     {{-- OPEN FORM TAG --}}
     @if (isset($model->id) && $model->id)
-        <form action="{{ action([controller(), 'update'], [$modelInject => $model->id]) }}" id="frm_edit" method="POST" enctype="application/x-www-form-urlencoded">
+        <form action="{{ action([controller(), 'update'], [$modelInject => $model->id]) }}" id="frm_edit" method="POST" enctype="application/x-www-form-urlencoded" autocomplete="off">
          @method('PUT')
     @else
-        <form action="{{ action([controller(), 'store']) }}" method="POST" id="frm_edit" enctype="application/x-www-form-urlencoded">
+        <form action="{{ action([controller(), 'store']) }}" method="POST" id="frm_edit" enctype="application/x-www-form-urlencoded" autocomplete="off">
     @endif
 
     @csrf
