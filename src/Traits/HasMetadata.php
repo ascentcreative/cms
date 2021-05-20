@@ -18,11 +18,13 @@ trait HasMetadata {
       });
 
       static::saving(function($model) { 
-        $model->captureMetadata();
+            if(request()->has('_metadata')) {
+                $model->captureMetadata();
+            }
       });
 
       static::saved(function($model) { 
-          if(request()->_method == 'PUT') {
+        if(request()->has('_metadata')) {
             $model->saveMetadata();
           }
       });

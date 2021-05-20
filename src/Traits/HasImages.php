@@ -39,11 +39,13 @@ trait HasImages {
         });
   
         static::saving(function($model) { 
-          $model->captureImages();
+            if(request()->has('_images')) {
+                $model->captureImages();
+            }
         });
   
         static::saved(function($model) { 
-            if (request()->_method == 'PUT') {
+            if(request()->has('_images')) {
                 $model->saveImages();
             }
         });

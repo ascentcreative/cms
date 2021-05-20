@@ -18,11 +18,13 @@ trait HasMenuItem {
       });
 
       static::saving(function($model) { 
-        $model->captureMenuItem();
+        if(request()->has('_menuitem')) {
+            $model->captureMenuItem();
+        }
       });
 
       static::saved(function($model) { 
-          if (request()->_method == 'PUT') {
+        if(request()->has('_menuitem')) {
             $model->savedMenuItem();
           }
       });
