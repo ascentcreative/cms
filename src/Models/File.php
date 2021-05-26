@@ -22,5 +22,10 @@ class File extends Base
 
     }
 
+    public function download() {
+        return Storage::disk($this->disk)->download($this->filepath, $this->original_name);
+    }
+
+
 }
 
