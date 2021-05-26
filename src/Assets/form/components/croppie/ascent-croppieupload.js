@@ -194,7 +194,7 @@ var CroppieUpload = {
                 
                 type: 'blob',
                 size: {width: self.options.targetWidth, height: self.options.targetHeight},
-                format: 'jpeg',
+              //  format: 'jpeg',
                 quality: 0.75
                 
             }).then(function (resp) {
@@ -202,7 +202,7 @@ var CroppieUpload = {
                 var fd = new FormData();
                 fd.append('destination', self.options.filedestination);
                 fd.append('randomisefilename', 1);
-                fd.append('payload', resp, 'myfile.jpg');
+                fd.append('payload', resp, 'myfile.png');
 
                 console.log(fd);
 
