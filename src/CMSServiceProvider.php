@@ -87,6 +87,7 @@ class CMSServiceProvider extends ServiceProvider
 
     $router = $this->app->make(Router::class);
     $router->aliasMiddleware('cms-nocache', \AscentCreative\CMS\Middleware\NoCache::class);
+    $router->aliasMiddleware('useAdminLogin', \AscentCreative\CMS\Middleware\UseAdminLogin::class);
 
     $this->commands([
         \AscentCreative\CMS\Commands\CreateAdminUser::class,
@@ -126,6 +127,15 @@ class CMSServiceProvider extends ServiceProvider
   public function bootFortify() {
 
 
+
+
+// Route::get('/admin')
+
+        $this->app->singleton(
+            \App\Http\Middleware\Authenticate::class, 
+            \AscentCreative\CMS\Middleware\Authenticate::class);
+
+
         // Override a couple of Fortify controllers as we want to 
         // return content in Json responses.
         $this->app->singleton(
@@ -136,11 +146,11 @@ class CMSServiceProvider extends ServiceProvider
             \Laravel\Fortify\Http\Controllers\PasswordController::class, 
             \AscentCreative\CMS\Fortify\Controllers\PasswordController::class);
 
-      // register new LoginResponse
-      $this->app->singleton(
-        \Laravel\Fortify\Contracts\RegisterResponse::class,
-        \App\Http\Responses\RegisterResponse::class
-        );
+        // register new LoginResponse
+        $this->app->singleton(
+            \Laravel\Fortify\Contracts\RegisterResponse::class,
+            \App\Http\Responses\RegisterResponse::class
+            );
 
         $this->app->singleton(
             \Laravel\Fortify\Contracts\LoginResponse::class,
@@ -155,6 +165,8 @@ class CMSServiceProvider extends ServiceProvider
         // seperate login and register views
 
         Fortify::loginView(function () {
+           // return view('cms::admin.auth.login');
+
             return view('auth.login');
         });
 
@@ -169,6 +181,7 @@ class CMSServiceProvider extends ServiceProvider
         Fortify::resetPasswordView(function ($request) {
             return view('auth.reset-password', ['request' => $request]);
         });
+
 
     }
 

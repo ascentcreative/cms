@@ -1,5 +1,6 @@
 <?php
 
+
 Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(function () {
 
     Route::get('/contact', 'ContactController@showform');
@@ -8,9 +9,17 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
        return view('cms::public.contact.showconfirm');
     });
 
-    Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'can:administer'])->group(function() {
 
-        
+    Route::get('/admin/login', function() {
+        return view('cms::auth.login');
+    })->name('admin-login');
+
+    Route::prefix('admin')->namespace('Admin')->middleware(['useAdminLogin', 'auth', 'can:administer'])->group(function() {
+
+        Route::get('/phpinfo', function() {
+            return phpinfo();
+        });
+
         Route::get('/', function() {
 
             if(view()->exists('admin.dashboard')) {
