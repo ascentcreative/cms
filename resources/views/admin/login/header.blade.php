@@ -1,0 +1,1 @@
+<img src="/vendor/ascent/cms/img/ascent-badge-trans.png" alt="Ascent" />
