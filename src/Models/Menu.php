@@ -63,7 +63,12 @@ class Menu extends Base
 
         foreach($items as $item) {
 
-            $out .= '<LI><A href="' . $item->itemUrl . '">' . $item->itemTitle . '</A>';
+            $newwin = '';
+            if ($item->newWindow == 1) {
+                $newwin = ' target="_blank"';
+            }
+
+            $out .= '<LI><A href="' . $item->itemUrl . '"' . $newwin . '>' . $item->itemTitle . '</A>';
             
             if(count($item->children) > 0) {
                  $out .= $this->traverse($item->children, $maxDepth, $depth+1);

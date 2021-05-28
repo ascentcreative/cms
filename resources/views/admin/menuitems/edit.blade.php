@@ -13,6 +13,8 @@
         The URL to link to
     </x-cms-form-input>
 
+    <x-cms-form-checkbox type="" name="newWindow" label="Open in New Window" :value="old('newWindow', $model->newWindow)" uncheckedValue="0"/>
+
 </div>
 
 <div class="cms-screenblock bg-white rounded shadow" style="">
