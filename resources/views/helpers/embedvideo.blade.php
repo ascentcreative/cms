@@ -6,6 +6,8 @@ $ary = parse_url($url);
 
 @endphp
 
+@isset($ary['host'])
+
 <div class="embed-container">
 
     @switch($ary['host'])
@@ -19,4 +21,6 @@ $ary = parse_url($url);
     @endswitch
 
 </div>
+
+@endisset
 
