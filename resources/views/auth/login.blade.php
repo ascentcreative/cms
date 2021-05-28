@@ -4,7 +4,7 @@
 
     <div class="flex flex-center flex-align-center" style="height: 80vh; flex-direction: column">
 
-        <div style="width: 200px; margin: 20px;">
+        <div style="width: 200px; margin: 20px; text-align: center">
         @includeFirst(['admin.login.header', 'cms::admin.login.header'])
         </div>
        
