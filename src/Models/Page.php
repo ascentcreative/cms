@@ -14,13 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 
-/**
- * Used a convenient jumping off point for all models in the package.
- * Essentially just prefixes all child models' table names with 'checkout_'. 
- */
 class Page extends Base
 {
-    use HasFactory, HasImages, HasMenuItem, HasMetadata; //HasHeaderImage; 
+    use HasFactory, HasMetadata, HasImages, HasMenuItem; 
 
     public $fillable = ['title', 'content'];
     
