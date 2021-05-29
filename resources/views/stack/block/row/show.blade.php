@@ -1,9 +1,9 @@
 {{-- @dump($data) --}}
 
-<div class="row" style="padding: 20px 0">
+<div class="row" style="padding: 20px 0 0">
 @foreach($data->items as $item) 
 
-    <div class="col-md-{{$item->cols->width}} xcol-sm-{{$item->cols->width * 2}} @if($item->cols->width < 6) hyphenbreak @endif">
+    <div class="col-md-{{$item->cols->width}} xcol-sm-{{$item->cols->width * 2}} @if($item->cols->width < 6) hyphenbreak @endif" style="padding-bottom: 20px;">
 
         @switch($item->type)
             @case('text')
