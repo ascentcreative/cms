@@ -56,6 +56,8 @@
 
                 <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="price-table" data-block-field="content">Price Table</a>
 
+                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="contact-form" data-block-field="content">Contact Form</a>
+
 
                 {{-- @foreach(\AscentCreative\CMS\Models\BlockTemplate::orderBy('name')->get() as $template)
                 <a class="dropdown-item text-sm btn-delete" href="{{ action([AscentCreative\CMS\Controllers\Admin\BlockController::class, 'create'], ['stack_id' => $item->id, 'blocktemplate_id'=>$template->id]) }}">

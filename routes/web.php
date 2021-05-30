@@ -3,7 +3,7 @@
 
 Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(function () {
 
-    Route::get('/contact', 'ContactController@showform');
+    //Route::get('/contact', 'ContactController@showform'); // not needed as form can be placed in stacked page
     Route::get('/contact/submit', 'ContactController@submit');
     Route::get('/contact/confirm', function() {
        return view('cms::public.contact.showconfirm');
