@@ -50,13 +50,33 @@
 
                 <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="row" data-block-field="content">Text/Image/Video Row</a>
 
+                @foreach(config('cms.core_page_blocks') as $key=>$val) 
+
+                    <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="{{ $key }}" data-block-field="content">{{ $val }}</a>
+
+                @endforeach
+
+                @if(count(config('cms.custom_page_blocks')) > 0)
+
+                    <div class="dropdown-divider"></div>
+
+                    @foreach(config('cms.custom_page_blocks') as $key=>$val) 
+
+                        <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="{{ $key }}" data-block-field="content">{{ $val }}</a>
+
+                    @endforeach
+
+                @endif
+
+
+{{-- 
                 <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="accommodation-list" data-block-field="content">Accommodation List</a>
 
                 <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="resource-list" data-block-field="content">Resource List</a>
 
-                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="price-table" data-block-field="content">Price Table</a>
+                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="price-table" data-block-field="content">Price Table</a> --}}
 
-                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="contact-form" data-block-field="content">Contact Form</a>
+          
 
 
                 {{-- @foreach(\AscentCreative\CMS\Models\BlockTemplate::orderBy('name')->get() as $template)

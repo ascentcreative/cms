@@ -22,6 +22,18 @@ return [
 
         'Page' => AscentCreative\CMS\Facades\PageFacade::class,
 
+    ],
+
+    'core_page_blocks' => [
+
+        'contact-form' => 'Contact Form'
+
+    ],
+
+    'custom_page_blocks' => [
+
+
+
     ]
 
 ];
