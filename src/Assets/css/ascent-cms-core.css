@@ -256,3 +256,64 @@
     justify-content: center;
     align-items: center;
 }
+
+
+/* contentgrid / sidebar base css */
+/* override column templates as needed */
+.contentgrid {
+    display:grid;
+    gap: 0 2em;
+    grid-template-columns: minmax(400px, auto);
+    grid-template-rows: auto minmax(auto, 100%);
+}
+
+.contentgrid .content {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+}
+
+.contentgrid.has-sidebar {
+    grid-template-columns: minmax(400px, auto) minmax(250px, 30%) !important;
+}
+
+ /* .contentgrid .sidebar { */
+    /* min-height: 100px; debug placement code... */
+/* }  */
+
+.contentgrid .sidebar#sidebar-top {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.contentgrid .sidebar#sidebar-bottom {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+@media only screen and (max-width: 750px) {
+
+    .contentgrid .content {
+        padding-bottom: 30px;
+    }
+
+    .contentgrid, .contentgrid.has-sidebar {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto auto;
+    }
+
+    .contentgrid .sidebar#sidebar-top {
+        grid-column: 1 / 2 !important;
+        grid-row: 1 / 2 !important;
+    }
+
+    .contentgrid .content {
+        grid-column: 1 / 2 !important;
+        grid-row: 2 / 3 !important;
+    }
+
+    .contentgrid .sidebar#sidebar-bottom {
+        grid-column: 1 / 2 !important;
+        grid-row: 3 / 4 !important;
+    }
+  
+}
