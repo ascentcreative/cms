@@ -16,6 +16,7 @@ abstract class AdminBaseController extends Controller
     static $bladePath = 'define.me';
 
     public $modelName = null; // override if the class name doesn't parse nicely.
+    public $modelNameHuman = null;
     public $modelPlural = null; // override this if the auto-plural fails spectacularly...
 
     public $pageSize = 15;
@@ -49,7 +50,7 @@ abstract class AdminBaseController extends Controller
 
         $modelName = $short ?? $this->modelName;
 
-        $modelNameHuman = trim(join(' ', preg_split('/(?=[A-Z])/',$modelName)));
+        $modelNameHuman = $this->modelNameHuman ?? trim(join(' ', preg_split('/(?=[A-Z])/',$modelName)));
 
         $out = array(
             'modelInject' => Str::lower($modelName),
