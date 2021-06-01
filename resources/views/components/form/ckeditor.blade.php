@@ -3,6 +3,8 @@
 @section('label'){{$label}}@overwrite
 @section('name'){{$name}}@overwrite
 
+@php $unid = 'fld-' . uniqid(); @endphp
+
 @once
     @push('scripts')
         @script('/vendor/ascent/cms/ckeditor/ckeditor.js', false)
@@ -19,7 +21,7 @@
       $(document).ready(function(){ 
 
               
-        var ck = CKEDITOR.replace($('textarea#{{$name}}')[0], 
+        var ck = CKEDITOR.replace($('textarea#{{$unid}}')[0], 
 
             { width : '100%', height : '{{ $height }}', 
                 extraAllowedContent : 'form; form[*]; form(*); input; input(*); input[*]; p[style]; script; script(*); script[*]; iframe; code; embed; iframe[*]; embed[*]; span(*); div(*); div(codesnippet)[*]; div[*]; codesnippet; codesnippet[contenteditable]; codesnippet[partial]; codesnippet[*]', filebrowserBrowseUrl:roxyFileman,
@@ -48,6 +50,6 @@
 
 @section('element')
 
-    <textarea id="{{$name}}" name="{{$name}}" class="form-control">{!! $value !!}</textarea>
+    <textarea id="{{$unid}}" name="{{$name}}" class="form-control">{!! $value !!}</textarea>
 
 @overwrite
