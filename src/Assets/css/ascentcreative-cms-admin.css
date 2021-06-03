@@ -170,6 +170,10 @@ table.menuitems tr:hover {
     background-color: white; #e9e9e9; /*rgba(0,0,0,0.05);*/
 }
 
+table tr.hidden {
+    opacity: 0.5;
+}
+
 .dropleft A.dropdown-toggle.dropdown-toggle-dots::before, 
 A.dropdown-toggle.dropdown-toggle-dots::after {
     content: '...';

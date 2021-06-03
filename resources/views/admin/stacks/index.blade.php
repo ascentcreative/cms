@@ -56,7 +56,7 @@
 
                 <table class="menuitems" id="stackblocks">
                     @foreach($item->blocks as $block)
-                        <tr>
+                        <tr class="{{ $block->published ? 'published' : 'hidden' }}">
                             <td>
                                 <A href="{{ action([AscentCreative\CMS\Controllers\Admin\BlockController::class, 'edit'], ['block' => $block->id]) }}">{{ $block->name }}</A>
                                 <input name="blockorder[]" type="hidden" value="{{ $block->id }}" /></td>
