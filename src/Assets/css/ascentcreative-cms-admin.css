@@ -167,7 +167,8 @@ table.menuitems tr:first-child td {
 }
 
 table.menuitems tr:hover {
-    background-color: white; #e9e9e9; /*rgba(0,0,0,0.05);*/
+    background-color: white; 
+    /* #e9e9e9; rgba(0,0,0,0.05); */
 }
 
 table tr.hidden {
