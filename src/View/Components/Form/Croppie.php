@@ -14,6 +14,7 @@ class Croppie extends Component
   
     public $width;
     public $height;
+    public $previewScale;
 
     public $wrapper;
     public $class;
@@ -25,7 +26,7 @@ class Croppie extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $width=0, $height=0,
+    public function __construct($label, $name, $value, $width=0, $height=0, $previewScale=0.5,
                         $wrapper='bootstrapformgroup', $class=''        
                     )
     {
@@ -36,6 +37,7 @@ class Croppie extends Component
 
         $this->width = $width;
         $this->height = $height;
+        $this->previewScale = $previewScale;
        
         $this->wrapper = $wrapper;
         $this->class = $class;
