@@ -1,6 +1,6 @@
 @php
 
-    if (count($model->image_specs) > 0) {
+    if (is_array($model->image_specs) && count($model->image_specs) > 0) {
         $specs = AscentCreative\CMS\Models\ImageSpec::whereIn('slug', $model->image_specs)->get();
     } else {
         $specs = AscentCreative\CMS\Models\ImageSpec::all();
