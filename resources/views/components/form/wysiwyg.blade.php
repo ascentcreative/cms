@@ -11,9 +11,7 @@
 
    <div class="wysiwyg-editor" style="width: 100%; height: 100%;">
 
-       <div contenteditable="true" id="edit-{{ $unid }}" style="width: 100%; height: 100%; padding: 20px; background: white;">
-           {!! $value !!}
-        </div>
+       <div contenteditable="true" id="edit-{{ $unid }}" style="width: 100%; height: 100%; padding: 20px; background: white;">{!! $value !!}</div>
 
     </div>
 
@@ -31,6 +29,17 @@
     @endpush
 @endonce
 
+{{-- @push('styles')
+
+   <style>
+       .wysiwyg-editor * {
+           white-space: pre-wrap !important;
+           tab-size: 10 !important;
+       }
+    </style>
+
+@endpush --}}
+
 @push('scripts')
 <SCRIPT>
 
@@ -44,10 +53,12 @@
         filebrowserImageBrowseUrl:roxyFileman+'?type=image',
         removeDialogTabs: 'link:upload;image:upload',
         removePlugins : 'elementspath',
+
         extraPlugins: 'font,richcombo,snippet,photogallery,justify,panel,button,floatpanel,panelbutton,colorbutton,colordialog',
         contentsCss: [ '/css/fck_editorarea.css','/css/buttons.css' ],
-        colorButton_colors: '{{ join(",", \AscentCreative\CMS\Models\Swatch::all()->transform(function($item, $key) { return str_replace('#', '', $item->hex); })->toArray()) }}'
-    }
+        colorButton_colors: '{{ join(",", \AscentCreative\CMS\Models\Swatch::all()->transform(function($item, $key) { return str_replace('#', '', $item->hex); })->toArray()) }}',
+        entities_additional: '#009'
+    }   
     
      );
 
@@ -57,6 +68,19 @@
             $('#output-{{$unid}}').change();
 
         });
+
+    
+        // $(document).delegate('#edit-{{$unid}}', 'keydown', function(e) {
+        //     console.log('fwefewf');
+        //     var keyCode = e.keyCode || e.which;
+        //     if (keyCode == 9) {
+        //         e.preventDefault();
+
+        //         document.execCommand('insertHTML', false, '&#009');
+           
+        //     }
+        // });
+    
 
     </SCRIPT>
 @endpush

@@ -3,7 +3,7 @@
 <div class="row" style="padding: 0px 0 20px">
 @foreach($data->items as $item) 
 
-    <div class="col-md-{{$item->cols->width}} xcol-sm-{{$item->cols->width * 2}} @if($item->cols->width < 6) hyphenbreak @endif" style="xpadding-bottom: 20px;">
+    <div class="col-md-{{$item->cols->width}} xcol-sm-{{$item->cols->width * 2}} @if($item->cols->width < 6) hyphenbreak @endif" style="xpadding-bottom: 20px; xwhite-space: pre-wrap; xtab-size: 10;">
 
         @switch($item->type)
             @case('text')
