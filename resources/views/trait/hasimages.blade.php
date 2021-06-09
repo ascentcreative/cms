@@ -1,5 +1,15 @@
+@php
 
-@foreach(AscentCreative\CMS\Models\ImageSpec::all() as $spec)
+    if (count($model->image_specs) > 0) {
+        $specs = AscentCreative\CMS\Models\ImageSpec::whereIn('slug', $model->image_specs)->get();
+    } else {
+        $specs = AscentCreative\CMS\Models\ImageSpec::all();
+    }
+
+@endphp
+
+
+@foreach($specs as $spec)
 
     <?php
 

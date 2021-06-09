@@ -31,6 +31,12 @@ trait HasImages {
 
     use Extender;
 
+    // Can't define this as the model needs to override it.
+    // Set this variable to an array of specs (by slug) for the model to include.
+    // If un-set, the model will show themm all.
+    /* public $image_specs = []; */
+
+
     
     public static function bootHasImages() {
   
