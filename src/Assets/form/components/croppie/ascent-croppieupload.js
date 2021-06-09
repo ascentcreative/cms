@@ -15,7 +15,7 @@ var CroppieUpload = {
     options: {
         targetWidth: 400,
         targetHeight: 400,
-        previewScale: 1,
+        previewScale: 0.7,
         popover: true,
         endpoint: '/cms/croppieupload',
         filedestination: '/upload/default'
@@ -38,9 +38,12 @@ var CroppieUpload = {
         /**
          * Configure the UI
          */
+
+        var dimensions = "(" + self.options.targetWidth + "px x " + self.options.targetHeight + "px)";
+
         obj.wrap('<DIV class="croppieupload empty"></DIV>');
 		this.root = $(obj).parent('.croppieupload');
-        this.root.append('<DIV class="cu_trigger"><DIV class="cu_message">Click to upload an image</DIV></DIV><INPUT type="file" id="cu_file"/>');
+        this.root.append('<DIV class="cu_trigger"><DIV class="cu_message"><div>Click to upload an image</div><div>' + dimensions + '</div></DIV></DIV><INPUT type="file" id="cu_file"/>');
         this.root.append('<DIV class="cu_actions"><A href="" class="button cu_remove nochevron btn-primary btn-sm">Remove</A><A href="" class="button cu_change nochevron btn-primary btn-sm">Change</A></DIV>');
 			
         // "remove" link action:
@@ -70,6 +73,12 @@ var CroppieUpload = {
 			self.readFile(this);
         });
 
+        // instead of pixel sizes, let's use aspect ratio...
+       //this.root.css('width', (this.vpw==0?400:this.vpw) + 'px').css('height', (this.vph==0?200:this.vph) + 'px');
+
+       this.root.css('max-width', (this.vpw==0?400:this.vpw) + 'px');
+       this.root.css('aspect-ratio', (this.vpw==0?400:this.vpw) + ' / ' + (this.vph==0?200:this.vph));
+
         var opts = self.options;
 
     },
@@ -86,7 +95,8 @@ var CroppieUpload = {
 
         console.log(this.element.val());
 
-        this.root.css('width', (vpw==0?400:vpw) + 'px').css('height', (vph==0?200:vph) + 'px').css('background-size', '100%');
+        // don't need to set size here - it'll be set on init instead
+        //this.root.css('width', (vpw==0?400:vpw) + 'px').css('height', (vph==0?200:vph) + 'px').css('background-size', '100%');
         this.root.css('background-image', "url('" + url + "')");
         this.root.removeClass('empty');
         
@@ -169,8 +179,8 @@ var CroppieUpload = {
                 height: this.vph
             },
             boundary: {
-                width: this.vpw + 100,
-                height: this.vph + 100
+                width: this.vpw + 0,
+                height: this.vph + 0
             },
             enableExif: true
             

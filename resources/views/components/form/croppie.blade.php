@@ -28,7 +28,7 @@
             $('#{{$unid}}').croppieupload({
                 targetWidth: {{ $width }},
                 targetHeight: {{ $height }},
-                previewScale: {{ 0.5 }}
+                previewScale: {{ $scale ?? 0.5 }}
             });
         });
     </script>

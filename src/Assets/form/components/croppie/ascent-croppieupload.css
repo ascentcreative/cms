@@ -1,15 +1,19 @@
 .croppieupload {
 	
-	width: 400px;
-	height: 200px;
+	/* width: 400px;
+	height: 200px; */
+
+    max-width: 100%;
 	
 	cursor: pointer;
 	
 	position: relative;
 	
 	background: rgba(0,0,0,0.1);
+    background-size: cover;
+    background-repeat: no-repeat;
 	
-	border: 3px solid white;
+	xborder: 3px solid white;
 	
 }
 
@@ -42,6 +46,7 @@
 
 .croppieupload .cu_message {
 	display: none;
+    text-align: center;
 }
 
 .croppieupload.empty .cu_message {
