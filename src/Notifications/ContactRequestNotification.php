@@ -46,12 +46,25 @@ class ContactRequestNotification extends Notification
         //return 
         
         $msg = (new MailMessage)
+                    ->template('vendor.notifications.email')
                     ->subject('New Contact Request');
+
+        $msg->greeting('A new contact request has been received:');
+
+        
+        $msg->line('From: ' . $this->_contactRequest->name);
+        $msg->line('Email: ' . $this->_contactRequest->email);
+       
+        $msg->line('---');
 
         foreach(explode("\n", $this->_contactRequest->message) as $line) {
             $msg->line($line);
         }
         
+        $msg->line('---');
+
+        $msg->salutation('(Replies to this message will be sent to the enquirer\'s address)');
+
         $msg->replyTo($this->_contactRequest->email);
 
         return $msg;

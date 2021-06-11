@@ -34,6 +34,15 @@ return [
 
 
 
-    ]
+    ],
+
+
+
+    /**
+     * CONTACT FORM SETTINGS
+     */
+    'contact' => [
+        'notify' => ['kieran@ascent-creative.co.uk', 'help@essentialchristiansongs.com']
+    ],
 
 ];

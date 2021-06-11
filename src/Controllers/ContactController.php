@@ -75,7 +75,7 @@ class ContactController extends Controller
 
             //echo "Woohoo! You're legit";
             // great stuff - process the request.
-            Notification::route('mail', 'kieran@ascent-creative.co.uk')
+            Notification::route('mail', config('cms.contact.notify'))
                     ->notify(new ContactRequestNotification($cr));
 
 
