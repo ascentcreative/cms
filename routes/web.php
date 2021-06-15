@@ -61,6 +61,8 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::get('/blocks/{block}/delete', [AscentCreative\CMS\Controllers\Admin\BlockController::class, 'delete']);
         Route::resource('/blocks', BlockController::class);
 
+        Route::get('/sitebanners/{sitebanner}/delete', [AscentCreative\CMS\Controllers\Admin\SiteBannerController::class, 'delete']);
+        Route::resource('/sitebanners', SiteBannerController::class);
 
 
         /** Content Stack */

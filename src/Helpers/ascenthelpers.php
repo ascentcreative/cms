@@ -169,6 +169,20 @@ function menu($slug, $maxDepth=0) {
 
 }
 
+function sitebanner($max=1) {
+
+    //dump(AscentCreative\CMS\Models\SiteBanner::live()->orderBy('start_date', 'ASC')->get());
+
+    $banner = AscentCreative\CMS\Models\SiteBanner::live()->orderBy('start_date', 'DESC')->first();
+
+    if (!$banner) {
+        return '';
+    } else {
+        return view('cms::sitebanner.show', ['banner'=>$banner]);
+    }
+
+}
+
 function contentstack($stackName) { 
  
     $stack = AscentCreative\CMS\Models\Stack::where('name', $stackName)->first();

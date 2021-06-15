@@ -1,0 +1,41 @@
+@extends('cms::admin.base.index')
+
+
+@section('indextable-head')
+
+  
+        <tr>
+            
+            <th width="">Banner</th>
+
+            <th></th>
+
+           
+          
+        </tr>
+
+@endsection
+
+@section('indextable-body')
+  
+    
+    @foreach ($models as $item)
+    
+        <tr class="indexitem">
+
+            <td class="title"><a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">{{$item->title}}</a></td>
+
+            
+            <td width="0"> 
+                <div class="btn-group dropleft">
+                    <A class="dropdown-toggle dropdown-toggle-dots" href="#" data-toggle="dropdown" ></A>
+                    <div class="dropdown-menu dropdown-menu-right" style="">
+                        <a class="dropdown-item text-sm btn-delete modal-link" href="{{ action([controller(), 'delete'], [$modelInject => $item->id]) }}">Delete</a> 
+                    </div>
+              </div>
+            </td>
+
+        </tr> 
+     @endforeach
+
+@endsection
