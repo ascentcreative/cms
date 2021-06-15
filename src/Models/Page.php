@@ -7,6 +7,7 @@ use AscentCreative\CMS\Traits\HasHeaderImage;
 use AscentCreative\CMS\Traits\HasImages;
 use AscentCreative\CMS\Traits\HasMenuItem;
 use AscentCreative\CMS\Traits\HasMetadata;
+use AscentCreative\CMS\Traits\HasSlug;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,31 +17,31 @@ use Illuminate\Support\Str;
 
 class Page extends Base
 {
-    use HasFactory, HasMetadata, HasImages, HasMenuItem; 
+    use HasFactory, HasMetadata, HasImages, HasMenuItem, HasSlug; 
 
     public $fillable = ['title', 'content'];
     
-    /*
-     * MUTATORS
-     * 
-     * setTitleAttribute: takes the incoming title and sets the slug accordingly
-     */
-    public function setTitleAttribute($value) {
-        // set the title so the value doesn't get lost
-        $this->attributes['title'] = $value;
+    // /*
+    //  * MUTATORS
+    //  * 
+    //  * setTitleAttribute: takes the incoming title and sets the slug accordingly
+    //  */
+    // public function setTitleAttribute($value) {
+    //     // set the title so the value doesn't get lost
+    //     $this->attributes['title'] = $value;
 
-        if (!isset($this->attributes['slug']) || $this->attributes['slug']==='') {
+    //     if (!isset($this->attributes['slug']) || $this->attributes['slug']==='') {
             
-            $slug = Str::slug(($value), '-');
+    //         $slug = Str::slug(($value), '-');
 
-            // check to see if any other slugs exist that are the same & count them
-            $count = static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+    //         // check to see if any other slugs exist that are the same & count them
+    //         $count = static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
 
-            $this->attributes['slug'] = $count ? "{$slug}-{$count}" : $slug;
+    //         $this->attributes['slug'] = $count ? "{$slug}-{$count}" : $slug;
 
-        }
+    //     }
 
-    }
+    // }
 
     public function getUrlAttribute() {
         return '/' . $this->slug;
