@@ -33,11 +33,10 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::resource('/menus', MenuController::class);
 
        
-
-        Route::get('/settings', [AscentCreative\CMS\Controllers\Admin\SettingsController::class, 'edit'])->middleware('can:view-settings');
+      
+        Route::get('/settings', [AscentCreative\CMS\Controllers\Admin\SettingsController::class, 'edit'])->middleware('can:change-settings');
         Route::post('/settings', [AscentCreative\CMS\Controllers\Admin\SettingsController::class, 'store'])->middleware('can:change-settings');
-        //Route::resource('/settings', SettingsController::class);
-
+      
         Route::get('/menuitems/{menuitem}/delete', [AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'delete']);
         Route::resource('/menuitems', MenuItemController::class);
 
