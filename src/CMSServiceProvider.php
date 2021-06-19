@@ -84,6 +84,7 @@ class CMSServiceProvider extends ServiceProvider
     $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
     $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    $this->loadMigrationsFrom(__DIR__.'/../database/settings');
 
     $router = $this->app->make(Router::class);
     $router->aliasMiddleware('cms-nocache', \AscentCreative\CMS\Middleware\NoCache::class);
