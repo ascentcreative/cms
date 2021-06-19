@@ -13,6 +13,7 @@ use AscentCreative\CMS\Notifications\ContactRequestNotification;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
 
+use AscentCreative\CMS\Settings\SiteSettings;
 
 
 class ContactController extends Controller
@@ -39,16 +40,29 @@ class ContactController extends Controller
 
 
     // validate the recaptcha:
+    $check = true;
 
-    $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-         'secret' => config('cms.recaptcha_secret'),
-         'response' => request()->get('g-recaptcha-response'),
-         'remoteip' => $_SERVER['REMOTE_ADDR']
-    ])->json();
+    if (config('cms.recaptcha_sitekey')) {
+
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => config('cms.recaptcha_secret'),
+            'response' => request()->get('g-recaptcha-response'),
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ])->json();
+
+        if(isset($response['error-codes'])) {
+            $check = false;
+        } 
+
+    } else {
+
+       // $check = true; // we're not using a captcha, so just allow it. 
+
+    }
 
 
 
-    if(isset($response['error-codes'])) {
+    if(!$check) {
         
         //abort('403', $response['error-codes'][0]);
 
@@ -64,10 +78,7 @@ class ContactController extends Controller
         $cr->recaptcha_score = $response['score'];
         $cr->save();
 
-
-        echo $response['score'];
-
-        if ($response['score'] < config('cms.recaptcha_threshold')) {
+        if ($response['score'] < app(SiteSettings::class)->contact_recaptcha_threshold) { //config('cms.recaptcha_threshold')) {
            
            // echo 'Ya BA-SIC';
             
@@ -75,7 +86,13 @@ class ContactController extends Controller
 
             //echo "Woohoo! You're legit";
             // great stuff - process the request.
-            Notification::route('mail', config('cms.contact.notify'))
+
+            $ary = explode(',', app(SiteSettings::class)->contact_to_addresses);
+            $recips = collect($ary)->transform(function($item) { 
+                return trim($item);
+            });
+
+            Notification::route('mail', $recips )  //config('cms.contact.notify'))
                     ->notify(new ContactRequestNotification($cr));
 
 
