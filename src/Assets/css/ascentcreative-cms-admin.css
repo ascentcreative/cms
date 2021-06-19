@@ -69,6 +69,7 @@ body > section {
    
 }
 
+
 .cms-sidebar-content UL LI A:hover {
     background: rgba(255,255,255,0.05);
     text-decoration: none;
@@ -88,6 +89,14 @@ body > section {
     font-size: 0.9rem;
     text-transform: uppercase;
 
+}
+
+A.settings-link {
+    color: #777;
+}
+
+A.settings-link:hover {
+    color: #ececec;
 }
 
 
