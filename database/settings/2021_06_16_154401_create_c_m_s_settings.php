@@ -43,6 +43,19 @@ class CreateCMSSettings extends SettingsMigration
             // skip - exists
         }
         
+
+        try{
+            $this->migrator->add('cms.welcome_email_subject', '');
+        } catch (Exception $e) {
+            // skip - exists
+        }
+
+
+        try{
+            $this->migrator->add('cms.welcome_email_content', '');
+        } catch (Exception $e) {
+            // skip - exists
+        }
          
         
 

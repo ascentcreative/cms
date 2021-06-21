@@ -33,6 +33,10 @@ class SiteSettings extends Settings
     public float $contact_recaptcha_threshold;
 
 
+
+    public string $welcome_email_subject;
+    public string $welcome_email_content;
+
     
     public static function group(): string
     {

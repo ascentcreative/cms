@@ -49,7 +49,11 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact Form</a>
-              </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="reg-tab" data-toggle="tab" href="#reg" role="tab" aria-controls="registration" aria-selected="false">Registration</a>
+            </li>
+
             {{-- <li class="nav-item">
               <a class="nav-link" id="menuitem-tab" data-toggle="tab" href="#menuitem" role="tab" aria-controls="menuitem" aria-selected="false">Menu Position</a>
             </li>
@@ -98,6 +102,20 @@
         
         
               
+            </div>
+
+
+
+            <div class="tab-pane show p-3" id="reg" role="tabpanel" aria-labelledby="reh-tab">
+
+                <x-cms-form-input type="text" name="welcome_email_subject" label="Welcome Email Subject" value="{{ old('welcome_email_subject', $model->welcome_email_subject) }}">
+                  
+                </x-cms-form-input>
+        
+                <x-cms-form-ckeditor type="text" name="welcome_email_content" label="Welcome Email Content" value="{{ old('welcome_email_content', $model->welcome_email_content) }}">
+                    
+                </x-cms-form-input>
+        
             </div>
 
 

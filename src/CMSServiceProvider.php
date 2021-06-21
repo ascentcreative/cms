@@ -4,6 +4,7 @@ namespace AscentCreative\CMS;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
 use Laravel\Fortify\Fortify;
 
@@ -14,6 +15,9 @@ class CMSServiceProvider extends ServiceProvider
 {
   public function register()
   {
+
+    $this->app->register(\AscentCreative\CMS\Providers\EventServiceProvider::class);
+
     //
     $this->app->singleton(HeadTitle::class, function() {
       return new HeadTitle();
@@ -66,6 +70,9 @@ class CMSServiceProvider extends ServiceProvider
 
   }
 
+
+ 
+
   public function boot()
   {
 
@@ -92,7 +99,6 @@ class CMSServiceProvider extends ServiceProvider
 
     $this->commands([
         \AscentCreative\CMS\Commands\CreateAdminUser::class,
-
     ]);
 
     // for web requests, work out what the menu item might be.
@@ -100,6 +106,11 @@ class CMSServiceProvider extends ServiceProvider
         $this->resolveMenuItem();
     }
     
+
+ 
+   
+
+
   }
 
 
