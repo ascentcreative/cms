@@ -204,6 +204,7 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
     Blade::component('cms-form-hidden', 'AscentCreative\CMS\View\Components\Form\Hidden');
     Blade::component('cms-form-input', 'AscentCreative\CMS\View\Components\Form\Input');
+    Blade::component('cms-form-datetime', 'AscentCreative\CMS\View\Components\Form\DateTime');
     Blade::component('cms-form-button', 'AscentCreative\CMS\View\Components\Form\Button');
     Blade::component('cms-form-checkbox', 'AscentCreative\CMS\View\Components\Form\Checkbox');
     Blade::component('cms-form-textarea', 'AscentCreative\CMS\View\Components\Form\Textarea');
@@ -215,6 +216,8 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
     Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
     Blade::component('cms-form-blockselect', 'AscentCreative\CMS\View\Components\Form\BlockSelect');
+
+    Blade::component('cms-form-relatedtokens', 'AscentCreative\CMS\View\Components\Form\RelatedTokens');
     
     Blade::component('cms-form-pivotlist', 'AscentCreative\CMS\View\Components\Form\PivotList');
     Blade::component('cms-form-biblereflist', 'AscentCreative\CMS\View\Components\Form\BibleRefList');
