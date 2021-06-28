@@ -273,7 +273,8 @@
 }
 
 .contentgrid.has-sidebar {
-    grid-template-columns: minmax(400px, auto) minmax(250px, 30%) !important;
+    /* grid-template-columns: minmax(400px, auto) minmax(250px, 30%) !important; */
+    grid-template-columns: minmax(400px, auto) 250px !important;
 }
 
  /* .contentgrid .sidebar { */
