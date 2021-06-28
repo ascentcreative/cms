@@ -1,0 +1,55 @@
+<?php
+
+namespace AscentCreative\CMS\View\Components\Form;
+
+use Illuminate\View\Component;
+
+class DateTime extends Component
+{
+
+    public $label;
+    public $name;
+    public $date_value;
+    public $time_value;
+
+    public $wrapper;
+    public $class;
+
+
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct( $label, $name, $value, $wrapper="bootstrapformgroup", $class='')
+    {
+       
+        $this->label = $label;
+        $this->name = $name;
+        //$this->value = $value;
+
+        if (!is_null($value) && trim($value) != '') {
+            $ary = explode(" ", $value);
+            $this->date_value = $ary[0];
+            $this->time_value = $ary[1];
+        }
+
+        $this->wrapper = $wrapper;
+        $this->class = $class;
+
+    }
+
+    public function setMonkeyAttribute($val) {
+        dd("MONKEY!");
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|string
+     */
+    public function render()
+    {
+        return view('cms::components.form.datetime');
+    }
+}
