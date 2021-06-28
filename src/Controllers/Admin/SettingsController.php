@@ -18,7 +18,7 @@ class SettingsController extends Controller
 
         $settings = app(SiteSettings::class);
 
-       return view('cms::admin.settings.edit')->with('model', $settings)->with('modelName','Settings');
+        return view('cms::admin.settings.edit')->with('model', $settings)->with('modelName','Settings');
        
    }
 
