@@ -38,6 +38,8 @@
     @endif
 
     @csrf
+    {{-- Prevent enter submitting the form --}}
+    <input type="submit" disabled style="display: none"/> 
 
 @endsection
 
