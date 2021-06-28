@@ -23,7 +23,7 @@ var StackBlockEdit = {
 			var fldName = idAry[1];
             var obj = this.element;
             
-            console.log('block edit init');
+            //console.log('block edit init');
             
             $(this.element).on('click', 'A.blockitem-delete', function() {
                 
