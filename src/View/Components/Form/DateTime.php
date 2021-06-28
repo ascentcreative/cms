@@ -39,9 +39,6 @@ class DateTime extends Component
 
     }
 
-    public function setMonkeyAttribute($val) {
-        dd("MONKEY!");
-    }
 
     /**
      * Get the view / contents that represent the component.
