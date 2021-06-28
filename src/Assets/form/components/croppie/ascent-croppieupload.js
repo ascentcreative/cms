@@ -85,15 +85,15 @@ var CroppieUpload = {
 
     setValue: function(url, vpw, vph) {
 
-        console.log('croppie - set value: ' + vpw + ', ' + vph);
+        //console.log('croppie - set value: ' + vpw + ', ' + vph);
 		
         self = this;
 
-        console.log('setting to: ' + url);
+        //console.log('setting to: ' + url);
 			
         this.element.val(url);
 
-        console.log(this.element.val());
+        //console.log(this.element.val());
 
         // don't need to set size here - it'll be set on init instead
         //this.root.css('width', (vpw==0?400:vpw) + 'px').css('height', (vph==0?200:vph) + 'px').css('background-size', '100%');
