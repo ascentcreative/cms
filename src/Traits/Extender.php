@@ -70,6 +70,8 @@ trait Extender {
 
                         $blades[$basename] = $aryPaths;
 
+                        $this->_requestedTraitBlades[] = strtolower($basename);
+
                     }
                     
                 }
