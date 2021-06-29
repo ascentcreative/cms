@@ -28,10 +28,22 @@ class DateTime extends Component
         $this->name = $name;
         //$this->value = $value;
 
-        if (!is_null($value) && trim($value) != '') {
-            $ary = explode(" ", $value);
-            $this->date_value = $ary[0];
-            $this->time_value = $ary[1];
+      //  dd($value);
+
+        if (is_array($value)) { 
+
+            $this->date_value = $value['date'];
+            $this->time_value = $value['time'];
+
+
+        }  else {
+
+            if (!is_null($value) && trim($value) != '') {
+                $ary = explode(" ", $value);
+                $this->date_value = $ary[0];
+                $this->time_value = $ary[1];
+            }
+
         }
 
         $this->wrapper = $wrapper;
