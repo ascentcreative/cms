@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 
+use Carbon\Carbon;
+
 use AscentCreative\CMS\Traits\Extender;
 
 /**
@@ -44,19 +46,24 @@ trait Publishable {
         // (this shoudln't be needed here - I need to find a way to wire this up to the field components)
         static::saving(function($model) { 
 
-            if($model->publish_start['date'] == '') {
+            // dd(request()->publish_start);
+            // dd($model->publish_start);
+
+            if(is_null(request()->publish_start['date']))  { // == '') {
                 $model->publish_start = null;
             } else {
-                $model->publish_start = join(' ', $model->publish_start);// . ":00";
+                $model->publish_start = join(' ', request()->publish_start);// . ":00";
             }
 
-            if($model->publish_end['date'] == '') {
+           
+
+            if(is_null(request()->publish_end['date'])) {//  == '') {
                 $model->publish_end = null;
             } else {
-                $model->publish_end = join(' ', $model->publish_end);// . ":00";
+                $model->publish_end = Carbon::create(join(' ', request()->publish_end)) ;// . ":00";
             }
 
-            //dd($model);
+           
 
         });
 
@@ -66,6 +73,75 @@ trait Publishable {
 
         // add fields to fillable:
         $this->fillable = array_merge($this->fillable, ['publishable', 'publish_start', 'publish_end']);
+
+        $this->casts = array_merge($this->casts, [
+            'publish_start' => 'datetime:Y-m-d H:i:s',
+            'publish_end' => 'datetime:Y-m-d H:i:s',
+        ]);
+
+    }
+
+    static $PUBLISHABLE_DRAFT = 'draft';
+    static $PUBLISHABLE_LIVE = 'live';
+    static $PUBLISHABLE_EXPIRED = 'expired';
+    static $PUBLISHABLE_SCHEDULED = 'scheduled';
+
+   
+    public function getPublishStatusAttribute() {
+
+        if ($this->publishable != 1) {
+            return self::$PUBLISHABLE_DRAFT;
+        }
+
+        if (!is_null($this->publish_start) && $this->publish_start->gt(Carbon::now())) {
+            return self::$PUBLISHABLE_SCHEDULED;
+        }
+
+        if (!is_null($this->publish_end) && $this->publish_end->lt(Carbon::now())) {
+            return self::$PUBLISHABLE_EXPIRED;
+        }
+     
+
+        return self::$PUBLISHABLE_LIVE;
+
+    }
+
+    public function getPublishStatusIconAttribute() {
+
+        $color = '';
+        switch ($this->publishStatus) {
+            case self::$PUBLISHABLE_DRAFT:
+                $icon = 'vector-pen';
+                //$color = 'text-warning';
+                break;
+
+            case self::$PUBLISHABLE_EXPIRED:
+                $icon = 'calendar-x-fill';
+                $color = 'text-danger';
+                break;
+
+            case self::$PUBLISHABLE_LIVE:
+                $icon = 'check-circle-fill';
+                $color = 'text-success';
+                break;
+
+            case self::$PUBLISHABLE_SCHEDULED:
+                $icon = 'clock-fill';
+                break;
+
+        }
+        
+        return '<i class="bi-' . $icon . ' ' . $color . '"></i>';
+
+    }
+
+    public function getIsPublishedAttribute() {
+
+        if ($this->publishStatus == self::$PUBLISHABLE_LIVE) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
