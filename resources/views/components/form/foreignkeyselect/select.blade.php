@@ -11,7 +11,7 @@
         <?php 
         
         //$opts = $model::orderBy($labelField)->get(); 
-       $opts = $query->orderBy($labelField)->get();
+       $opts = $query->orderBy($sortField, $sortDirection)->get();
         
         ?>
 
