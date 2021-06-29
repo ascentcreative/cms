@@ -15,7 +15,7 @@
 
     <div class="p-2">
     {{-- <div class="col-4"> --}} 
-        <x-cms-form-datetime name="publish_start" label="Publish At" value="{{ old('publish_start', $model->publish_start) }}" wrapper="inline">
+        <x-cms-form-datetime name="publish_start" label="Publish At" :value="old('publish_start', $model->publish_start)" wrapper="inline">
             (leave blank to publish immediately)
         </x-cms-form-input>
     {{-- </div> --}}
@@ -24,7 +24,7 @@
 
     <div class="p-2">
     {{-- <div class="col-4"> --}}
-        <x-cms-form-datetime name="publish_end" label="Published Until" value="{{ old('publish_end', $model->publish_end) }}" wrapper="inline">
+        <x-cms-form-datetime name="publish_end" label="Published Until" :value="old('publish_end', $model->publish_end)" wrapper="inline">
             (leave blank to publish indefinitely)
         </x-cms-form-datetime>
     {{-- </div> --}}
