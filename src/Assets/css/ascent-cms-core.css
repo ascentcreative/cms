@@ -231,6 +231,16 @@
     justify-content: space-between;
 }
 
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .flex-end {
     display: flex;
     justify-content: flex-end;
