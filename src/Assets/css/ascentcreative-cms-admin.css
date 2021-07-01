@@ -245,3 +245,9 @@ tr.ui-sortable-handle td:first-child{
 tr.ui-sortable-helper {
     background-color: white;
 }
+
+
+/* toggle-display */
+.toggle-display {
+    display: none;
+}
