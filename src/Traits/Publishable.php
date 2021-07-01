@@ -5,6 +5,7 @@ namespace AscentCreative\CMS\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 
 use Carbon\Carbon;
@@ -39,6 +40,14 @@ trait Publishable {
                         $query->whereDate('publish_end', '>=', date('Y-m-d H:i:s'))
                             ->orWhereNull('publish_end');
                     });
+        });
+
+        // apply a global scope for sorting publishable objects:
+        // order by publishable [put drafts first in admin], if(publish_start is not null, publish_start, created_at) DESC [sort by relevant dates]
+        static::addGlobalScope('publish_sort', function (Builder $builder) {
+            $table = $builder->getModel()->getTable();
+            $builder->orderBy('publishable')
+                    ->orderBy(DB::raw('if(' . $table . '.publish_start is not null, ' . $table . '.publish_start, ' . $table . '.created_at)'), 'DESC');
         });
 
 
