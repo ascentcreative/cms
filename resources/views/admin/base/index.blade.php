@@ -56,11 +56,13 @@
 
     @if($models instanceof \Illuminate\Pagination\LengthAwarePaginator && $models->lastPage() > 1 )
         
-        <div class="cms-screen-paginator">
-            
-            <A href="{{ $models->previousPageUrl() }}"> Prev </A> | <A href="{{ $models->nextPageUrl() }}"> Next </A>
+            {{-- <div class="cms-screen-paginator">
+                
+                <A href="{{ $models->previousPageUrl() }}"> Prev </A> | <A href="{{ $models->nextPageUrl() }}"> Next </A>
 
-        </div>
+            </div> --}}
+
+        {{ $models->links( 'cms::admin.pagination.bootstrap-4' ) }} 
 
     @endif
 
