@@ -251,3 +251,14 @@ tr.ui-sortable-helper {
 .toggle-display {
     display: none;
 }
+
+
+.code-editor {
+    background: #333;
+    color: lime;
+    width: 100%;
+    resize: none;
+    font-family: monospace;
+    height:250px;
+    padding: 5px;
+}

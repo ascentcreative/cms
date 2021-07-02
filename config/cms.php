@@ -26,7 +26,8 @@ return [
 
     'core_page_blocks' => [
 
-        'contact-form' => 'Contact Form'
+        'contact-form' => 'Contact Form',
+        'embed-code' => 'Embedded Third-Party Code',
 
     ],
 
