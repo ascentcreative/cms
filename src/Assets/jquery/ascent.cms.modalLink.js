@@ -16,19 +16,12 @@ var ModalLink = {
         
         // We're calling this on click, so just launch straight into the business end...
 
-       // window.location.href = $(this.element).attr('href');
-
         if (this.options.target) {
             this.targetPath = this.options.target
         } else {
             this.targetPath = $(this.element).attr('href');
         }
-
-        //$('#ajaxModal').hide();
-
-        //console.log(self.targetPath);
-      
-     //   $.get({ url: self.targetPath
+        
         $.ajax({
             type: 'GET',
             url: self.targetPath,
@@ -92,7 +85,7 @@ var ModalLink = {
         inFlow = false;
         if($('body .modal').length > 0) {
             inFlow = true; // take note - we'll need this later
-            $('body .modal, body .modal-backdrop').remove(); // kill the calling modal
+            $('body .modal#ajaxModal, body .modal-backdrop').remove(); // kill the calling modal
         }
         
         // add the newly supplied modal
