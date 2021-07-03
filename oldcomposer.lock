@@ -761,12 +761,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ascentcreative/laravel-instagram-feed.git",
-                "reference": "d3e5d8b3bd417552ac4b41ed6b5d83cc515ab619"
+                "reference": "76963f8fa293aeb9b64fe8a4f935b8fd21e75f4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ascentcreative/laravel-instagram-feed/zipball/d3e5d8b3bd417552ac4b41ed6b5d83cc515ab619",
-                "reference": "d3e5d8b3bd417552ac4b41ed6b5d83cc515ab619",
+                "url": "https://api.github.com/repos/ascentcreative/laravel-instagram-feed/zipball/76963f8fa293aeb9b64fe8a4f935b8fd21e75f4b",
+                "reference": "76963f8fa293aeb9b64fe8a4f935b8fd21e75f4b",
                 "shasum": ""
             },
             "require": {
@@ -814,7 +814,7 @@
             "support": {
                 "source": "https://github.com/ascentcreative/laravel-instagram-feed/tree/carouselitems"
             },
-            "time": "2021-07-03T12:47:35+00:00"
+            "time": "2021-07-03T12:25:45+00:00"
         },
         {
             "name": "egulias/email-validator",
