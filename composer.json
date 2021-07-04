@@ -16,7 +16,7 @@
     "doctrine/dbal": "^3.0",
     "spatie/laravel-activitylog": "^3.17",
     "spatie/laravel-settings": "^2.1",
-    "dymantic/laravel-instagram-feed": "dev-carouselitems"
+    "dymantic/laravel-instagram-feed": "^2.5"
   },
   "autoload": {
     "psr-4": {

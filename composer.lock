@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60f698aca7e1ff77144f7ce183eb28e5",
+    "content-hash": "2e48b8ee0186246c86ac0ada5270bb14",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -757,16 +757,16 @@
         },
         {
             "name": "dymantic/laravel-instagram-feed",
-            "version": "dev-carouselitems",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ascentcreative/laravel-instagram-feed.git",
-                "reference": "d3e5d8b3bd417552ac4b41ed6b5d83cc515ab619"
+                "url": "https://github.com/Dymantic/laravel-instagram-feed.git",
+                "reference": "19c9be920e7351346d54064fbd079716878bccd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ascentcreative/laravel-instagram-feed/zipball/d3e5d8b3bd417552ac4b41ed6b5d83cc515ab619",
-                "reference": "d3e5d8b3bd417552ac4b41ed6b5d83cc515ab619",
+                "url": "https://api.github.com/repos/Dymantic/laravel-instagram-feed/zipball/19c9be920e7351346d54064fbd079716878bccd3",
+                "reference": "19c9be920e7351346d54064fbd079716878bccd3",
                 "shasum": ""
             },
             "require": {
@@ -796,11 +796,7 @@
                     "Dymantic\\InstagramFeed\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Dymantic\\InstagramFeed\\Tests\\": "tests"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -812,9 +808,10 @@
             ],
             "description": "Fetches the instagram feed for given authenticated profiles",
             "support": {
-                "source": "https://github.com/ascentcreative/laravel-instagram-feed/tree/carouselitems"
+                "issues": "https://github.com/Dymantic/laravel-instagram-feed/issues",
+                "source": "https://github.com/Dymantic/laravel-instagram-feed/tree/v2.5.0"
             },
-            "time": "2021-07-03T12:47:35+00:00"
+            "time": "2021-07-04T02:23:07+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -6036,9 +6033,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "dymantic/laravel-instagram-feed": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
