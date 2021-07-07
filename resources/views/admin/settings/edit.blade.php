@@ -48,6 +48,9 @@
               <a class="nav-link" id="main-tab" data-toggle="tab" href="#main" role="tab" aria-controls="main" aria-selected="true">Main Site Settings</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="code-tab" data-toggle="tab" href="#code" role="tab" aria-controls="code" aria-selected="false">Add-in Code</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact Form</a>
             </li>
             <li class="nav-item">
@@ -67,11 +70,23 @@
                 <x-cms-form-input type="text" name="site_name" label="Site Name" value="{{ old('site_name', $model->site_name) }}">
                     Shows in the tab label for all pages of the site
                 </x-cms-form-input>
+            </div>
+
+
+            <div class="tab-pane show p-3" id="code" role="tabpanel" aria-labelledby="code-tab">
         
-        
-                <x-cms-form-textarea type="text" name="custom_head_tags" label="Custom HEAD Tags" value="{!! old('custom_head_tags', $model->custom_head_tags) !!}">
+                <x-cms-form-code type="text" name="custom_head_tags" label="Custom HEAD Tags" value="{!! old('custom_head_tags', $model->custom_head_tags) !!}">
                    Adds this code to the HTML Head of the site. Best used for custom Meta tags (Facebook pixel verification etc).<br/><strong>Do not use for anything which would need to be covered by cookie opt-in code (i.e. analytics / tracking coode etc)</strong>
-                </x-cms-form-textarea>
+                </x-cms-form-code>
+
+                <x-cms-form-code type="text" name="custom_body_tags_start" label="Custom Opening BODY Tags" value="{!! old('custom_body_tags_start', $model->custom_body_tags_start) !!}">
+                    Adds this code to the HTML of the site, immediately AFTER the opening BODY tag. </strong>
+                 </x-cms-form-code>
+
+                 <x-cms-form-code type="text" name="custom_body_tags_end" label="Custom Closing BODY Tags" value="{!! old('custom_body_tags_end', $model->custom_body_tags_end) !!}">
+                    Adds this code to the HTML of the site, immediately BEFORE the closing BODY tag. </strong>
+                 </x-cms-form-code>
+
             </div>
 
 

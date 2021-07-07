@@ -24,6 +24,8 @@ class SiteSettings extends Settings
 
     /* misc */
     public ?string $custom_head_tags;
+    public ?string $custom_body_tags_start;
+    public ?string $custom_body_tags_end;
 
 
     /* contact settings */
