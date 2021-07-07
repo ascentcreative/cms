@@ -80,11 +80,11 @@
                 </x-cms-form-code>
 
                 <x-cms-form-code type="text" name="custom_body_tags_start" label="Custom Opening BODY Tags" value="{!! old('custom_body_tags_start', $model->custom_body_tags_start) !!}">
-                    Adds this code to the HTML of the site, immediately AFTER the opening BODY tag. </strong>
+                    Adds this code to the HTML of the site, immediately AFTER the opening BODY tag. Take care not to add any HTML which may display in a visitor's browser.</strong>
                  </x-cms-form-code>
 
                  <x-cms-form-code type="text" name="custom_body_tags_end" label="Custom Closing BODY Tags" value="{!! old('custom_body_tags_end', $model->custom_body_tags_end) !!}">
-                    Adds this code to the HTML of the site, immediately BEFORE the closing BODY tag. </strong>
+                    Adds this code to the HTML of the site, immediately BEFORE the closing BODY tag. Take care not to add any HTML which may display in a visitor's browser.</strong>
                  </x-cms-form-code>
 
             </div>
