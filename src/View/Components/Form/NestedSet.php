@@ -28,6 +28,7 @@ class NestedSet extends Component
     public $scopeValue;
     public $relationshipValue;
     public $relationValue;
+    public $relationLabel;
 
     public $wrapper;
     public $class;
@@ -53,6 +54,7 @@ class NestedSet extends Component
             $scopeValue,
             $relationshipValue,
             $relationValue,
+            $relationLabel='title',
 
             $nullScopeLabel="Please Select:",
 
@@ -76,6 +78,7 @@ class NestedSet extends Component
         $this->scopeValue = $scopeValue;
         $this->relationshipValue = $relationshipValue;
         $this->relationValue = $relationValue;
+        $this->relationLabel = $relationLabel;
 
         $this->nullScopeLabel = $nullScopeLabel;
 

@@ -22,6 +22,8 @@ var NestedSet = {
         this.options.scopeVal = $(obj).find('INPUT.ns_scopefield').val();
         this.options.relationshipVal = $(obj).find('INPUT.ns_relationshipfield').val();
         this.options.relationVal = $(obj).find('INPUT.ns_relationfield').val();
+        this.options.relationLabel = $(obj).find('INPUT.ns_relationlabel').val();
+
 
 
         $(obj).append('<div class="ns_scope" />');
@@ -31,6 +33,7 @@ var NestedSet = {
         $(obj).find('SELECT.ns_relationshipselect').val(this.options.relationshipVal);
         $(obj).find('INPUT.ns_relationshipfield').remove();
         $(obj).find('INPUT.ns_relationfield').remove();
+        $(obj).find('INPUT.ns_relationlabel').remove();
 
         // don't set any options in the relation field - scopeChange does that based on the selected scope.
         $(obj).find('.ns_relate').append('<SELECT style="flex: 0 0 77%" class="ns_relationselect form-control" name="' + this.options.relationFieldName + '"><OPTION value="">Please Select:</OPTION></SELECT>');
@@ -99,7 +102,7 @@ var NestedSet = {
         for(node in nodes) {
             if(nodes[node].menu_id == scope) {
                // console.log(depth + ': ' + nodes[node]);
-                label = ('-'.repeat(depth)) + " " + nodes[node]['title'];
+                label = ('-'.repeat(depth)) + " " + nodes[node][this.options.relationLabel];
 
                 opts.push('<OPTION value="' + nodes[node]['id'] + '">' + label.trim() + '</OPTION>');
                 children = this.traverse(nodes[node].children, scope, depth+1);

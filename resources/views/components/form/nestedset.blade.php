@@ -22,9 +22,12 @@
 
     <div class="nestedset" name="{{$name}}" id="{{$name}}">
 
+        <div style="display: none">
         <INPUT type="text" class="ns_scopefield" xname="{{$scopeFieldName}}" value="{{$scopeValue}}" id="scopeField"/>
         <INPUT type="text" class="ns_relationshipfield" xname="{{$relationshipFieldName}}" value="{{$relationshipValue}}" id="relationshipField"/>
         <INPUT type="text" class="ns_relationfield" xname="{{$relationFieldName}}" value="{{$relationValue}}" id="relationField"/>
+        <INPUT type="text" class="ns_relationlabel" xname="{{$relationLabel}}" value="{{$relationLabel}}" id="relationLabel"/>
+        </div>
        
     </div>
 
