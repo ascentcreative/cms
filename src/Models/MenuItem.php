@@ -20,6 +20,8 @@ class MenuItem extends Base
 
     public $fillable = ['menu_id', 'title', 'url', 'newWindow'];
 
+    public $appends = ['itemTitle'];
+
     protected function getScopeAttributes()
     {
         return [ 'menu_id' ];
