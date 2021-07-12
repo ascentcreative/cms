@@ -6,7 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{{ headTitle()->render() }}</title>
     
-        <link rel="alternate icon" href="/img/favicon.png">
+
+        <link rel="alternate icon" href="/storage/{!! AscentCreative\CMS\Models\File::find(app(AscentCreative\CMS\Settings\SiteSettings::class)->favicon)->filepath ?? '' !!}">
 
         {{ metadata($model ?? null) }}
     
@@ -27,7 +28,7 @@
 @section('open_body_tag')
     <body>
 @show
-    
+
         {!! app(AscentCreative\CMS\Settings\SiteSettings::class)->custom_body_tags_start !!}
 
         @yield('site_layout')
