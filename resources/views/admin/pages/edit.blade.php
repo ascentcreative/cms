@@ -8,6 +8,10 @@
         The title of the page
     </x-cms-form-input>
 
+    @includeFirst($model->getTraitBlades('HasMenuItem'))
+
+
+
 </div>
 
 <div class="cms-screenblock-tabs bg-white rounded shadow" style="">
@@ -20,9 +24,9 @@
         <li class="nav-item">
             <a class="nav-link" id="headimg-tab" data-toggle="tab" href="#headimg" role="tab" aria-controls="headimg" aria-selected="false">Images</a>
           </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link" id="menuitem-tab" data-toggle="tab" href="#menuitem" role="tab" aria-controls="menuitem" aria-selected="false">Menu Position</a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a class="nav-link" id="metadata-tab" data-toggle="tab" href="#metadata" role="tab" aria-controls="metadata" aria-selected="false">Metadata</a>
         </li>
@@ -66,11 +70,10 @@
 
         </div>
 
-        <div class="tab-pane show p-3" id="menuitem" role="tabpanel" aria-labelledby="menuitem-tab">
+        {{-- <div class="tab-pane show p-3" id="menuitem" role="tabpanel" aria-labelledby="menuitem-tab">
 
-            @includeFirst($model->getTraitBlades('HasMenuItem'))
-
-        </div>
+           
+        </div> --}}
 
         <div class="tab-pane show p-3" id="metadata" role="tabpanel" aria-labelledby="metadata-tab">
 
