@@ -67,9 +67,15 @@
     
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane show p-3" id="main" role="tabpanel" aria-labelledby="main-tab">
+                
                 <x-cms-form-input type="text" name="site_name" label="Site Name" value="{{ old('site_name', $model->site_name) }}">
                     Shows in the tab label for all pages of the site
                 </x-cms-form-input>
+
+                <x-cms-form-fileupload type="text" name="favicon" label="Favicon" value="{{ old('favicon', $model->favicon) }}">
+                   Favicon to use for the site
+                </x-cms-form-input>
+
             </div>
 
 
