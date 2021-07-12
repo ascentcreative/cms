@@ -11,12 +11,12 @@
   "require": {
     "laravel/fortify": "^1.7",
     "matthiasmullie/minify": "^1.3",
-    "kalnoy/nestedset": "^5.0",
     "spatie/laravel-permission": "^4.0",
     "doctrine/dbal": "^3.0",
     "spatie/laravel-activitylog": "^3.17",
     "spatie/laravel-settings": "^2.1",
-    "dymantic/laravel-instagram-feed": "^2.5"
+    "dymantic/laravel-instagram-feed": "^2.5",
+    "kalnoy/nestedset": "^6.0"
   },
   "autoload": {
     "psr-4": {
