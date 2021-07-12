@@ -28,6 +28,7 @@ return [
 
         'contact-form' => 'Contact Form',
         'embed-code' => 'Embedded Third-Party Code',
+        'instagram-feed' => 'Instagram Feed',
 
     ],
 
