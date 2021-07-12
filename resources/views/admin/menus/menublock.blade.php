@@ -1,0 +1,80 @@
+
+
+        <tr class="indexitem">
+
+            <td class="title" style="vertical-align: top" valign="top">
+
+                @if($item)
+                    <div class="pt-1"><a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">{{$item->title}}</a></div>
+                @else 
+                    Pages not in any menu
+                @endif
+
+                <div class="Ppt-1 btn-group dropright">
+                    
+                    <A class="btn btn-secondary btn-sm dropdown-toggle" href="#" data-toggle="dropdown" >Add</A>
+
+                    <div class="dropdown-menu dropdown-menu-right" style="">
+        
+                        <a class="btn btn-secondary btn-sm dropdown-item" href="{{ action([AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'create'], ['menu_id' => ($item ? $item->id : '') ]) }}">Menu Item</a>
+                        <a class="btn btn-secondary btn-sm dropdown-item" href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'create'], ['_menuitem[menu_id]' => ($item ? $item->id : '') ]) }}">Page</a>
+        
+                    </div>
+              </div>    
+
+               
+            </td>
+
+            <td valign="top">
+
+                @php
+
+                    if ($item) {
+                        $tree = \AscentCreative\CMS\Models\MenuItem::scoped(['menu_id'=>$item->id])->withDepth()->defaultOrder()->get();
+                    } else {
+
+                        $tree = [];
+                       // $tree = \AscentCreative\CMS\Models\MenuItem::scoped(['menu_id'=>$item->id])->withDepth()->defaultOrder()->get();
+                    }
+
+                @endphp
+
+                <table class="menuitems">
+                @foreach($tree as $mi)
+                    <tr>
+                        <td style="padding-left: {{10 + (20 * $mi->depth)}}px">
+
+                        
+
+                            @switch($mi->linkable_type)
+
+                                @case(\AscentCreative\CMS\Models\Page::class)
+                                    <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->linkable_id]) }}">{{ $mi->itemTitle }}</A>
+                                @break
+
+                                @default
+                                    <A href="{{ action([AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'edit'], ['menuitem' => $mi->id]) }}">{{ $mi->itemTitle }}</A>
+                              
+
+                            @endswitch
+
+
+                            
+                        </td>
+                        <td> @if($mi->linkable) {{ $mi->linkable->url }} @else {{ $mi->url }} @endif</td>
+                        <td><A class="modal-link" href="@switch($mi->linkable_type)
+                            
+                            @case(\AscentCreative\CMS\Models\Page::class)
+                            {{   action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'delete'], ['page' => $mi->linkable_id])  }}
+                            @break
+                            
+                            @default 
+                            {{   action([AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'delete'], ['menuitem' => $mi->id])  }}
+                            @endswitch">[x]</A></td>
+                    </tr>
+                @endforeach
+                </table>
+
+            </td>
+
+        </tr> 
