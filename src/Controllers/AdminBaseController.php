@@ -219,7 +219,10 @@ abstract class AdminBaseController extends Controller
         $cls = ($this::$modelClass);
         
         if (is_null($id)) {
-            $model = ($this::$modelClass)::make(); //new $cls();
+
+            $model = ($this::$modelClass)::make();
+            $model->fill(request()->all()); //new $cls();
+
         } else {
             $items = $this->prepareModelQuery();
             $model = $items->find($id);
