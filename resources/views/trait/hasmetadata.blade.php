@@ -2,8 +2,12 @@
     
 $md = $model->metadata;
 
-@endphp
+if(!$md && request()->_metadata) {
+    $md = new AscentCreative\CMS\Models\Metadata();
+    $md->fill(request()->_metadata);
+}
 
+@endphp
 
 <x-cms-form-textarea label="Description" name="_metadata[description]" value="{{ old('_metadata.description', $md->description ?? '')}}">
     @if(!is_null($gendesc = $model->generateMetaDescription()))Leave blank to use the automatically generated description. @endif
