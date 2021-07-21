@@ -44,6 +44,7 @@
         @script('/vendor/ascent/cms/js/jquery-3.5.1.min.js')
         @script('/vendor/ascent/cms/js/jquery-ui.min.js')
         @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
+        @script('/vendor/ascent/cms/js/jquery.ui.touch-punch.min.js')
         @script('/vendor/ascent/cms/jquery/jquery.matchHeight-min.js')
         @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
         @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js')
