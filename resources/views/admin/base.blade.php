@@ -21,20 +21,20 @@
 </head>
 <body>
 
-    <header>
+    {{-- <header>
 
         @section('header')
         @show
 
-    </header>
+    </header> --}}
 
     <section>
         @yield('pagebody')
     </section>
 
-    <footer>
+    {{-- <footer>
 
-    </footer>
+    </footer> --}}
 
     @script('/vendor/ascent/cms/js/jquery-3.5.1.min.js')
     @script('/vendor/ascent/cms/js/jquery-ui.min.js')
