@@ -14,6 +14,8 @@ class MenuController extends AdminBaseController
     static $modelClass = 'AscentCreative\CMS\Models\Menu';
     static $bladePath = "cms::admin.menus";
 
+    public $modelNameHuman = "";
+    public $modelNamePlural = "";
 
 
     public function rules($request, $model=null) {
