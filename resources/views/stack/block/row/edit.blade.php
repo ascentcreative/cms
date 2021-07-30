@@ -58,17 +58,18 @@ $unid = 'sbe-' . uniqid();
         </div>
     </div>
 
-@endsection
+@overwrite
 
 @section('block-settings') 
 
     {{-- <x-cms-form-input type="text" name="{{$name}}[bgcolor]" value="{{ !is_null($value) ? $value->bgcolor : '' }}" label="bg colour" wrapper="simple"/> --}}
-        <x-cms-form-input type="text" name="{{$name}}[bgcolor]" value="{{ isset($value->bgcolor) ? $value->bgcolor : '' }}" label="bg colour" wrapper="simple"/>
+    {{-- <x-cms-form-input type="text" name="{{$name}}[bgcolor]" value="{{ isset($value->bgcolor) ? $value->bgcolor : '' }}" label="bg colour"/> --}}
 
 @overwrite
 
 @push('scripts')
 <script>
+
     $(document).ready(function() {
         $('#{{ $unid }}').parents('.block-edit').stackblockedit();
     });

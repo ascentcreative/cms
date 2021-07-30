@@ -1,5 +1,3 @@
-{{-- @dump($data) --}}
-
 <div class="row" style="padding: 0px 0 20px">
 @isset($data->items)
     @foreach($data->items as $item) 
@@ -12,7 +10,7 @@
                     @break
 
                 @case('image')
-                    <IMG src="{{ $item->image }}" width="100%"/>
+                    <IMG src="{{ $item->image }}" width="100%" height="100%" style="object-fit: contain; object-position: top"/>
                     @break
 
                 @case('video')

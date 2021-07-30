@@ -38,25 +38,23 @@ var StackEdit = {
                 }
             });
 
-
             //capture the submit event of the form to serialise the stack data
             $(this.element).parents('form').on('submit', function() {
 
-                //console.log($('*[data-scope=stack-content]').serializeJSON());
-               
-                var data = $(self.element).find('INPUT, SELECT, TEXTAREA').not('.stack-output').serializeJSON();
-                
-                // remove the top level wrapper (which is just the field name):
-                for(fld in data) {
-              
-                    $(self.element).find('.stack-output').val(
-                        JSON.stringify(data[fld])
-                    );
-
-                }
-//                return false;
+                self.serialise();
 
             });
+
+
+            $(this.element).on('change', function() {
+
+                self.serialise();
+
+            });
+
+
+
+
 
             $(this.element).on('click', '.block-delete', function() {
                 console.log('delete me');
@@ -95,10 +93,32 @@ var StackEdit = {
 
             });
 
+            this.serialise();
+
 
 		},
 
+        serialise: function() {
+
+            var data = $(this.element).find('INPUT, SELECT, TEXTAREA').not('.stack-output').serializeJSON();
+
+            console.log(data);
+         //  return false;
+         
+            // remove the top level wrapper (which is just the field name):
+            for(fld in data) {
+          
+                $(this.element).find('.stack-output').val(
+                    JSON.stringify(data[fld])
+                );
+
+            }
+
+        },
+
         updateBlockIndexes: function() {
+
+            console.log('UBI - Stack');
 
             // reapply field indexes to represent reordering
             $(this.element).find('.block-edit').each(function(idx) {

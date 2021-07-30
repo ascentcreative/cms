@@ -22,3 +22,7 @@
 
 @overwrite
 
+
+@section('block-actions')
+@overwrite
+

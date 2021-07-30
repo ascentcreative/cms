@@ -4,8 +4,13 @@
 @section('block-content')
 
 
-    <div class="flex flex-center" style="width: 100%">
-        <H2 class="text-muted text-center" style="width: 100%;">Instagram Feed</H2>
+    <div class="flex flex-center" style="flex: 0 0 200px">
+        <H2 class="text-muted text-center" style="width: 100%;">INSTAGRAM FEED</H2>
     </div>
+
+    <div class="container">
+
+    </div>
+
 
 @overwrite

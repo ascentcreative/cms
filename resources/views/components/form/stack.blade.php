@@ -3,6 +3,10 @@
 @section('label'){{$label}}@overwrite
 @section('name'){{$name}}@overwrite
 
+{{-- @push('styles')
+@style('/css/screen.css')
+@endpush --}}
+
 @section('element')
 
     @php 
@@ -30,29 +34,23 @@
 
         }
 
+        $safename = str_replace(array('[', ']'), array('_', ''), $name)
+
     @endphp
 
-    <div class="stack-edit" id="{{$name}}">
+    <div class="stack-edit" id="{{$safename}}" name="{{$name}}">
 
-        {{-- for each row, show the relevant edit blade --}}
-        <div class="stack-blocks">
-        @foreach($value as $key=>$block)
-            
-            <x-cms-form-stackblock type="{{ $block->type }}" name="{{ $name }}[{{$key}}]" :value="$block" />
-
-        @endforeach
-        </div>
-
+        <div class="flex flex-between pb-2">
 
         <div class="btn-group dropright">
             <A class="btn btn-secondary btn-sm dropdown-toggle" href="#" data-toggle="dropdown" >Add Block</A>
             <div class="dropdown-menu dropdown-menu-right" style="">
 
-                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="row" data-block-field="content">Text/Image/Video Row</a>
+                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="row" data-block-field="{{ $safename }}">Text/Image/Video Row</a>
 
                 @foreach(config('cms.core_page_blocks') as $key=>$val) 
 
-                    <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="{{ $key }}" data-block-field="content">{{ $val }}</a>
+                    <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="{{ $key }}" data-block-field="{{ $safename }}">{{ $val }}</a>
 
                 @endforeach
 
@@ -62,33 +60,29 @@
 
                     @foreach(config('cms.custom_page_blocks') as $key=>$val) 
 
-                        <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="{{ $key }}" data-block-field="content">{{ $val }}</a>
+                        <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="{{ $key }}" data-block-field="{{ $safename }}">{{ $val }}</a>
 
                     @endforeach
 
                 @endif
 
-
-{{-- 
-                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="accommodation-list" data-block-field="content">Accommodation List</a>
-
-                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="resource-list" data-block-field="content">Resource List</a>
-
-                <a class="stack-add-block dropdown-item text-sm btn-option" href="#" data-block-type="price-table" data-block-field="content">Price Table</a> --}}
-
-          
-
-
-                {{-- @foreach(\AscentCreative\CMS\Models\BlockTemplate::orderBy('name')->get() as $template)
-                <a class="dropdown-item text-sm btn-delete" href="{{ action([AscentCreative\CMS\Controllers\Admin\BlockController::class, 'create'], ['stack_id' => $item->id, 'blocktemplate_id'=>$template->id]) }}">
-                <b>{{ $template->name }}</b>
-                <br/>
-                <span class="text-sm text-muted">{{ $template->description }}</span>
-
-                </a> 
-                @endforeach --}}
             </div>
-      </div>    
+      </div>  
+
+        <button class="btn btn-sm btn-primary bi-eye-fill" id="stack-preview">Preview</button>
+
+        </div>
+
+        {{-- for each row, show the relevant edit blade --}}
+        <div class="stack-blocks">
+        @foreach($value as $key=>$block)
+            
+            <x-cms-form-stackblock type="{{ $block->type }}" name="{{ $safename }}[{{$key}}]" :value="$block" />
+
+        @endforeach
+        </div>
+
+  
 
         {{--  --}}
 
@@ -127,8 +121,43 @@
     <script>
       
         $(document).ready(function() {
-            $('.stack-edit#{{$name}}').stackedit();
+            $('.stack-edit#{{$safename}}').stackedit();
         });
+
+
+
+        /** prototype previews **/
+        $('#stack-preview').click(function() {
+
+            // grab all form data, serialise and post to an endpoint in a popup window. Simples.
+
+            $.ajax({ 
+    
+                type: 'POST',
+                url: '/admin/previewtest',
+                data: $('form#frm_edit').serialize(),
+                headers: {
+                    'Accept' : "application/json"
+                }
+
+            }).done(function(data, xhr, request) {
+
+                console.log(data);
+                
+                // put the resulting HTML in the preview popup.
+                w = window.open('', '_preview', "height=800,width=1200");
+                w.document.open();
+                w.document.write(data);
+                w.document.close();
+
+            }).fail(function(data) {
+                alert(data.responseJSON.message);
+            });
+
+            return false;
+        });
+
+
 
     </script>
 

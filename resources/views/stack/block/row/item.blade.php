@@ -23,10 +23,6 @@
                 
                     <div class="videoitem" style="padding: 10px; width: 100%; padding-right: 30px;">
 
-                         
-
-                        
-
                         <div class="text-center pt-2">
                             Video Not Yet Implemented...
                             {{-- <button class="button btn-sm btn btn-primary text-small">Change</button> <button class="button btn-sm btn btn-primary text-small">Options</button> --}}

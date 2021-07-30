@@ -25,7 +25,8 @@ return [
     ],
 
     'core_page_blocks' => [
-
+        
+        'page-header' => 'Page Header',
         'contact-form' => 'Contact Form',
         'embed-code' => 'Embedded Third-Party Code',
         'instagram-feed' => 'Instagram Feed',
