@@ -237,6 +237,7 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-croppie', 'AscentCreative\CMS\View\Components\Form\Croppie');
 
 
+    Blade::component('cms-modal', 'AscentCreative\CMS\View\Components\Modal');
 
   }
 
