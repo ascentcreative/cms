@@ -16,6 +16,23 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
     Route::prefix('admin')->namespace('Admin')->middleware(['useAdminLogin', 'auth', 'can:administer'])->group(function() {
 
+  
+        Route::match(['post', 'put'], '/previewtest', function() {
+
+            $page = new AscentCreative\CMS\Models\Page();
+
+            $page->fill(request()->all());
+
+            headTitle()->add('[PREVIEW]');
+
+            $contr = App::make('AscentCreative\CMS\Controllers\PageController');
+
+            return $contr->show($page, true);
+
+
+        });
+
+
         Route::get('/phpinfo', function() {
             return phpinfo();
         });
@@ -54,9 +71,11 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::resource('/permissions', PermissionController::class);
 
 
-
+        Route::get('/stacks/{stack}/delete', [AscentCreative\CMS\Controllers\Admin\StackController::class, 'delete']);
         Route::resource('/stacks', StackController::class);
         Route::post('/stacks/updateblockorder', [AscentCreative\CMS\Controllers\Admin\StackController::class, 'updateblockorder']);
+        
+
         Route::get('/blocks/{block}/delete', [AscentCreative\CMS\Controllers\Admin\BlockController::class, 'delete']);
         Route::resource('/blocks', BlockController::class);
 
@@ -153,5 +172,6 @@ Route::get('/cms/welcomeemail/{order}', function (\App\Models\User $user) {
  * Route::get('/{page:slug}', [AscentCreative\CMS\Controllers\PageController::class, 'show']);
  * 
  */
+
 
 
