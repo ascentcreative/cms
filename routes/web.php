@@ -19,14 +19,16 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
   
         Route::match(['post', 'put'], '/previewtest', function() {
 
+            // set the preview flag - used in some model traits to decide how to fetch the data
+            // also causes "HeadTitle" to prepend a preview lable to the page title
+            request()->isPreview = true;
+
+
+            // Create an in-memory copy of the model using the POSTed/PUTed data
+            // (Currently hardcoded to Page, but need to somehow detect the desired model and target controller / view)
             $page = new AscentCreative\CMS\Models\Page();
-
             $page->fill(request()->all());
-
-            headTitle()->add('[PREVIEW]');
-
             $contr = App::make('AscentCreative\CMS\Controllers\PageController');
-
             return $contr->show($page, true);
 
 
