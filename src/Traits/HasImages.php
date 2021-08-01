@@ -131,5 +131,36 @@ trait HasImages {
         
     }
 
+    public function getImage($spec) {
+        
+        if(request()->isPreview) {
+
+            $img = new Image();
+            $img->fill($this->_images[$spec]);
+            return $img;
+            //return ($this->images[$spec]['image']);
+
+        } else {
+
+            return $this->imageBySpec($spec);
+
+        }
+
+        // if($this->images instanceof \Illuminate\Database\Eloquent\Collection) {
+        //     // it's coming from the database
+
+        
+        // } else if(is_array($this->images)) {
+
+        //     // it's an array - we may be previewing.
+
+        //     // rather than return this as a string, why not build the model and fill it, so it behaves the same as teh above, just without needing it in the DB?
+
+           
+
+        // }
+
+    }
+
 
 }
