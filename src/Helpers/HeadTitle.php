@@ -30,7 +30,12 @@ class HeadTitle {
 
         $inst = app(HeadTitle::class);
 
-        return join($sep, array_reverse($inst->_elements));
+        $ary = array_reverse($inst->_elements);
+        if (request()->isPreview) {
+            array_unshift($ary, '[PREVIEW]');
+        }
+
+        return join($sep, $ary);
 
     }
 
