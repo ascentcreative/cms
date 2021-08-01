@@ -11,6 +11,8 @@ class Image extends Base
 {
     use HasFactory;
 
+    public $fillable = ['image', 'alt_text', 'imageable_type', 'imageable_id', 'image_spec_id'];
+    
     public function spec() {
         return $this->belongsTo(ImageSpec::class, 'image_spec_id');
     }
