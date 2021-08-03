@@ -196,7 +196,7 @@ var StackBlockEdit = {
 
         updateBlockIndexes: function() {
 
-            console.log('UBI - Block');
+            // console.log('UBI - Block');
 
             if($(this.element).find('.blockitem').length == 0) {
                 $(this.element).find('.placeholder').show();
@@ -212,10 +212,11 @@ var StackBlockEdit = {
                 $(this).find('INPUT:not([type=file]), SELECT, TEXTAREA').each(function(fldidx) {
                     var ary = $(this).attr('name').split(/(\[|\])/);
 
-                    console.log(ary);
+                    // console.log(ary);
 
                     // we're allowing drops from other blocks, so need to update ary[2] also...
-                    blockidx = $(self.element).parent().children().index(self.element);
+                    blockidx = $(self.element).parent().children('.block-edit').index(self.element);
+                    // console.log('BLockIdx : ' + blockidx);
                     ary[2] = blockidx;
 
                     ary[10] = idx;

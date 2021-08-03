@@ -102,7 +102,7 @@ var StackEdit = {
 
             var data = $(this.element).find('INPUT, SELECT, TEXTAREA').not('.stack-output').serializeJSON();
 
-            console.log(data);
+           // console.log(data);
          //  return false;
          
             // remove the top level wrapper (which is just the field name):
@@ -118,12 +118,17 @@ var StackEdit = {
 
         updateBlockIndexes: function() {
 
-            console.log('UBI - Stack');
+            // console.log('UBI - Stack');
+
+            // console.log($(this.element).find('.block-edit'));
 
             // reapply field indexes to represent reordering
             $(this.element).find('.block-edit').each(function(idx) {
 
                 $(this).find('INPUT:not([type=file]), SELECT, TEXTAREA').each(function(fldidx) {
+
+                 //   console.log(idx + " vs " + fldidx);
+
                     var ary = $(this).attr('name').split(/(\[|\])/);
                     ary[2] = idx;
                     $(this).attr('name', ary.join(''));
