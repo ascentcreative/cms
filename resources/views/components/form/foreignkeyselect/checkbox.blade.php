@@ -14,7 +14,7 @@
 
         @foreach ($opts as $opt)
       
-            <label style="display: block">
+            <label class="col-form-label" style="display: block">
                 <input type="checkbox" name="{{$name}}[]" value="{{ $opt->$idField }}" xclass="form-control" 
 
                 @if(!is_null($value) && array_search($opt->$idField, array_keys($value->keyBy($idField)->toArray())) !== false)
