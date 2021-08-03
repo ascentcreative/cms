@@ -69,6 +69,12 @@ body > section {
    
 }
 
+.cms-sidebar-content UL LI UL LI {
+    font-size: 0.8em;
+    margin-left: 1rem;
+    padding: 0;
+}
+
 
 .cms-sidebar-content UL LI A:hover {
     background: rgba(255,255,255,0.05);
