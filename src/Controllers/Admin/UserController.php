@@ -33,7 +33,8 @@ class UserController extends AdminBaseController
     public function rules($request, $model=null) {
 
        return [
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email'
         ]; 
 

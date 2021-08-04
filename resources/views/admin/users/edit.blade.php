@@ -5,11 +5,15 @@
 
 <div class="cms-screenblock cms-screenblock-main bg-white rounded shadow" style="">
    
-    <x-cms-form-input type="text" name="name" label="Name" value="{{ old('name', $model->name) }}">
-        The real name of the user
+    <x-cms-form-input type="text" name="first_name" label="First Name" value="{{ old('first_name', $model->first_name) }}">
+        The first name of the user
     </x-cms-form-input>
 
-    <x-cms-form-input type="text" name="email" label="Emaiil" value="{{ old('email', $model->email) }}">
+    <x-cms-form-input type="text" name="last_name" label="Last Name" value="{{ old('last_name', $model->last_name) }}">
+        The last name of the user
+    </x-cms-form-input>
+
+    <x-cms-form-input type="text" name="email" label="Email" value="{{ old('email', $model->email) }}">
         Their email address (also used for logging in etc)
     </x-cms-form-input>
 
