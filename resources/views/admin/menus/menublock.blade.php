@@ -52,21 +52,21 @@
 
                             @if($item)
 
-                            @switch($mi->linkable_type)
+                                @switch($mi->linkable_type)
 
-                                @case(\AscentCreative\CMS\Models\Page::class)
-                                    <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->linkable_id]) }}">{{ $mi->itemTitle }}</A>
-                                @break
+                                    @case(\AscentCreative\CMS\Models\Page::class)
+                                        <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->linkable_id]) }}">{{ $mi->itemTitle }}</A>
+                                    @break
 
-                                @default
-                                    <A href="{{ action([AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'edit'], ['menuitem' => $mi->id]) }}">{{ $mi->itemTitle }}</A>
-                              
+                                    @default
+                                        <A href="{{ action([AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'edit'], ['menuitem' => $mi->id]) }}">{{ $mi->itemTitle }}</A>
+                                
 
-                            @endswitch
+                                @endswitch
 
                             @else
 
-                            <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->id]) }}">{{ $mi->title }}</A>
+                                <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->id]) }}">{{ $mi->title }}</A>
 
                             @endif
 
@@ -74,15 +74,24 @@
                             
                         </td>
                         <td> @if($mi->linkable) {{ $mi->linkable->url }} @else {{ $mi->url }} @endif</td>
-                        <td><A class="modal-link" href="@switch($mi->linkable_type)
+                        <td>
                             
-                            @case(\AscentCreative\CMS\Models\Page::class)
-                            {{   action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'delete'], ['page' => $mi->linkable_id])  }}
-                            @break
                             
-                            @default 
-                            {{   action([AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'delete'], ['menuitem' => $mi->id])  }}
-                            @endswitch">[x]</A></td>
+                            <A class="modal-link" href="@if($item)
+                            
+                                @switch($mi->linkable_type)
+                            
+                                    @case(\AscentCreative\CMS\Models\Page::class)
+                                    {{   action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'delete'], ['page' => $mi->linkable_id])  }}
+                                    @break
+                            
+                                    @default 
+                                    {{   action([AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'delete'], ['menuitem' => $mi->id])  }}
+                                    @endswitch
+
+                                @else
+                                    {{   action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'delete'], ['page' => $mi->id])  }}
+                                @endif">[x]</A></td>
                     </tr>
                 @endforeach
                 </table>
