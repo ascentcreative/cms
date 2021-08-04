@@ -7,8 +7,14 @@
 
     <div style="columns: 3">
     <?php 
-        
+     
        $opts = $query->orderBy($labelField)->get();
+
+       if(is_array($value) || is_null($value)) {
+           $keys = $value;
+       } else {
+           $keys = array_keys($value->keyBy($idField)->toArray());
+       }
 
         ?>
 
@@ -17,7 +23,7 @@
             <label class="col-form-label" style="display: block">
                 <input type="checkbox" name="{{$name}}[]" value="{{ $opt->$idField }}" xclass="form-control" 
 
-                @if(!is_null($value) && array_search($opt->$idField, array_keys($value->keyBy($idField)->toArray())) !== false)
+                @if(!is_null($value) && array_search($opt->$idField, $keys) !== false)
 
                 {{-- @if (array_search($opt->$idField, $value->toArray() ) !== false) --}}
                     checked="checked"
