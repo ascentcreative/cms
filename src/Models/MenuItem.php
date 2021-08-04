@@ -30,7 +30,12 @@ class MenuItem extends Base
 
     public function getItemTitleAttribute() {
         if (is_null($this->title)) {
-            return $this->linkable->title;
+            if($this->linkable->titleField) {
+                $fld = $this->linkable->titleField;
+            } else {
+                $fld = 'title';
+            }
+            return $this->linkable->$fld;
         } else {
             return $this->title;
         }
