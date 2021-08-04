@@ -4,19 +4,23 @@
 
             <td class="title" style="vertical-align: top" valign="top">
 
+                <div class="pt-1 lead">
                 @if($item)
-                    <div class="pt-1"><a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">{{$item->title}}</a></div>
+                    <a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">{{$item->title}}</a>
                 @else 
-                    Pages not in any menu
+                    Pages not in menus
                 @endif
+                </div>
 
-                <div class="Ppt-1 btn-group dropright">
+                <div class="pt-1 btn-group dropright">
                     
                     <A class="btn btn-secondary btn-sm dropdown-toggle" href="#" data-toggle="dropdown" >Add</A>
 
                     <div class="dropdown-menu dropdown-menu-right" style="">
         
+                        @if($item)
                         <a class="btn btn-secondary btn-sm dropdown-item" href="{{ action([AscentCreative\CMS\Controllers\Admin\MenuItemController::class, 'create'], ['menu_id' => ($item ? $item->id : '') ]) }}">Menu Item</a>
+                        @endif
                         <a class="btn btn-secondary btn-sm dropdown-item" href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'create'], ['_menuitem[menu_id]' => ($item ? $item->id : '') ]) }}">Page</a>
         
                     </div>
@@ -34,7 +38,9 @@
                     } else {
 
                         $tree = [];
-                       // $tree = \AscentCreative\CMS\Models\MenuItem::scoped(['menu_id'=>$item->id])->withDepth()->defaultOrder()->get();
+
+                        $tree = \AscentCreative\CMS\Models\Page::whereDoesntHave('menuitem')->get();
+                      //  $tree = \AscentCreative\CMS\Models\MenuItem::scoped(['menu_id'=>$item->id])->withDepth()->defaultOrder()->get();
                     }
 
                 @endphp
@@ -44,7 +50,7 @@
                     <tr>
                         <td style="padding-left: {{10 + (20 * $mi->depth)}}px">
 
-                        
+                            @if($item)
 
                             @switch($mi->linkable_type)
 
@@ -57,6 +63,12 @@
                               
 
                             @endswitch
+
+                            @else
+
+                            <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->id]) }}">{{ $mi->title }}</A>
+
+                            @endif
 
 
                             

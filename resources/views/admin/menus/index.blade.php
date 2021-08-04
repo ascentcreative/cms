@@ -24,6 +24,6 @@
      @endforeach
 
 
-     {{-- @include('cms::admin.menus.menublock', ['item'=>null]) --}}
+     @include('cms::admin.menus.menublock', ['item'=>null])
 
 @endsection
