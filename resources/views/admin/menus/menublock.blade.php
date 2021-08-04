@@ -39,7 +39,7 @@
 
                         $tree = [];
 
-                        $tree = \AscentCreative\CMS\Models\Page::whereDoesntHave('menuitem')->get();
+                        $tree = \AscentCreative\CMS\Models\Page::whereDoesntHave('menuitem')->orderBy('title')->get();
                       //  $tree = \AscentCreative\CMS\Models\MenuItem::scoped(['menu_id'=>$item->id])->withDepth()->defaultOrder()->get();
                     }
 
