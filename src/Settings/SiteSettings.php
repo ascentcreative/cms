@@ -12,6 +12,9 @@ class SiteSettings extends Settings
 
     public ?string $favicon;
 
+
+    public ?int $homepage_id;
+
     // public string $org_name;
     // public string $org_address;
     // //public string

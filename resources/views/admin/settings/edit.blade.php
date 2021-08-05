@@ -76,6 +76,14 @@
                    Favicon to use for the site
                 </x-cms-form-input>
 
+                {{-- <x-cms-form-fileupload type="text" name="homa" label="Favicon" value="{{ old('favicon', $model->favicon) }}"> --}}
+                <x-cms-form-foreignkeyselect type="select" name="homepage_id" label="Homepage" value="{{ old('homepage_id', $model->homepage_id) }}"
+                    :query="\AscentCreative\CMS\Models\Page::query()"
+                    >
+                    Select the page to load at the home url for the site
+                </x-cms-form-foreignkeyselect>
+                 {{-- </x-cms-form-input> --}}
+
             </div>
 
 

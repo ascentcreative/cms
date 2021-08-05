@@ -48,7 +48,21 @@
                 <table class="menuitems">
                 @foreach($tree as $mi)
                     <tr>
+
+
+                        @php
+                            $homeid = app(AscentCreative\CMS\Settings\SiteSettings::class)->homepage_id;
+                            $is_home = false;
+                            if (
+                                ($item && $mi->linkable_type == \AscentCreative\CMS\Models\Page::class && $mi->linkable_id == $homeid) || (!$item && $mi->id == $homeid)
+                                ) {
+                                    $is_home = true;
+                                }
+                        @endphp
+
                         <td style="padding-left: {{10 + (20 * $mi->depth)}}px">
+
+                           
 
                             @if($item)
 
@@ -68,6 +82,10 @@
 
                                 <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->id]) }}">{{ $mi->title }}</A>
 
+                            @endif
+
+                            @if($is_home)
+                                <i class="bi-house-door-fill"></i>
                             @endif
 
 
