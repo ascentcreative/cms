@@ -62,6 +62,10 @@
 
                         <td style="padding-left: {{10 + (20 * $mi->depth)}}px">
 
+                            @if($is_home)
+                                <i class="bi-house-door-fill text-primary"></i>
+                            @endif
+
                            
 
                             @if($item)
@@ -84,10 +88,7 @@
 
                             @endif
 
-                            @if($is_home)
-                                <i class="bi-house-door-fill"></i>
-                            @endif
-
+               
 
                             
                         </td>
