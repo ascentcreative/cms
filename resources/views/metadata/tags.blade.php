@@ -11,8 +11,8 @@
 <meta name="description" content="{{ $desc }}" />
 
 <meta name="og:description" content="{{ $desc }}" />
-@if(!request()->isPreview)
-    <meta name="og:updated_time" content="{{ $model ? $model->updated_at->toAtomString() ?? '' }}" />
+@if($model && !request()->isPreview)
+    <meta name="og:updated_time" content="{{ $model->updated_at->toAtomString() ?? '' }}" />
 @endif
 
-<meta name="twitter:description" content="{{ $desc }}" />
+<meta name="twitter:description" content="{{ $desc }}" /> 
