@@ -21,8 +21,6 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     });
 
 
-
-
     //Route::get('/contact', 'ContactController@showform'); // not needed as form can be placed in stacked page
     Route::get('/contact/submit', 'ContactController@submit');
     Route::get('/contact/confirm', function() {
@@ -33,6 +31,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     Route::get('/admin/login', function() {
         return view('cms::auth.login');
     })->name('admin-login');
+
 
     Route::prefix('admin')->namespace('Admin')->middleware(['useAdminLogin', 'auth', 'can:administer'])->group(function() {
 
@@ -128,7 +127,6 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::get('/bibleref/parse/{term}', [AscentCreative\CMS\Controllers\BibleRefController::class, 'parse']);
 
         Route::post('/video-embed/render', function() {
-            //return request()->all();
             return embedVideo(request()->url);
         });
 
