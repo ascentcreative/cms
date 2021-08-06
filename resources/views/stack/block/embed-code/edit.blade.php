@@ -5,7 +5,7 @@
 
 
 <div class="flex" style="flex: 0 0 200px">
-    <H3 class="text-muted text-center" style="width: 100%;">EMBED CODE</H3>
+    <H2 class="text-muted text-center" style="width: 100%;">EMBED CODE</H2>
 </div>
 
 <div class="container">
