@@ -171,8 +171,6 @@ function menu($slug, $maxDepth=0) {
 
 function sitebanner($max=1) {
 
-    //dump(AscentCreative\CMS\Models\SiteBanner::live()->orderBy('start_date', 'ASC')->get());
-
     $banner = AscentCreative\CMS\Models\SiteBanner::live()->orderBy('start_date', 'DESC')->first();
 
     if (!$banner) {

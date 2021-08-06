@@ -14,7 +14,7 @@
                     @break
 
                 @case('video')
-                    {{ embedVideo('https://youtu.be/VkDL6nFPHKU') }}
+                    {{ embedVideo( $item->video ) }}
                     @break
 
             @endswitch

@@ -127,6 +127,11 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
         Route::get('/bibleref/parse/{term}', [AscentCreative\CMS\Controllers\BibleRefController::class, 'parse']);
 
+        Route::post('/video-embed/render', function() {
+            //return request()->all();
+            return embedVideo(request()->url);
+        });
+
     });
 
     Route::get('/modal/{path}', function($path) {

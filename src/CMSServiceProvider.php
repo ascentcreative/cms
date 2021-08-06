@@ -228,6 +228,8 @@ class CMSServiceProvider extends ServiceProvider
 
     Blade::component('cms-form-wysiwyg', 'AscentCreative\CMS\View\Components\Form\Wysiwyg');
 
+    Blade::component('cms-form-videoembed', 'AscentCreative\CMS\View\Components\Form\VideoEmbed');
+
 
     Blade::component('cms-form-stack', 'AscentCreative\CMS\View\Components\Form\Stack');
     Blade::component('cms-form-stackblock', 'AscentCreative\CMS\View\Components\Form\StackBlock');
