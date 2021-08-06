@@ -13,9 +13,7 @@
 
 
     <x-cms-form-input type="text" name="{{$name}}" value="{!! $value !!}" label="Video URL" wrapper="simple" class="video-embed-url">
-        Either the Page URL or Share URL:<br/>
-        <code>https://www.youtube.com/watch?v=[code]</code><br/>
-        <code>https://youtu.be/[code]</code>
+        Either the Page URL or Share URL: <code>https://www.youtube.com/watch?v=[code]</code>, <code>https://youtu.be/[code]</code>
     </x-cms-form-input>
 
     </div>

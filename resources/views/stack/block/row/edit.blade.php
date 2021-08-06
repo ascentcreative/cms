@@ -37,7 +37,7 @@ $unid = 'sbe-' . uniqid();
         
         <div class="placeholder" @if( count((array) ($value->items ?? [])) > 0) style="display: none" @endif/>
             Add an item:
-            <A href="#" class="block-add-item-text">Text</A> | <a href="#" class="block-add-item-image">Image</a> | <a href="#" class="block-add-item-video">video</a>
+            <A href="#" class="block-add-item-text">Text</A> | <a href="#" class="block-add-item-image">Image</a> | <a href="#" class="block-add-item-video">Video</a>
         </div>
 
     </div>
