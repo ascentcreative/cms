@@ -1,8 +1,14 @@
 @php
 
-    $profile = \Dymantic\InstagramFeed\Profile::where('username', 'kieranmetcalfe')->first();
+    if(!$data->account) {
+        return;
+    }
+    
+    $profile = \Dymantic\InstagramFeed\Profile::find($data->account); //where('username', 'ascent_creative')->first();
 
-    $data = $profile->feed(5);
+
+
+    $data = $profile->refreshFeed($data->imagecount ?? 5);
     
 @endphp
 

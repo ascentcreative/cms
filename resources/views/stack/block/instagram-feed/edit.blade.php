@@ -10,6 +10,12 @@
 
     <div class="container">
 
+        <x-cms-form-foreignkeyselect type="select" name="{{ $name }}[account]" value="{{ $value->account ?? ''}}" label="Account" 
+            :query="\Dymantic\InstagramFeed\Profile::query()" labelField="username"
+            />
+
+        <x-cms-form-input type="number" name="{{ $name }}[imagecount]" value="{{ $value->imagecount ?? 5 }}" label="Images to Show" />
+
     </div>
 
 
