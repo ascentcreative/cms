@@ -36,7 +36,7 @@ class ForeignKeySelect extends Component
      *
      * @return void
      */
-    public function __construct($type='select', $label, $name, $value=[], $query, $labelField="title", $sortField="title", $sortDirection="ASC", $idField="id", $nullItemLabel="Please Select:", $wrapper='bootstrapformgroup', $class='')
+    public function __construct($type='select', $label, $name, $value=[], $query, $labelField="title", $sortField=null, $sortDirection="ASC", $idField="id", $nullItemLabel="Please Select:", $wrapper='bootstrapformgroup', $class='')
     {
         $this->type = $type;
         $this->label = $label;
@@ -50,7 +50,11 @@ class ForeignKeySelect extends Component
         $this->query = $query; // Builder instance allowing filters to be applied to the dataset
 
         $this->labelField = $labelField;
-        $this->sortField = $sortField;
+        if(is_null($sortField)) {
+            $this->sortField = $labelField;
+        } else {
+            $this->sortField = $sortField;
+        }
         $this->sortDirection = $sortDirection;
         $this->idField = $idField;
 
