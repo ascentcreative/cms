@@ -92,7 +92,12 @@
 
                             
                         </td>
-                        <td> @if($mi->linkable) {{ $mi->linkable->url }} @else {{ $mi->url }} @endif</td>
+                        <td> 
+                            @if($mi->linkable) {{ $mi->linkable->url }} @else {{ $mi->url }} @endif
+                       
+                            &nbsp;<A href="@if($mi->linkable) {{ $mi->linkable->url }} @else {{ $mi->url }} @endif" class="bi-box-arrow-up-right" target="_blank"></A>
+                        
+                        </td>
                         <td>
                             
                             
