@@ -44,7 +44,7 @@
                 @break
 
                 @case('stack')
-                    <x-cms-form-stack label="TESTING" 
+                    <x-cms-form-stack label="" 
                     name="content" 
                     :value="old('content', $model->content)" 
                     wrapper="none"/>
