@@ -5,18 +5,8 @@
 
 @section('element')
 
-    @dump($value)
-
     <div class="ajaxuploadmulti" id="{{nameToId($name)}}"">
-
-        {{--  --}}
-        <input type="file" multiple class="ajaxupload-file" accept="{{ join(',', $accept) }}" id="{{nameToId($name)}}-upload">
-
-
-
-      
-        
-        
+        <input type="file" multiple class="ajaxupload-file" accept="{{ join(',', $accept) }}" id="{{nameToId($name)}}-upload">        
     </div>
 
     <label class="button btn btn-primary btn-sm bi-plus-circle-fill" for="{{ nameToId($name) }}-upload">
@@ -24,34 +14,25 @@
     </label>
 
 
-        {{-- Tempted to set this as a template, and have the jQuery Widget control creation 
-            of them at runtime (both on load, and when new files are added) --}}
+    {{-- Tempted to set this as a template, and have the jQuery Widget control creation 
+        of them at runtime (both on load, and when new files are added) --}}
 
-            <template id="ajaxuploadmulti-item">
-                <div class="ajaxuploadmulti-ui ajaxupload-ui form-control">
-                    <div class="ajaxupload-display">
-                        
-                        <A href="#" onclick="return false;" class="ajaxupload-reset bi-x-square-fill text-lg text-danger" style="font-size: 1.2rem; padding-right: 20px;"></A>
-        
-                        <div class="ajaxupload-progress"></div>
-                        <div class="ajaxupload-text">
-                            
-                            @if($value) 
-                                {{-- @php
-                                   // $file = AscentCreative\CMS\Models\File::find($value);
-                                @endphp
-                                {{ // $file->original_name }} --}}
-                            @else
-                                Choose file
-                            @endif
-                            
-                        </div>
-        
-                    </div>
-        
-                    <input type="hidden" name="{{$name}}[]" class="ajaxuploadmulti-value" xid="{{nameToId($name)}}-value" value="{{ $value }}">
-                </div> 
-            </template>
+    <template id="ajaxuploadmulti-item">
+        <div class="ajaxuploadmulti-ui ajaxupload-ui form-control">
+            <div class="ajaxupload-display">
+                
+                <A href="#" onclick="return false;" class="ajaxupload-reset bi-x-square-fill text-lg text-danger" style="font-size: 1.2rem; padding-right: 20px;"></A>
+                <div class="ajaxupload-progress"></div>
+                <div class="ajaxupload-text"></div>
+
+            </div>
+
+            <input type="hidden" name="{{$name}}[999][id]" class="ajaxuploadmulti-id" xid="{{nameToId($name)}}-id" value="">
+            <input type="hidden" name="{{$name}}[999][original_name]" class="ajaxuploadmulti-label" xid="{{nameToId($name)}}-label" value="">
+        </div> 
+    </template>
+
+
 @overwrite
 
 @once
@@ -67,7 +48,7 @@
     <script>
         $(document).ready(function() {
             $('#{{ nameToId($name) }}').ajaxuploadmulti({
-                data: {!! $value !!},
+                data: @json($value),
                 disk: '{{ $disk }}',
                 path: '{{ $path }}',
                 preserveFilename: {{ $preserveFilename ? 'true':'false' }}

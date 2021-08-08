@@ -84,11 +84,29 @@ var AjaxUploadMulti = {
         $(this.element).append(item);
         $(item).ajaxuploadmultifile();
         if(data) {
+            console.log('setting data');
+            console.log(data);
             $(item).ajaxuploadmultifile('setValue', data.id , data.original_name);
         }
+
+        this.updateFileIndexes();
+
         return item;
+
         
+        
+    },
+
+
+    updateFileIndexes: function() {
+        $(this.element).find('.ajaxuploadmulti-ui').each(function(index) {
+            var prefix = "_attachments[" + index + "]";
+            $(this).find("input").each(function() {
+               this.name = this.name.replace(/_attachments\[\d+\]/, prefix);   
+            });
+        });
     }
+
 
 
    
@@ -111,7 +129,6 @@ var AjaxUploadMultiFile = {
         console.log('this', this.element);
         var self = this;
 
-
         $(this.element).find('.ajaxupload-reset').on('click', function() {
             $(self.element).remove();
         });
@@ -122,17 +139,13 @@ var AjaxUploadMultiFile = {
     setValue: function(value, text) {
 
         console.log(value, text);
-        $(this.element).find('.ajaxuploadmulti-value').val(value);
+        $(this.element).find('.ajaxuploadmulti-id').val(value);
+        $(this.element).find('.ajaxuploadmulti-label').val(text);
         $(this.element).addClass('has-file');
         this.updateUI(text, 0);
+
     },
 
-    reset: function() {
-        console.log('resetting');
-        $(this.element).find('.ajaxuploadmulti-value').val('');
-        $(this.element).removeClass('has-file');
-        this.updateUI(this.options.placeholder, 0);
-    },
 
     updateUI: function(text, pct=0) {
 
@@ -149,8 +162,7 @@ var AjaxUploadMultiFile = {
 
         var self = this;
 
-        console.log('uploading', file);
-
+      
         var formData = new FormData(); 
         formData.append('payload', file); 
         formData.append('disk', 'public'); //self.options.disk);

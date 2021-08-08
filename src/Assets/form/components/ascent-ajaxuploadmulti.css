@@ -1,3 +1,9 @@
+.ajaxuploadmulti .form-control {
+    padding: 0px;
+    overflow: hidden;
+    margin-bottom: 10px;
+ }
+
 .ajaxuploadmulti input[type="file"] {
     display: none;
 }
@@ -26,7 +32,7 @@
     align-items: center;
 }
 
-.ajaxuploadmulti .ajaxupload-ui .ajaxupload-display {
+.ajaxuploadmulti .ajaxuploadmulti-ui .ajaxupload-display {
     flex: 1 1 100%;
     height: calc(1.5em + .75rem + 2px);
     position: relative;
@@ -38,13 +44,13 @@
 
 }
 
-.ajaxupload .ajaxupload-ui .ajaxupload-display .ajaxupload-text {
+.ajaxuploadmulti .ajaxupload-ui .ajaxupload-display .ajaxupload-text {
     position: relative;
     z-index: 11;
 }
 
 
-.ajaxupload .ajaxupload-display .ajaxupload-progress {
+.ajaxuploadmulti .ajaxupload-display .ajaxupload-progress {
 
     position: absolute;
     background: #efefef;
@@ -56,10 +62,10 @@
 
 }
 
-.ajaxupload .ajaxupload-reset {
+.ajaxuploadmulti .ajaxupload-reset {
     display: none;
 }
 
-.ajaxupload.has-file .ajaxupload-reset {
+.ajaxuploadmulti.has-file .ajaxupload-reset {
     display: inline-block;
 }
