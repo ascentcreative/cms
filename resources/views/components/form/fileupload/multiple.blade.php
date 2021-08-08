@@ -5,6 +5,7 @@
 
 @section('element')
 
+    <div class="p-3 bg-light border">
     <div class="ajaxuploadmulti" id="{{nameToId($name)}}"">
         <input type="file" multiple class="ajaxupload-file" accept="{{ join(',', $accept) }}" id="{{nameToId($name)}}-upload">        
     </div>
@@ -12,6 +13,7 @@
     <label class="button btn btn-primary btn-sm bi-plus-circle-fill" for="{{ nameToId($name) }}-upload">
         Add Files
     </label>
+    </div>
 
 
     {{-- Tempted to set this as a template, and have the jQuery Widget control creation 
