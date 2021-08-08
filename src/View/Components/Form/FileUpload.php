@@ -20,13 +20,15 @@ class FileUpload extends Component
 
     public $accept;
 
+    public $multiple;
+
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $disk='public', $path='ajaxuploads', $preserveFilename=false, $wrapper="bootstrapformgroup", $class='', $accept=[])
+    public function __construct($label, $name, $value, $disk='public', $path='ajaxuploads', $preserveFilename=false, $wrapper="bootstrapformgroup", $class='', $accept=[], $multiple=false)
     {
         
         $this->label = $label;
@@ -40,6 +42,8 @@ class FileUpload extends Component
         $this->wrapper = $wrapper;
         $this->class = $class;
 
+        $this->multiple = $multiple;
+
     }
 
     /**
@@ -49,6 +53,6 @@ class FileUpload extends Component
      */
     public function render()
     {
-        return view('cms::components.form.fileupload');
+        return view('cms::components.form.fileupload.' . ($this->multiple ? 'multiple' : 'single') );
     }
 }
