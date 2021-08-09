@@ -61,7 +61,11 @@ var PivotList = {
 			// create the UL and autocomplete fields
 			$(outer).append('<UL class="pivotlist-list list-group pb-2"></UL>');
 			$(outer).find(".pivotlist-list").append('<LI class="emptyDisp list-group-item border-0 bg-transparent">No items selected</LI>');
-			$(outer).append('<DIV class="inputbar d-flex align-items-center"><INPUT type="text" id="' + thisID + '-input" class="flex-fill mr-2 form-control" spellcheck="false" placeholder="' + opts.placeholder + '"/><A href="#" id="' + thisID + '-addlink" class="btn-sm btn-primary">Add</A></DIV>');
+			
+            // ** temp removal of 'add' button as it does nothing! ** //
+            // $(outer).append('<DIV class="inputbar d-flex align-items-center"><INPUT type="text" id="' + thisID + '-input" class="flex-fill mr-2 form-control" spellcheck="false" placeholder="' + opts.placeholder + '"/><A href="#" id="' + thisID + '-addlink" class="btn-sm btn-primary">Add</A></DIV>');
+            $(outer).append('<DIV class="inputbar d-flex align-items-center"><INPUT type="text" id="' + thisID + '-input" class="flex-fill mr-2 form-control" spellcheck="false" placeholder="' + opts.placeholder + '"/></DIV>');
+            
 		
 			// autocomplete and events
 			$("#" + thisID + "-input").autocomplete({
@@ -72,12 +76,41 @@ var PivotList = {
 			    		console.log(ui);
 			    	
 			    		if (  $("#" + thisID + " #" + ui.item.id).length > 0 ) {
-						// check for duplicates (across all source fields)
-						alert ("That item has already been added.")
+                            // check for duplicates (across all source fields)
+                            alert ("That item has already been added.")
 			    		} else { 
-			    			self.createBlock('', ui.item.id, ui.item.label, ui.item);
-			    			console.log(event);
-			    			$("#" + thisID + "-input").val('');
+
+                            if(ui.item.id == 'create' && opts.storeRoute) {
+                                // fire off a request to create the new term.
+                               // alert(ui.item.term);
+
+                                $.ajax({
+
+                                    type: 'POST',
+                                    url: opts.storeRoute,
+                                    data: {
+                                        'theme': ui.item.term
+                                    },
+                                    headers: {
+                                        'Accept' : "application/json"
+                                    }
+                                }).done(function(data, xhr, request){
+                                 //   console.log(data);  
+                                  //  alert(data.id);
+                                    ui.item.id = data.id;
+                                    ui.item.label = data.theme;
+
+                                    self.createBlock('', ui.item.id, ui.item.label, ui.item);
+                                    $("#" + thisID + "-input").val('');
+                                });
+                                   
+                            } else {
+
+                                self.createBlock('', ui.item.id, ui.item.label, ui.item);
+                                $("#" + thisID + "-input").val('');
+                            }
+
+			    		
 						}
 						
 						
