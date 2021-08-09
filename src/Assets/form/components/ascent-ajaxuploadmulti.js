@@ -196,7 +196,7 @@ var AjaxUploadMultiFile = {
             url: "/cms/ajaxupload",
             data: formData
 
-        }).done(function(data, xhr, requesr){
+        }).done(function(data, xhr, request){
 
                 
                 //Do something success-ish
