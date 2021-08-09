@@ -16,6 +16,7 @@ class PivotList extends Component
     public $dataval;
 
     public $optionRoute;
+    public $storeRoute;
     public $labelField;
     public $addToAll;
     public $sortField;
@@ -32,7 +33,7 @@ class PivotList extends Component
     public function __construct($label, $name, $value, $optionRoute, $optionModel, $labelField, 
                                 $addToAll=null, $sortField=null, 
                                 $pivotField=null, $pivotFieldLabel=null, $pivotFieldPlaceholder=null,
-                                $class="")
+                                $class="", $storeRoute=null)
     {
      
         /*
@@ -58,6 +59,12 @@ class PivotList extends Component
         The URL to which the type-ahead/automplete terms will be sent
         */
         $this->optionRoute = $optionRoute;
+
+        /*
+        The URL to which requests to create a new item will be sent
+        (Optional - only use if simple values as typed wouuld make a valid item. i.e. simple themes etc)
+        */
+        $this->storeRoute = $storeRoute;
 
         /*
         The field from the autocomplete data to be used as the label for the individual elements

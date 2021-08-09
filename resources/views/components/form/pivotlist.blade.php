@@ -16,6 +16,9 @@
             
             $('#{{$id}}').pivotlist({
                 optionRoute: '{{$optionRoute}}',
+                @if($storeRoute)
+                storeRoute: '{{$storeRoute}}',
+                @endif
                 labelField: '{{$labelField}}',
                 data: @json($value),
                 placeholder: 'Type a few characters to search...',
