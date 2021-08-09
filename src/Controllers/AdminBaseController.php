@@ -181,7 +181,13 @@ abstract class AdminBaseController extends Controller
        // $cls = $this::$modelClass;
         $model = ($this::$modelClass)::make(); //new $cls();
         $this->commitModel($request, $model);
-        return redirect()->to($request->_postsave);
+
+        if($request->wantsJson()) {
+            return $model;
+        } else {
+            return redirect()->to($request->_postsave);
+        }
+        
   
     }
 
