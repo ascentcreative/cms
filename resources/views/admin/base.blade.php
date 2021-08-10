@@ -40,6 +40,7 @@
     @script('/vendor/ascent/cms/js/jquery-ui.min.js')
     @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
     @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
+    @stack('lib')
     @stack('scripts')
     <script>
         $.ajaxSetup({
