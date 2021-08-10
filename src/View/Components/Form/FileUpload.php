@@ -21,6 +21,7 @@ class FileUpload extends Component
     public $accept;
 
     public $multiple;
+    public $sortable;
 
 
     /**
@@ -28,7 +29,7 @@ class FileUpload extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $disk='public', $path='ajaxuploads', $preserveFilename=false, $wrapper="bootstrapformgroup", $class='', $accept=[], $multiple=false)
+    public function __construct($label, $name, $value, $disk='public', $path='ajaxuploads', $preserveFilename=false, $wrapper="bootstrapformgroup", $class='', $accept=[], $multiple=false, $sortable=false)
     {
         
         $this->label = $label;
@@ -43,6 +44,7 @@ class FileUpload extends Component
         $this->class = $class;
 
         $this->multiple = $multiple;
+        $this->sortable = $sortable;
 
     }
 

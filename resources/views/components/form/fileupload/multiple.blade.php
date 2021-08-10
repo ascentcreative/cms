@@ -6,7 +6,7 @@
 @section('element')
 
     <div class="p-3 bg-light border">
-    <div class="ajaxuploadmulti" id="{{nameToId($name)}}"">
+    <div class="ajaxuploadmulti" id="{{nameToId($name)}}"" name="{{ $name }}">
         <input type="file" multiple class="ajaxupload-file" accept="{{ join(',', $accept) }}" id="{{nameToId($name)}}-upload">        
     </div>
 
@@ -51,6 +51,7 @@
         $(document).ready(function() {
             $('#{{ nameToId($name) }}').ajaxuploadmulti({
                 data: @json($value),
+                sortable: {{ $sortable ? 'true' : 'false' }},
                 disk: '{{ $disk }}',
                 path: '{{ $path }}',
                 preserveFilename: {{ $preserveFilename ? 'true':'false' }}
