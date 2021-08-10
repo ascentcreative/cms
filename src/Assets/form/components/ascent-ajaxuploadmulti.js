@@ -13,7 +13,8 @@ var AjaxUploadMulti = {
         disk: 'public',
         path: 'ajaxuploads',
         preserveFilename: false,
-        placeholder: 'Choose file'
+        placeholder: 'Choose file',
+        sortable: false
     },
     
     _init: function () {
@@ -69,6 +70,15 @@ var AjaxUploadMulti = {
           
 
          });
+
+         if (this.options.sortable) {
+            $(this.element).sortable({
+                update: function(event, ui) {
+                    self.updateFileIndexes();
+                    ui.item.find('input').change();
+                }
+            });
+        }
         
         
 
@@ -93,18 +103,23 @@ var AjaxUploadMulti = {
 
         return item;
 
-        
-        
     },
 
 
     updateFileIndexes: function() {
+
+        fldname = this.element.attr('name');
         $(this.element).find('.ajaxuploadmulti-ui').each(function(index) {
-            var prefix = "_attachments[" + index + "]";
+            var prefix = fldname + "[" + index + "]";
             $(this).find("input").each(function() {
-               this.name = this.name.replace(/_attachments\[\d+\]/, prefix);   
+
+                esc = fldname.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+                re = new RegExp(esc + "\\[\\d+\\]");
+               this.name = this.name.replace(re, prefix);   
             });
         });
+
     }
 
 
@@ -143,6 +158,9 @@ var AjaxUploadMultiFile = {
         $(this.element).find('.ajaxuploadmulti-label').val(text);
         $(this.element).addClass('has-file');
         this.updateUI(text, 0);
+
+        // fire a change event
+        $(this.element).find('.ajaxuploadmulti-label').change();
 
     },
 
