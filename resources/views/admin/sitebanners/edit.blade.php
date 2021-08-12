@@ -48,6 +48,9 @@
             <x-cms-form-fileupload label="Image" name="image_id" :value="old('image_id', $model->image_id ?? '')">
             </x-cms-form-fileupload>
 
+            <x-cms-form-checkbox type="" name="use_full_width" label="Use Full Width?" checkedValue="1" uncheckedValue="0" value="{{ old('use_full_width', $model->use_full_width) }}" />
+
+
             <x-cms-form-input type="text" name="link_url" label="Link URL" value="{{ old('link_url', $model->link_url) }}">
                 The URL that the banner will link to
             </x-cms-form-input>
