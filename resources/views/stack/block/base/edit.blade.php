@@ -50,6 +50,7 @@
 
                 <x-cms-form-colour label="Background Colour" name="{{ $name }}[bgcolor]" :value="$value->bgcolor ?? 'white'" />
 
+                <x-cms-form-fileupload label="Background Image" name="{{ $name }}[bgimage]" :value="$value->bgimage ?? ''" />
 
                 <div class="border p-2 mb-2">
                     <div><strong>Padding</strong></div>
@@ -86,3 +87,36 @@
 
 
 </div>
+
+
+{{-- @once
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+
+            $('.toggle-display').each(function() {
+
+                var disp = $(this);
+                
+                var ctl = $('INPUT[name="' + $(this).data('toggle-control') + '"]');
+
+                if(ctl.is(":checked")) {
+                    disp.show();
+                }
+
+                ctl.on('change', function() {
+                    if ($(this).is(":checked")) {
+                        disp.slideDown('fast');
+                    } else {
+                        disp.slideUp('fast');
+                    }
+                });
+
+            });
+
+        });
+    </script>
+@endpush
+
+@endonce --}}
