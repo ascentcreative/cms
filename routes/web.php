@@ -153,7 +153,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             'path' => '/storage/' . $path,
         ]);
 
-    })->middleware('auth', 'can:uploadfiles');
+    })->middleware('auth', 'can:upload-files');
 
 
 
@@ -177,7 +177,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         return $file;
 
 
-    })->middleware('auth', 'can:uploadfiles');
+    })->middleware('auth', 'can:upload-files');
 
 
 });
