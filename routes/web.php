@@ -10,7 +10,8 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     Route::get('/', function () {
 
         // get 'homepage' and render it.
-       $page_id = app(AscentCreative\CMS\Settings\SiteSettings::class)->homepage_id;
+
+        $page_id = app(AscentCreative\CMS\Settings\SiteSettings::class)->homepage_id;
         $page = \AscentCreative\CMS\Models\Page::find($page_id); // <- the page flagged as homepage.
         if($page) {
             return app()->make(\AscentCreative\CMS\Controllers\PageController::class)->show($page);
@@ -18,7 +19,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             return view('welcome');
         }
     
-    });
+    })->name('homepage');
 
 
     //Route::get('/contact', 'ContactController@showform'); // not needed as form can be placed in stacked page
