@@ -18,6 +18,8 @@ class CMSServiceProvider extends ServiceProvider
 
     $this->app->register(\AscentCreative\CMS\Providers\EventServiceProvider::class);
 
+    $this->app->register(\Jenssegers\Agent\AgentServiceProvider::class);
+
     //
     $this->app->singleton(HeadTitle::class, function() {
       return new HeadTitle();
@@ -39,6 +41,8 @@ class CMSServiceProvider extends ServiceProvider
     /* Model facades */
 
     $aliases = array();
+
+    $aliases['Agent'] = \Jenssegers\Agent\Facades\Agent::class;
 
     // For each model:
     // 1) Set up an alias for the Facade (allows Page::method() calls)
