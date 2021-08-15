@@ -31,7 +31,7 @@
                 @endif" 
                 
                 @if(isset($item->bgimage) && $item->bgimage != '') 
-                class="parallax-window" data-parallax="scroll" data-image-src="/storage/{{ \AscentCreative\CMS\Models\File::find($item->bgimage)->filepath }}"
+                data-android-fix="false" class="parallax-window" data-parallax="scroll" data-image-src="/storage/{{ \AscentCreative\CMS\Models\File::find($item->bgimage)->filepath }}"
                 @endif
 
                 >
