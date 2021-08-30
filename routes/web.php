@@ -36,6 +36,9 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
     Route::prefix('admin')->namespace('Admin')->middleware(['useAdminLogin', 'auth', 'can:administer'])->group(function() {
 
+        Route::get('/phpinfo', function() {
+            phpinfo();
+        });
   
         Route::match(['post', 'put'], '/previewtest', function() {
 
