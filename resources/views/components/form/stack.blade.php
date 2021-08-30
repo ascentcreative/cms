@@ -106,7 +106,7 @@
     @push('styles')
         @style('/vendor/ascent/cms/form/components/ascent-stack-edit.css')
     @endpush
-    @push('scripts')
+    @push('lib')
         @script('/vendor/ascent/cms/js/jquery.serializejson.js')
         @script('/vendor/ascent/cms/form/components/ascent-stack-edit.js')
         @script('/vendor/ascent/cms/form/components/ascent-stack-block-edit.js')
