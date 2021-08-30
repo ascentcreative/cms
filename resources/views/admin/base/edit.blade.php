@@ -70,7 +70,7 @@
 
     <nav class="navbar">
         <BUTTON type="submit" class="btn btn-primary bi-check-circle-fill" class="button">Save {{$modelName}}</BUTTON>
-        <A href="{{ url()->previous() }}" class="btn btn-primary bi-x-circle-fill">Close {{$modelName}}</A>
+        <A href="{{ url()->previous() }}" class="btn btn-primary bi-x-circle-fill">{{-- Close {{$modelName}} --}} Exit Without Saving</A>
     </nav>
 
 @endsection
