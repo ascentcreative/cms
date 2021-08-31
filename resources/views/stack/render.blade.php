@@ -28,14 +28,21 @@
                     margin-left: {{ $item->margin->left }}px;
                 @endif @if(isset($item->margin->right) && $item->margin->right != 0) 
                     margin-right: {{ $item->margin->right }}px;
+                @endif @if(Agent::isMobile() && isset($item->bgimage) && $item->bgimage != '')
+                    background-image: url('/storage/{{ \AscentCreative\CMS\Models\File::find($item->bgimage)->filepath }}');
+                    background-size: cover;
+                    background-position: center;
                 @endif" 
                 
-                @if(isset($item->bgimage) && $item->bgimage != '') 
-                data-android-fix="false" class="parallax-window" data-parallax="scroll" data-image-src="/storage/{{ \AscentCreative\CMS\Models\File::find($item->bgimage)->filepath }}"
-                @endif
+                @if(!Agent::isMobile())
+                    @if(isset($item->bgimage) && $item->bgimage != '') 
+                        data-android-fix="false" class="parallax-window" data-parallax="scroll" data-image-src="/storage/{{ \AscentCreative\CMS\Models\File::find($item->bgimage)->filepath }}"
+                    @endif
+                @endif         
 
                 >
 
+      
 
 
             {{-- @if(!isset($item->fullwidth) || !$item->fullwidth)  --}}
