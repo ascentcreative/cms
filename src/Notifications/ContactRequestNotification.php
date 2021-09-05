@@ -44,10 +44,13 @@ class ContactRequestNotification extends Notification
     public function toMail($notifiable)
     {
         //return 
+
+        $settings = app(\AscentCreative\CMS\Settings\SiteSettings::class);
         
         $msg = (new MailMessage)
                     ->template('vendor.notifications.email')
-                    ->subject('New Contact Request');
+                    ->subject('New Contact Request')
+                    ->from($settings->contact_from_address, $settings->contact_from_name);
 
         $msg->greeting('A new contact request has been received:');
 
