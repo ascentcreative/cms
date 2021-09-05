@@ -38,6 +38,7 @@ class SiteSettings extends Settings
     public ?string $contact_from_address;
     public ?string $contact_to_addresses;
     public ?float $contact_recaptcha_threshold;
+    public ?float $contact_confirm_page_id;
 
 
 

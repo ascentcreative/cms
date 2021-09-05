@@ -128,6 +128,13 @@
                     The score below which enquiries will be rejected as spam.
                 </x-cms-form-input>
                 @endif
+
+
+                <x-cms-form-foreignkeyselect type="select" name="contact_confirm_page_id" label="Confirmation Page" value="{{ old('contact_confirm_page_id', $model->contact_confirm_page_id) }}"
+                    :query="\AscentCreative\CMS\Models\Page::query()"
+                    >
+                    Select the page to display after a successful contact form submission
+                </x-cms-form-foreignkeyselect>
         
         
               
