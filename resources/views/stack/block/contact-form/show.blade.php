@@ -11,10 +11,12 @@
 
     {{-- <x-cms-form-button label="Send Message" name="submit" value="submit" wrapper="simple"/> --}}
     
+    <div class="text-right">
     <button class="g-recaptcha" 
         data-sitekey="{{ config('cms.recaptcha_sitekey') }}" 
         data-callback='onSubmit' 
         data-action='submit'>Submit</button>
+    </div>
 
 </form>
 
