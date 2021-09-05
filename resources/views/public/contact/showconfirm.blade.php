@@ -1,4 +1,4 @@
-@extends(config('cms.wrapper_blade')) 
+@extends(config('cms.page_wrapper_blade')) 
 
 @push('scripts')
 <script src="https://www.google.com/recaptcha/api.js"></script>
@@ -9,11 +9,11 @@
   </script>
 @endpush
 
-@section('contenthead')
+@section('pagehead')
     <H1>Thank you for your message</H1>
 @endsection
 
-@section('contentmain')
+@section('pagecontent')
   
     @includeFirst(['contact.confirm', 'cms::public.contact.confirm'])
 
