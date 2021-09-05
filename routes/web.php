@@ -25,7 +25,16 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     //Route::get('/contact', 'ContactController@showform'); // not needed as form can be placed in stacked page
     Route::get('/contact/submit', 'ContactController@submit');
     Route::get('/contact/confirm', function() {
-       return view('cms::public.contact.showconfirm');
+
+        $page_id = app(AscentCreative\CMS\Settings\SiteSettings::class)->contact_confirm_page_id;
+        $page = \AscentCreative\CMS\Models\Page::find($page_id); // <- the page flagged as homepage.
+        if($page) {
+            return app()->make(\AscentCreative\CMS\Controllers\PageController::class)->show($page);
+        } else {
+            return view('cms::public.contact.showconfirm');
+        }
+
+       
     });
 
 
