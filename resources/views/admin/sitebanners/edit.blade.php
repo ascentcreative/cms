@@ -50,10 +50,14 @@
 
             <x-cms-form-checkbox type="" name="use_full_width" label="Use Full Width?" checkedValue="1" uncheckedValue="0" value="{{ old('use_full_width', $model->use_full_width) }}" />
 
+            
 
             <x-cms-form-input type="text" name="link_url" label="Link URL" value="{{ old('link_url', $model->link_url) }}">
                 The URL that the banner will link to
             </x-cms-form-input>
+
+            <x-cms-form-checkbox type="" name="new_window" label="Open in New Window" checkedValue="1" uncheckedValue="0" value="{{ old('new_window', $model->new_window) }}" />
+
 
             <x-cms-form-colour name="bgcolor" label="Background Colour" :value="old('bgcolor', $model->bgcolor ?? '')" />
 

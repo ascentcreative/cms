@@ -14,7 +14,7 @@ class SiteBanner extends Base
     use HasFactory;
 
     public $table = "cms_sitebanners";
-    public $fillable = ['title', 'text', 'link_url', 'image_id', 'bgcolor', 'use_full_width', 'publishable', 'start_date', 'end_date'];
+    public $fillable = ['title', 'text', 'link_url', 'image_id', 'bgcolor', 'use_full_width', 'new_window', 'publishable', 'start_date', 'end_date'];
 
  
     public function scopeLive($query) {
