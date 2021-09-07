@@ -10,7 +10,7 @@
 
             {{-- This needs to use some form of auto conversion... ie put everythig in a styles property to automatically write to the tag  --}}
            {{--  will also need to know how to format values (although these could be selected on the setting themselves) --}}
-            style="position: relative; @if(isset($item->bgcolor) && $item->bgcolor != '' && (!isset($item->bgimage) || $item->bgimage == '')) 
+            style="@if(isset($item->bgcolor) && $item->bgcolor != '' && (!isset($item->bgimage) || $item->bgimage == '')) 
                     background-color: {{ $item->bgcolor }};
                 @endif  @if(isset($item->padding->top) && $item->padding->top != 0) 
                     padding-top: {{ $item->padding->top }}px;
