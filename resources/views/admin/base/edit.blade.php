@@ -69,8 +69,12 @@
 @section('headbar')
 
     <nav class="navbar">
-        <BUTTON type="submit" class="btn btn-primary bi-check-circle-fill" class="button">Save {{$modelName}}</BUTTON>
-        <A href="{{ url()->previous() }}" class="btn btn-primary bi-x-circle-fill">{{-- Close {{$modelName}} --}} Exit Without Saving</A>
+
+        @section('headactions')
+            <BUTTON type="submit" class="btn btn-primary bi-check-circle-fill" class="button">Save {{$modelName}}</BUTTON>
+            <A href="{{ url()->previous() }}" class="btn btn-primary bi-x-circle-fill">{{-- Close {{$modelName}} --}} Exit Without Saving</A>
+        @show 
+        
     </nav>
 
 @endsection

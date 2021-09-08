@@ -36,7 +36,11 @@
 @section('headbar')
 
     <nav class="navbar">
-        <A href="{{ action([controller(), 'index']) }}" type="button" class="btn btn-primary btn-sm" onclick="" class="button">Close</A>
+
+        @section('headactions')
+            <A href="{{ action([controller(), 'index']) }}" type="button" class="btn btn-primary btn-sm" onclick="" class="button">Close</A>    
+        @show
+        
     </nav>
 
 @endsection
