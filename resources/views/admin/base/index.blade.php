@@ -16,7 +16,7 @@
 
         @section('headactions')
 
-            <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary">Create</a>
+            <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary bi-plus-circle-fill">Create</a>
 
         @show
 
