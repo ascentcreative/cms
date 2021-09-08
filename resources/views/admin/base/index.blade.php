@@ -14,7 +14,11 @@
 
     <nav class="navbar">
 
-        <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary">Create</a>
+        @section('headactions')
+
+            <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary">Create</a>
+
+        @show
 
     </nav>
 
