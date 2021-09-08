@@ -38,9 +38,9 @@
     <nav class="navbar">
 
         @section('headactions')
-            <A href="{{ action([controller(), 'index']) }}" type="button" class="btn btn-primary btn-sm" onclick="" class="button">Close</A>    
+            <A href="{{ action([controller(), 'index']) }}" type="button" class="btn btn-primary bi-x-circle-fill" onclick="" class="button">Close</A>    
         @show
-        
+
     </nav>
 
 @endsection
