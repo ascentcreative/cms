@@ -117,89 +117,103 @@ var ModalLink = {
 
         $('#ajaxModal FORM').not('.no-ajax').submit(function() {
 
-            var form = this;
-       
-            $('.validation-error').remove();
+            try {
 
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'), 
-                 headers: {
-                    'Accept' : "application/json"
-                 },
-                data: $(this).serialize(),
-                statusCode: {
-                    200: function(data, xhr, request) {
+                var form = this;
+        
+                $('.validation-error').remove();
 
-                        if(request.getResponseHeader('fireEvent')) {
-                            $(document).trigger(request.getResponseHeader('fireEvent'));
-                        }
+                // switched to use formdata to allow files.
+                var formData = new FormData($(form)[0]); 
+              
+                $.ajax({
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    url: $(this).attr('action'), 
+                    headers: {
+                        'Accept' : "application/json"
+                    },
+                    data: formData,
+                    statusCode: {
+                        200: function(data, xhr, request) {
 
-                        if(data) {
-                            self.showResponseModal(data);
-                        } else {
-                            switch($(form).attr('data-onsuccess')) {
+                            if(request.getResponseHeader('fireEvent')) {
+                                $(document).trigger(request.getResponseHeader('fireEvent'));
+                            }
+
+                            if(data) {
+                                self.showResponseModal(data);
+                            } else {
+                                switch($(form).attr('data-onsuccess')) {
+                                    case 'refresh':
+                                        window.location.reload();
+                                        break;
+
+                                    default:
+                                        $('#ajaxModal').modal('hide');
+                                }
+                            }
+                        },
+                        302: function(data, xhr, request) {
+
+                            if(data.getResponseHeader('fireEvent')) {
+                                $(document).trigger(data.getResponseHeader('fireEvent'));
+                            }
+
+                            switch(data.responseJSON) {
+
+                                case 'reload':
                                 case 'refresh':
                                     window.location.reload();
                                     break;
 
                                 default:
-                                    $('#ajaxModal').modal('hide');
+
+                                    $('body').modalLink({
+                                        target: data.responseJSON
+                                    });
+
+                                    break;
+
                             }
-                        }
-                    },
-                    302: function(data, xhr, request) {
 
-                        if(data.getResponseHeader('fireEvent')) {
-                            $(document).trigger(data.getResponseHeader('fireEvent'));
-                        }
+                        
 
-                        switch(data.responseJSON) {
+                            //$('.modal').modal('hide');
 
-                            case 'reload':
-                            case 'refresh':
-                                window.location.reload();
-                                break;
+                        },
+                        422: function(data, xhr, request) {
+                            for(fldname in data.responseJSON.errors) { 
 
-                            default:
+                                console.log(fldname + " --- " + data.responseJSON.errors[fldname]);
 
-                                $('body').modalLink({
-                                    target: data.responseJSON
-                                });
+                                $('[name="' + fldname + '"]').parents('.element-wrapper').find('.error-display').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
+                                    data.responseJSON.errors[fldname] + 
+                                '</small>');
 
-                                break;
+                            }
+                        },
+                        500: function(data, xhr, request) {
 
-                        }
-
-                       
-
-                        //$('.modal').modal('hide');
-
-                    },
-                    422: function(data, xhr, request) {
-                        for(fldname in data.responseJSON.errors) { 
-
-                            console.log(fldname + " --- " + data.responseJSON.errors[fldname]);
-
-                            $('[name="' + fldname + '"]').parents('.element-wrapper').find('.error-display').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
-                                data.responseJSON.errors[fldname] + 
-                            '</small>');
+                            alert('An unexpected error occurred');
+                        
 
                         }
-                    },
-                    500: function(data, xhr, request) {
-
-                        alert('An unexpected error occurred');
-                    
-
                     }
-                }
-            }); /*.fail(function(data, xhr, request) {
-                alert('fail');
-                self.showResponseModal(data);
+                }); /*.fail(function(data, xhr, request) {
+                    alert('fail');
+                    self.showResponseModal(data);
 
-            }); */
+                }); */
+            } catch(e) {
 
+                console.log(e);
+                return false;
+
+            }
+
+        
 
             return false;
 
