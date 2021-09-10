@@ -125,6 +125,8 @@ var ModalLink = {
 
                 // switched to use formdata to allow files.
                 var formData = new FormData($(form)[0]); 
+
+                // console.log(...formData);
               
                 $.ajax({
                     type: 'POST',
@@ -137,6 +139,9 @@ var ModalLink = {
                     data: formData,
                     statusCode: {
                         200: function(data, xhr, request) {
+
+                            console.log('200!');
+                            console.log(data);
 
                             if(request.getResponseHeader('fireEvent')) {
                                 $(document).trigger(request.getResponseHeader('fireEvent'));
