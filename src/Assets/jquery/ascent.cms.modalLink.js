@@ -13,6 +13,15 @@ var ModalLink = {
         var thisID = (this.element)[0].id;
         var obj = this.element;
 
+        // alert('fwefewf');
+
+        // alert($('INPUT.item-select').serialize());
+
+        console.log(this.element.data('serialiseForModal'));
+        //return false;
+
+        //alert(this.data('serialise-for-modal'));
+
         
         // We're calling this on click, so just launch straight into the business end...
 
@@ -21,6 +30,11 @@ var ModalLink = {
         } else {
             this.targetPath = $(this.element).attr('href');
         }
+
+        if( this.element.data('serialiseForModal') ) {
+             self.targetPath += '?' + $( this.element.data('serialiseForModal') ).serialize();
+        }
+        
         
         $.ajax({
             type: 'GET',
@@ -160,6 +174,24 @@ var ModalLink = {
                                 }
                             }
                         },
+
+                        201: function (data, xhr, request) {
+
+                            switch($(form).attr('data-onsuccess')) {
+                                case 'refresh':
+                                    window.location.reload();
+                                    break;
+
+                                default:
+                                    if(data) {
+                                        self.showResponseModal(data);
+                                    } else {
+                                        $('#ajaxModal').modal('hide');
+                                    }
+                            }
+
+                        },
+
                         302: function(data, xhr, request) {
 
                             if(data.getResponseHeader('fireEvent')) {
@@ -193,7 +225,7 @@ var ModalLink = {
 
                                 console.log(fldname + " --- " + data.responseJSON.errors[fldname]);
 
-                                $('[name="' + fldname + '"]').parents('.element-wrapper').find('.error-display').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
+                                $('[name="' + fldname + '"]').parents('.element-wrapper').find('.error-display').last().append('<small class="validation-error alert alert-danger form-text" role="alert">' +
                                     data.responseJSON.errors[fldname] + 
                                 '</small>');
 
