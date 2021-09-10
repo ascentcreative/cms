@@ -1,4 +1,4 @@
-@extends('cms::components.form.wrapper.bootstrapformgroup')
+@extends('cms::components.form.wrapper.' . $wrapper)
 
 @section('label'){{$label}}@overwrite
 @section('name'){{$name}}@overwrite
