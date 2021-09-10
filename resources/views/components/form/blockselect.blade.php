@@ -11,7 +11,7 @@
         <label for="{{$name}}-{{ Str::slug($key) }}" class="cms-blockselect-option">
             <input type="checkbox" name="{{$name}}{{$maxSelect!=1?'[]':''}}" id="{{$name}}-{{ Str::slug($key) }}" value="{{$key}}"
 
-                @if(in_array($key, $value)) checked @endif
+                @if( (is_array($value) && in_array($key, $value)) || (!is_array($value) && $key == $value) ) checked @endif
             />
 
             @if($blockblade)
