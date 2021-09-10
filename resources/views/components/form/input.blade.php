@@ -5,7 +5,7 @@
 
 @section('element')
 
-    <input type="{{$type}}" name="{{$name}}" value="{!! $value !!}" class="form-control"
+    <input type="{{$type}}" name="{{$name}}" value="{!! $value !!}" class="form-control{{ ($type=='file' ? '-file' : '') }}"
         @if($type=='number') min="0" step="0.01" @endif
     />
 
