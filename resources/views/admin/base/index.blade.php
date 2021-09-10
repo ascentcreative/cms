@@ -38,7 +38,6 @@
 <div class="cms-screenblock bg-white rounded shadow" style="">
 
    
-
     @if($models->count() > 0)
         
     <table class="table table-hover">
@@ -57,6 +56,8 @@
 
 
     </table>
+
+    @yield('post-indextable')
 
     @if($models instanceof \Illuminate\Pagination\LengthAwarePaginator && $models->lastPage() > 1 )
         
