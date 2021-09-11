@@ -1,0 +1,1 @@
+<input type="checkbox" name="items[]" value="{{ $item->id }}" class="item-select xform-control" />

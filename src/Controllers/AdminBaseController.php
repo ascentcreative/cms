@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
+
+use AscentCreative\CMS\Admin\UI\Index\Column;
  
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,12 +24,16 @@ abstract class AdminBaseController extends Controller
     public $pageSize = 15;
     public $indexSort = array();
     public $indexSearchFields = array();
+    public $indexSelectable = true;
 
     public $ignoreScopes = array();
 
     public $allowDeletions = true;
 
+    public $_columns = array();
+
     private $_filters = array();
+
 
     public function __construct() {
         //parent::__construct();
@@ -134,10 +140,26 @@ abstract class AdminBaseController extends Controller
         }
        
         // prepare any defined sorters...
-
+        //$items = $items->withSum('income', 'amount')->orderBy('income_sum_amount', 'DESC');
+        $columns = $this->buildColumns();
+        if(request()->sort) {
+            foreach($columns as $col) {
+                if (array_key_exists($col->slug, request()->sort)) {
+                    $dir = request()->sort[$col->slug];
+                    if ($col->sortQuery) { //instanceof Closure) {
+                        $q = $col->sortQuery;
+                        $items = $q($items, $dir);
+                        $col->sorted = $dir;
+                    }
+                }  
+            }
+        }
+       // dd(request()->sort);
+        
         if (!is_array($this->indexSort)) {
             $this->indexSort = array($this->indexSort);
         }
+
         foreach($this->indexSort as $sort) {
             if (is_array($sort)) {
                 $col = $sort[0];
@@ -148,11 +170,68 @@ abstract class AdminBaseController extends Controller
             }
             $items = $items->orderBy($col, $dir);
         }
+
         
         $items = $items->paginate($this->pageSize)->withQueryString();
 
-        return view($this::$bladePath . '.index', $this->prepareViewData())->with('models', $items);
+    //    if (count($columns) > 0) {
+    //         // new version with builder blade
+    //         return view('cms::admin.base.index.builder', $this->prepareViewData())
+    //                     ->with('models', $items)
+    //                     ->with('columns', $columns);
+    //     } else {
+    //         // old version with custom views
+    //         return view($this::$bladePath . '.index', $this->prepareViewData())
+    //                     ->with('models', $items);
+    //     }
+
+        return view($this::$bladePath . '.index', $this->prepareViewData())
+                        ->with('models', $items)
+                        ->with('columns', $columns);
+
     }
+
+    /**
+     * overridable function where the columns are defined
+     *
+     * @return array of column objects
+     */
+    public function getColumns() : array {
+        return [];
+    }
+
+    /**
+     * Takes the getColumns() output and makes core adjustments (like adding selection checkboxes and delete / context menu)
+     * 
+     * @return array of column objects
+     */
+    public function buildColumns() : array {
+        
+        $cols = $this->getColumns();
+
+        if ($this->indexSelectable) {
+
+            array_unshift($cols,
+                Column::make()
+                    ->valueBlade('cms::admin.ui.index.selectcolumn')
+                    ->width('1%')
+            );
+
+        }
+
+        array_push($cols,
+            Column::make()
+                ->valueBlade('cms::admin.ui.index.actionmenucolumn')
+                ->align('right')
+        );
+
+
+        return $cols;
+
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

@@ -268,3 +268,10 @@ tr.ui-sortable-helper {
     height:250px;
     padding: 5px;
 }
+
+
+/* sortable columns */
+.sort-link {
+    color: inherit;
+    white-space: nowrap;
+}
