@@ -7,13 +7,19 @@ class Column {
     public $sortBy = '';
     public $sortQuery = null;
 
-    public $sorted = 'blah';
+    public $sorted = '';
 
 
+    public $filter = null;
+    public $filterScope = null;
     public $filterable = false;
+    public $filterBlade = '';
+    public $filterOpts = '';
+
 
     public $title = '';
     public $slug = '';
+    public $titleBlade = null;
 
     public $value = '';
     
@@ -25,10 +31,6 @@ class Column {
     public $align = '';
 
     public $width = null;
-
-
-
-  //  public abstract function renderitem($item);
 
 
     static function make($title = null, $value = null) {
@@ -50,6 +52,11 @@ class Column {
     public function title($val) {
         $this->title = $val;
         $this->slug = \Illuminate\Support\Str::slug($val);
+        return $this;
+    }
+
+    public function titleBlade($blade) {
+        $this->titleBlade = $blade;
         return $this;
     }
 
@@ -79,12 +86,10 @@ class Column {
         return $this;
     }
 
-
     public function align($align) {
         $this->align = $align;
         return $this;
     }
-
 
     public function sortable($bool=true) {
         $this->sortable = $bool;
@@ -120,7 +125,6 @@ class Column {
 
         unset($query['sort']);
 
-        // if not sorted, go asc
         switch($this->sorted) {
             case 'asc':
                 $dir = 'desc';
@@ -143,5 +147,37 @@ class Column {
         
     }
 
-    
+    /* filtering */
+    public function filter($filter) {
+        $this->filterable = true;
+        $this->filter = $filter;
+        return $this;
+    }    
+
+
+    public function filterScope($scope) { 
+        $this->filterable = true;
+        $this->filterScope = $scope;
+        return $this;
+    }
+
+    public function filterBlade($blade, $opts=null) {
+        $this->filterBlade = $blade;
+        $this->filterOpts = $opts;
+        return $this;
+    }
+
+    // merges a few attributes togther for use in the filter blade
+    public function getFilterBladeParameters() {
+
+        $params = [
+            'name' => $this->slug,
+            'opts' => $this->filterOpts
+        ];
+
+        return $params;
+
+    }
+
+
 }
