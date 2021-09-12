@@ -200,6 +200,26 @@ A.dropdown-toggle.dropdown-toggle-dots::after {
 }
 
 
+.table th {
+    white-space: nowrap;
+    position: relative;
+} 
+
+.table th:after {
+    content: '';
+    width: 1px;
+    background-color: #ececec;
+    position: absolute;
+    bottom: 5px;
+    top: 5px;
+    right: 0;
+}
+
+.table th:last-child:after {
+    display: none;
+}
+
+
 /* convenience classes */
 .flex-between {
     display: flex;
@@ -274,4 +294,38 @@ tr.ui-sortable-helper {
 .sort-link {
     color: inherit;
     white-space: nowrap;
+}
+
+
+/* filter UI */
+th.filterable {
+    position: relative;
+    z-index: 100;
+    background: white;
+}
+
+.filter-panel {
+    display: none;
+    z-index: 99;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: 0px solid;
+    padding: 10px;
+
+    left: 0;
+    top: calc(100%);
+
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.3);
+}
+
+.text-right .filter-panel {
+    left: auto;
+    right: 0;
+}
+
+
+.filter-panel .cms-blockselect-option {
+    padding: 3px 10px;
+    margin-bottom: 5px;
 }
