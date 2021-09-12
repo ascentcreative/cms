@@ -14,7 +14,7 @@
     @if(!is_null($uncheckedValue))
         <input type="hidden" id="{{$name}}-unchecked" name="{{$name}}" value="{{$uncheckedValue}}"/>
     @endif
-    <div style="display: flex; align-items: center; height: 100%;">
+    <div style="display: flex; align-items: center; height: 100%;" class="pt-1">
         <input type="checkbox" id="{{$name}}" name="{{$name}}" value="{{$checkedValue}}"
         
         @if($value == $checkedValue)
