@@ -32,16 +32,22 @@ class SavedFilter extends Base
             $urlinfo = parse_url(url()->previous());
             $model->url = $urlinfo['path'];
 
-            parse_str($urlinfo['query'], $query);
+            if(isset($urlinfo['query'])) {
+                parse_str($urlinfo['query'], $query);
 
-            unset($query['page']);
+                unset($query['page']);
 
-            $model->filter = http_build_query($query);
+                $model->filter = http_build_query($query);
+            }
 
         });
         
     }
 
+
+    public function scopeByUrl($q, $url) {
+        return $q->where('url', $url);
+    }
 
     public function scopeGlobal($q) {
         return $q->where('is_global', 1);

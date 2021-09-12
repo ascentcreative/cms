@@ -6,7 +6,7 @@
     <A class="dropdown-toggle dropdown-toggle-dots" href="#" data-toggle="dropdown" ></A>
     <div class="dropdown-menu dropdown-menu-right shadow" style="">
 
-        @if( count($gf = \AscentCreative\CMS\Models\SavedFilter::global()->get()) > 0)
+        @if( count($gf = \AscentCreative\CMS\Models\SavedFilter::byUrl('/'.request()->path())->global()->get()) > 0)
         <div class="dropdown-item small text-small text-uppercase font-weight-bold">Global Filters</div>
 
             @foreach($gf as $f)
@@ -16,7 +16,7 @@
         <div class="dropdown-divider"></div>
         @endif
 
-        @if( count($pf = \AscentCreative\CMS\Models\SavedFilter::private()->get()) > 0)
+        @if( count($pf = \AscentCreative\CMS\Models\SavedFilter::byUrl('/'.request()->path())->private()->get()) > 0)
         <div class="dropdown-item small text-small text-uppercase font-weight-bold">My Filters</div>
             
             @foreach($pf as $f)
