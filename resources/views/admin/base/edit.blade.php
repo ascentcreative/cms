@@ -46,7 +46,7 @@
 
 @section('screen-end')
 
-        <input type="hidden" name="_postsave" value="{{ old('_postsave', url()->previous()) }}" />
+        <input type="hidden" name="_postsave" value="{{ old('_postsave', session('last_index')) }}" />
 
     {{-- ClOSE FORM TAG --}}
     </form>
@@ -72,7 +72,7 @@
 
         @section('headactions')
             <BUTTON type="submit" class="btn btn-primary bi-check-circle-fill" class="button">Save {{$modelName}}</BUTTON>
-            <A href="{{ url()->previous() }}" class="btn btn-primary bi-x-circle-fill">{{-- Close {{$modelName}} --}} Exit Without Saving</A>
+            <A href="{{ session('last_index') }}" class="btn btn-primary bi-x-circle-fill">{{-- Close {{$modelName}} --}} Exit Without Saving</A>
         @show 
         
     </nav>
