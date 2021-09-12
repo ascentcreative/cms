@@ -1,7 +1,7 @@
-<div class="inline-form-element element-wrapper {{$class}} flex flex-between" id="{{$name}}-wrapper">
+<div class="inline-form-element inline-wrapper element-wrapper {{$class}} flex" id="{{$name}}-wrapper">
 
     @hasSection('label')
-        <label for="@yield('name')" class="inline-form-element-label">@yield('label')</label>
+        <label for="@yield('name')" class="inline-form-element-label mr-3">@yield('label')</label>
     @endif
 
     @yield('element')
