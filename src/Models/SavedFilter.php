@@ -31,7 +31,12 @@ class SavedFilter extends Base
 
             $urlinfo = parse_url(url()->previous());
             $model->url = $urlinfo['path'];
-            $model->filter = $urlinfo['query'];
+
+            parse_str($urlinfo['query'], $query);
+
+            unset($query['page']);
+
+            $model->filter = http_build_query($query);
 
         });
         
