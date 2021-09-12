@@ -116,6 +116,15 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::get('/sitebanners/{sitebanner}/delete', [AscentCreative\CMS\Controllers\Admin\SiteBannerController::class, 'delete']);
         Route::resource('/sitebanners', SiteBannerController::class);
 
+        Route::get('/savefilters', function() { 
+            return view('cms::admin.savedfilters.modal.create'); //->with('batches', $batches );
+        })->name('savefilters');
+
+        Route::resource('savedfilters', SavedFiltersController::class, [
+            'names' => [
+                'store' => 'savedfilters.create',
+            ]
+        ]);
 
         /** Content Stack */
         Route::get('/stackblock/make/{type}/{name}/{key}', function($type, $name, $key) {
