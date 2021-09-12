@@ -204,8 +204,6 @@ abstract class AdminBaseController extends Controller
         request()->pageSize = $pageSize;
 
 
-        //dd(session()->all());
-
         // And finally, use the page size to paginate the query
         if (is_numeric($pageSize)) {
             $items = $items->paginate($pageSize)->withQueryString();
@@ -242,6 +240,7 @@ abstract class AdminBaseController extends Controller
 
             array_unshift($cols,
                 Column::make()
+                ->titleBlade('cms::admin.ui.index.checkalltoggle')
                     ->valueBlade('cms::admin.ui.index.selectcolumn')
                     ->width('1%')
             );
@@ -249,16 +248,20 @@ abstract class AdminBaseController extends Controller
         }
 
         array_push($cols,
-            Column::make()
-                ->titleBlade('cms::admin.ui.index.clearfilters')
-                ->valueBlade('cms::admin.ui.index.actionmenucolumn')
-                ->align('right')
-                ->width('1%')
+            $this->buildActionMenuColumn()
         );
-
 
         return $cols;
 
+    }
+
+
+    public function buildActionMenuColumn() {
+        return Column::make()
+                ->titleBlade('cms::admin.ui.index.clearfilters')
+                ->valueBlade('cms::admin.ui.index.actionmenucolumn')
+                ->align('right')
+                ->width('1%');
     }
 
 
