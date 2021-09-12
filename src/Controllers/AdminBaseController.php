@@ -131,6 +131,8 @@ abstract class AdminBaseController extends Controller
 
         } 
 
+        $columns = $this->buildColumns();
+
         // prepare any defined filters...
 
         if (is_array($this->_filters)) {
@@ -138,10 +140,23 @@ abstract class AdminBaseController extends Controller
                 $items = $filter->applyFilter($items);
             }
         }
+
+        if(request()->cfilter) {
+
+            foreach($columns as $col) {
+                if (array_key_exists($col->slug, request()->cfilter)) {
+                    $filtervals = request()->cfilter[$col->slug];
+                    if ($scope = $col->filterScope) { //instanceof Closure) {
+                        // $q = $col->sortQuery;
+                        $items->$scope($filtervals); // = $q($items, $dir);
+                        //$col->sorted = $dir;
+                    }
+                }  
+            }
+
+        }
        
         // prepare any defined sorters...
-        //$items = $items->withSum('income', 'amount')->orderBy('income_sum_amount', 'DESC');
-        $columns = $this->buildColumns();
         if(request()->sort) {
             foreach($columns as $col) {
                 if (array_key_exists($col->slug, request()->sort)) {
@@ -154,7 +169,7 @@ abstract class AdminBaseController extends Controller
                 }  
             }
         }
-       // dd(request()->sort);
+
         
         if (!is_array($this->indexSort)) {
             $this->indexSort = array($this->indexSort);
@@ -171,19 +186,33 @@ abstract class AdminBaseController extends Controller
             $items = $items->orderBy($col, $dir);
         }
 
-        
-        $items = $items->paginate($this->pageSize)->withQueryString();
 
-    //    if (count($columns) > 0) {
-    //         // new version with builder blade
-    //         return view('cms::admin.base.index.builder', $this->prepareViewData())
-    //                     ->with('models', $items)
-    //                     ->with('columns', $columns);
-    //     } else {
-    //         // old version with custom views
-    //         return view($this::$bladePath . '.index', $this->prepareViewData())
-    //                     ->with('models', $items);
-    //     }
+        session(['last_index'=> url()->full()]);
+       
+        /** 
+         * Sort out the page size 
+         * 
+         * If it's set in the request, use it
+         * Otherwise, check the session
+         * Failing that, pull it from the controller's default
+        */
+        $pageSize = request()->pageSize ?? (session('pageSize_' . request()->path()) ?? $this->pageSize);
+
+        // Once we know the page size, write it to the session for next access
+        session(['pageSize_' . request()->path() => $pageSize]);
+        // Plus, if it didn't come from the request, set it, so the UI can show the right selected value in the dropdown
+        request()->pageSize = $pageSize;
+
+
+        //dd(session()->all());
+
+        // And finally, use the page size to paginate the query
+        if (is_numeric($pageSize)) {
+            $items = $items->paginate($pageSize)->withQueryString();
+        } else {
+            // this won't happen - was going to be for an ALL setting, but problematic for the view info display.
+           $items = $items->get();
+        }
 
         return view($this::$bladePath . '.index', $this->prepareViewData())
                         ->with('models', $items)
@@ -221,8 +250,10 @@ abstract class AdminBaseController extends Controller
 
         array_push($cols,
             Column::make()
+                ->titleBlade('cms::admin.ui.index.clearfilters')
                 ->valueBlade('cms::admin.ui.index.actionmenucolumn')
                 ->align('right')
+                ->width('1%')
         );
 
 
