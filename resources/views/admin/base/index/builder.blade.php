@@ -165,7 +165,14 @@
     
             </div>
     
-
+            @if(env('LOG_QUERIES'))
+            <div>
+                Index Load Start = {{ session('index_load_start') }}
+                Index Load End = {{ $end = microtime(true )}}
+                Duration = {{ $end - session('index_load_start')}}
+            </div>
+            @endif 
+            
 @endsection
 
 
