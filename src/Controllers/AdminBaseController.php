@@ -284,7 +284,7 @@ abstract class AdminBaseController extends Controller
     public function buildActionMenuColumn() {
         return Column::make()
                 ->titleBlade('cms::admin.ui.index.clearfilters')
-                ->valueBlade('cms::admin.ui.index.actionmenucolumn')
+                ->valueBlade('cms::admin.ui.index.actionmenu')
                 ->align('right')
                 ->width('1%');
     }

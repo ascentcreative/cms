@@ -3,7 +3,8 @@
     <div class="dropdown-menu dropdown-menu-right" style="">
         
         @section('action-menu-buttons')
-            <a class="dropdown-item text-sm btn-delete modal-link" href="{{ action([controller(), 'delete'], [$modelInject => $item->id]) }}">Delete {{ $modelName }}</a> 
+           
+
         @show
 
     </div>
