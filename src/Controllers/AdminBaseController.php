@@ -25,6 +25,9 @@ abstract class AdminBaseController extends Controller
     public $indexSort = array();
     public $indexSearchFields = array();
     public $indexSelectable = true;
+    public $indexEagerLoad = [];
+    public $indexEagerLoadSum = [];
+    public $indexEagerLoadCount = [];
 
     public $ignoreScopes = array();
 
@@ -99,9 +102,26 @@ abstract class AdminBaseController extends Controller
     public function index()
     {
 
+        session(['index_load_start'=>microtime(true)]);
+
         // get the items for the view
         $items = $this->prepareModelQuery();
+
+
+        // Eager Loading:
+        foreach($this->indexEagerLoad as $with) {
+            $items->with($with);
+        }
+
+        foreach($this->indexEagerLoadSum as $rel=>$prop) {
+            $items->withSum($rel, $prop);
+        }
+
+        foreach($this->indexEagerLoadCount as $withCount) {
+            $items->withCount($withCount);
+        }
         
+
         // apply search string:
 
        if(isset($_GET['search'])) {
@@ -203,6 +223,7 @@ abstract class AdminBaseController extends Controller
         // Plus, if it didn't come from the request, set it, so the UI can show the right selected value in the dropdown
         request()->pageSize = $pageSize;
 
+        //\Log::info("*** RUNNING INDEX QUERY(S) ***");
 
         // And finally, use the page size to paginate the query
         if (is_numeric($pageSize)) {
@@ -211,6 +232,10 @@ abstract class AdminBaseController extends Controller
             // this won't happen - was going to be for an ALL setting, but problematic for the view info display.
            $items = $items->get();
         }
+
+        //\Log::info("*** INDEX QUERY(S) COMPLETE ***");
+
+        
 
         return view($this::$bladePath . '.index', $this->prepareViewData())
                         ->with('models', $items)
