@@ -96,7 +96,7 @@
      {{-- for each column, render the value cell --}}
      @foreach($columns as $col) 
 
-        <td class="@if($col->align) text-{{$col->align}} @endif ">
+        <td class="@if($col->align) text-{{$col->align}} @endif @if($col->noWrap) text-nowrap @endif">
 
             @if($col->isBlade) 
                 @include($col->value, $col->bladeProps)

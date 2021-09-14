@@ -31,6 +31,7 @@ class Column {
     public $align = '';
 
     public $width = null;
+    public $noWrap = false;
 
 
     static function make($title = null, $value = null) {
@@ -46,6 +47,11 @@ class Column {
 
     public function width($val) {
         $this->width = $val;
+        return $this;
+    }
+
+    public function noWrap($val=true) {
+        $this->noWrap = $val;
         return $this;
     }
 
@@ -91,6 +97,17 @@ class Column {
         return $this;
     
     }
+
+    public function valueSum($rel, $prop) {
+        $this->value = function($item) use ($rel, $prop) {
+            // dd($item->$prop);
+            return $item->$rel->sum($prop); 
+        };
+        // should also add this to the withCount for the view?
+        return $this;
+    
+    }
+
 
     public function valueBlade($blade, $props=[]) {
         $this->isBlade = true;
