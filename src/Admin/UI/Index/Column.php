@@ -79,6 +79,19 @@ class Column {
         return $this;
     }
 
+    public function valueCount($prop) {
+        $this->value = function($item) use ($prop) {
+            // dd($item->$prop);
+
+            \Log::info('** ' . $prop . ' **');
+            $prop = $prop . '_count';
+            return $item->$prop; 
+        };
+        // should also add this to the withCount for the view?
+        return $this;
+    
+    }
+
     public function valueBlade($blade, $props=[]) {
         $this->isBlade = true;
         $this->value = $blade;
@@ -108,6 +121,14 @@ class Column {
         $this->sortable();
         $this->sortQuery = function ($q, $dir='asc') use ($relation, $prop) {
             return $q->withSum($relation, $prop)->orderby($relation . '_sum_' . $prop, $dir);
+        };
+        return $this;
+    }
+
+    public function sortableByCount($prop) {
+        $this->sortable();
+        $this->sortQuery = function ($q, $dir='asc') use ($prop) {
+            return $q->orderby($prop, $dir);
         };
         return $this;
     }
