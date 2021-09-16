@@ -272,9 +272,11 @@ abstract class AdminBaseController extends Controller
 
         }
 
-        array_push($cols,
-            $this->buildActionMenuColumn()
-        );
+        if($amCol = $this->buildActionMenuColumn()) {
+            array_push($cols,
+                $amCol
+            );
+        }
 
         return $cols;
 
