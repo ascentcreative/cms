@@ -205,7 +205,7 @@ A.dropdown-toggle.dropdown-toggle-dots::after {
     position: relative;
 } 
 
-.table th:after {
+.table thead th:after {
     content: '';
     width: 1px;
     background-color: #ececec;
