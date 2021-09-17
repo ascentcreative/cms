@@ -3,6 +3,8 @@
 @isset($content)
     @foreach(json_decode($content) as $item)
 
+        @if($item->published ?? true)
+
         {{-- @dd($item) --}}
 
        
@@ -70,6 +72,8 @@
     
 
         </div>
+
+        @endif
        
     @endforeach
 @endisset

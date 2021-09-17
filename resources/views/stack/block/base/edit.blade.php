@@ -37,6 +37,7 @@
                
             @show
 
+                <x-cms-form-checkbox type="" name="{{ $name }}[published]" label="Published?" uncheckedValue="0" checkedValue="1" :value="$value->published ?? 1"/>
 
                 <x-cms-form-input type="text" name="{{ $name }}[contentwidth]" label="Content Width" :value="$value->contentwidth ?? ''">
                     The width of the screen to use for the content. Leave blank for the default centralised portion, or enter values in % or px. <br/>
