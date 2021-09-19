@@ -8,7 +8,7 @@ return [
     'page_wrapper_blade' => env('CMS_PAGE_WRAPPER_BLADE', 'cms.page.show'),
 
     // list of paths to try for Model Extender trait blades. Will be checked in the order specified.
-    'traitbladepaths' => ['admin.trait', 'cms::trait'],
+    'traitbladepaths' => ['admin.trait', 'cms::trait', 'geo::trait'],
 
     // recaptcha keys
     'recaptcha_sitekey' => env('RECAPTCHA_SITEKEY', ''), //6Lf_PYsaAAAAANe6Uv_tzWjLVO-qwgfC9WWKkQ2u'),
