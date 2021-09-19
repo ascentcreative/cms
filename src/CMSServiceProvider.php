@@ -208,6 +208,7 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
     Blade::component('cms-form-hidden', 'AscentCreative\CMS\View\Components\Form\Hidden');
     Blade::component('cms-form-input', 'AscentCreative\CMS\View\Components\Form\Input');
+    Blade::component('cms-form-options', 'AscentCreative\CMS\View\Components\Form\Options');
     Blade::component('cms-form-datetime', 'AscentCreative\CMS\View\Components\Form\DateTime');
     Blade::component('cms-form-button', 'AscentCreative\CMS\View\Components\Form\Button');
     Blade::component('cms-form-checkbox', 'AscentCreative\CMS\View\Components\Form\Checkbox');

@@ -217,5 +217,16 @@ class Column {
 
     }
 
+    public function buildClearFilterUrl() {
+
+        $url = url()->current();
+        $query = request()->query();
+
+        unset($query['cfilter'][$this->slug]);
+
+        return $url . (count($query) > 0 ? ('?' . http_build_query($query)) : '');
+        
+    }
+
 
 }

@@ -68,6 +68,11 @@
                             {{-- <form method="POST" action="{{ $col->buildFilterUrl() }}" class="filter-form" name="cfilter-form-{{ $col->slug }}" id="">  --}}
                                 {{-- {{ csrf_field() }}  --}} 
                                 @include($col->filterBlade, $col->getFilterBladeParameters())
+                              
+                                <div class="flex flex-between flex-nowrap mt-2">
+                                    <small><a href=" {{ $col->buildClearFilterUrl() }}" class="mr-2">Clear</a></small>
+                                    <button class="btn btn-sm btn-primary ml-2">Update</button>
+                                </div>
 
                             {{-- </form> --}}
 
@@ -183,7 +188,7 @@
 
     $('form#frm-indexparams .filter, #pageSize').on('change', function(e) {
         //console.log(e.target);
-        $('form#frm-indexparams').submit();
+       // $('form#frm-indexparams').submit();
     });
 
     $('.filter-panel').on('click', function(e) {
