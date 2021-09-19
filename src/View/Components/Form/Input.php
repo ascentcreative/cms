@@ -13,6 +13,7 @@ class Input extends Component
     public $value;
 
     public $accept;
+    public $autocomplete;
 
     public $wrapper;
     public $class;
@@ -23,7 +24,7 @@ class Input extends Component
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value, $accept="", $wrapper="bootstrapformgroup", $class='')
+    public function __construct($type, $label, $name, $value, $accept="", $autocomplete=false, $wrapper="bootstrapformgroup", $class='')
     {
         $this->type = $type;
         $this->label = $label;
@@ -31,6 +32,7 @@ class Input extends Component
         $this->value = $value;
 
         $this->accept = $accept;
+        $this->autocomplete = $autocomplete;
 
         $this->wrapper = $wrapper;
         $this->class = $class;
