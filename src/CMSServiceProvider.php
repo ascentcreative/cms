@@ -111,7 +111,11 @@ class CMSServiceProvider extends ServiceProvider
     }
     
 
- 
+    if(env('LOG_QUERIES')) {
+        \DB::listen(function ($query) {
+            \Log::info($query->sql . ' - Bind: [' . join(', ', $query->bindings) . '] - Time: ' . $query->time);
+       });   
+    }
    
 
 
