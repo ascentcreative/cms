@@ -186,9 +186,10 @@
 
 <script>
 
-    $('form#frm-indexparams .filter, #pageSize').on('change', function(e) {
+    //$('form#frm-indexparams .filter, #pageSize').on('change', function(e) {
+    $('#pageSize').on('change', function(e) {
         //console.log(e.target);
-       // $('form#frm-indexparams').submit();
+        $('form#frm-indexparams').submit();
     });
 
     $('.filter-panel').on('click', function(e) {
