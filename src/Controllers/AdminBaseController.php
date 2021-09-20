@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Validator;
+
 use AscentCreative\CMS\Admin\UI\Index\Column;
  
 use Illuminate\Database\Eloquent\Model;
@@ -314,9 +316,14 @@ abstract class AdminBaseController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate(
-            $this->rules($request)
-        );
+        // $validatedData = $request->validate(
+        //     $this->rules($request)
+        // );
+
+        Validator::make($request->all(), 
+                    $this->rules($request),
+                    $this->messages($request)
+                    )->validate();
 
        // $cls = $this::$modelClass;
         $model = ($this::$modelClass)::make(); //new $cls();
@@ -391,9 +398,16 @@ abstract class AdminBaseController extends Controller
         $qry = $this->prepareModelQuery();
         $model = $qry->find($id);
 
-        $validatedData = $request->validate(
-            $this->rules($request, $model)
-        );
+        // dd($request);
+
+        // $validatedData = $request->validate(
+        //     $this->rules($request, $model)
+        // );
+
+        Validator::make($request->all(), 
+                    $this->rules($request, $model),
+                    $this->messages($request, $model)
+                    )->validate();
         
         $this->commitModel($request, $model);
         return redirect()->to($request->_postsave);
@@ -401,8 +415,13 @@ abstract class AdminBaseController extends Controller
     }
 
 
-    /* implement tthis method to specify input validation rules to be applied before attempting to commit the model to the database */
+    /* implement this method to specify input validation rules to be applied before attempting to commit the model to the database */
     public abstract function rules(Request $request, $model);
+
+     /* override this method to specify custom validation messages for the above rules */
+    public function messages(Request $request, $model):array {
+        return []; //
+    }
 
 
     /* implement this method with the code which reads data from the request into the Model and commits it to the database */
