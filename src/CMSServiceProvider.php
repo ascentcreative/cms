@@ -225,6 +225,7 @@ class CMSServiceProvider extends ServiceProvider
 
     Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
     Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
+    Blade::component('cms-form-relationautocomplete', 'AscentCreative\CMS\View\Components\Form\RelationAutocomplete');
     Blade::component('cms-form-blockselect', 'AscentCreative\CMS\View\Components\Form\BlockSelect');
 
     Blade::component('cms-form-relatedtokens', 'AscentCreative\CMS\View\Components\Form\RelatedTokens');
