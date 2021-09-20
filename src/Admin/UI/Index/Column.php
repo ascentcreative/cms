@@ -85,6 +85,14 @@ class Column {
         return $this;
     }
 
+    public function valueRelationshipProperty($rel, $prop, $isLink=false) {
+        $this->value = function ($item) use ($rel, $prop) {
+            return $item->$rel->$prop ?? '';
+        };
+        $this->isLink = $isLink;
+        return $this;
+    }
+
     public function valueCount($prop) {
         $this->value = function($item) use ($prop) {
             // dd($item->$prop);
