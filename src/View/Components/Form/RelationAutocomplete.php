@@ -33,7 +33,7 @@ class RelationAutocomplete extends Component
      *
      * @return void
      */
-    public function __construct($label, $relationship, $dataurl, $displayField='title', $placeholder="Begin typing to search...", $wrapper='bootstrapformgroup', $class='')
+    public function __construct($label, $relationship, $dataurl, $name=null, $displayField='title', $placeholder="Begin typing to search...", $wrapper='bootstrapformgroup', $class='')
     {
        
         $this->label = $label;
@@ -48,8 +48,12 @@ class RelationAutocomplete extends Component
 
         // get the foreign model
         
+        if (is_null($name)) {
+            $this->name = $relationship->getRelationName();
+        } else {
+            $this->name = $name;
+        }
         
-        $this->name = $relationship->getRelationName();
 
         if($foreign) {
             $this->value = $foreign->id;
