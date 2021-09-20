@@ -49,7 +49,7 @@ class RelationAutocomplete extends Component
         // get the foreign model
         
         if (is_null($name)) {
-            $this->name = $relationship->getRelationName();
+            $this->name = $relationship->getRelationName() . '_id';
         } else {
             $this->name = $name;
         }

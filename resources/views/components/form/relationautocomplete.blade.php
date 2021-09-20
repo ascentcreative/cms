@@ -6,7 +6,7 @@
 @section('element')
 
     <input type="text" id="{{ nameToId($name) }}-entry" name="{{$name}}-entry" placeholder="{{ $placeholder }}" class="form-control" value="{{ $display }}">
-    <input type="hidden" id="{{ nameToId($name) }}" name="{{$name}}_id" value="{{ $value }}" />
+    <input type="hidden" id="{{ nameToId($name) }}" name="{{$name}}" value="{{ $value }}" />
 
 @overwrite
 
