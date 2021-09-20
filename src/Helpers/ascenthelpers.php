@@ -95,7 +95,11 @@ function obscure($str) {
         $words = explode('.', $ary[0]);
         $out = array();
         foreach($words as $word) {
-            $out[] = substr($word, 0, 1) . str_repeat('*', strlen($word)-2) . substr($word, -1, 1);
+            if(strlen($word) > 2) {
+                $out[] = substr($word, 0, 1) . str_repeat('*', strlen($word)-2) . substr($word, -1, 1);
+            } else {
+                $out[] = $word;
+            }
         }
         return join('.', $out) . '@' . $ary[1];
     }
