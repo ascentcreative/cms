@@ -87,7 +87,18 @@ class Column {
 
     public function valueRelationshipProperty($rel, $prop, $isLink=false) {
         $this->value = function ($item) use ($rel, $prop) {
-            return $item->$rel->$prop ?? '';
+
+            $ary = explode('.', $rel);
+
+            foreach($ary as $rel) {
+                if($item->$rel) {
+                $item = $item->$rel;
+                } else {
+                    return ''; //"bailed at " . $rel;
+                }
+            }
+
+            return $item->$prop ?? '';
         };
         $this->isLink = $isLink;
         return $this;
