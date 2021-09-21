@@ -72,7 +72,11 @@ var PivotList = {
 				source: opts.optionRoute, //opts.autocompleteURL,
 			    minLength: 2,
 			    select: function( event, ui ) {
+
+                        console.log(self);
 			    	
+                        lblfld = self.options.labelField;
+
 			    		console.log(ui);
 			    	
 			    		if (  $("#" + thisID + " #" + ui.item.id).length > 0 ) {
@@ -89,7 +93,7 @@ var PivotList = {
                                     type: 'POST',
                                     url: opts.storeRoute,
                                     data: {
-                                        'theme': ui.item.term
+                                        [lblfld] : ui.item.term
                                     },
                                     headers: {
                                         'Accept' : "application/json"
@@ -98,7 +102,7 @@ var PivotList = {
                                  //   console.log(data);  
                                   //  alert(data.id);
                                     ui.item.id = data.id;
-                                    ui.item.label = data.theme;
+                                    ui.item.label = data[self.options.labelField]; //theme;
 
                                     self.createBlock('', ui.item.id, ui.item.label, ui.item);
                                     $("#" + thisID + "-input").val('');
