@@ -71,8 +71,10 @@
             </div>
       </div>  
 
-        <button class="btn btn-sm btn-primary bi-eye-fill" id="stack-preview">Preview</button>
-
+        @if($previewable)
+            <button class="btn btn-sm btn-primary bi-eye-fill" id="stack-preview">Preview</button>
+        @endif
+        
         </div>
 
         {{-- for each row, show the relevant edit blade --}}
@@ -164,3 +166,5 @@
     </script>
 
 @endpush
+
+@section('label'){{$tmp_label}}@overwrite
