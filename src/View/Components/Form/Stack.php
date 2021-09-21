@@ -12,6 +12,8 @@ class Stack extends Component
     public $name;
     public $value;
   
+    public $previewable;
+
     public $wrapper;
     public $class;
 
@@ -22,7 +24,7 @@ class Stack extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, 
+    public function __construct($label, $name, $value, $previewable = true,
                         $wrapper='bootstrapformgroup', $class=''        
                     )
     {
@@ -31,6 +33,8 @@ class Stack extends Component
         $this->name = $name;
         $this->value = json_decode($value);
        
+        $this->previewable = $previewable;
+
         $this->wrapper = $wrapper;
         $this->class = $class;
 
