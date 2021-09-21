@@ -419,7 +419,7 @@ abstract class AdminBaseController extends Controller
     public abstract function rules(Request $request, $model);
 
      /* override this method to specify custom validation messages for the above rules */
-    public function messages(Request $request, $model):array {
+    public function messages(Request $request, $model=null):array {
         return []; //
     }
 
