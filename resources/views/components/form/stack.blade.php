@@ -1,6 +1,8 @@
 @extends('cms::components.form.wrapper.' . $wrapper)
 
-@section('label'){{$label}}@overwrite
+@php $tmp_label = $label; @endphp
+
+
 @section('name'){{$name}}@overwrite
 
 {{-- @push('styles')
