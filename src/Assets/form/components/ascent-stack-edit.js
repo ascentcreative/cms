@@ -129,11 +129,12 @@ var StackEdit = {
 
                  //   console.log(idx + " vs " + fldidx);
 
-                    var ary = $(this).attr('name').split(/(\[|\])/);
-                    ary[2] = idx;
-                    $(this).attr('name', ary.join(''));
-                    $(this).change();
-
+                    if($(this).attr('name') != undefined && $(this).attr('name').indexOf('[')) {
+                        var ary = $(this).attr('name').split(/(\[|\])/);
+                        ary[2] = idx;
+                        $(this).attr('name', ary.join(''));
+                        $(this).change();
+                    }
                   
                    // $('#frm_edit').addClass('dirty'); //trigger('checkform.areYouSure');
                     
