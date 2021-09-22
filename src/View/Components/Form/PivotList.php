@@ -24,6 +24,7 @@ class PivotList extends Component
     public $pivotFieldLabel;
     public $pivotFieldPlaceholder;
 
+    public $wrapper;
     public $class;
     /**
      * Create a new component instance.
@@ -33,7 +34,8 @@ class PivotList extends Component
     public function __construct($label, $name, $value, $optionRoute, $optionModel, $labelField, 
                                 $addToAll=null, $sortField=null, 
                                 $pivotField=null, $pivotFieldLabel=null, $pivotFieldPlaceholder=null,
-                                $class="", $storeRoute=null)
+                                $class="", $storeRoute=null,
+                                $wrapper="bootstrapformgroup")
     {
      
         /*
@@ -165,7 +167,7 @@ class PivotList extends Component
             echo 'Unexpected Data Type';
         }
 
-
+        $this->wrapper = $wrapper;
         $this->class = $class;
         
     }
