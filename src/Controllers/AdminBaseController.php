@@ -50,6 +50,21 @@ abstract class AdminBaseController extends Controller
         $this->_filters = $filters;
     }
 
+
+    /** Function to check for locally override blades */
+    public function resolveBlade($action) {
+
+        $path = $this::$bladePath . '.' . $action;
+        $overridePath = str_replace('::', '.', $path);
+
+        if(view()->exists($overridePath)) {
+            return $overridePath;
+        } else {
+            return $path;
+        }
+
+    }
+
     /**
      * Creates an array of the generic data points used by the view
      * (i.e. model name, plural, etc)
@@ -239,7 +254,7 @@ abstract class AdminBaseController extends Controller
 
         
 
-        return view($this::$bladePath . '.index', $this->prepareViewData())
+        return view($this->resolveBlade('index'), $this->prepareViewData())
                         ->with('models', $items)
                         ->with('columns', $columns);
 
