@@ -196,3 +196,8 @@ function contentstack($stackName) {
     }
 
 }
+
+
+function prevent_submit_on_enter() {
+    return  '<input type="submit" disabled style="display: none"/>';
+}
