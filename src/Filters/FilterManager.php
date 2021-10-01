@@ -91,9 +91,13 @@ class FilterManager {
             $sorter_data = $data[$wrapper] ?? [];
         }
 
+     //   dd($this->sorters);
+
         foreach($this->sorters as $key=>$scope) {
+            
             if(isset($sorter_data[$key])) {
-                $query->$scope($sorter_data[$key]);
+                //$query = 
+                $query = $scope($query, $sorter_data[$key]);
             }
         }
 
