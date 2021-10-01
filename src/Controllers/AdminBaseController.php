@@ -81,7 +81,9 @@ abstract class AdminBaseController extends Controller
         $out = array(
             'modelInject' => Str::lower($modelName),
             'modelName' => $modelNameHuman,
-            'modelPlural' => (Str::pluralStudly($modelNameHuman) ?? $this->modelPlural)
+            'modelPlural' => (Str::pluralStudly($modelNameHuman) ?? $this->modelPlural),
+
+            'rowClassResolvers' => $this->getRowClassResolvers(),
         );
 
         headTitle()->add($out['modelPlural']);
@@ -266,6 +268,10 @@ abstract class AdminBaseController extends Controller
      * @return array of column objects
      */
     public function getColumns() : array {
+        return [];
+    }
+
+    public function getRowClassResolvers() : array {
         return [];
     }
 

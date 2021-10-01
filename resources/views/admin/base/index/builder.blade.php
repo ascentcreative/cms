@@ -97,7 +97,14 @@
 
 @foreach ($models as $item)
 
-    <tr>
+    {{-- ability to compute a class (or classes?) for the row --}}
+    @php
+        $classes = [];
+        foreach($rowClassResolvers as $fn) {
+            $classes[] = $fn($item);
+        }
+    @endphp
+    <tr class="{{ join(' ', $classes); }}">
      {{-- for each column, render the value cell --}}
      @foreach($columns as $col) 
 
