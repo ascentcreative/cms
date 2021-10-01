@@ -22,22 +22,22 @@
 
             @if($col->sortable)
 
-                <A href="{{ $col->buildSortUrl() }}" class="sort-link sort-link-{{ $col->sorted }} ml-1"">
+                <A href="{{ $col->buildSortUrl() }}" class="sort-link sort-link-{{ $col->getSortDirection() }} ml-1"">
 
-                @switch($col->sorted)
-                        @case('asc')
-                            <i class="bi-caret-up-fill"></i>
-                            @break
+                @switch($col->getSortDirection())
+                    @case('asc')
+                        <i class="bi-caret-up-fill"></i>
+                        @break
 
-                        @case('desc')
-                            <i class="bi-caret-down-fill"></i>
-                            @break
+                    @case('desc')
+                        <i class="bi-caret-down-fill"></i>
+                        @break
 
-                        @default
-                            <i class="bi-chevron-expand"></i>
-                            @break
-
+                    @default
+                        <i class="bi-chevron-expand"></i>
+                        @break
                 @endswitch
+             
             
                 </A>
 
