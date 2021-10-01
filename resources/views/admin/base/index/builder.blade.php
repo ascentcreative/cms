@@ -115,7 +115,7 @@
             @else
 
                 @if($col->isLink) 
-                    <a href="{{ action([controller(), 'edit'], [$modelInject => $item->id]) }}">
+                    <a href="{{ action([controller(), $col->linkAction], [$modelInject => $item->id]) }}">
                 @endif
             
                 @if($col->value instanceof Closure) 
