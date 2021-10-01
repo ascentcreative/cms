@@ -27,6 +27,7 @@ class Column {
     public $bladeProps;
 
     public $isLink = false;
+    public $linkAction='edit';
 
     public $align = '';
 
