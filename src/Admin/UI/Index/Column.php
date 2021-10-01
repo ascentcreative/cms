@@ -67,8 +67,9 @@ class Column {
         return $this;
     }
 
-    public function isLink($bool=true) {
+    public function isLink($bool=true, $linkAction="edit") {
         $this->isLink = $bool;
+        $this->linkAction = $linkAction;
         return $this;
     }
 
