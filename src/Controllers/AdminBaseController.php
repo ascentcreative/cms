@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 use AscentCreative\CMS\Admin\UI\Index\Column;
+use AscentCreative\CMS\Filters\FilterManager;
  
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,16 +40,14 @@ abstract class AdminBaseController extends Controller
 
     private $_filters = array();
 
+    protected $_filtermanager;
 
     public function __construct() {
         //parent::__construct();
-       //$this->registerFilters();
+        $this->_filtermanager = new FilterManager();
+
     }
 
-    public function registerFilters($filters) {
-        // does nothing - override me...
-        $this->_filters = $filters;
-    }
 
 
     /** Function to check for locally override blades */
@@ -174,40 +173,26 @@ abstract class AdminBaseController extends Controller
 
         // prepare any defined filters...
 
-        if (is_array($this->_filters)) {
-            foreach($this->_filters as $filter) {
-                $items = $filter->applyFilter($items);
+        // if (is_array($this->_filters)) {
+        //     foreach($this->_filters as $filter) {
+        //         $items = $filter->applyFilter($items);
+        //     }
+        // }
+
+        $fm = $this->_filtermanager;
+        $fm->filter_wrapper = 'cfilter';
+
+        foreach($columns as $col) {
+            if($col->filterable) {
+                $fm->registerFilter($col->slug, $col->filterScope);
+            }
+
+            if($col->sortable) {
+                $fm->registerSorter($col->slug, $col->sortQuery);
             }
         }
 
-        if(request()->cfilter) {
-
-            foreach($columns as $col) {
-                if (array_key_exists($col->slug, request()->cfilter)) {
-                    $filtervals = request()->cfilter[$col->slug];
-                    if ($scope = $col->filterScope) { //instanceof Closure) {
-                        // $q = $col->sortQuery;
-                        $items->$scope($filtervals); // = $q($items, $dir);
-                        //$col->sorted = $dir;
-                    }
-                }  
-            }
-
-        }
-       
-        // prepare any defined sorters...
-        if(request()->sort) {
-            foreach($columns as $col) {
-                if (array_key_exists($col->slug, request()->sort)) {
-                    $dir = request()->sort[$col->slug];
-                    if ($col->sortQuery) { //instanceof Closure) {
-                        $q = $col->sortQuery;
-                        $items = $q($items, $dir);
-                        $col->sorted = $dir;
-                    }
-                }  
-            }
-        }
+        $items = $fm->apply($items);
 
         
         if (!is_array($this->indexSort)) {
