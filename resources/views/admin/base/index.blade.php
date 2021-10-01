@@ -5,6 +5,7 @@
 
 @section('headbar')
 
+    @section('headfilters')
     {{-- <form class="form-inline" method="get" id="frm_filter"> --}}
     <div class="flex flex-align-center" style="white-space: nowrap">
         <div>
@@ -16,6 +17,8 @@
             </div>
         @endisset
     </div>
+
+    @show
     {{-- </form> --}}
 
     <nav class="navbar">
