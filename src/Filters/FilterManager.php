@@ -16,6 +16,7 @@ class FilterManager {
     public $sorter_wrapper = 'sort';
 
     private $filters = [];
+    private $statutoryFilters = [];
     private $sorters = [];
 
 
@@ -44,6 +45,20 @@ class FilterManager {
 
     }
 
+
+    /**
+     * Register a new statutory filter
+     * param: $socpe - the eloquent scope name to apply on the model - i.e. scopeByTheme = 'byTheme';
+     * No params needed - it's always applied.
+     */
+    public function registerStatutoryFilter($scope) {
+
+        $this->statutoryFilters[] = $scope;
+
+        return $this;
+
+    }
+
     /**
      * Register a new sorter
      * param: $field - the name of the field
@@ -64,6 +79,11 @@ class FilterManager {
         $data = $data ?? request()->all();
 
         // dd($data);
+
+        foreach($this->statutoryFilters as $key=>$scope) {
+            $query->$scope();
+        }
+
 
         $wrapper = $this->filter_wrapper;
         if ($wrapper == '') {
