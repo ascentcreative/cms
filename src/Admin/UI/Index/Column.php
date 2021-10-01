@@ -184,7 +184,7 @@ class Column {
 
         unset($query['sort']);
 
-        switch($this->sorted) {
+        switch($this->getSortDirection()) {
             case 'asc':
                 $dir = 'desc';
                 break;
@@ -204,6 +204,14 @@ class Column {
 
         return $url . (count($query) > 0 ? ('?' . http_build_query($query)) : '');
         
+    }
+
+    public function getSortDirection() {
+
+        if (isset(request()->sort[$this->slug])) {
+            return request()->sort[$this->slug];
+        }
+
     }
 
     /* filtering */
