@@ -313,6 +313,8 @@ th.filterable {
     border-top: 0px solid;
     padding: 10px;
 
+    text-align: left;
+
     left: 0;
     top: calc(100%);
 
