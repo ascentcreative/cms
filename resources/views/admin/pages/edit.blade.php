@@ -50,6 +50,13 @@
                     wrapper="none"/>
                 @break
 
+                @case('stackeditor')
+                    <x-stackeditor label="" 
+                    name="content" 
+                    :value="old('content', $model->content)" 
+                    wrapper="none"/>
+                @break
+
             @endswitch
 
             {{-- 
