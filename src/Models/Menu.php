@@ -45,21 +45,22 @@ class Menu extends Base
     /**
      * Render out the menu items (UL)
      */
-    public function render($maxDepth = 0) {
+    public function render($maxDepth = 0, $classes='') {
 
         $items = MenuItem::scoped(['menu_id'=>$this->id])->defaultOrder()->get()->toTree();
 
-        return $this->traverse($items, $maxDepth);
+        return $this->traverse($items, $maxDepth, 0, $classes);
 
     }
 
-    public function traverse($items, $maxDepth, $depth = 0) {
+    public function traverse($items, $maxDepth, $depth = 0, $classes='') {
 
         if ($maxDepth != 0 && $depth == $maxDepth) {
             return '';
         }
 
-        $out = '<UL class="menu menu-' . $this->slug . '">';
+
+        $out = '<UL class="menu menu-' . $this->slug . ' ' . $classes . '">';
 
         foreach($items as $item) {
 
