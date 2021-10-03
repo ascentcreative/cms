@@ -51,10 +51,8 @@
                 @break
 
                 @case('stackeditor')
-                    <x-stackeditor label="" 
-                    name="content" 
-                    :value="old('content', $model->content)" 
-                    wrapper="none"/>
+                {{-- Used to prevent errors if the stackeditor package isn't installed --}}
+                   @include('cms::stackeditor.proxy')
                 @break
 
             @endswitch
