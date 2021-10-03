@@ -90,6 +90,8 @@ var AjaxUpload = {
 
                     console.log(data);
 
+                    $(self.element).trigger('change');
+
                     //   var result = $.parseJSON(data);
                     //   //console.log(result);
                     //   if(result['result'] == 'OK') {
@@ -140,6 +142,7 @@ var AjaxUpload = {
         $(this.element).find('.ajaxupload-value').val('');
         $(this.element).removeClass('has-file');
         this.updateUI(this.options.placeholder, 0);
+        $(this.element).trigger('change');
     },
 
     updateUI: function(text, pct=0) {

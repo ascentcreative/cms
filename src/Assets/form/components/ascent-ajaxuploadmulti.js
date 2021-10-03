@@ -230,6 +230,9 @@ var AjaxUploadMultiFile = {
 
                 console.log(data);
 
+                $(self.element).trigger('change');
+
+
                 //   var result = $.parseJSON(data);
                 //   //console.log(result);
                 //   if(result['result'] == 'OK') {
