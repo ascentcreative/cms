@@ -55,23 +55,24 @@
 
    
     {{-- @if($models->count() > 0) --}}
-        
-    <table class="table table-hover">
+    <div class="cms-tablewrap">
+        <table class="table table-hover">
 
-        <thead>
+            <thead>
 
-        @yield('indextable-head')
+            @yield('indextable-head')
 
-        </thead>
+            </thead>
 
-        <tbody>
+            <tbody>
 
-           @yield('indextable-body')
+            @yield('indextable-body')
 
-        </tbody>
+            </tbody>
 
 
-    </table>
+        </table>
+    </div>
 
 
 
