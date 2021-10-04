@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
 use Laravel\Fortify\Fortify;
 
+use Spatie\Activitylog\Models\Activity;
+
 use AscentCreative\CMS\Helpers\HeadTitle;
 use AscentCreative\CMS\Helpers\AdminMenu;
 
@@ -88,6 +90,8 @@ class CMSServiceProvider extends ServiceProvider
     $this->bootDirectives();
     $this->bootComponents();
     $this->bootPublishes();
+
+    $this->bootActivityLogging();
   
 
     $this->loadViewsFrom(__DIR__.'/../resources/views', 'cms');
@@ -119,6 +123,18 @@ class CMSServiceProvider extends ServiceProvider
    
 
 
+  }
+
+  public function bootActivityLogging() {
+
+    Activity::saving(function (Activity $activity) {
+
+        $activity->properties = $activity->properties->put('session', session()->getId());
+        $activity->properties = $activity->properties->put('ip', request()->ip());
+        
+    });
+
+    
   }
 
 
@@ -225,6 +241,7 @@ class CMSServiceProvider extends ServiceProvider
 
     Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
     Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
+    Blade::component('cms-form-autocomplete', 'AscentCreative\CMS\View\Components\Form\Autocomplete');
     Blade::component('cms-form-relationautocomplete', 'AscentCreative\CMS\View\Components\Form\RelationAutocomplete');
     Blade::component('cms-form-blockselect', 'AscentCreative\CMS\View\Components\Form\BlockSelect');
 
