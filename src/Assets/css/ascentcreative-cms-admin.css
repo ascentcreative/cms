@@ -114,6 +114,7 @@ A.settings-link:hover {
 
 .cms-screen {
     max-width: 1200px;
+    /* min-width: 1000px; */
     width: 100%;
 
 }
@@ -121,6 +122,12 @@ A.settings-link:hover {
 .cms-screenblock {
     padding: 1.4rem 2rem;
     margin-bottom: 1rem;
+    
+}
+
+.cms-screenblock .cms-tablewrap {
+    width: 100%;
+    overflow-x: scroll;
 }
 
 .cms-screenblock-tabs .tab-pane {
