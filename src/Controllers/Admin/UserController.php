@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserController extends AdminBaseController
 {
 
-    static $modelClass = 'App\Models\User';
+    //static $modelClass = 'App\Models\User';
+    static $modelClass = 'AscentCreative\CMS\Models\User';
     static $bladePath = "cms::admin.users";
 
 

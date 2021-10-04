@@ -8,8 +8,13 @@
             
             <th width="">Name</th>
 
+            <th>Email</th>
+            <th></th>
             <th></th>
 
+            <th>Last Login</th>
+
+            <th width="1%"></th>
            
           
         </tr>
@@ -33,6 +38,10 @@
 
             <td>
                 {!! $item->getPermissionNames() !!}
+            </td>
+
+            <td>
+                {{ $item->lastLogin }}
             </td>
 
             <td width="0"> 
