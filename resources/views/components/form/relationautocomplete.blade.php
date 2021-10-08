@@ -1,6 +1,6 @@
 @extends('cms::components.form.wrapper.bootstrapformgroup')
 
-@section('label'){{$label}}@overwrite
+@php $tmp_label = $label; @endphp
 @section('name'){{$name}}@overwrite
 
 @section('element')
@@ -21,3 +21,6 @@
     });
     </script>
 @endpush
+
+
+@section('label'){{$tmp_label}}@overwrite

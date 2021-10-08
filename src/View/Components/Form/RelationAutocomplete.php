@@ -40,20 +40,31 @@ class RelationAutocomplete extends Component
         $this->relationship = $relationship;
         $this->dataurl = $dataurl;
 
-        $related = $relationship->getRelated();
-
-        $foreign = $relationship->first();
-
-        // from the relation, build up the data...
-
-        // get the foreign model
-        
         if (is_null($name)) {
             $this->name = $relationship->getRelationName() . '_id';
         } else {
             $this->name = $name;
         }
         
+
+
+        $related = $relationship->getRelated();
+
+        if($old = old($this->name)) {
+
+            // dd($old);
+            $foreign = $related::find($old); //->first();
+            // dd($foreign);
+        } else {
+            $foreign = $relationship->first();
+        }
+
+
+        // from the relation, build up the data...
+
+        // get the foreign model
+        
+       
 
         if($foreign) {
             $this->value = $foreign->id;
