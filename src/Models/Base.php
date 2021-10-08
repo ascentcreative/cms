@@ -21,6 +21,11 @@ class Base extends Model
 
     protected static $logFillable = true;
 
+    /* Validation properties */
+    public static $rules = [];
+    public static $messages = [];
+
+
     public function getTable()
     {
         return ($this->table ?? 'cms_' . Str::snake(Str::pluralStudly(class_basename($this))));
