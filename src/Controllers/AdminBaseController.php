@@ -422,7 +422,38 @@ abstract class AdminBaseController extends Controller
 
 
     /* implement this method to specify input validation rules to be applied before attempting to commit the model to the database */
-    public abstract function rules(Request $request, $model);
+    public function rules(Request $request, $model=null) {
+
+        try {
+            $cls = $this::$modelClass;
+            return $cls::$rules;
+        } catch (\Error $e) {
+
+            // no rules - at the very least, ensure all non-nullable cols have values?
+            // - but only deal with fields set in the post? 
+            //  - i.e. - id and slug may be required, but not controlled on the form. Returning a validation failure will redisplay the form with no visible errors.
+
+            $cls = $this::$modelClass;
+            $inst = new $cls();
+
+            $data = $request->all();
+
+            $cols = \DB::connection()
+            ->getDoctrineSchemaManager()
+            ->listTableColumns($inst->getTable());
+
+            $rules = [];
+            foreach($cols as $key=>$col) {
+                if (array_key_exists($key, $data) && $col->getNotNull()) {
+                    $rules[$key] = 'required';
+                }
+            }
+     
+            return $rules;
+
+        }
+  
+    }
 
      /* override this method to specify custom validation messages for the above rules */
     public function messages(Request $request, $model=null):array {
