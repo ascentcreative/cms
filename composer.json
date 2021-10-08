@@ -36,5 +36,8 @@
         "type": "vcs",
         "url": "git@github.com:ascentcreative/laravel-instagram-feed.git"
       }
-    ]
+    ],
+  "require-dev": {
+    "barryvdh/laravel-debugbar": "^3.6"
+  }
 }
