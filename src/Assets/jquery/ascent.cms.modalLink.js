@@ -155,6 +155,8 @@ var ModalLink = {
                     statusCode: {
                         200: function(data, xhr, request) {
 
+                            
+
                             console.log('200!');
                             console.log(data);
                             
@@ -204,7 +206,18 @@ var ModalLink = {
                                 }
 
                                 if(data) {
-                                    self.showResponseModal(data);
+
+                                    if($(data).hasClass('modal')) { 
+                                        self.showResponseModal(data);
+                                    } else {
+                                        $('#ajaxModal').modal('hide');
+                                        $(document).trigger({
+                                            type: 'modal-link-response',
+                                            response: data
+                                        });
+                                    }
+                                   
+                                    
                                 } else {
                                     switch($(form).attr('data-onsuccess')) {
                                         case 'refresh':
