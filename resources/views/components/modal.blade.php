@@ -1,6 +1,8 @@
 <div class="modal text-left" id="{{ $modalid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog @if($centered) modal-dialog-centered @endif modal-lg {{$modalSize ?? ''}}" role="document">
 
+        {{ $formstart ?? '' }}
+        
         <div class="modal-content">
 
         {{-- @if($modalShowHeader ?? false) --}}
@@ -42,7 +44,7 @@
 
       </div>
 
-    
+      {{ $formend ?? '' }}
 
     </div>
   </div>
