@@ -9,8 +9,9 @@ class Modal extends Component
     public $modalid;
     public $title;
     public $closebutton;
+    public $centered = false;
 
-    public function __construct($modalid, $title='', $closebutton=true) {
+    public function __construct($modalid, $title='', $closebutton=true, $centered=false) {
 
        // dd($modalid);
 
@@ -18,6 +19,7 @@ class Modal extends Component
 
         $this->title = $title;
         $this->closebutton = $closebutton;
+        $this->centered = $centered;
 
     }
 
