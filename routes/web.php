@@ -126,6 +126,32 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             ]
         ]);
 
+
+
+        /* Routes for HasMany component modal and validation */
+
+        Route::get('/cms/components/hasmany/{source}/{target}', function($source, $target) {
+            /* present the modal */
+            return view('admin.' . $source . '.hasmany.' . $target . '.modal');
+        })->name('cms.components.hasmany');
+
+
+        Route::post('/cms/components/hasmany/{source}/{target}', function($source, $target) {
+            /* validate modal data */
+            $cls = session()->get('modelTableCache.' . $target);
+            $rules = $cls::$rules;
+            Validator::make(request()->all(), $rules)->validate();
+
+            /* If pass, return the new item to add to the field */
+            /* Item = the data submitted (converted to an object for compatibility) */
+            /* Name = the field name and a new unique index (replaced by a numeric ID on save) */
+            /* Note - this doesn't actually create the new record in the database. The save process for the parent model needs to do that */
+            return view('admin.' . $source . '.hasmany.' . $target . '.item', ['item' => (object) request()->all(), 'name' => $target . '[' . uniqid() . ']']);
+        })->name('cms.components.hasmany');
+
+
+
+
         /** Content Stack */
         Route::get('/stackblock/make/{type}/{name}/{key}', function($type, $name, $key) {
             return view('cms::stack.block.make')->with('type', $type)->with('name', $name)->with('key', $key)->with('value', null);
@@ -203,6 +229,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
 
 });
+
 
 
 
