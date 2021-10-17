@@ -3,6 +3,25 @@
 
 Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(function () {
 
+    Route::get('/longrunprogress', function() {
+        // fake the progress for now
+        $prog = session()->get('prog');
+        if(!is_numeric($prog)) {
+            $prog = 1;
+        } else {
+            $prog++;
+        }
+
+        session()->put('prog', $prog);
+
+        return response()->json($prog);
+
+    });
+
+    Route::get('/lrptest', function() {
+        return view('cms::lrptest');
+    });
+
 
     /** 
      * HOMEPAGE Routing
