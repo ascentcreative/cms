@@ -16,15 +16,15 @@ var ModalLink = {
         var obj = this.element;
 
 
-        if (this.element.data('backdrop')) {
-            this.backdrop = this.element.data('backdrop');
+        if (this.element.data('backdrop') != null) {
+            this.backdrop = this.element.data('backdrop'); 
         }
 
-        // console.log(this.element.data('keyboard'));
-
-        if (this.element.data('keyboard')) {
+        if (this.element.data('keyboard')  != null ) {
             this.keyboard = this.element.data('keyboard');
         }
+
+
        
         
         // We're calling this on click, so just launch straight into the business end...
