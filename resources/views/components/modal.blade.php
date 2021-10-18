@@ -36,7 +36,7 @@
             <button type="submit" class="btn btn-danger"> Yes </button>
          --}}
         
-                {{ $footer }}
+                {{ $footer ?? '' }}
 
           </div>
         {{-- @endif --}}
