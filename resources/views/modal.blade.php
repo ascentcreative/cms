@@ -1,4 +1,4 @@
-<div class="modal fade text-left" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-left" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 
     @stack('styles')
 
@@ -8,9 +8,11 @@
         @if($modalShowHeader ?? false)
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">@yield('modalTitle')</h5>
+            @if($modalCloseButton ?? true)
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+            @endif
           </div>
         @endif
 
