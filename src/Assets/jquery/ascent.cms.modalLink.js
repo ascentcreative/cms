@@ -5,6 +5,8 @@ var ModalLink = {
     self: null,
     loginPath: '/modal/cms/modals.login',
     targetPath: '',
+    backdrop: true,
+    keyboard: true,
     
     _init: function () {
 
@@ -13,15 +15,17 @@ var ModalLink = {
         var thisID = (this.element)[0].id;
         var obj = this.element;
 
-        // alert('fwefewf');
 
-        // alert($('INPUT.item-select').serialize());
+        if (this.element.data('backdrop')) {
+            this.backdrop = this.element.data('backdrop');
+        }
 
-        console.log(this.element.data('serialiseForModal'));
-        //return false;
+        // console.log(this.element.data('keyboard'));
 
-        //alert(this.data('serialise-for-modal'));
-
+        if (this.element.data('keyboard')) {
+            this.keyboard = this.element.data('keyboard');
+        }
+       
         
         // We're calling this on click, so just launch straight into the business end...
 
@@ -113,7 +117,10 @@ var ModalLink = {
         }
 
         // fire up the new modal
-        $('#ajaxModal').modal();
+        $('#ajaxModal').modal({
+            backdrop: this.backdrop,
+            keyboard: this.keyboard
+        });
          // if we removed the fade class, re-add it now so this one fades out nicely!
          if (inFlow) {
             $('body .modal').addClass('fade');
