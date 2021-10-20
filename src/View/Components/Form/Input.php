@@ -18,13 +18,15 @@ class Input extends Component
     public $wrapper;
     public $class;
 
+    public $multiple; // only used on file inputs
+
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value, $accept="", $autocomplete=false, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($type, $label, $name, $value, $accept="", $autocomplete=false, $wrapper="bootstrapformgroup", $class='', $multiple='false')
     {
         $this->type = $type;
         $this->label = $label;
@@ -36,6 +38,8 @@ class Input extends Component
 
         $this->wrapper = $wrapper;
         $this->class = $class;
+
+        $this->multiple = $multiple;
 
     }
 

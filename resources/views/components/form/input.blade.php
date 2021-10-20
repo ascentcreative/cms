@@ -8,6 +8,9 @@
     <input type="{{$type}}" name="{{$name}}" value="{!! $value !!}" @if($type=='file' && $accept != '') accept="{{ $accept }}" @endif
         class="form-control{{ ($type=='file' ? '-file' : '') }}"
         @if($type=='number') min="0" step="0.01" @endif
+        @if($type=='file')
+            @if($multiple) multiple @endif
+        @endif
         autocomplete="{{ $autocomplete ? 'on' : 'off' }}"
     />
 
