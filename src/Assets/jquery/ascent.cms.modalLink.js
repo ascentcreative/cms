@@ -16,6 +16,9 @@ var ModalLink = {
         var obj = this.element;
 
 
+        /* I think, actually, we should read these from the loaded Modal... 
+            Makes it more flexible in a run of dialogs so each can be specified individually */
+
         if (this.element.data('backdrop') != null) {
             this.backdrop = this.element.data('backdrop'); 
         }
