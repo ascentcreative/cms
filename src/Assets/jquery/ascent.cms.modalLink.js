@@ -124,6 +124,7 @@ var ModalLink = {
             backdrop: this.backdrop,
             keyboard: this.keyboard
         });
+
          // if we removed the fade class, re-add it now so this one fades out nicely!
          if (inFlow) {
             $('body .modal').addClass('fade');
@@ -165,11 +166,6 @@ var ModalLink = {
                     statusCode: {
                         200: function(data, xhr, request) {
 
-                            
-
-                            console.log('200!');
-                            console.log(data);
-                            
                             var disposition = request.getResponseHeader('content-disposition');
                             
                             if (disposition && disposition.indexOf('attachment') !== -1) {
@@ -177,7 +173,7 @@ var ModalLink = {
                                 var contentType = request.getResponseHeader('content-type');
                                 var file = new Blob([data], { type: contentType });
 
-                                console.log(request.getResponseHeader('content-disposition'));
+                                //console.log(request.getResponseHeader('content-disposition'));
                                 var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
                                 var matches = filenameRegex.exec(disposition);
                                 if (matches != null && matches[1]) { 
@@ -209,8 +205,6 @@ var ModalLink = {
 
                             } else {
 
-
-
                                 if(request.getResponseHeader('fireEvent')) {
                                     $(document).trigger(request.getResponseHeader('fireEvent'));
                                 }
@@ -220,11 +214,11 @@ var ModalLink = {
                                     if($(data).hasClass('modal')) { 
                                         self.showResponseModal(data);
                                     } else {
-                                        $('#ajaxModal').modal('hide');
                                         $(document).trigger({
                                             type: 'modal-link-response',
                                             response: data
                                         });
+                                        $('#ajaxModal').modal('hide');
                                     }
                                    
                                     
