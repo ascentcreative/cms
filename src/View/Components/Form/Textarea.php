@@ -12,6 +12,9 @@ class Textarea extends Component
     public $name;
     public $value;
 
+    public $rows;
+    public $cols;
+
     public $wrapper;
     public $class;
 
@@ -21,12 +24,15 @@ class Textarea extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($label, $name, $value, $rows=null, $cols=null, $wrapper="bootstrapformgroup", $class='')
     {
         
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
+
+        $this->rows = $rows;
+        $this->cols = $cols;
 
         $this->wrapper = $wrapper;
         $this->class = $class;
