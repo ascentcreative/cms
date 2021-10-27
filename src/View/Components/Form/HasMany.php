@@ -2,7 +2,7 @@
 
 namespace AscentCreative\CMS\View\Components\Form;
 
-use Illuminate\View\Component;
+use Illuminate\View\Component; 
 
 /* Form component designed to work with a HasMany eloquent relation */
 class HasMany extends Component
