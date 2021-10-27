@@ -149,9 +149,25 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
         /* Routes for HasMany component modal and validation */
 
+        // load modal - either empty or with data values for editing
         Route::get('/cms/components/hasmany/{source}/{target}', function($source, $target) {
             /* present the modal */
-            return view('admin.' . $source . '.hasmany.' . $target . '.modal');
+            // Not sure we need the source? would the dialog not be the same regardless of that (ini polymorphic sitautions?)
+            //return view('admin.' . $source . '.hasmany.' . $target . '.modal');
+
+            // extract incoming data
+            if(request()->$target) {
+                $idx = array_key_first(request()->$target);
+                $item = request()->$target[$idx];
+                $action = 'Edit';
+            } else {
+                $idx = '0';
+                $item = [];
+                $action = 'New';
+            }
+ 
+            return view('components.hasmany.' . $target . '.modal', ['idx' =>  $idx, 'item' => (object) $item, 'action' => $action ] );
+            
         })->name('cms.components.hasmany');
 
 
@@ -165,7 +181,14 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             /* Item = the data submitted (converted to an object for compatibility) */
             /* Name = the field name and a new unique index (replaced by a numeric ID on save) */
             /* Note - this doesn't actually create the new record in the database. The save process for the parent model needs to do that */
-            return view('admin.' . $source . '.hasmany.' . $target . '.item', ['item' => (object) request()->all(), 'name' => $target . '[' . uniqid() . ']']);
+            //return view('admin.' . $source . '.hasmany.' . $target . '.item', ['item' => (object) request()->all(), 'name' => $target . '[' . uniqid() . ']']);
+
+            // $obj = new $cls();
+            // $obj->fill(request()->all());
+            $obj = (object) request()->all();
+
+            return view('components.hasmany.' . $target . '.item', ['item' => $obj, 'name' => $target . '[' . request()->idx . ']', 'idx' => request()->idx]);
+
         })->name('cms.components.hasmany');
 
 

@@ -5,20 +5,23 @@
 
 @section('element')
 
-    <div class="border p-3 bg-light w-50">
+    <div class="border p-3 bg-light hasmany" id="{{ nameToId($name) }}" data-fieldname="{{ $name }}">
 
         <div class="hasmany-items">
      
             @foreach($value as $idx=>$item)
 
-                @include('admin.' . $source . '.hasmany.' . $target . '.item', ['item'=> (object) $item, 'name'=>$name . '[' . $idx . ']' ] )
+                {{-- Removed source from blade path - not sure we need it --}}
+                {{-- @include('admin.' . $source . '.hasmany.' . $target . '.item', ['item'=> (object) $item, 'name'=>$name . '[' . $idx . ']' ] ) --}}
+
+                @include('components.hasmany.' . $target . '.item', ['item'=> (object) $item, 'name'=>$name . '[' . $idx . ']' ] )
 
             @endforeach
 
         </div>
     
         {{-- Derive route name from parent and target models --}}
-        <a href="{{ route('cms.components.hasmany', ['source'=>$source, 'target'=>$target]) }}" class="button btn btn-sm btn-primary modal-link" xdata-toggle="modal" xdata-target="#hasmanyedit">Add New</a>
+        <a href="{{ route('cms.components.hasmany', ['source'=>$source, 'target'=>$target]) }}" class="hasmany-add button btn btn-sm btn-primary modal-link" xdata-toggle="modal" xdata-target="#hasmanyedit">Add New</a>
 
     </div>
 
@@ -26,27 +29,18 @@
 
 @section('label'){{$tmp_label}}@overwrite
 
+@once
+    @push('scripts')
+        @script('/vendor/ascent/cms/form/components/ascent-hasmany.js')
+    @endpush
+@endonce
+
 @push('scripts')
+
 <script>
-
-$(document).on('modal-link-response', function(e) {
-
-    $('.hasmany-items').append(e.response);
-
-});
-
+    $(document).ready(function() {
+        $('#{{ nameToId($name) }}').hasmany();
+    });
 </script>
 
-
-{{-- <script>
-    $(document).on('click', 'button#hasmany-create', function(e) {
-        
-        e.preventDefault();
-
-        // do something to add the new row...
-        // I'm guessing an ajax submit, but how do we tell it where to send it, and what blade to respond with?
-        // what if we had a template holding a blank row, with labelled placeholders for the data?
-
-    });
-</script> --}}
 @endpush
