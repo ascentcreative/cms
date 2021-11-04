@@ -302,7 +302,7 @@ var ModalLink = {
                         },
                         500: function(data, xhr, request) {
 
-                            alert('An unexpected error occurred');
+                            alert('An unexpected error occurred:' + "\n\n" + data.responseJSON.message);
                         
 
                         }
