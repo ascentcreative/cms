@@ -13,6 +13,8 @@ use Spatie\Activitylog\Models\Activity;
 use AscentCreative\CMS\Helpers\HeadTitle;
 use AscentCreative\CMS\Helpers\AdminMenu;
 
+use Jenssegers\Agent\Agent;
+
 class CMSServiceProvider extends ServiceProvider
 {
   public function register()
@@ -131,6 +133,11 @@ class CMSServiceProvider extends ServiceProvider
 
         $activity->properties = $activity->properties->put('session', session()->getId());
         $activity->properties = $activity->properties->put('ip', request()->ip());
+
+        $agent = new Agent();
+        $activity->properties = $activity->properties->put('agent', $_SERVER['HTTP_USER_AGENT']);
+        $activity->properties = $activity->properties->put('robot', $agent->isRobot());
+        
         
     });
 
