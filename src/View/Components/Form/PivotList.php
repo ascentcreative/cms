@@ -151,6 +151,7 @@ class PivotList extends Component
             // to the Eloquent Collection above. Most likely from a validation 
             // failure elswhere on the form (i.e. formatted for Pivot Sync, rather than 
             // data from the query). 
+            // Also applicable if the component is used on a stack block (i.e. data stored as json)
   
             $data = array();
             foreach($value as $idx=>$row) {
