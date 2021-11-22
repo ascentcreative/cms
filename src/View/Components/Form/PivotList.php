@@ -129,11 +129,16 @@ class PivotList extends Component
                     $cls = $this->optionModel;
                     $lbl = $this->labelField;
                     $cls = $cls::find($itm->id);
+
+                    if($cls) {
+                        
+                        $row['id'] = $itm->id;
+                        $row['label'] = $cls->$labelField;
+                        
+                        $data[] = $row;
                     
-                    $row['id'] = $itm->id;
-                    $row['label'] = $cls->$labelField;
-                    
-                    $data[] = $row;
+                    }
+
 
                 }
                 
@@ -154,11 +159,13 @@ class PivotList extends Component
                 $lbl = $this->labelField;
                 $cls = $cls::find($idx);
                     
-                $row = array();
-                $row['id'] = $idx;
-                $row['label'] = $cls->$labelField;
+                if($cls) {
+                    $row = array();
+                    $row['id'] = $idx;
+                    $row['label'] = $cls->$labelField;
 
-                $data[] = $row;
+                    $data[] = $row;
+                }
             }
 
             $this->value = $data;
