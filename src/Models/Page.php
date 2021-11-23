@@ -10,6 +10,8 @@ use AscentCreative\CMS\Traits\HasMetadata;
 use AscentCreative\CMS\Traits\HasSlug;
 use AscentCreative\CMS\Traits\Publishable;
 
+use Laravel\Scout\Searchable;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +20,7 @@ use Illuminate\Support\Str;
 
 class Page extends Base
 {
-    use HasFactory, HasMetadata, HasImages, HasMenuItem, HasSlug; //, Publishable; 
+    use HasFactory, HasMetadata, HasImages, HasMenuItem, HasSlug, Searchable; //, Publishable; 
 
     public $fillable = ['title', 'content'];
     
