@@ -17,7 +17,9 @@
     "spatie/laravel-settings": "^2.1",
     "dymantic/laravel-instagram-feed": "^2.5",
     "kalnoy/nestedset": "^6.0",
-    "jenssegers/agent": "^2.6" 
+    "jenssegers/agent": "^2.6",
+    "laravel/scout": "^9.3",
+    "yab/laravel-scout-mysql-driver": "^5.0" 
   },
   "autoload": {
     "psr-4": {
@@ -36,8 +38,5 @@
         "type": "vcs",
         "url": "git@github.com:ascentcreative/laravel-instagram-feed.git"
       }
-    ],
-  "require-dev": {
-    "barryvdh/laravel-debugbar": "^3.6"
-  }
+    ]
 }
