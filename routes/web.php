@@ -22,7 +22,6 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         return view('cms::lrptest');
     });
 
-
     /** 
      * HOMEPAGE Routing
      */
@@ -39,6 +38,11 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         }
     
     })->name('homepage');
+
+    /**
+     * FULL TEXT SEARCH (Using Scout)
+     */
+    Route::get('/search',  'SearchController@search');
 
 
     //Route::get('/contact', 'ContactController@showform'); // not needed as form can be placed in stacked page
