@@ -135,9 +135,12 @@ trait HasImages {
         
         if(request()->isPreview) {
 
-            $img = new Image();
-            $img->fill($this->_images[$spec]);
-            return $img;
+            return $this->imageBySpec($spec);
+            // dd($this->_images);
+
+            // $img = new Image();
+            // $img->fill($this->_images[$spec]);
+            // return $img;
             //return ($this->images[$spec]['image']);
 
         } else {
