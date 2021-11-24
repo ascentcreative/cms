@@ -12,11 +12,14 @@ use Illuminate\Support\Str;
 use AscentCreative\CMS\Traits\HasImages;
 use AscentCreative\CMS\Traits\HasMetadata;
 
+use Laravel\Scout\Searchable;
 
 class MenuItem extends Base
 {
    
-    use HasFactory, NodeTrait, HasImages, HasMetadata; //HasHeaderImage;
+    use HasFactory, NodeTrait, HasImages, HasMetadata, Searchable {
+        NodeTrait::usesSoftDelete insteadOf Searchable; // SrchUsesSoftDelete;
+    } //HasHeaderImage;
 
     public $fillable = ['menu_id', 'title', 'url', 'newWindow'];
 
@@ -29,7 +32,7 @@ class MenuItem extends Base
 
 
     public function getItemTitleAttribute() {
-        if (is_null($this->title)) {
+        if (is_null($this->title) && $this->linkable) {
             if($this->linkable->titleField) {
                 $fld = $this->linkable->titleField;
             } else {
