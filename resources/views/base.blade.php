@@ -12,11 +12,17 @@
         {{ metadata($model ?? null) }}
     
         @style('/vendor/ascent/cms/css/ascent-cms-core.css') 
+
+        @foreach(packageAssets()->getStylesheets() as $style)
+            @style($style)
+        @endforeach
+
         @style("/vendor/ascent/cms/css/bootstrap.min.css") 
         @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css") 
         @style("/vendor/ascent/cms/js/jquery-ui.min.css") 
         @style("/css/screen.css") 
-        @style('/vendor/ascent/checkout/css/ascentcreative-checkout.css') 
+        {{-- @style("/css/styles.css")  --}}
+       
         @stack('styles')
 
         @yield('site_head')
@@ -52,6 +58,11 @@
         @endif
         @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
         @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js')
+
+        @foreach(packageAssets()->getScripts() as $script)
+            @script($script)
+        @endforeach
+
         @stack('scripts')
 
         {!! app(AscentCreative\CMS\Settings\SiteSettings::class)->custom_body_tags_end !!}

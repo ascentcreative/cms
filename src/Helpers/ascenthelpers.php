@@ -152,6 +152,10 @@ function headTitle() {
 	return app(\AscentCreative\CMS\Helpers\HeadTitle::class);
 }
 
+function packageAssets() {
+	return app(\AscentCreative\CMS\Helpers\PackageAssets::class);
+}
+
 function metadata($model=null) {
     return view()->first(["metadata.tags", "cms::metadata.tags"])->with(['model'=>$model]);
 }

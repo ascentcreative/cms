@@ -11,6 +11,7 @@ use Laravel\Fortify\Fortify;
 use Spatie\Activitylog\Models\Activity;
 
 use AscentCreative\CMS\Helpers\HeadTitle;
+use AscentCreative\CMS\Helpers\PackageAssets;
 use AscentCreative\CMS\Helpers\AdminMenu;
 
 use Jenssegers\Agent\Agent;
@@ -27,6 +28,10 @@ class CMSServiceProvider extends ServiceProvider
     //
     $this->app->singleton(HeadTitle::class, function() {
       return new HeadTitle();
+    });
+
+    $this->app->singleton(PackageAssets::class, function() {
+        return new PackageAssets();
     });
 
     $this->app->singleton(AdminMenu::class, function() {
