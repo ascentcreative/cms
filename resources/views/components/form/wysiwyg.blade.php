@@ -11,7 +11,7 @@
 
    <div class="wysiwyg-editor" style="width: 100%; height: 100%;">
 
-       <div contenteditable="true" id="edit-{{ $unid }}" style="width: 100%; height: 100%; padding: 10px 15px; background: white;">{!! $value !!}</div>
+       <div contenteditable="true" id="edit-{{ $unid }}" style="width: 100%; height: 100%; padding: 10px 15px;">{!! $value !!}</div>
 
     </div>
 
