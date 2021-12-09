@@ -13,6 +13,7 @@ class Colour extends Component
 
     public $wrapper;
     public $class;
+    public $elementClass;
 
 
     /**
@@ -20,7 +21,7 @@ class Colour extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($label, $name, $value, $wrapper="bootstrapformgroup", $class='', $elementClass = '')
     {
     
         $this->label = $label;
@@ -29,6 +30,7 @@ class Colour extends Component
 
         $this->wrapper = $wrapper;
         $this->class = $class;
+        $this->elementClass = $elementClass;
 
     }
 

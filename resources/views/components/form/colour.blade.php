@@ -2,13 +2,14 @@
 
 @section('label'){{$label}}@overwrite
 @section('name'){{$name}}@overwrite
+@section('elementClass'){{$elementClass}}@overwrite
 @php
     $id = str_replace(array('[', ']'), array('--', ''), $name);
 @endphp
 
 @section('element')
 
-    <input name="{{$name}}" id="{{ $id }}" value="{!! $value !!}" class="form-control" autocomplete="off"/>
+    <input name="{{$name}}" id="{{ $id }}" value="{!! $value !!}" class="form-control {{ $elementClass ?? ''}} " autocomplete="off"/>
 
 @overwrite
 
