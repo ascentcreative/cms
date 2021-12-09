@@ -2,4 +2,5 @@
 <x-stackeditor label="" 
 name="content" 
 :value="old('content', $model->content)" 
-wrapper="none"/>
+wrapper="none"
+:model="$model ?? null"/>
