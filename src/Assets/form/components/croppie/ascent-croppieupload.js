@@ -150,7 +150,7 @@ var CroppieUpload = {
         // needs to be converted to a bootstrap modal ideally, but maybe just use the CSS from the old version for now...
         $('BODY').append('<DIV class="cu_curtain"></DIV>');
         
-        $('.cu_curtain').append('<DIV class="cu_wrap"><DIV class="croppie"></DIV><DIV class="cudlg_actions"><A href="" class="button cu_cancel nochevron">Cancel</A><A href="" class="button cu_result nochevron">OK</A></DIV>');
+        $('.cu_curtain').append('<DIV class="cu_wrap"><DIV class="croppie"></DIV><DIV class="cudlg_actions"><A href="" class="btn btn-secondary button cu_cancel nochevron">Cancel</A><A href="" class="button btn btn-primary cu_result nochevron">OK</A></DIV>');
         
         console.log(self.options);
 
