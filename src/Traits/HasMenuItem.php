@@ -44,7 +44,7 @@ trait HasMenuItem {
 
     public function captureMenuItem() {
 
-        echo 'pre save';
+        // echo 'pre save';
 
         session(['extenders._menuitem' => $this->_menuitem]);
         unset($this->attributes['_menuitem']);     
@@ -52,7 +52,7 @@ trait HasMenuItem {
     }
 
     public function savedMenuItem() {
-        echo 'done save...';
+        // echo 'done save...';
 
         $data = session()->pull('extenders._menuitem');
 
