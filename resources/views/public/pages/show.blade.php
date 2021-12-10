@@ -23,7 +23,7 @@
 
             @case('stackeditor')
                 @include('stackeditor::render', ['content' => $model->content])
-        @break
+            @break
 
         @endswitch
        
