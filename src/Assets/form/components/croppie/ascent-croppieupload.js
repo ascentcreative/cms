@@ -124,7 +124,7 @@ var CroppieUpload = {
                 
                 img = new Image;
                 img.onload = function() {
-                    self.startCroppie(e.target.result, img.width, img.height);
+                    self.startCroppie(e.target.result, img.width, img.height, input.files[0].type);
                 };
                 img.src = e.target.result;
                                 
