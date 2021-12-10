@@ -13,8 +13,8 @@ var CroppieUpload = {
         
     // Default options.
     options: {
-        targetWidth: 400,
-        targetHeight: 400,
+        targetWidth: 300,
+        targetHeight: 300,
         previewScale: 0.7,
         popover: true,
         endpoint: '/cms/croppieupload',
@@ -38,9 +38,14 @@ var CroppieUpload = {
         /**
          * Configure the UI
          */
-
-        var dimensions = "(" + self.options.targetWidth + "px x " + self.options.targetHeight + "px)";
-
+        var dimensions = '';
+        if(self.options.targetWidth != 0 || self.options.targetHeight != 0) {
+            var dimensions = "(" + self.options.targetWidth + "px x " + self.options.targetHeight + "px)";
+        } else {
+            this.vpw = 300;
+            this.vph = 300;
+        }
+        
         obj.wrap('<DIV class="croppieupload empty"></DIV>');
 		this.root = $(obj).parent('.croppieupload');
         this.root.append('<DIV class="cu_trigger"><DIV class="cu_message"><div>Click to upload an image</div><div>' + dimensions + '</div></DIV></DIV><INPUT type="file" id="cu_file"/>');
@@ -98,6 +103,8 @@ var CroppieUpload = {
         // don't need to set size here - it'll be set on init instead
         //this.root.css('width', (vpw==0?400:vpw) + 'px').css('height', (vph==0?200:vph) + 'px').css('background-size', '100%');
         this.root.css('background-image', "url('" + url + "')");
+        this.root.css('background-size', 'contain');
+        this.root.css('background-position', 'center');
         this.root.removeClass('empty');
         
     },
