@@ -199,12 +199,25 @@ var CroppieUpload = {
 
         
         $('.cu_result').click(function() {
+
+            switch(filetype) {
+                case 'image/jpeg':
+                case 'image/jpg':
+                    var format = 'jpeg';
+                    var ext = 'jpg';
+                    break;
+
+                case 'image/png':
+                    var format = 'png';
+                    var ext = 'png';
+                    break;
+            }
             
             $('.cu_wrap .croppie').croppie('result', {
                 
                 type: 'blob',
                 size: {width: self.options.targetWidth, height: self.options.targetHeight},
-              //  format: 'jpeg',
+                format: format,
                 quality: 0.75
                 
             }).then(function (resp) {
@@ -212,7 +225,7 @@ var CroppieUpload = {
                 var fd = new FormData();
                 fd.append('destination', self.options.filedestination);
                 fd.append('randomisefilename', 1);
-                fd.append('payload', resp, 'myfile.png');
+                fd.append('payload', resp, 'myfile.' + ext);
 
                 console.log(fd);
 
