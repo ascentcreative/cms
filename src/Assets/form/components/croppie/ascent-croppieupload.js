@@ -141,7 +141,7 @@ var CroppieUpload = {
 
     },
 
-    startCroppie: function(url, filewidth, fileheight) {
+    startCroppie: function(url, filewidth, fileheight, filetype) {
 
          console.log('startCroppie: ' + filewidth + ', ' + fileheight);
 			
