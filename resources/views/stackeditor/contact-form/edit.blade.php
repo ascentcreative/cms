@@ -8,3 +8,9 @@
 </div>
 
 @overwrite
+
+@section('block-settings')
+@overwrite
+
+@section('block-actions')
+@overwrite
