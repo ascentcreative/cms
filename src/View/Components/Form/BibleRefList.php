@@ -16,12 +16,15 @@ class BibleRefList extends Component
 
     public $deuterocanonical;
 
+    public $wrapper;
+    public $class;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $deuterocanonical=false)
+    public function __construct($label, $name, $value, $deuterocanonical=false, $class='')
     {
      
         $this->value = $value;
@@ -37,6 +40,8 @@ class BibleRefList extends Component
         $this->name = $name;
 
         $this->deuterocanonical = $deuterocanonical;
+
+        $this->class = $class;
         
        
        
