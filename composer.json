@@ -19,7 +19,7 @@
     "kalnoy/nestedset": "^6.0",
     "jenssegers/agent": "^2.6",
     "laravel/scout": "^9.3",
-    "yab/laravel-scout-mysql-driver": "^5.0" 
+    "yab/laravel-scout-mysql-driver": "^5.1" 
   },
   "autoload": {
     "psr-4": {

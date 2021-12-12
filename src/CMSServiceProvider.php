@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
 use Laravel\Fortify\Fortify;
 
+use Laravel\Scout\EngineManager;
+
 use Spatie\Activitylog\Models\Activity;
 
 use AscentCreative\CMS\Helpers\HeadTitle;
@@ -127,6 +129,11 @@ class CMSServiceProvider extends ServiceProvider
             \Log::info($query->sql . ' - Bind: [' . join(', ', $query->bindings) . '] - Time: ' . $query->time);
        });   
     }
+
+
+    resolve(EngineManager::class)->extend('ascent', function () {
+        return new \AscentCreative\CMS\Engines\AscentEngine;
+    });
    
 
 
