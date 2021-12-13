@@ -51,11 +51,16 @@ class PageController extends AdminBaseController
 
     public function rules($request, $model=null) {
 
-      $rules = array_merge([
+        $rules = [
             'title' => 'required',
-            ],
-            \AscentCreative\StackEditor\View\Components\Stack::getRules('content', $request->content)
-        );
+        ];
+
+        if(config('cms.content_editor') == 'stackeditor') {
+            $rules = array_merge(
+                $rules,
+                \AscentCreative\StackEditor\View\Components\Stack::getRules('content', $request->content)
+            );
+        }
 
        return $rules;
 
@@ -63,13 +68,14 @@ class PageController extends AdminBaseController
 
     public function messages($request, $model=null) : array {
 
-        $msgs = array_merge([
-            
-            ],
-            \AscentCreative\StackEditor\View\Components\Stack::getMessages('content', $request->content)
-        );
-
-        // dd($msgs);
+        $msgs = [];
+        
+        if(config('cms.content_editor') == 'stackeditor') {
+            $msgs = array_merge(
+                $msgs,
+                \AscentCreative\StackEditor\View\Components\Stack::getMessages('content', $request->content)
+            );
+        }
 
         return $msgs;
 
