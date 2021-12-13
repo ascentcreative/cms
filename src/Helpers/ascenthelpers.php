@@ -128,6 +128,18 @@ function imageUrl($spec, $models) {
 }
 
 
+/**
+ * 
+ * Convert a nested field name - xyz[0][abc] - to dot notation xyz.0.abc
+ * 
+ * @param mixed $name
+ * 
+ * @return string
+ */
+function dotName($name) : string {
+    return str_replace(array('[', ']'), array('.', ''), $name);
+}
+
 function embedVideo($url) {
 
     return view('cms::helpers.embedvideo')->with('url', $url);
