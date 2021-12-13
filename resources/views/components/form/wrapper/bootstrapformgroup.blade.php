@@ -8,9 +8,9 @@
                 {{ $slot }}
             </small>
         @endif
-        @if($errors->first($name))
+        @if($msg = $errors->first(dotName($name)))
             <small class="validation-error alert alert-danger form-text" role="alert">
-                {{ $errors->first($name) }}
+                {{ $msg }}
             </small>
         @endif
     </div>
