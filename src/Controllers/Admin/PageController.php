@@ -51,14 +51,32 @@ class PageController extends AdminBaseController
 
     public function rules($request, $model=null) {
 
-       return [
+      $rules = array_merge([
             'title' => 'required',
-        ]; 
+            ],
+            \AscentCreative\StackEditor\View\Components\Stack::getRules('content', $request->content)
+        );
+
+       return $rules;
+
+    }
+
+    public function messages($request, $model=null) : array {
+
+        $msgs = array_merge([
+            
+            ],
+            \AscentCreative\StackEditor\View\Components\Stack::getMessages('content', $request->content)
+        );
+
+        // dd($msgs);
+
+        return $msgs;
 
     }
 
 
-    public function autocomplete(Request $request, string $term) {
+    public function autocomplete(Request $request, string $term) {  
 
         echo $term;
 
