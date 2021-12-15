@@ -73,9 +73,9 @@ trait HasAttachments {
 
     protected function deleteAttachments() {
         
-        $item = $this->attachments;
+        $items = $this->attachments;
 
-        if (!is_null($item)) {
+        foreach($items as $item) {
             $item->delete();
         }
         
