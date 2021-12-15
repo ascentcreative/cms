@@ -335,11 +335,13 @@ abstract class AdminBaseController extends Controller
         $model = ($this::$modelClass)::make(); //new $cls();
 
         // look out for arrays which should be JSON
-        foreach($model->fillable as $key) {
+        //foreach($model->fillable as $key) {
+        foreach($request->all() as $key=>$tmp) {
             if (is_array($request->$key) && substr($key, 0, 1) != "_") {
                 $request->merge([$key => json_encode($request->$key)]);
             }
         }
+        //}
 
         $this->commitModel($request, $model);
 
@@ -423,9 +425,9 @@ abstract class AdminBaseController extends Controller
                     $this->messages($request, $model)
                     )->validate();
 
-                    
+
         // look out for arrays which should be JSON
-        foreach($model->fillable as $key) {
+        foreach($request->all() as $key=>$tmp) {
             if (is_array($request->$key) && substr($key, 0, 1) != "_") {
                 $request->merge([$key => json_encode($request->$key)]);
             }
