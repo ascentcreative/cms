@@ -365,3 +365,11 @@ footer {
     white-space: nowrap;
     width: 1px;
  }
+
+
+ /* override fade on modal */
+/* MODAL - fade in only, not slide down */
+BODY .modal.fade#ajaxModal .modal-dialog,
+BODY .modal.fade .modal-dialog {
+    transform: none;
+}
