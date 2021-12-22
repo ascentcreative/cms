@@ -1,11 +1,11 @@
-<div class="modal text-left" id="{{ $modalid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal text-left fade {{ $modalclass }}" id="{{ $modalid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog @if($centered) modal-dialog-centered @endif modal-lg {{$modalSize ?? ''}}" role="document">
 
         {{ $formstart ?? '' }}
         
         <div class="modal-content">
 
-        {{-- @if($modalShowHeader ?? false) --}}
+        @if($modalShowHeader ?? true)
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
                 {{ $title }}
@@ -19,7 +19,7 @@
 
 
           </div>
-        {{-- @endif --}}
+        @endif
 
         <div class="modal-body">
 
@@ -28,7 +28,7 @@
         </div>
 
        
-        {{-- @if( $modalShowFooter ?? false ) --}}
+        @if( $modalShowFooter ?? true )
            <div class="modal-footer">
 {{--                 
             <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
@@ -39,7 +39,7 @@
                 {{ $footer ?? '' }}
 
           </div>
-        {{-- @endif --}}
+        @endif
     
 
       </div>

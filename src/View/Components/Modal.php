@@ -7,19 +7,26 @@ class Modal extends Component
 {
 
     public $modalid;
+    public $modalclass;
     public $title;
     public $closebutton;
     public $centered = false;
 
-    public function __construct($modalid, $title='', $closebutton=true, $centered=false) {
+    public $modalShowHeader = true;
+    public $modalShowFooter = true;
+
+    public function __construct($modalid, $modalclass='', $title='', $closebutton=true, $centered=false, $showHeader=true, $showFooter=true) {
 
        // dd($modalid);
 
         $this->modalid = $modalid;
+        $this->modalclass = $modalclass;
 
         $this->title = $title;
         $this->closebutton = $closebutton;
         $this->centered = $centered;
+        $this->modalShowHeader = $showHeader;
+        $this->modalShowFooter = $showFooter;
 
     }
 
