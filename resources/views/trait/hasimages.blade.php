@@ -26,7 +26,7 @@
     ?>
 
     <x-cms-form-croppie label="{{ $spec->title }}" name="_images[{{ $spec->slug }}][image]" value="{!! old('_images.' . $spec->slug . '.image', $image) !!}"  
-                        width="{{ $spec->width }}" height="{{ $spec->height }}" previewScale="{{ $spec->preview_scale }}">
+                        width="{{ $spec->width }}" height="{{ $spec->height }}" previewScale="{{ $spec->preview_scale }}" quality="{{ $spec->quality }}">
     </x-cms-form-croppie>
 
     <x-cms-form-input type="text" label="Alt Text" name="_images[{{ $spec->slug }}][alt_text]" value="{!! old('_images.' . $spec->slug . '.alt_text', $alt) !!}">
