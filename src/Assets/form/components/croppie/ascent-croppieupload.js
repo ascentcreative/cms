@@ -16,6 +16,7 @@ var CroppieUpload = {
         targetWidth: 300,
         targetHeight: 300,
         previewScale: 0.7,
+        quality: 0.1,
         popover: true,
         endpoint: '/cms/croppieupload',
         filedestination: '/upload/default'
@@ -33,7 +34,6 @@ var CroppieUpload = {
         // incoming options
         this.vpw = self.options.targetWidth * self.options.previewScale;
 		this.vph = self.options.targetHeight * self.options.previewScale;
-
 
         /**
          * Configure the UI
@@ -189,7 +189,8 @@ var CroppieUpload = {
                 width: this.vpw + 0,
                 height: this.vph + 0
             },
-            enableExif: true
+            enableExif: true,
+            enableResize: true
             
         });
         
@@ -220,12 +221,14 @@ var CroppieUpload = {
                     break;
             }
             
+            alert(self.options.quality + ' / ' + self.options.targetWidth);
+
             $('.cu_wrap .croppie').croppie('result', {
                 
                 type: 'blob',
                 size: {width: self.options.targetWidth, height: self.options.targetHeight},
                 format: format,
-                quality: 0.75
+                quality: self.options.quality
                 
             }).then(function (resp) {
                 
