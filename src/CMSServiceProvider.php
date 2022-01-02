@@ -243,6 +243,8 @@ class CMSServiceProvider extends ServiceProvider
   // register the components
   public function bootComponents() {
 
+    Blade::component('cms-multisizeimage', 'AscentCreative\CMS\View\Components\Display\MultiSizeImage');
+
     
     Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
     Blade::component('cms-form-hidden', 'AscentCreative\CMS\View\Components\Form\Hidden');
