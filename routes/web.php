@@ -243,8 +243,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
         $path = Storage::disk('public')->putFile(request()->destination, request()->file('payload'));
 
-    
-
+        
         $multiSizeImage = new Guizoxxv\LaravelMultiSizeImage\MultiSizeImage();
         $multiSizeImage->processImage($_SERVER['DOCUMENT_ROOT'] . '/storage/' . $path);
 
