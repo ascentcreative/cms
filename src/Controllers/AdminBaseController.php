@@ -333,16 +333,7 @@ abstract class AdminBaseController extends Controller
 
        // $cls = $this::$modelClass;
         $model = ($this::$modelClass)::make(); //new $cls();
-
-        // look out for arrays which should be JSON
-        //foreach($model->fillable as $key) {
-        foreach($request->all() as $key=>$tmp) {
-            if (is_array($request->$key) && substr($key, 0, 1) != "_") {
-                $request->merge([$key => json_encode($request->$key)]);
-            }
-        }
-        //}
-
+       
         $this->commitModel($request, $model);
 
         if($request->wantsJson()) {
@@ -414,11 +405,11 @@ abstract class AdminBaseController extends Controller
         $qry = $this->prepareModelQuery();
         $model = $qry->find($id);
 
-
-
         // $validatedData = $request->validate(
         //     $this->rules($request, $model)
         // );
+
+       
 
         Validator::make($request->all(), 
                     $this->rules($request, $model),
@@ -427,11 +418,13 @@ abstract class AdminBaseController extends Controller
 
 
         // look out for arrays which should be JSON
-        foreach($request->all() as $key=>$tmp) {
-            if (is_array($request->$key) && substr($key, 0, 1) != "_") {
-                $request->merge([$key => json_encode($request->$key)]);
-            }
-        }
+        // foreach($request->all() as $key=>$tmp) {
+        //     if (is_array($request->$key) && substr($key, 0, 1) != "_") {
+        //         $request->merge([$key => json_encode($request->$key)]);
+        //     }
+        // }
+
+        // aaargh - this breaks everywhere that a legitimate array is passed in.
         
         $this->commitModel($request, $model);
         return redirect()->to($request->_postsave);
