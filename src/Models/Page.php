@@ -23,6 +23,10 @@ class Page extends Base
     use HasFactory, HasMetadata, HasImages, HasMenuItem, HasSlug, Searchable; //, Publishable; 
 
     public $fillable = ['title', 'content'];
+
+    protected $casts = [
+        'content' => 'array',
+    ];
     
     // /*
     //  * MUTATORS
