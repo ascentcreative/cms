@@ -139,8 +139,7 @@ var CroppieUpload = {
             
             reader.readAsDataURL(input.files[0]);
 
-        }
-        else {
+        } else {
             
             alert("Sorry - your browser doesn't support the FileReader API");
             
@@ -221,8 +220,6 @@ var CroppieUpload = {
                     break;
             }
             
-            alert(self.options.quality + ' / ' + self.options.targetWidth);
-
             $('.cu_wrap .croppie').croppie('result', {
                 
                 type: 'blob',
