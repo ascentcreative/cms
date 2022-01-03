@@ -9,6 +9,10 @@ class MultiSizeImage extends Component
 
     public $src;
     public $alt;
+    public $class;
+    public $style;
+    public $width;
+    public $height;
 
     // these are populated from the files discovered on disk.
     public $srcset;
@@ -20,10 +24,14 @@ class MultiSizeImage extends Component
      *
      * @return void
      */
-    public function __construct($src, $alt)
+    public function __construct($src, $alt='', $class="", $style="", $width="", $height="")
     {
         $this->src = $src;
         $this->alt = $alt;
+        $this->style = $style;
+        $this->class = $class;
+        $this->width = $width;
+        $this->height = $height;
 
 
         /** Dynamically calculate the sizes and srcset from the stored images 
@@ -38,6 +46,7 @@ class MultiSizeImage extends Component
         $sizes = [];
     
         $globname = $_SERVER['DOCUMENT_ROOT'] . $info['dirname'] . '/' . $info['filename'] . '@*.' . $info['extension'];
+    
         foreach(glob($globname) as $file) {
             $image_width = getimagesize($file)[0];
             $srcset[] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $file) . ' ' . $image_width . 'w';
