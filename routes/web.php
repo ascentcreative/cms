@@ -241,12 +241,13 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
     Route::post('/cms/croppieupload', function() {
 
+        // log croppie data:
+        activity()->withProperties(request()->all())->log('croppie-upload');
+
         $path = Storage::disk('public')->putFile(request()->destination, request()->file('payload'));
 
-        
         $multiSizeImage = new Guizoxxv\LaravelMultiSizeImage\MultiSizeImage();
         $multiSizeImage->processImage($_SERVER['DOCUMENT_ROOT'] . '/storage/' . $path);
-
 
         return response()->json([
             'path' => '/storage/' . $path,
