@@ -1,7 +1,7 @@
 <img
     {{-- src="{{ $src }}" --}}
     srcset="{{ $srcset }}"
-    sizes="{{ $sizes }}"
+    @if($sizes && $includeSizes) sizes="{{ $sizes }}" @endif
     alt="{{ $alt }}" 
     @if($class) class="{{ $class }}" @endif
     @if($style) style="{{ $style }}" @endif

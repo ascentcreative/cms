@@ -14,6 +14,8 @@ class MultiSizeImage extends Component
     public $width;
     public $height;
 
+    public $includeSizes;
+
     // these are populated from the files discovered on disk.
     public $srcset;
     public $sizes;
@@ -24,7 +26,7 @@ class MultiSizeImage extends Component
      *
      * @return void
      */
-    public function __construct($src, $alt='', $class="", $style="", $width="", $height="")
+    public function __construct($src, $alt='', $class="", $style="", $width="", $height="", $includeSizes = true)
     {
         $this->src = $src;
         $this->alt = $alt;
@@ -32,6 +34,7 @@ class MultiSizeImage extends Component
         $this->class = $class;
         $this->width = $width;
         $this->height = $height;
+        $this->includeSizes = $includeSizes;
 
 
         /** Dynamically calculate the sizes and srcset from the stored images 
@@ -69,7 +72,10 @@ class MultiSizeImage extends Component
             }
 
             $this->srcset = join(', ', $srcset);
-            $this->sizes = join(', ', array_reverse($sizelist));
+
+            if($includeSizes) {
+                $this->sizes = join(', ', array_reverse($sizelist));
+            }
 
         }
 
