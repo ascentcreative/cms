@@ -38,31 +38,42 @@ class MultiSizeImage extends Component
          *  (Note - doesn't use the sizes from the config file in case they've changed since the files were created )
          */
 
-        $info = pathinfo($src);
+
+       
+
+       
 
         $arySizes = [];
 
         $srcset = [];
         $sizes = [];
-    
-        $globname = $_SERVER['DOCUMENT_ROOT'] . $info['dirname'] . '/' . $info['filename'] . '@*.' . $info['extension'];
-    
-        foreach(glob($globname) as $file) {
-            $image_width = getimagesize($file)[0];
-            $srcset[] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $file) . ' ' . $image_width . 'w';
-            $sizes[] = $image_width; 
-        } 
 
-        $sizelist = [];
-        $lastsize = '';
+        if($src) {
 
-        foreach(collect($sizes)->sortDesc()->toArray() as $size) {
-            $sizelist[] = $lastsize . $size . 'px';
-            $lastsize = "(max-width: " . $size . "px) ";
+            $info = pathinfo($src);
+    
+            $globname = $_SERVER['DOCUMENT_ROOT'] . $info['dirname'] . '/' . $info['filename'] . '@*.' . $info['extension'];
+        
+            foreach(glob($globname) as $file) {
+                $image_width = getimagesize($file)[0];
+                $srcset[] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $file) . ' ' . $image_width . 'w';
+                $sizes[] = $image_width; 
+            } 
+
+            $sizelist = [];
+            $lastsize = '';
+
+            foreach(collect($sizes)->sortDesc()->toArray() as $size) {
+                $sizelist[] = $lastsize . $size . 'px';
+                $lastsize = "(max-width: " . $size . "px) ";
+            }
+
+            $this->srcset = join(', ', $srcset);
+            $this->sizes = join(', ', array_reverse($sizelist));
+
         }
 
-        $this->srcset = join(', ', $srcset);
-        $this->sizes = join(', ', array_reverse($sizelist));
+       
         
     }
 
