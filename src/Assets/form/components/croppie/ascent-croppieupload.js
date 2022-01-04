@@ -244,15 +244,13 @@ var CroppieUpload = {
                     contentType: false
                 }).done(function(data) {
                     
-                    //console.log(data);
-                    
-                    //parsed = $.parseJSON(data);
-                    
-                    //console.log(parsed);
-                    
                     self.setValue(data['path'], this.vpw, this.vph);
                     $('.cu_curtain').remove();
                     
+                }).fail(function(data) {
+
+                    alert('Image Upload Failed: (' + data.status + ') ' + data.responseJSON.message);
+
                 });
                         
             });
