@@ -26,7 +26,8 @@
 @push('scripts')
     <script>
         $('#tkn_{{ $uniq }}').relatedtokens({
-
+            fieldName: '{{ $relationship }}',
+            tokenName: '{{ $tokenName }}'
         });
     </script>
 @endpush

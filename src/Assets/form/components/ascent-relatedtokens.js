@@ -6,6 +6,12 @@ $.ascent = $.ascent?$.ascent:{};
 
 var RelatedTokens = {
 
+    // Default options.
+	options: {
+        fieldName: 'tags',
+        tokenName: 'tag'
+    },
+
     _init: function () {
 
         var self = this;
@@ -23,7 +29,7 @@ var RelatedTokens = {
         this.element.prepend('<div class="rt_tokens"></div>');
 
         for($iTkn = 0; $iTkn < val.length; $iTkn++) {
-            this.addToken(val[$iTkn]['tag'], val[$iTkn]['id']);
+            this.addToken(val[$iTkn][this.options.tokenName], val[$iTkn]['id']);
         }
 
         this.element.on('click', 'A.rt_remove', function() {
@@ -57,7 +63,7 @@ var RelatedTokens = {
 
         var idx = this.element.find('.rt_token').length;
         // this.element.find('.rt_tokens').append('<div class="rt_token">' + label + '<input type="text" name="tags[' + idx + '][tag]" value="' + label + '"><input type="text" name="tags[' + idx + '][id]" value="' + id + '"></div>');
-        this.element.find('.rt_tokens').append('<div class="rt_token">' + label + '<input type="hidden" name="tags[][tag]" value="' + label + '"><A href="#delete-token" class="bi-x-square-fill text-danger rt_remove"></A></div>');
+        this.element.find('.rt_tokens').append('<div class="rt_token">' + label + '<input type="hidden" name="' + this.options.fieldName + '[][' + this.options.tokenName + ']" value="' + label + '"><A href="#delete-token" class="bi-x-square-fill text-danger rt_remove"></A></div>');
 
         
 

@@ -18,6 +18,7 @@ class RelatedTokens extends Component
     public $value;
 
     public $relationship;
+    public $tokenName;
   
 
     public $wrapper;
@@ -31,7 +32,7 @@ class RelatedTokens extends Component
      *
      * @return void
      */
-    public function __construct($label, $name, $value=[], $relationship,
+    public function __construct($label, $name, $value=[], $relationship, $tokenName='tag',
                             $wrapper='bootstrapformgroup', $class='')
     {
 
@@ -41,6 +42,7 @@ class RelatedTokens extends Component
         $this->value = $value;
         
         $this->relationship = $relationship;
+        $this->tokenName = $tokenName;
 
         $this->wrapper = $wrapper;
         $this->class = $class;
