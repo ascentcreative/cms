@@ -3,6 +3,12 @@
 
 Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(function () {
 
+
+    Route::get('logintest', function() {
+        echo 'ok';
+    })->middleware('auth');
+
+
     Route::get('/longrunprogress', function() {
         // fake the progress for now
         $prog = session()->get('prog');
@@ -66,7 +72,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     })->name('admin-login');
 
 
-    Route::prefix('admin')->namespace('Admin')->middleware(['useAdminLogin', 'auth', 'can:administer'])->group(function() {
+    Route::prefix('admin')->namespace('Admin')->middleware(['auth', 'can:administer'])->group(function() {
 
         Route::get('/phpinfo', function() {
             phpinfo();
