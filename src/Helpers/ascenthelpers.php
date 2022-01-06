@@ -217,3 +217,61 @@ function contentstack($stackName) {
 function prevent_submit_on_enter() {
     return  '<input type="submit" disabled style="display: none"/>';
 }
+
+
+
+
+/**
+ * 
+ * When a login challenge is presented, look up the intended URL and work out from the Route's prefix what blades should be used
+ * 
+ * @param mixed $action
+ * 
+ * @return array - the paths to use for the auth view blades
+ */
+function resolveAuthBladePaths($action) : array {
+
+    $prefix = '';
+
+    $route = null;
+    
+    try {
+
+        $url = request()->intended ?? session('url.intended');
+        if($url) {
+            $route = app('router')->getRoutes()->match(app('request')->create($url));
+        }
+        
+    } catch (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
+        
+    } 
+
+    if (!is_null($route)) {
+        $prefix = $route->action['prefix'];
+    }
+
+
+    // chedck the cms config file for specified paths
+    $paths = config('cms.authpaths.' . $prefix);
+
+    // if none found, create them from the prefix name
+    // (but fallback to the App's main auth blades so that not every prefix needs an auth)
+    if(is_null($paths)) {
+
+        // use the prefix name in a path:
+        $paths = [
+            \str_replace('/', '', $prefix) . '.auth',
+            'cms::' . \str_replace('/', '', $prefix) . '.auth',
+            'auth' // fallback to basic login
+        ];
+
+    }
+    
+    // appened the action / blade name to the paths
+    $paths = collect($paths)->transform(function($item) use ($action) {
+        return $item . '.' . $action;
+    })->toArray();
+
+    return $paths;
+
+}
