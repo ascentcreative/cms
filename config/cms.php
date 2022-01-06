@@ -48,5 +48,16 @@ return [
     'contact' => [
         'notify' => ['kieran@ascent-creative.co.uk']
     ],
+    
+
+
+    /**
+     * AUTH view path config
+     */
+    // 'authpaths' => [
+    //     '' => 'auth',
+    //     '/admin' => ['admin.auth', 'cms::auth'],
+    // ],
+
 
 ];
