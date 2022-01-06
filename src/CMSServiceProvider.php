@@ -5,6 +5,7 @@ namespace AscentCreative\CMS;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\View;
 use Illuminate\Routing\Router;
 use Laravel\Fortify\Fortify;
 
@@ -182,15 +183,7 @@ class CMSServiceProvider extends ServiceProvider
   // fortify commands
   public function bootFortify() {
 
-
-
-
-// Route::get('/admin')
-
-        $this->app->singleton(
-            \App\Http\Middleware\Authenticate::class, 
-            \AscentCreative\CMS\Middleware\Authenticate::class);
-
+     
 
         // Override a couple of Fortify controllers as we want to 
         // return content in Json responses.
@@ -220,22 +213,24 @@ class CMSServiceProvider extends ServiceProvider
 
         // seperate login and register views
 
-        Fortify::loginView(function () {
-           // return view('cms::admin.auth.login');
 
-            return view('auth.login');
+        Fortify::loginView(function () {
+            return View::first(resolveAuthBladePaths('login')); //view('cms::auth.login');
         });
 
         Fortify::registerView(function () {
-            return view('auth.register');
+            //return view('auth.register');
+            return View::first(resolveAuthBladePaths('register'));
         });
 
         Fortify::requestPasswordResetLinkView(function () {
-            return view('auth.forgot-password');
+            // return view('auth.forgot-password');
+            return View::first(resolveAuthBladePaths('forgot-password'));
         });
 
         Fortify::resetPasswordView(function ($request) {
-            return view('auth.reset-password', ['request' => $request]);
+            // return view('auth.reset-password', ['request' => $request]);
+            return View::first(resolveAuthBladePaths('reset-password'), ['request' => $request]);
         });
 
 
