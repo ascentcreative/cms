@@ -215,22 +215,38 @@ class CMSServiceProvider extends ServiceProvider
 
 
         Fortify::loginView(function () {
-            return View::first(resolveAuthBladePaths('login')); //view('cms::auth.login');
+            try {
+                return View::first(resolveAuthBladePaths('login'));
+            } catch (\Exception $e) {
+                abort(404);
+            }
         });
 
         Fortify::registerView(function () {
             //return view('auth.register');
-            return View::first(resolveAuthBladePaths('register'));
+            try {
+                return View::first(resolveAuthBladePaths('register'));
+            } catch (\Exception $e) {
+                abort(404);
+            }
         });
 
         Fortify::requestPasswordResetLinkView(function () {
             // return view('auth.forgot-password');
-            return View::first(resolveAuthBladePaths('forgot-password'));
+            try {
+                return View::first(resolveAuthBladePaths('forgot-password'));
+            } catch (\Exception $e) {
+                abort(404);
+            }
         });
 
         Fortify::resetPasswordView(function ($request) {
             // return view('auth.reset-password', ['request' => $request]);
-            return View::first(resolveAuthBladePaths('reset-password'), ['request' => $request]);
+            try {
+                return View::first(resolveAuthBladePaths('reset-password'), ['request' => $request]);
+            } catch (\Exception $e) {
+                abort(404);
+            }
         });
 
 
