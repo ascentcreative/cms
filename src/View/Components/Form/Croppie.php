@@ -14,6 +14,7 @@ class Croppie extends Component
   
     public $width;
     public $height;
+    public $constrained;
     public $previewScale;
     public $quality;
 
@@ -38,11 +39,19 @@ class Croppie extends Component
 
         $this->width = $width;
         $this->height = $height;
+        
+        if ($width == 0 && $height == 0) {
+            $this->constrained = 0;
+        } else {
+            $this->constrained = 1;
+        }
+
         $this->quality = $quality;
         $this->previewScale = $previewScale;
        
         $this->wrapper = $wrapper;
         $this->class = $class;
+
 
     }
 

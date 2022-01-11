@@ -26,6 +26,7 @@
     <script>
         $(document).ready(function() {
             $('#{{$unid}}').croppieupload({
+                constrained: {{ $constrained }},
                 targetWidth: {{ $width }},
                 targetHeight: {{ $height }},
                 previewScale: {{ $previewScale ?? 0.5 }},

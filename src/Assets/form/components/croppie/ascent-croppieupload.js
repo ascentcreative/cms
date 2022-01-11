@@ -13,9 +13,10 @@ var CroppieUpload = {
         
     // Default options.
     options: {
-        targetWidth: 300,
-        targetHeight: 300,
+        targetWidth: 0,
+        targetHeight: 0,
         previewScale: 0.7,
+        constrained: true,
         quality: 0.1,
         popover: true,
         endpoint: '/cms/croppieupload',
@@ -45,12 +46,18 @@ var CroppieUpload = {
             this.vpw = 300;
             this.vph = 300;
         }
+
+      
         
         obj.wrap('<DIV class="croppieupload empty"></DIV>');
 		this.root = $(obj).parent('.croppieupload');
         this.root.append('<DIV class="cu_trigger"><DIV class="cu_message"><div>Click to upload an image</div><div>' + dimensions + '</div></DIV></DIV><INPUT type="file" id="cu_file"/>');
         this.root.append('<DIV class="cu_actions"><A href="" class="button cu_remove nochevron btn-primary btn-sm">Remove</A><A href="" class="button cu_change nochevron btn-primary btn-sm">Change</A></DIV>');
 			
+        if(!self.options.constrained) {
+            this.root.addClass('unconstrained');
+        }
+
         // "remove" link action:
         this.root.find('.cu_remove').click(function() {
             if (confirm('Remove Image?')) {
@@ -81,8 +88,10 @@ var CroppieUpload = {
         // instead of pixel sizes, let's use aspect ratio...
        //this.root.css('width', (this.vpw==0?400:this.vpw) + 'px').css('height', (this.vph==0?200:this.vph) + 'px');
 
-       this.root.css('max-width', (this.vpw==0?400:this.vpw) + 'px');
-       this.root.css('aspect-ratio', (this.vpw==0?400:this.vpw) + ' / ' + (this.vph==0?200:this.vph));
+       if(self.options.constrained) {
+            this.root.css('max-width', (this.vpw==0?400:this.vpw) + 'px');
+            this.root.css('aspect-ratio', (this.vpw==0?400:this.vpw) + ' / ' + (this.vph==0?200:this.vph));
+       }   
 
         var opts = self.options;
 
@@ -102,17 +111,21 @@ var CroppieUpload = {
 
         // don't need to set size here - it'll be set on init instead
         //this.root.css('width', (vpw==0?400:vpw) + 'px').css('height', (vph==0?200:vph) + 'px').css('background-size', '100%');
-        this.root.css('background-image', "url('" + url + "')");
+        // this.root.css('background-image', "url('" + url + "')");
         this.root.css('background-size', 'contain');
         this.root.css('background-position', 'center');
-        this.root.removeClass('empty');
+        this.root.removeClass('empty').addClass('has-image');
+
+        $(this.root).find('img').remove();
+        this.root.prepend('<img src="' + url + '"/>');
         
     },
 
     clearValue: function() {
 			
         this.root.css('background-image', 'none');
-        this.root.addClass('empty');
+        this.root.addClass('empty').removeClass('has-image');
+        $(this.root).find('img').remove();
         this.element.val('');
         
     },		
@@ -189,7 +202,7 @@ var CroppieUpload = {
                 height: this.vph + 0
             },
             enableExif: true,
-            enableResize: true
+            enableResize: (self.options.constrained ? false : true)
             
         });
         
