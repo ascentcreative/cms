@@ -373,3 +373,17 @@ BODY .modal.fade#ajaxModal .modal-dialog,
 BODY .modal.fade .modal-dialog {
     transform: none;
 }
+
+
+
+/* Layout Grid */
+/* Breakpoints can be overridden, but based on a 12 / 8 / 4 setup */
+
+.layout-grid {
+    display: grid;
+    margin: 0px auto;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 1rem;
+    padding: 0px 1rem;
+}
+
