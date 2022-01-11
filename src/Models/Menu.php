@@ -69,7 +69,7 @@ class Menu extends Base
                 $newwin = ' target="_blank"';
             }
 
-            $out .= '<LI><A href="' . $item->itemUrl . '"' . $newwin . '>' . $item->itemTitle . '</A>';
+            $out .= '<LI class="' . ( count($item->children) > 0 ? 'menu-branch' : 'menu-leaf' ) . '"><A href="' . $item->itemUrl . '"' . $newwin . '>' . $item->itemTitle . '</A>';
             
             if(count($item->children) > 0) {
                  $out .= $this->traverse($item->children, $maxDepth, $depth+1);
