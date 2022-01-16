@@ -90,7 +90,8 @@ var CroppieUpload = {
 
        if(self.options.constrained) {
             this.root.css('max-width', (this.vpw==0?400:this.vpw) + 'px');
-            this.root.css('aspect-ratio', (this.vpw==0?400:this.vpw) + ' / ' + (this.vph==0?200:this.vph));
+            // this.root.css('aspect-ratio', (this.vpw==0?400:this.vpw) + ' / ' + (this.vph==0?200:this.vph));
+            this.root.css('width', (this.vpw==0?400:this.vpw)+'px').css('height', (this.vph==0?200:this.vph) + 'px');
        }   
 
         var opts = self.options;
