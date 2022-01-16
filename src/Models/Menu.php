@@ -60,7 +60,7 @@ class Menu extends Base
         }
 
 
-        $out = '<UL class="menu menu-' . $this->slug . ' ' . $classes . '">';
+        $out = '<UL class="menu ' . ($depth==0?('menu-' . $this->slug):'') . ' ' . $classes . '">';
 
         foreach($items as $item) {
 
