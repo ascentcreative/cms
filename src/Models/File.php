@@ -26,6 +26,10 @@ class File extends Base
         return Storage::disk($this->disk)->download($this->filepath, $this->original_name);
     }
 
+    public function getMimetypeAttribute() {
+        return mime_content_type($this->fullpath);
+    }
+
 
 }
 
