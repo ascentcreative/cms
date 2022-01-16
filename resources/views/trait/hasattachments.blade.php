@@ -1,1 +1,1 @@
-<x-cms-form-fileupload name="_attachments" label="File(s)" :value="old('_attachments', $model->attachments)" multiple="true" />
+<x-cms-form-fileupload name="_attachments" label="File(s)" :value="old('_attachments', $model->attachments)" multiple="true" sortable="true"/>
