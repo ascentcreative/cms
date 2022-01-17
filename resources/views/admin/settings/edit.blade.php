@@ -48,6 +48,9 @@
               <a class="nav-link" id="main-tab" data-toggle="tab" href="#main" role="tab" aria-controls="main" aria-selected="true">Main Site Settings</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="social-tab" data-toggle="tab" href="#social" role="tab" aria-controls="social" aria-selected="false">Social Media Links</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="code-tab" data-toggle="tab" href="#code" role="tab" aria-controls="code" aria-selected="false">Add-in Code</a>
             </li>
             <li class="nav-item">
@@ -66,6 +69,7 @@
         </ul>
     
         <div class="tab-content" id="myTabContent">
+
             <div class="tab-pane show p-3" id="main" role="tabpanel" aria-labelledby="main-tab">
                 
                 <x-cms-form-input type="text" name="site_name" label="Site Name" value="{{ old('site_name', $model->site_name) }}">
@@ -83,6 +87,37 @@
                     Select the page to load at the home url for the site
                 </x-cms-form-foreignkeyselect>
                  {{-- </x-cms-form-input> --}}
+
+            </div>
+
+            <div class="tab-pane show p-3" id="social" role="tabpanel" aria-labelledby="social-tab">
+
+
+                @for($i = 0; $i<5; $i++)
+
+                <div class="border pt-3 pl-3 pr-3 pb-1 mb-2">
+                    
+                    {{-- <x-cms-form-input type="text" name="social_accounts[{{ $i }}][platform]" label="Platform" value="{{ old('social_accounts.' . $i . '.platform', $model->social_accounts[$i]['platform'] ?? '') }}">
+                        
+                    </x-cms-form-input> --}}
+
+                    <x-cms-form-options type="select" name="social_accounts[{{ $i }}][platform]" label="Platform" value="{{ old('social_accounts.' . $i . '.platform', $model->social_accounts[$i]['platform'] ?? '') }}"
+                        :options="array_merge([''=>'-'], collect(config('cms.socialplatforms'))->mapWithKeys(function($item, $key) {
+                            return [$key=>$item['longname']];
+                            })->toArray())"
+                        >
+
+                    </x-cms-form-select>
+
+                    <x-cms-form-input type="text" name="social_accounts[{{ $i }}][link]" label="Link" value="{{ old('social_accounts.' . $i . '.link', $model->social_accounts[$i]['link'] ?? '') }}">
+                        
+                    </x-cms-form-input>
+
+                </div>
+
+                @endfor
+
+               
 
             </div>
 
