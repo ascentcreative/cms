@@ -9,9 +9,7 @@ class CreateSocialMediaSettings extends SettingsMigration
      
 
         try{
-            $this->migrator->add('cms.social_accounts', [
-                'facebook'=>'tester'
-            ]);
+            $this->migrator->add('cms.social_accounts', []);
         } catch (Exception $e) {
             // skip - exists
         }
