@@ -1,0 +1,2 @@
+
+<a href="{{ $link }}" class="social-link social-link-{{ config('cms.socialplatforms.' . $platform . '.shortname') }}" target="_blank"><img src="/img/{{ config('cms.socialplatforms.' . $platform . '.shortname') }}.png" alt="{{ config('cms.socialplatforms.' . $platform . '.longname') }}" border="0" /></a>

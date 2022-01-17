@@ -20,18 +20,13 @@ class SiteSettings extends Settings
     // //public string
 
 
-    // public ?string $social_facebook;
-    // public ?string $social_twitter;
-    // public ?string $social_instagram;
-    // public ?string $social_youtube;
-    // public ?string $social_linkedin;
-
+    /* Array of social media accounts */
+    public ?array $social_accounts;
 
     /* misc */
     public ?string $custom_head_tags;
     public ?string $custom_body_tags_start;
     public ?string $custom_body_tags_end;
-
 
     /* contact settings */
     public ?string $contact_from_name;
@@ -39,8 +34,6 @@ class SiteSettings extends Settings
     public ?string $contact_to_addresses;
     public ?float $contact_recaptcha_threshold;
     public ?float $contact_confirm_page_id;
-
-
 
     public ?string $welcome_email_subject;
     public ?string $welcome_email_content;

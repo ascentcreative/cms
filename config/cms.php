@@ -60,4 +60,38 @@ return [
     // ],
 
 
+    /**
+     * Social Media Account options:
+     */
+    'socialplatforms' => [
+        
+        'facebook' => [
+            'url' => 'https://facebook.com/',
+            'longname' => 'Facebook',
+            'shortname' => 'fb',
+        ],
+        'instagram' => [
+            'url' => 'https://instagram.com/',
+            'longname' => 'Instagram',
+            'shortname' => 'ig',
+        ],
+        'twitter' => [
+            'url' => 'https://twitter.com/',
+            'longname' => 'Twitter',
+            'shortname' => 'tw',
+        ],
+        'youtube' => [
+            'url' => 'https://youtube.com/',
+            'longname' => 'YouTube',
+            'shortname' => 'yt',
+        ],
+        'linkedin' => [
+            'url' => 'https://linkedin.com/',
+            'longname' => 'LinkedIn',
+            'shortname' => 'li',
+        ],
+
+    ],
+
+
 ];

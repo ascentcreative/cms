@@ -189,6 +189,20 @@ function menu($slug, $maxDepth=0, $classes='') {
 
 }
 
+
+/**
+ * 
+ * Renders basic HTML for the social media links (taken from the site settings)
+ * Uses cms::socials.item for each one, but can override in app's socials.item blade if present.
+ * 
+ * @return string
+ */
+function socials() : string {
+    
+    return view('cms::socials.render');
+
+}
+
 function sitebanner($max=1) {
 
     $banner = AscentCreative\CMS\Models\SiteBanner::live()->orderBy('start_date', 'DESC')->first();
