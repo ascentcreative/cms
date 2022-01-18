@@ -48,7 +48,7 @@
                  </DIV> 
             </DIV>
             <div id="acm_action" class="text-center">
-                <div><A class="button nochevron acm_acceptall">Accept All Cookies</A></div>
+                <div><A class="button btn btn-primary nochevron acm_acceptall">Accept All Cookies</A></div>
                 <div class="text-small text-white pt-2"><A id="acm_chooser" class="acm_manage" href="#" data-toggle="modal" data-target="#acm_modal">Let me choose</A></div>
             </div>
         {{-- </DIV> --}}
@@ -94,8 +94,8 @@
         </div>
         <div class="modal-footer flex flex-between">
         
-          <button type="button" class="acm_acceptselected">Accept Selected</button>
-          <button type="button" class="acm_acceptall">Accept All</button>
+          <button type="button" class="btn btn-secondary acm_acceptselected">Accept Selected</button>
+          <button type="button" class="btn btn-primary acm_acceptall">Accept All</button>
           
         </div>
       </div>
