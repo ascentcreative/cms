@@ -6,6 +6,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{{ headTitle()->render() }}</title>
     
+        @if(env('APP_ENV') != 'production')
+            <meta name="robots" content="noindex,nofollow">
+        @endif
 
         <link rel="alternate icon" href="/storage/{!! AscentCreative\CMS\Models\File::find(app(AscentCreative\CMS\Settings\SiteSettings::class)->favicon)->filepath ?? '../vendor/ascent/cms/img/ascent-badge-trans.png' !!}">
 
