@@ -123,7 +123,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::get('/pages/{page}/delete', [AscentCreative\CMS\Controllers\Admin\PageController::class, 'delete']);
         Route::resource('/pages', PageController::class);
        
-
+        Route::get('/users/autocomplete', [AscentCreative\CMS\Controllers\Admin\UserController::class, 'autocomplete']);
         Route::get('/users/{user}/delete', [AscentCreative\CMS\Controllers\Admin\UserController::class, 'delete']);
         Route::resource('/users', UserController::class);
 
