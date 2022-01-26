@@ -53,6 +53,10 @@ class User extends Authenticatable // implements MustVerifyEmail
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    public function getNameAndEmailAttribute() {
+        return $this->name . ' (' . $this->email . ')';
+    }
+
 
     public function activityOn() {
         return $this->morphMany(Activity::class, 'subject');
