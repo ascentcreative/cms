@@ -5,7 +5,7 @@
 
 @section('element')
 
-    <div style="columns: 3">
+    <div style="xcolumns: 3; display: grid">
     <?php 
      
        $opts = $query->orderBy($labelField)->get();
