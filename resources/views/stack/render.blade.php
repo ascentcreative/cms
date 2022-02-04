@@ -1,11 +1,12 @@
 {{-- {!! $content !!} --}}
 
 @isset($content)
-    @foreach(json_decode($content) as $item)
+    {{-- @foreach(json_decode($content) as $item) --}}
+    @foreach(json_decode(json_encode($content)) as $item)
 
         @if($item->published ?? true)
 
-        {{-- @dd($item) --}}
+        {{-- @dd(json_decode(json_encode($content))) --}}
 
        
             <div 
