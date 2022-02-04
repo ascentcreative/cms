@@ -94,10 +94,11 @@
     {{-- 
         This field receives the serialized & stringified JSON on save.
         Using the main field name means that all the actual heirarchical fields are replaced / ignored
-    --}}
-    <input type="hidden" name="{{$name}}" class="stack-output"/>
-    {{-- <textarea name="{{$name}}" class="stack-output" style="width: 100%; height: 400px"></textarea> --}}
 
+        // no longer needed as we're casting the field as an array
+    --}}
+    {{-- <input type="hidden" name="{{$name}}" class="stack-output"/> --}}
+   
     </div>
 
 
