@@ -31,7 +31,8 @@ class Stack extends Component
        
         $this->label = $label;
         $this->name = $name;
-        $this->value = json_decode($value);
+        // $this->value = json_decode($value);
+        $this->value = json_decode(json_encode($value));
        
         $this->previewable = $previewable;
 
