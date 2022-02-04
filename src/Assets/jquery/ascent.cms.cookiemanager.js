@@ -1,22 +1,11 @@
 
-// Code (c) Kieran Metcalfe / Ascent Creative 2014
+// Code (c) Kieran Metcalfe / Ascent Creative 2022
 // Code may be used as part of a site built and hosted by Ascent Creative, but may not be transferred to 3rd parties
-// Wrapper for the Flickr Justified-Layout code - handles the layout for a given collection of images
 
 $.ascent = $.ascent?$.ascent:{};
 
 var CookieManager = {
 		
-		// Default options.
-	    // options: {
-	    //     types: {
-	    //     		'essential': {title: "Essential Cookies", text: 'These cookies are required for the operation of the site and cannot be disabled.', mandatory: true},
-	    //     	    'analytics': {title: "Analytics", text: 'Analytics cookies help us to monitor traffic and trends in usage of the site. They are anonymous and a huge help to us, but are not required.'},
-	    //     	    'functionality': {title: "Functionality", text: 'While not strictly necessary, some cookies are used to store preferences and choices you have made. They provide a better experience on the site, but are not required.'},
-	    //     	    'thirdparty': {title:"Third Party", text: 'Some of the features of the site require cookies from third parties. These are not required, but if you choose not to allow them, those features will not be available.'}
-	    //     }
-	        
-	    // },
 
 		_init: function () {
 
@@ -78,60 +67,19 @@ var CookieManager = {
 		prompt: function(changed) {
 			
 			var acm = this;
-			
-			// switch(state) {
-			
-                // case 'manage':
-                //         var headertext = "<H3>Manage your cookie settings</H3>";
-                //         var formopen = true;
-                //     break;
-                    
-                // case 'changed':
-            //             var headertext = "Our cookies have changed - please review your preferences.";
-            //             var formopen = false;
-                    
-			// 	default:
-			// 		var headertext = "We use cookies on this site, but we need to know you\'re ok with that:";
-			// 		var formopen = false;
-			// 	break
-			
-			// }
-			
 
             if(changed) {
                 var headertext = "Our cookies have changed - please review your preferences.";
             }
-			
-			// $('BODY').append('<DIV id="acm_wrap"><DIV id="acm_prompt" class="' + (formopen?'acm_formopen':'') + '"><DIV id="acm_summary"><DIV id="acm_header">' + headertext + '</DIV> <P><A class="button nochevron" id="acm_acceptall">Accept All Cookies</A></P><A id="acm_choose" href="#">Let me choose</A></DIV></DIV></DIV>');
-			
-			// $('#acm_prompt').append('<DIV id="acm_details"/>');
-			
-			// for (item in acm.options.types) {
-			
-			// 	var type = acm.options.types[item];
-				
-			// 	if(type.mandatory || $('#acm_' + item).length > 0) {
-					
-			// 		$('#acm_details').append(
-
-			// 			'<DIV class="acm_detailitem'  + (type.mandatory?' acm_mandatory':'') + ($.cookie('acm_' + item) == '1'?' acm_selected':'') + '" id="acm_details_' + item + '"><LABEL for="acm_select_' + item + '"><H3>' + type.title + '</H3><P>' + type.text + '</P></LABEL></DIV>'
-							
-			// 		);
-					
-			// 	}
-				
-			// }
+	
 			
 			$('.acm_cookietype').on('click', function() {
 				$(this).toggleClass('acm_selected');
 			});
 			
-			// $('#acm_details').append('<P><A href="#" class="button nochevron" id="acm_acceptselected">Accept selected types</A></P>');
 			
 			$('.acm_acceptselected').on('click', function() {
 				
-				//for (item in acm.options.types) {
-
                 $('.acm_cookietype').each(function() {
 
                     if ($(this).hasClass("acm_selected") || $(this).hasClass("acm_mandatory")) { //acm.options.types[item].mandatory || $('#acm_details_' + item).hasClass('acm_selected')) {
@@ -146,7 +94,6 @@ var CookieManager = {
 
                 });
 					
-				//}
 				
 				$('#acm_wrap').fadeOut(); //remove();
 				
@@ -211,6 +158,15 @@ var CookieManager = {
                     if ($(template).length > 0) {
                         $('body').append(template.html());
                     }
+
+
+                    var headtemplate = $('template#' + $(this).attr('data-cookie') + '_head');
+
+                    if ($(headtemplate).length > 0) {
+                        $('head').append(headtemplate.html());
+                    }
+
+
 				
 				}
 
