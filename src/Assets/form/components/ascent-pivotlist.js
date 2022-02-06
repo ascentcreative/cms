@@ -69,7 +69,7 @@ var PivotList = {
 		
 			// autocomplete and events
 			$("#" + thisID + "-input").autocomplete({
-				source: opts.optionRoute, //opts.autocompleteURL,
+				source: opts.optionRoute + '?return_field=' + self.options.labelField, //opts.autocompleteURL,
 			    minLength: 2,
 			    select: function( event, ui ) {
 
