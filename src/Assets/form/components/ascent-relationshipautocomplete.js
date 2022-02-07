@@ -1,0 +1,61 @@
+// ******
+
+// ******
+// Code (c) Kieran Metcalfe / Ascent Creative 2022
+$.ascent = $.ascent?$.ascent:{};
+
+var RelationshipAutocomplete = {
+
+    // Default options.
+	options: {
+      source: ''
+    },
+
+    _init: function () {
+
+        var self = this;
+
+        console.log(this.options.source);
+
+        $(this.element).find('.ra-input').autocomplete({
+            source: this.options.source,
+            select: function(ui, item) {
+                console.log(item.item);
+                self.setValue(item.item);
+         
+            }
+        });
+
+        $(this.element).on('click', '.ra-clear', function() {
+            self.setValue(null);
+        });
+            
+
+    },
+
+    setValue: function(item) {
+       
+        if(item) {
+            $(this.element).find('.ra-value').val(item.id);
+            $(this.element).find('.ra-label').html(item.label);
+            $(this.element).addClass("has-value");
+        } else {
+            $(this.element).find('.ra-value').val('');
+            $(this.element).find('.ra-input').val('');
+            $(this.element).find('.ra-label').html('');
+            $(this.element).removeClass("has-value");
+        }   
+
+    }
+
+}
+
+$.widget('ascent.relationshipautocomplete', RelationshipAutocomplete);
+$.extend($.ascent.RelationshipAutocomplete, {
+		 
+		
+}); 
+
+$(document).ready(function(){
+   // $('.cms-relatedtokens').relatedtokens();
+});

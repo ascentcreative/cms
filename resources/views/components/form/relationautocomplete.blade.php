@@ -5,20 +5,38 @@
 
 @section('element')
 
-    <input type="text" id="{{ nameToId($name) }}-entry" name="{{$name}}-entry" placeholder="{{ $placeholder }}" class="form-control" value="{{ $display }}">
-    <input type="hidden" id="{{ nameToId($name) }}" name="{{$name}}" value="{{ $value }}" />
-
+    <div class="ra-wrap @isset($value) has-value @endisset " id="{{ nameToId($name) }}">
+        <div class="ra-entry">
+            <input type="text" id="{{ nameToId($name) }}-entry" name="{{$name}}-entry" placeholder="{{ $placeholder }}" class="form-control ra-input" value="{{ $display }}">
+        </div>
+        <div class="ra-display form-control">
+            <span class="ra-label">{{ $display }}</span><a href="#" class="ra-clear bi-x-square-fill text-danger"></a>
+        </div>
+        <input type="hidden" class="ra-value" id="{{ nameToId($name) }}-value" name="{{$name}}" value="{{ $value }}" />
+    </div>
+    
 @overwrite
+
+@once
+
+    @push('styles')
+        @style('/vendor/ascent/cms/form/components/ascent-relationshipautocomplete.css')
+    @endpush
+
+    @push('scripts')
+        @script('/vendor/ascent/cms/form/components/ascent-relationshipautocomplete.js')
+    @endpush
+
+@endonce
+
 
 @push('scripts')
     <script>
-    $('#{{ nameToId($name) }}-entry').autocomplete({
-        source: '{{ $dataurl }}',
-        select: function(ui, item) {
-            console.log(item.item.id);
-            $('#{{ nameToId($name) }}').val(item.item.id);
-        }
-    });
+
+        $('#{{ nameToId($name) }}').relationshipautocomplete({
+            source: '{{ $dataurl }}'
+        });
+        
     </script>
 @endpush
 
