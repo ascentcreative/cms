@@ -387,3 +387,18 @@ BODY .modal.fade .modal-dialog {
     padding: 0px 1rem;
 }
 
+
+
+
+
+/* JQuery UI Overrides */
+
+body .ui-widget {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+body .ui-state-highlight, body .ui-state-active, body .ui-state-focus {
+    /* color: red !important; */
+    font-weight: normal !important;
+}
