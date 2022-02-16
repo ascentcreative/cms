@@ -2,12 +2,14 @@
     <div class="modal-dialog modal-dialog-centered {{$modalSize ?? ''}}" role="document">
 
 
-<form action="{{ action([controller(), 'destroy'], [$modelInject => $model->id]) }}" method="POST" class='no-ajax'>
-    @csrf
-    @method('DELETE')
+
 
 
       <div class="modal-content">
+
+        <form action="{{ action([controller(), 'destroy'], [$modelInject => $model->id]) }}" method="POST" class='no-ajax'>
+            @csrf
+            @method('DELETE')
 
         {{-- @if($modalShowHeader ?? false) --}}
           <div class="modal-header">
@@ -44,51 +46,14 @@
             
           </div>
         {{-- @endif --}}
+
+    </form>
     
 
       </div>
 
-</form>
+
 
     </div>
   </div>
 
-
-{{-- 
-@php 
-$modalShowHeader = true;
-$modalShowFooter = true;
-
-@endphp
-
-@section('modalTitle', 'Confirm Deletion')
-
-@section('modalContent')
-
-<form action="{{ action([controller(), 'destroy'], [$modelInject => $model->id]) }}" method="POST">
-    @csrf
-    @method('DELETE')
-
-    <P>Are you sure you want to delete the {{$modelName}} 
-    
-    @if($model->title)
-        titled "<strong><em>{{ $model->title }}</em></strong>"
-    @endif
-
-    ?</P>
-
-    <P>This action is final and cannot be undone</P>
-
-    
-    </form> 
-
-@endsection
-
-@section('modalButtons')
-
-    <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
-
-    <button type="submit" class="btn btn-danger"> Yes </button>
-
-</form>
-@endsection --}}
