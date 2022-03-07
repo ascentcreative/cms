@@ -268,9 +268,12 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         $disk = request()->disk;
         $path = request()->path;
         $payload = request()->file('payload');
+
+        $sanitise = $payload->getClientOriginalName();
+        $sanitise = str_replace(array('?', '#', '/', '\\', ','), '', $sanitise);
         
         if ((bool) request()->preserveFilename) {
-            $filepath = Storage::disk($disk)->putFileAs($path, $payload, $payload->getClientOriginalName());
+            $filepath = Storage::disk($disk)->putFileAs($path, $payload, $sanitise);
         } else {
             $filepath = Storage::disk($disk)->putFile($path, $payload);
         }
@@ -278,7 +281,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         $file = new AscentCreative\CMS\Models\File();
         $file->disk = $disk;
         $file->filepath = $filepath;
-        $file->original_name = $payload->getClientOriginalName();
+        $file->original_name = $sanitise; //$payload->getClientOriginalName();
         $file->save();
         return $file;
 
