@@ -77,6 +77,8 @@
         
         </div>
 
+        {{-- @dd($value); --}}
+
         {{-- for each row, show the relevant edit blade --}}
         <div class="stack-blocks">
         @foreach($value as $key=>$block)
@@ -94,10 +96,8 @@
     {{-- 
         This field receives the serialized & stringified JSON on save.
         Using the main field name means that all the actual heirarchical fields are replaced / ignored
-
-        // no longer needed as we're casting the field as an array
     --}}
-    {{-- <input type="hidden" name="{{$name}}" class="stack-output"/> --}}
+        <input type="hidden" name="{{$name}}" class="stack-output"/>
    
     </div>
 
