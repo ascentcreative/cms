@@ -1,6 +1,11 @@
 <img
-    {{-- src="{{ $src }}" --}}
-    srcset="{{ $srcset }}"
+    @if($srcset)
+        srcset="{{ $srcset }}"
+    @else
+        src="{{ $src }}"
+    @endif
+    
+   
     @if($sizes && $includeSizes) sizes="{{ $sizes }}" @endif
     alt="{{ $alt }}" 
     @if($class) class="{{ $class }}" @endif
