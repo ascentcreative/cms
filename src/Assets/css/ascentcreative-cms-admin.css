@@ -43,8 +43,11 @@ body > section {
 
 .cms-sidebar-content UL {
     list-style: none;
-    margin: 0 0px 20px;
     padding: 0;
+}
+
+.cms-sidebar-content > UL {
+    margin: 0 0px 20px;
 }
 
 .cms-sidebar-content UL A {
