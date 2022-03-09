@@ -1,6 +1,6 @@
 @extends('cms::admin.screen')
 
-@section('screentitle'){{ $modelPlural }}@endsection
+@section('screentitle'){{ $viewTitle ?? $modelPlural }}@endsection
 
 
 @section('headbar')
