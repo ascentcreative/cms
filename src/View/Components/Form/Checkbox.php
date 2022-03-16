@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 class Checkbox extends Component
 {
 
-    public $type;
+   
     public $label;
     public $name;
     public $value;
@@ -24,9 +24,9 @@ class Checkbox extends Component
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value, $labelEscape=true, $labelAfter=false, $checkedValue=1, $uncheckedValue=null, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($label, $name, $value, $labelEscape=true, $labelAfter=false, $checkedValue=1, $uncheckedValue=null, $wrapper="bootstrapformgroup", $class='')
     {
-        $this->type = $type;
+       
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
