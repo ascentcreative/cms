@@ -1,5 +1,5 @@
 <div class="form-group row element-wrapper {{ $class }}" id="{{$name}}-wrapper">
-    <label for="@yield('name')" class="col-2 col-form-label">@yield('label'):</label>
+    <label for="@yield('name')" class="col-2 col-form-label">@yield('label')</label>
     <div class="col">
         @yield('element')
         <div class="error-display"></div>
