@@ -6,6 +6,17 @@
 @section('element')
 
 <select name="{{ $name }}" class="form-control">
+
+@if($includeNullItem) 
+
+    <option value="" @if($value == '') selected @endif>
+
+        {!! $nullItemLabel ?? '- Select -' !!}
+
+    </option>
+
+@endif
+
 @foreach($options as $key=>$opt)
 
     <option value="{{ $key }}" @if($value == $key) selected @endif>

@@ -14,6 +14,8 @@ class Options extends Component
 
     public $options;
 
+    public $includeNullItem;
+    public $nullItemLabel;
 
     public $wrapper;
     public $class;
@@ -24,7 +26,9 @@ class Options extends Component
      *
      * @return void
      */
-    public function __construct($type, $label, $name, $value, $options, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($type, $label, $name, $value, $options, $wrapper="bootstrapformgroup", $class='',
+                                    $includeNullItem = true, $nullItemLabel = '- Select -'
+                                )
     {
         $this->type = $type;
         $this->label = $label;
@@ -32,6 +36,10 @@ class Options extends Component
         $this->value = $value;
 
         $this->options = $options;
+
+        // Only used by SELECT type fields
+        $this->includeNullItem = $includeNullItem;
+        $this->nullItemLabel = $nullItemLabel;
 
         $this->wrapper = $wrapper;
         $this->class = $class;
