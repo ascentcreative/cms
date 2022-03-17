@@ -15,6 +15,22 @@ class File extends Base
 
     public $hidden = ['disk', 'filepath'];
 
+    protected static function booted()
+    {
+
+        // delete on-disk file
+        static::deleted(function ($model) {
+
+            //dd('deleting file');
+            // $model->file()->delete();
+            Storage::disk($model->disk)->delete($model->filepath);
+
+
+        });
+
+    }
+
+
 
     public function getFullpathAttribute() {
 
