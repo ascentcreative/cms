@@ -402,3 +402,8 @@ body .ui-state-highlight, body .ui-state-active, body .ui-state-focus {
     /* color: red !important; */
     font-weight: normal !important;
 }
+
+/* To allow UI elements (such as autocomplete dropdowns) to appear in bootstrap modals */
+body .ui-front {
+    z-index: 2000;
+}
