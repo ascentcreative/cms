@@ -148,7 +148,9 @@ class CMSServiceProvider extends ServiceProvider
         $activity->properties = $activity->properties->put('ip', request()->ip());
 
         $agent = new Agent();
-        $activity->properties = $activity->properties->put('agent', $_SERVER['HTTP_USER_AGENT']);
+        if(isset($_SERVER['HTTP_USER_AGENT'])) {
+            $activity->properties = $activity->properties->put('agent', $_SERVER['HTTP_USER_AGENT']);
+        }
         $activity->properties = $activity->properties->put('robot', $agent->isRobot());
         
         
