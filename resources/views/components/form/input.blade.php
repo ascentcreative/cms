@@ -11,6 +11,7 @@
         @if($type=='file')
             @if($multiple) multiple @endif
         @endif
+        @if($wireModel) wire:model="{{ $wireModel }}" @endif
         autocomplete="{{ $autocomplete ? 'on' : 'off' }}"
     />
 
