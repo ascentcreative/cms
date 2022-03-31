@@ -21,7 +21,7 @@
         @endforeach
 
         @style("/vendor/ascent/cms/css/bootstrap.min.css") 
-        @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css") 
+        @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css") 
         @style("/vendor/ascent/cms/js/jquery-ui.min.css") 
         @style("/css/screen.css") 
         {{-- @style("/css/styles.css")  --}}
