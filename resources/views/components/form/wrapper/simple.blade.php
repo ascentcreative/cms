@@ -10,14 +10,15 @@
         <small class="validation-error alert alert-danger form-text" role="alert">
             {!! $errors->first($name) !!}
         </small>
-        @else
+    @else
 
-            @if(trim($slot))
-                <small class="form-text text-muted">
-                    {{ $slot }}
-                </small>
-            @endif
-
+        @if(trim($slot))
+            <small class="form-text text-muted">
+                {{ $slot }}
+            </small>
         @endif
-        <div class="error-display"></div>
+
+    @endif
+    <div class="error-display"></div>
+
 </div> 
