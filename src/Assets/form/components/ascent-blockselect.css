@@ -1,9 +1,45 @@
 .cms-blockselect {
+    display: grid;
+    gap: 20px;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+
+.cms-blockselect-columns-2 {
+    /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+    /* grid-template-columns: 1fr 1fr; */
+    /* flex: 0 0 49%; */
+}
+
+.cms-blockselect-columns-3 {
+   
+    /* flex: 0 0 49%; */
+}
+
+
+.cms-blockselect-option {
+
+    border: 2px solid #ccc;
+    padding: 10px;
+    /* margin-bottom: 2%; */
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 0;
+
+}
+
+
+/* 
+
+.cms-blockselect {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
 }
+
 
 .cms-blockselect-option {
 
@@ -36,7 +72,7 @@
 
 .cms-blockselect-option:last-child {
     margin-bottom: 0;
-}
+} */
 
 .cms-blockselect-option INPUT {
     display: none;
