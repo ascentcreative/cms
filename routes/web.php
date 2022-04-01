@@ -294,6 +294,26 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
 
 
+    // MultiStepForm Step Validation endpoint:
+    Route::post('/msf-validate', function() {
+
+        $input = [];
+        parse_str(request()->input, $input);
+
+        $validatorSetup = (array) json_decode(Crypt::decryptString(request()->validators));
+
+        
+        Validator::validate(
+                $input, 
+                (array) $validatorSetup['validators'] ?? [],
+                (array) $validatorSetup['messages'] ?? []
+            );
+
+        
+    })->name('msf.validate');
+
+
+
 Route::get('/cms/welcomeemail/{order}', function (\App\Models\User $user) {
 
     $mail = new AscentCreative\CMS\Notifications\WelcomeEmailNotification($user);
