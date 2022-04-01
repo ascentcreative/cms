@@ -20,6 +20,9 @@ class Input extends Component
 
     public $multiple; // only used on file inputs
 
+    public $validators;
+    public $required = false;
+
     public $wireModel;
 
 
@@ -30,7 +33,8 @@ class Input extends Component
      */
     public function __construct($type, $label, $name, $value, $accept="", 
                                     $autocomplete=false, $wrapper="bootstrapformgroup", $class='', $multiple='false',
-                                    $wireModel=''
+                                    $wireModel='',
+                                    $validators=''
                                     )
     {
         $this->type = $type;
@@ -45,6 +49,12 @@ class Input extends Component
         $this->class = $class;
 
         $this->multiple = $multiple;
+
+        $this->validators = $validators;
+        $aryVld = explode("|", $validators);
+        if(array_search('required', $aryVld) !== false) {
+            $this->required = true;
+        }
 
 
         $this->wireModel = $wireModel;
