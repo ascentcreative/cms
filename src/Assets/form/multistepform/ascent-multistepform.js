@@ -51,6 +51,21 @@ var MultiStepForm = {
             $(e.target).prevAll('.msf-step:not(.msf-disabled)').first().multistepformstep('show');
 
         });
+
+
+        $(this.element).on('change', 'input, select, textarea', function() {
+            // console.log($(this).attr('name'));
+            try {
+                $('.error-display[for="' + $(this).attr('name').replace(/\[/g, '.').replace(/\]/g, '') + '"]').html('');
+            } catch (e) {
+                // nevermind
+            }
+        });
+
+        // $(this.element).on('input', 'input, select, textarea', function() {
+        //     console.log($(this).attr('name'));
+        //     $('.error-display[for="' + $(this).attr('name').replace(/\[/g, '.').replace(/\]/g, '') + '"]').html('');
+        // });
         
     }, 
 
