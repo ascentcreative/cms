@@ -300,12 +300,30 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         $input = [];
         parse_str(request()->input, $input);
 
-        $validatorSetup = (array) json_decode(Crypt::decryptString(request()->validators));
+        $validatorSetup = (array) json_decode(Crypt::decryptString(request()->validators)) ?? [];
+
+        // loop through validators and check if any are classes:
+        $validators = [];
+        foreach((array) $validatorSetup['validators'] as $field=>$list) {
+            $valAry = explode('|', $list);
+            $valOut = [];
+            foreach($valAry as $val) {
+                if(substr($val, 0, 4) == 'new ') {
+                    $cls = substr($val, 4);
+                    $valOut[] = new $cls;
+                } else {
+                    $valOut[] = $val;
+                }
+               
+            }
+            $validators[$field] = $valOut;
+        }
+
 
         
         Validator::validate(
                 $input, 
-                (array) $validatorSetup['validators'] ?? [],
+                $validators ?? [],
                 (array) $validatorSetup['messages'] ?? []
             );
 
