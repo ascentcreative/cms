@@ -19,5 +19,5 @@
             @endif
 
         @endif
-        <div class="error-display"></div>
+        <div class="error-display" for="{{ $name }}"></div>
 </div> 
