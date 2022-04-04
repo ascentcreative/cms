@@ -25,6 +25,11 @@ class Input extends Component
 
     public $wireModel;
 
+    public $preelement;
+    public $postelement;
+
+    public $placeholder;
+
 
     /**
      * Create a new component instance.
@@ -34,7 +39,10 @@ class Input extends Component
     public function __construct($type, $label, $name, $value, $accept="", 
                                     $autocomplete=false, $wrapper="bootstrapformgroup", $class='', $multiple='false',
                                     $wireModel='',
-                                    $validators=''
+                                    $validators='',
+                                    $preelement='',
+                                    $postelement='',
+                                    $placeholder=''
                                     )
     {
         $this->type = $type;
@@ -49,6 +57,11 @@ class Input extends Component
         $this->class = $class;
 
         $this->multiple = $multiple;
+
+        $this->preelement= $preelement;
+        $this->postelement = $postelement;
+
+        $this->placeholder = $placeholder;
 
         $this->validators = $validators;
         $aryVld = explode("|", $validators);

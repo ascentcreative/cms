@@ -5,6 +5,14 @@
 
 @section('element')
 
+    @if($preelement || $postelement)
+        <div class="form-inline">
+    @endif
+
+    @if($preelement)
+    {{ $preelement }}&nbsp;
+    @endif
+
     <input type="{{$type}}" name="{{$name}}" value="{!! $value !!}" @if($type=='file' && $accept != '') accept="{{ $accept }}" @endif
         class="form-control{{ ($type=='file' ? '-file' : '') }}" 
         @if($required) required @endif
@@ -16,6 +24,15 @@
         @if($wireModel) wire:model.lazy="{{ $wireModel }}" @endif
         {{-- @if($validators) data-validators="{{ Crypt::encryptString($validators) }}" @endif --}}
         autocomplete="{{ $autocomplete ? 'on' : 'off' }}"
+        @if($placeholder) placeholder="{{ $placeholder }}" @endif
     />
+
+    @if($postelement)
+    &nbsp;{{ $postelement }}
+    @endif
+
+    @if($preelement || $postelement)
+        </div>
+    @endif
 
 @overwrite
