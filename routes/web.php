@@ -185,7 +185,8 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             /* validate modal data */
             $cls = session()->get('modelTableCache.' . $target);
             $rules = $cls::$rules;
-            Validator::make(request()->all(), $rules)->validate();
+            $messages = $cls::$messages;
+            Validator::make(request()->all(), $rules, $messages)->validate();
 
             /* If pass, return the new item to add to the field */
             /* Item = the data submitted (converted to an object for compatibility) */
