@@ -34,7 +34,7 @@
     <script>
 
         $('#{{ nameToId($name) }}').relationshipautocomplete({
-            source: '{{ $dataurl }}'
+            source: '{!! $dataurl !!}'
         });
         
     </script>
