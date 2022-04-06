@@ -67,9 +67,15 @@ var PivotList = {
             $(outer).append('<DIV class="inputbar d-flex align-items-center"><INPUT type="text" id="' + thisID + '-input" class="flex-fill mr-2 form-control" spellcheck="false" placeholder="' + opts.placeholder + '"/></DIV>');
             
 		
+            // url building:
+            let urlsep = '?';
+            if(opts.optionRoute.indexOf('?') != -1) {
+                urlsep = '&';
+            }
+
 			// autocomplete and events
 			$("#" + thisID + "-input").autocomplete({
-				source: opts.optionRoute + '?return_field=' + self.options.labelField, //opts.autocompleteURL,
+				source: opts.optionRoute + urlsep + 'return_field=' + self.options.labelField, //opts.autocompleteURL,
 			    minLength: 2,
 			    select: function( event, ui ) {
 
