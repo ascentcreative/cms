@@ -122,7 +122,18 @@ var PivotList = {
     
                 },
     			
-			});
+			}).autocomplete('instance')._renderItem = function( ul, item ) {
+
+                // console.log(item);
+                //return $( "<li>" ).append( renderItem(item) ).appendTo( ul );
+                if(item.formattedlabel) {
+                    return $( "<li>").append(item.formattedlabel).appendTo(ul);
+                } else {
+                    return $( "<li>").append('<div>' + item.label + '<div>').appendTo(ul);
+                }
+                
+        
+            };;
 			
 			$("#" + thisID + "-input").keypress(function(){
 				$("#" + thisID + "-input").removeData();
