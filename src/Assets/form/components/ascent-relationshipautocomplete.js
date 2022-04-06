@@ -24,7 +24,18 @@ var RelationshipAutocomplete = {
                 self.setValue(item.item);
          
             }
-        });
+        }).autocomplete('instance')._renderItem = function( ul, item ) {
+
+            // console.log(item);
+            //return $( "<li>" ).append( renderItem(item) ).appendTo( ul );
+            if(item.formattedlabel) {
+                return $( "<li>").append(item.formattedlabel).appendTo(ul);
+            } else {
+                return $( "<li>").append('<div>' + item.label + '<div>').appendTo(ul);
+            }
+            
+    
+        };;
 
         $(this.element).on('click', '.ra-clear', function() {
             self.setValue(null);
