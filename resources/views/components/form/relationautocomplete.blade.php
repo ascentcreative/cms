@@ -1,4 +1,4 @@
-@extends('cms::components.form.wrapper.bootstrapformgroup')
+@extends('cms::components.form.wrapper.' . $wrapper)
 
 @php $tmp_label = $label; @endphp
 @section('name'){{$name}}@overwrite
