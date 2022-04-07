@@ -160,28 +160,33 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         /* Routes for HasMany component modal and validation */
 
         // load modal - either empty or with data values for editing
-        Route::get('/cms/components/hasmany/{source}/{target}', function($source, $target) {
+        Route::get('/cms/components/hasmany/{source}/{target}/{fieldname}', function($source, $target, $fieldname) {
             /* present the modal */
             // Not sure we need the source? would the dialog not be the same regardless of that (ini polymorphic sitautions?)
             //return view('admin.' . $source . '.hasmany.' . $target . '.modal');
 
+            // dd($fieldname);
+
             // extract incoming data
-            if(request()->$target) {
-                $idx = array_key_first(request()->$target);
-                $item = request()->$target[$idx];
+            if(request()->$fieldname) {
+                $idx = array_key_first(request()->$fieldname);
+                $item = request()->$fieldname[$idx];
                 $action = 'Edit';
             } else {
                 $idx = '0';
                 $item = [];
                 $action = 'New';
             }
- 
-            return view('components.hasmany.' . $target . '.modal', ['idx' =>  $idx, 'item' => (object) $item, 'action' => $action ] );
+
+            // divert to specified blade if given
+            $blade = request()->blade ?? "modal";
+            
+            return view('components.hasmany.' . $target . '.' . $blade, ['idx' =>  $idx, 'item' => (object) $item, 'action' => $action ] );
             
         })->name('cms.components.hasmany');
 
 
-        Route::post('/cms/components/hasmany/{source}/{target}', function($source, $target) {
+        Route::post('/cms/components/hasmany/{source}/{target}/{fieldname}', function($source, $target, $fieldname) {
             /* validate modal data */
             $cls = session()->get('modelTableCache.' . $target);
             $rules = $cls::$rules;
@@ -198,7 +203,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             // $obj->fill(request()->all());
             $obj = (object) request()->all();
 
-            return view('components.hasmany.' . $target . '.item', ['item' => $obj, 'name' => $target . '[' . request()->idx . ']', 'idx' => request()->idx]);
+            return view('components.hasmany.' . $target . '.item', ['item' => $obj, 'name' => $fieldname . '[' . request()->idx . ']', 'idx' => request()->idx]);
 
         })->name('cms.components.hasmany');
 

@@ -21,7 +21,7 @@
         </div>
     
         {{-- Derive route name from parent and target models --}}
-        <a href="{{ route('cms.components.hasmany', ['source'=>$source, 'target'=>$target]) }}" class="hasmany-add button btn btn-sm btn-primary modal-link" xdata-toggle="modal" xdata-target="#hasmanyedit">Add New</a>
+        <a href="{{ route('cms.components.hasmany', ['source'=>$source, 'target'=>$target, 'fieldname'=>$name]) }}" class="hasmany-add button btn btn-sm btn-primary modal-link" xdata-toggle="modal" xdata-target="#hasmanyedit">Add New</a>
 
     </div>
 

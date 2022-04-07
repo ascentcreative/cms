@@ -68,6 +68,45 @@ var HasMany = {
             });
 
 
+            /**
+             * Custom action hook, allowing a modal to be displayed and the calling item to be replaced
+             * 
+             * Passing in a 'blade' parameter will divert the edit action to a different modal UI
+             *  - that modal UI can submit to a different route than the base one to avoid generic proccessing
+             *  - but the custom route must render a new copy of the item blade to replace the existing one. 
+             * 
+             *  - the 'blade' parameter should be in the data-blade attribute of the calling link/button
+             *       - blade file assumed to be in same directory as the item and modal blades
+             * 
+             */
+             $(this.element).on('click', '.hasmany-item-action', function(e) {
+
+                // to work with the modal-link setup, we should serialise the item's data
+                data = ($(this).parents('.hasmany-item').find('INPUT, TEXTAREA').serialize());
+
+                data += '&blade=' + $(this).attr('data-blade');
+
+                console.log(data);
+
+                // e.preventDefault();
+
+                // return false;
+                // pull in the base URL from the .hasmany-add button
+                url = $(this).parents('.hasmany').find('.hasmany-add').attr('href');
+                // and append the serialised data to it.
+                $(this).attr('href', url + "?" + data);
+               // alert('ok : ' + $(this).attr('href'));
+
+                // ensure it's a modal link so that the edit screen pops up in a dialog.
+                // the modalLink widget will handle the actual flow and creation of the modals
+                $(this).addClass('modal-link');
+
+                // when we get a positive response from the modalLink, add in returned data
+                $(document).on('modal-link-response', { hasmany: self }, self.replaceItem );
+
+            });
+
+
              /**
              * Removes an item block from the component
              */
