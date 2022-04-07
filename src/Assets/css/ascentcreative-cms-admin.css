@@ -170,7 +170,7 @@ H1, H2 {
 }
 
 button::before, A.btn::before {
-    margin-right: 10px;
+    margin-right: 0.5em;
 }
 
 .table-hover tbody tr:hover {
