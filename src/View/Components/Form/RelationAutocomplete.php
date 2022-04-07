@@ -51,7 +51,6 @@ class RelationAutocomplete extends Component
         $related = $relationship->getRelated();
 
         if($old = old($this->name)) {
-
             // dd($old);
             $foreign = $related::find($old); //->first();
             // dd($foreign);
