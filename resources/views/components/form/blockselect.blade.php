@@ -6,7 +6,7 @@
 @section('element')
 
 
-    <div class="cms-blockselect cms-blockselect-columns-{{$columns}}" data-max-select="{{$maxSelect}}" @isset($maxHeight) style="max-height: {{$maxHeight}}; overflow-y: scroll"@endisset>
+    <div class="cms-blockselect cms-blockselect-columns-{{$columns}} cms-blockselect-{{ $layout }}" data-max-select="{{$maxSelect}}" @isset($maxHeight) style="max-height: {{$maxHeight}}; overflow-y: scroll"@endisset>
     @foreach($options as $key=>$opt)
         <label for="{{$name}}-{{ Str::slug($key) }}" class="cms-blockselect-option">
             <input type="checkbox" name="{{$name}}{{$maxSelect!=1?'[]':''}}" id="{{$name}}-{{ Str::slug($key) }}" value="{{$key}}"
