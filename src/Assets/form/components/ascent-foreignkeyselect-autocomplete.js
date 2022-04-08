@@ -43,8 +43,6 @@ var ForeignKeySelectAutoComplete = {
     },
 
     setValue: function(item) {
-       
-        console.log(item);
 
         if(item) {
             $(this.element).find('.fksac-value').val(item.value);
