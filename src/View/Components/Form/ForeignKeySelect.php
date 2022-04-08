@@ -36,12 +36,25 @@ class ForeignKeySelect extends Component
      *
      * @return void
      */
-    public function __construct($type='select', $label, $name, $value=[], $query, $labelField="title", $sortField=null, $sortDirection="ASC", $idField="id", $nullItemLabel="Please Select:", $wrapper='bootstrapformgroup', $class='')
+    public function __construct($type='select', $label, $name, $value=[], $query, $labelField="title", $sortField=null, $sortDirection="ASC", $idField="id", $nullItemLabel=null, $wrapper='bootstrapformgroup', $class='')
     {
         $this->type = $type;
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
+        
+        if(is_null($nullItemLabel)) {
+            switch($type) {
+                case 'autocomplete':
+                    $nullItemLabel = "Enter a few characters to search...";
+                    break;
+
+                default:
+                    $nullItemLabel = "Please Select:";
+                    break;
+            }
+        }
+
         $this->nullItemLabel = $nullItemLabel;
 
         // foreign model / table info:
