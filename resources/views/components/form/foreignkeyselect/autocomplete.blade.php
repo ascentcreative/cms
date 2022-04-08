@@ -17,14 +17,14 @@ if($value) {
     $sel = $vals->where('value', $value)->first();
     $display = $sel['label'];
 }
-
 @endphp
+
 
 @section('element')
 
     <div class="fksac-wrap @isset($value) has-value @endisset " id="{{ nameToId($name) }}">
         <div class="fksac-entry">
-            <input type="text" id="{{ nameToId($name) }}-entry" name="{{$name}}-entry" placeholder="{{ $placeholder ?? '' }}" class="form-control fksac-input" value="{{ $display ?? '' }}">
+            <input type="text" id="{{ nameToId($name) }}-entry" name="{{$name}}-entry" placeholder="{{ $nullItemLabel ?? '' }}" class="form-control fksac-input" value="{{ $display ?? '' }}">
         </div>
         <div class="fksac-display form-control">
             <span class="fksac-label">{{ $display ?? ''}}</span><a href="#" class="fksac-clear bi-x-square-fill text-danger"></a>
