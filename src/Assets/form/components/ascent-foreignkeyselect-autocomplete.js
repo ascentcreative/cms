@@ -37,6 +37,7 @@ var ForeignKeySelectAutoComplete = {
 
         $(this.element).on('click', '.fksac-clear', function() {
             self.setValue(null);
+            return false;
         });
             
 

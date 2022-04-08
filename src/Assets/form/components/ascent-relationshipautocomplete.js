@@ -36,6 +36,7 @@ var RelationshipAutocomplete = {
 
         $(this.element).on('click', '.ra-clear', function() {
             self.setValue(null);
+            return false;
         });
             
 
