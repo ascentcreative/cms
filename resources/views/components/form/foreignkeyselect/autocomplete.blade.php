@@ -13,11 +13,13 @@ $vals = $query->orderBy($sortField, $sortDirection)->get()
                         'value' => $item->$labelField,
                     ]; 
             });
+  
 
 if($value) {
-    $sel = $vals->where('value', $value)->first();
+    $sel = $vals->where('id', $value)->first();
     $display = $sel['label'];
 }
+
 @endphp
 
 
