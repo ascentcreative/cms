@@ -44,8 +44,10 @@ var ForeignKeySelectAutoComplete = {
 
     setValue: function(item) {
        
+        console.log(item);
+
         if(item) {
-            $(this.element).find('.fksac-value').val(item.id);
+            $(this.element).find('.fksac-value').val(item.value);
             $(this.element).find('.fksac-label').html(item.label);
             $(this.element).addClass("has-value");
         } else {
