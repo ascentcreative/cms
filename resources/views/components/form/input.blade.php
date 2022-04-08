@@ -25,6 +25,7 @@
         {{-- @if($validators) data-validators="{{ Crypt::encryptString($validators) }}" @endif --}}
         autocomplete="{{ $autocomplete ? 'on' : 'off' }}"
         @if($placeholder) placeholder="{{ $placeholder }}" @endif
+        @if($size) size="{{ $size }}" @endif
     />
 
     @if($postelement)
