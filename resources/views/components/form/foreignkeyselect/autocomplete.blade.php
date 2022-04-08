@@ -8,8 +8,9 @@
 $vals = $query->orderBy($sortField, $sortDirection)->get()
             ->transform(function($item) use ($labelField, $idField) {
                 return [
+                        'id' => $item->$idField,
                         'label' => $item->$labelField,
-                        'value' => $item->$idField,
+                        'value' => $item->$labelField,
                     ]; 
             });
 

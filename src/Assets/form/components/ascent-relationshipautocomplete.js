@@ -20,7 +20,7 @@ var RelationshipAutocomplete = {
         $(this.element).find('.ra-input').autocomplete({
             source: this.options.source,
             select: function(ui, item) {
-                console.log(item.item);
+               
                 self.setValue(item.item);
          
             }
