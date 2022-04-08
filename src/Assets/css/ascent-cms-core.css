@@ -407,3 +407,11 @@ body .ui-state-highlight, body .ui-state-active, body .ui-state-focus {
 body .ui-front {
     z-index: 2000;
 }
+
+
+
+/* form components */
+
+.inline-wrapper label {
+    margin-bottom: 0;
+}
