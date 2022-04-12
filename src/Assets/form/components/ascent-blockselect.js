@@ -14,7 +14,7 @@ var BlockSelect = {
         var self = this;
         self.trackOrder = [];
         
-        $(this.element).off('change'); 
+        $(this.element).off('change', self.processChange); 
         $(this.element).on('change', '.cms-blockselect-option INPUT', {widget: self}, self.processChange);
 
 
