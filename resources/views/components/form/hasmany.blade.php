@@ -5,6 +5,9 @@
 
 @section('element')
 
+    {{-- Hidden element - ensures an empty field is processed --}}
+    <input type="hidden" value="" name="{{ $name }}" />
+
     <div class="border p-3 bg-light hasmany" id="{{ nameToId($name) }}" data-fieldname="{{ $name }}">
 
         <div class="hasmany-items">
