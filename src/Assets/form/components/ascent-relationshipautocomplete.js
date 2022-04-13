@@ -8,7 +8,8 @@ var RelationshipAutocomplete = {
 
     // Default options.
 	options: {
-      source: ''
+      source: '',
+      displayField: ''
     },
 
     _init: function () {
@@ -43,10 +44,18 @@ var RelationshipAutocomplete = {
     },
 
     setValue: function(item) {
+
        
         if(item) {
+
+            let display = item[this.options.displayField];
+
+            if (!display) {
+                display = item.label;
+            }
+
             $(this.element).find('.ra-value').val(item.id);
-            $(this.element).find('.ra-label').html(item.label);
+            $(this.element).find('.ra-label').html(display);
             $(this.element).addClass("has-value");
         } else {
             $(this.element).find('.ra-value').val('');

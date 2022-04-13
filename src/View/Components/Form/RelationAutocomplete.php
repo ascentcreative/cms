@@ -20,6 +20,7 @@ class RelationAutocomplete extends Component
     public $name;
     public $value;
     public $display;
+    public $displayField;
     public $dataurl;
 
     public $placeholder;
@@ -64,7 +65,7 @@ class RelationAutocomplete extends Component
         // get the foreign model
         
        
-
+        $this->displayField = $displayField;
         if($foreign) {
             $this->value = $foreign->id;
             $this->display = $foreign->$displayField;
