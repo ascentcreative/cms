@@ -11,11 +11,12 @@ class Modal extends Component
     public $title;
     public $closebutton;
     public $centered = false;
+    public $size;
 
     public $modalShowHeader = true;
     public $modalShowFooter = true;
 
-    public function __construct($modalid, $modalclass='', $title='', $closebutton=true, $centered=false, $showHeader=true, $showFooter=true) {
+    public function __construct($modalid, $modalclass='', $title='', $closebutton=true, $centered=false, $showHeader=true, $showFooter=true, $size="modal-lg") {
 
        // dd($modalid);
 
@@ -27,6 +28,7 @@ class Modal extends Component
         $this->centered = $centered;
         $this->modalShowHeader = $showHeader;
         $this->modalShowFooter = $showFooter;
+        $this->size = $size;
 
     }
 

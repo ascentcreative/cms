@@ -1,5 +1,5 @@
 <div class="modal text-left fade {{ $modalclass }}" id="{{ $modalid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog @if($centered) modal-dialog-centered @endif modal-lg {{$modalSize ?? ''}}" role="document">
+    <div class="modal-dialog @if($centered) modal-dialog-centered @endif  {{$size ?? 'modal-lg'}}" role="document">
 
         {{ $formstart ?? '' }}
         
