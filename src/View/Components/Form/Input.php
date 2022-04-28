@@ -32,6 +32,9 @@ class Input extends Component
 
     public $size;
 
+    public $min;
+    public $step;
+
 
     /**
      * Create a new component instance.
@@ -45,7 +48,9 @@ class Input extends Component
                                     $preelement='',
                                     $postelement='',
                                     $placeholder='',
-                                    $size=''
+                                    $size='',
+                                    $min=0,
+                                    $step=0.01
                                     )
     {
         $this->type = $type;
@@ -66,6 +71,8 @@ class Input extends Component
 
         $this->placeholder = $placeholder;
         $this->size = $size;
+        $this->min = $min;
+        $this->step = $step;
 
         $this->validators = $validators;
         $aryVld = explode("|", $validators);

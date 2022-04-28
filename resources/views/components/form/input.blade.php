@@ -17,7 +17,10 @@
         class="form-control{{ ($type=='file' ? '-file' : '') }}" 
         @if($required) required @endif
 
-        @if($type=='number') min="0" step="0.01" @endif
+        @if($type=='number') 
+            @if($min) min="{{ $min }}" @endif
+            @if($step) step="{{ $step }}" @endif 
+        @endif
         @if($type=='file')
             @if($multiple) multiple @endif
         @endif
