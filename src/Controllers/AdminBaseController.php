@@ -97,7 +97,7 @@ abstract class AdminBaseController extends Controller
      * Applies any necessary steps (such as global scope removal)
      */
 
-     private function prepareModelQuery() {
+     protected function prepareModelQuery() {
 
         $cls = $this::$modelClass;
 
