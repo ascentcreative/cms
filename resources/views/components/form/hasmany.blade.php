@@ -12,14 +12,16 @@
 
         <div class="hasmany-items">
      
-            @foreach($value as $idx=>$item)
+            @if(is_array($value))
+                @foreach($value as $idx=>$item)
 
-                {{-- Removed source from blade path - not sure we need it --}}
-                {{-- @include('admin.' . $source . '.hasmany.' . $target . '.item', ['item'=> (object) $item, 'name'=>$name . '[' . $idx . ']' ] ) --}}
+                    {{-- Removed source from blade path - not sure we need it --}}
+                    {{-- @include('admin.' . $source . '.hasmany.' . $target . '.item', ['item'=> (object) $item, 'name'=>$name . '[' . $idx . ']' ] ) --}}
 
-                @include('components.hasmany.' . $target . '.item', ['item'=> (object) $item, 'name'=>$name . '[' . $idx . ']' ] )
+                    @include('components.hasmany.' . $target . '.item', ['item'=> (object) $item, 'name'=>$name . '[' . $idx . ']' ] )
 
-            @endforeach
+                @endforeach
+            @endif
 
         </div>
     
