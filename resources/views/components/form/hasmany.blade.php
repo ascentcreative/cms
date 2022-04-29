@@ -12,7 +12,8 @@
 
         <div class="hasmany-items">
      
-            @if(is_array($value))
+            
+            @if(isset($value))
                 @foreach($value as $idx=>$item)
 
                     {{-- Removed source from blade path - not sure we need it --}}
