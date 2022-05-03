@@ -3,24 +3,24 @@
 @section('screen-start')
         
     {{-- OPEN FORM TAG --}}
-    @if ($model->id)
+    {{-- @if ($model->id)
         <form action="{{ action([controller(), 'update'], [$modelInject => $model->id]) }}" method="POST" enctype="application/x-www-form-urlencoded">
          @method('PUT')
     @else
         <form action="{{ action([controller(), 'store']) }}" method="POST" enctype="application/x-www-form-urlencoded">
-    @endif
+    @endif --}}
 
-    @csrf
+    {{-- @csrf --}}
 
 @endsection
 
 
 @section('screen-end')
 
-        <input type="hidden" name="_postsave" value="{{ old('_postsave', url()->previous()) }}" />
+        {{-- <input type="hidden" name="_postsave" value="{{ old('_postsave', url()->previous()) }}" /> --}}
 
     {{-- ClOSE FORM TAG --}}
-    </form>
+    {{-- </form> --}}
     
 @endsection
 
@@ -38,6 +38,11 @@
     <nav class="navbar">
 
         @section('headactions')
+
+            @can('update', $model)
+                <A href="{{ action([controller(), 'edit'], [$modelInject => $model->id]) }}" type="button" class="btn btn-primary bi-pencil-square" onclick="" class="button">Edit {{$modelName}}</A>    
+            @endcan
+
             <A href="{{ session('last_index') }}" type="button" class="btn btn-primary bi-x-circle-fill" onclick="" class="button">Close</A>    
         @show
 
