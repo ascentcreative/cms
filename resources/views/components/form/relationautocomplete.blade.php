@@ -5,15 +5,25 @@
 
 @section('element')
 
-    <div class="ra-wrap @isset($value) has-value @endisset " id="{{ nameToId($name) }}">
-        <div class="ra-entry">
-            <input type="text" id="{{ nameToId($name) }}-entry" name="{{$name}}-entry" placeholder="{{ $placeholder }}" class="form-control ra-input" value="{{ $display }}">
+    @if($readonly)
+
+        <div class="col-form-label border-bottom p-2">
+            {{ $display }}
         </div>
-        <div class="ra-display form-control">
-            <span class="ra-label">{{ $display }}</span><a href="#" class="ra-clear bi-x-square-fill text-danger"></a>
+
+    @else
+
+        <div class="ra-wrap @isset($value) has-value @endisset " id="{{ nameToId($name) }}">
+            <div class="ra-entry">
+                <input type="text" id="{{ nameToId($name) }}-entry" name="{{$name}}-entry" placeholder="{{ $placeholder }}" class="form-control ra-input" value="{{ $display }}">
+            </div>
+            <div class="ra-display form-control">
+                <span class="ra-label">{{ $display }}</span><a href="#" class="ra-clear bi-x-square-fill text-danger"></a>
+            </div>
+            <input type="hidden" class="ra-value" id="{{ nameToId($name) }}-value" name="{{$name}}" value="{{ $value }}" />
         </div>
-        <input type="hidden" class="ra-value" id="{{ nameToId($name) }}-value" name="{{$name}}" value="{{ $value }}" />
-    </div>
+
+    @endif 
     
 @overwrite
 

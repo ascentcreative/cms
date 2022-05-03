@@ -13,23 +13,33 @@
     {{ $preelement }}&nbsp;
     @endif
 
-    <input type="{{$type}}" name="{{$name}}" value="{!! $value !!}" @if($type=='file' && $accept != '') accept="{{ $accept }}" @endif
-        class="form-control{{ ($type=='file' ? '-file' : '') }}" 
-        @if($required) required @endif
+    @if($readonly)
 
-        @if($type=='number') 
-            @if($min) min="{{ $min }}" @endif
-            @if($step) step="{{ $step }}" @endif 
-        @endif
-        @if($type=='file')
-            @if($multiple) multiple @endif
-        @endif
-        @if($wireModel) wire:model.lazy="{{ $wireModel }}" @endif
-        {{-- @if($validators) data-validators="{{ Crypt::encryptString($validators) }}" @endif --}}
-        autocomplete="{{ $autocomplete ? 'on' : 'off' }}"
-        @if($placeholder) placeholder="{{ $placeholder }}" @endif
-        @if($size) size="{{ $size }}" @endif
-    />
+        <div class="col-form-label border-bottom p-2">
+         {{ $value }}
+        </div>
+
+    @else
+
+        <input type="{{$type}}" name="{{$name}}" value="{!! $value !!}" @if($type=='file' && $accept != '') accept="{{ $accept }}" @endif
+            class="form-control{{ ($type=='file' ? '-file' : '') }}" 
+            @if($required) required @endif
+
+            @if($type=='number') 
+                @if($min) min="{{ $min }}" @endif
+                @if($step) step="{{ $step }}" @endif 
+            @endif
+            @if($type=='file')
+                @if($multiple) multiple @endif
+            @endif
+            @if($wireModel) wire:model.lazy="{{ $wireModel }}" @endif
+            {{-- @if($validators) data-validators="{{ Crypt::encryptString($validators) }}" @endif --}}
+            autocomplete="{{ $autocomplete ? 'on' : 'off' }}"
+            @if($placeholder) placeholder="{{ $placeholder }}" @endif
+            @if($size) size="{{ $size }}" @endif
+        />
+
+    @endif
 
     @if($postelement)
     &nbsp;{{ $postelement }}

@@ -5,24 +5,39 @@
 
 @section('element')
 
-    <select name="{{$name}}" class="form-control">
-        <option value="">{{$nullItemLabel}}</option>
+    @php
+        $opts = $query->orderBy($sortField, $sortDirection)->get();
+    @endphp
 
-        <?php 
-        
-        //$opts = $model::orderBy($labelField)->get(); 
-       $opts = $query->orderBy($sortField, $sortDirection)->get();
-        
-        ?>
+    @if($readonly)
 
-        @foreach ($opts as $opt)
+        <div class="col-form-label  border-bottom p-2">
+            @php $display = $opts->keyBy($idField)->get($value)->$labelField ?? ''; @endphp 
+            @if($display) 
+                {{ $display }}
+            @else 
+                <span class="text-muted">- Not Specified -</span>
+            @endif
+        </div>
 
-        <option value="{{ $opt->$idField }}" @if ($value == $opt->$idField)
-            selected
-        @endif>{{ $opt->$labelField }}</option>
+    @else
 
-        @endforeach
 
-    </select>
+        <select name="{{$name}}" class="form-control">
+            <option value="">{{$nullItemLabel}}</option>
+
+            
+
+            @foreach ($opts as $opt)
+
+            <option value="{{ $opt->$idField }}" @if ($value == $opt->$idField)
+                selected
+            @endif>{{ $opt->$labelField }}</option>
+
+            @endforeach
+
+        </select>
+
+    @endif
 
 @overwrite

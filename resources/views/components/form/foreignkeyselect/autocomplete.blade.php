@@ -25,6 +25,14 @@ if($value) {
 
 @section('element')
 
+    @if($readonly)
+
+        <div class="col-form-label  border-bottom p-2">
+            {{ $opts->keyBy($idField)->get($value)->$labelField ?? 'n/a' }}
+        </div>
+
+    @else
+
     <div class="fksac-wrap @isset($value) has-value @endisset " id="{{ nameToId($name) }}">
         <div class="fksac-entry">
             <input type="text" id="{{ nameToId($name) }}-entry" name="{{$name}}-entry" placeholder="{{ $nullItemLabel ?? '' }}" class="form-control fksac-input" value="{{ $display ?? '' }}">
@@ -34,6 +42,8 @@ if($value) {
         </div>
         <input type="hidden" class="fksac-value" id="{{ nameToId($name) }}-value" name="{{$name}}" value="{{ $value }}" />
     </div>
+
+    @endif
 
 @overwrite
 

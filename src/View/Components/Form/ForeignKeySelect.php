@@ -17,6 +17,7 @@ class ForeignKeySelect extends Component
     public $label;
     public $name;
     public $value;
+    public $readonly;
 
   //  public $model;
     public $query;
@@ -36,12 +37,13 @@ class ForeignKeySelect extends Component
      *
      * @return void
      */
-    public function __construct($type='select', $label, $name, $value=[], $query, $labelField="title", $sortField=null, $sortDirection="ASC", $idField="id", $nullItemLabel=null, $wrapper='bootstrapformgroup', $class='')
+    public function __construct($type='select', $label, $name, $value=[], $query, $labelField="title", $sortField=null, $sortDirection="ASC", $idField="id", $nullItemLabel=null, $wrapper='bootstrapformgroup', $class='', $readonly=false)
     {
         $this->type = $type;
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
+        $this->readonly = $readonly;
         
         if(is_null($nullItemLabel)) {
             switch($type) {

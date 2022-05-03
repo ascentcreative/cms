@@ -19,6 +19,7 @@ class RelationAutocomplete extends Component
 
     public $name;
     public $value;
+    public $readonly;
     public $display;
     public $displayField;
     public $dataurl;
@@ -34,7 +35,7 @@ class RelationAutocomplete extends Component
      *
      * @return void
      */
-    public function __construct($label, $relationship, $dataurl, $name=null, $displayField='title', $placeholder="Begin typing to search...", $wrapper='bootstrapformgroup', $class='')
+    public function __construct($label, $relationship, $dataurl, $name=null, $displayField='title', $placeholder="Begin typing to search...", $wrapper='bootstrapformgroup', $class='', $readonly=false)
     {
        
         $this->label = $label;
@@ -47,6 +48,7 @@ class RelationAutocomplete extends Component
             $this->name = $name;
         }
         
+        $this->readonly = $readonly;
 
 
         $related = $relationship->getRelated();
