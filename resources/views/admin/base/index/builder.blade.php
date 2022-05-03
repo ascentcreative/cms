@@ -115,7 +115,15 @@
             @else
 
                 @if($col->isLink) 
-                    <a href="{{ action([controller(), $col->linkAction], [$modelInject => $item->id]) }}">
+                    @if($col->linkAction instanceof Closure) 
+                        @php 
+                            $la_closure = $col->linkAction; 
+                            $linkAction = $la_closure($item);
+                        @endphp
+                    @else
+                        @php $linkAction = $col->linkAction; @endphp
+                    @endif
+                    <a href="{{ action([controller(), $linkAction], [$modelInject => $item->id]) }}">
                 @endif
             
                 @if($col->value instanceof Closure) 
