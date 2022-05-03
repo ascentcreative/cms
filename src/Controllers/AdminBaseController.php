@@ -24,6 +24,8 @@ abstract class AdminBaseController extends Controller
     public $modelNameHuman = null;
     public $modelPlural = null; // override this if the auto-plural fails spectacularly...
 
+    public $authorize = [];
+
     public $pageSize = 15;
     public $indexSort = array();
     public $indexSearchFields = array();
@@ -387,6 +389,10 @@ abstract class AdminBaseController extends Controller
             $items = $this->prepareModelQuery();
             $model = $items->find($id);
         }
+
+        if(in_array('edit', $this->authorize)) {
+            $this->authorize('update', $model);
+        }
        
         return view($this::$bladePath . '.edit', $this->prepareViewData())->withModel($model);
 
@@ -401,6 +407,8 @@ abstract class AdminBaseController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        
 
         $qry = $this->prepareModelQuery();
         $model = $qry->find($id);
@@ -504,6 +512,15 @@ abstract class AdminBaseController extends Controller
                 $qry = $this->prepareModelQuery();
                 $model = $qry->find($id);
             }
+
+
+            if(in_array('delete', $this->authorize)) {
+                try {
+                    $this->authorize('delete', $model);
+                } catch (\Exception $e) {
+                    return view('cms::admin.modals.nodelete', $this->prepareViewData())->with('exception', $e); 
+                }
+             }
 
             return view('cms::admin.modals.confirmdelete', $this->prepareViewData())->withModel($model);
 
