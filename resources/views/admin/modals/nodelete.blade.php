@@ -11,7 +11,12 @@ $modalShowFooter = true;
 
 @section('modalContent')
 
-    <P>This application does not allow {{ $modelPlural }} to be deleted</P>
+    @if($exception ?? null) 
+        <P>Unable to delete the {{ $modelName}}.</P>
+        <P><strong>{{ $exception->getMessage() }}</strong></P>
+    @else
+        <P>This application does not allow {{ $modelPlural }} to be deleted</P>
+    @endif
 
 @endsection
 
