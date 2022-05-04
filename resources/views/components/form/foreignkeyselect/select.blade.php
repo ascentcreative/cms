@@ -16,7 +16,7 @@
             @if($display) 
                 {{ $display }}
             @else 
-                <span class="text-muted">- Not Specified -</span>
+                <span class="text-muted">{{ $nullItemLabel }}</span>
             @endif
         </div>
 
