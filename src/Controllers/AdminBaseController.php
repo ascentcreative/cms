@@ -312,7 +312,17 @@ abstract class AdminBaseController extends Controller
     public function create()
     {
        // $cls = $this->modelClass;
-        return $this->edit(); //ew $cls());
+        // return $this->edit(); //ew $cls());
+        // $cls = $this->modelClass;
+
+        if(in_array('create', $this->authorize)) {
+            $this->authorize('create', $this::$modelClass);
+        }
+
+        $model = ($this::$modelClass)::make();
+        $model->fill(request()->all());
+
+        return view($this::$bladePath . '.edit', $this->prepareViewData())->withModel($model);
     }
 
     /**
@@ -366,6 +376,8 @@ abstract class AdminBaseController extends Controller
         } else {
             $model = $cls::find($id);
         }
+
+        // view()->share('accessmode', 'read');
        
         return view($this::$bladePath . '.show', $this->prepareViewData())->withModel($model);
     }
