@@ -65,9 +65,9 @@ class FilterManager {
      * param: $socpe - the eloquent scope name to apply on the model - i.e. scopeByTheme = 'byTheme';
      * param: $wrapper - override the wrapper for this field
      */
-    public function registerSorter($field, $query, $wrapper=null) {
+    public function registerSorter($field, $scope, $wrapper=null) {
  
-        $this->sorters[$field] = $query;
+        $this->sorters[$field] = $scope;
 
         return $this;
 
