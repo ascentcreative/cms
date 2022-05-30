@@ -16,6 +16,7 @@ class FilterManager {
     public $sorter_wrapper = 'sort';
 
     private $filters = [];
+    private $filter_additional = [];
     private $statutoryFilters = [];
     private $sorters = [];
 
@@ -36,10 +37,15 @@ class FilterManager {
      * param: $field - the name of the field
      * param: $socpe - the eloquent scope name to apply on the model - i.e. scopeByTheme = 'byTheme';
      * param: $wrapper - override the wrapper for this field
+     * param: ...$additional - array of extra fields that the filter scope requires (will be passed as parameters to the scope function)
      */
-    public function registerFilter($field, $scope, $wrapper=null) {
+    public function registerFilter($field, $scope, $wrapper=null, ...$additional) {
 
         $this->filters[$field] = $scope;
+
+        // dump($additional);
+
+        $this->filter_additional[$field] = $additional;
 
         return $this;
 
@@ -78,8 +84,6 @@ class FilterManager {
 
         $data = $data ?? request()->all();
 
-        // dd($data);
-
         foreach($this->statutoryFilters as $key=>$scope) {
             $query->$scope();
         }
@@ -96,9 +100,18 @@ class FilterManager {
             if(isset($filter_data[$key])) {
 
                 // eager load for performance?
-                //$query->with($key);
-
-                $query->$scope($filter_data[$key]);
+                if(isset($this->filter_additional[$key])) {
+                    $args = [];
+                    foreach($this->filter_additional[$key] as $fld) {
+                        $args[] = $filter_data[$fld];
+                    }
+                    $query->$scope($filter_data[$key], ...$args);
+                } else {
+                    // dump('here');
+                    $query->$scope($filter_data[$key]);
+                }
+                
+                
             }
         }
 
