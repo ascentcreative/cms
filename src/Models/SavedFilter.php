@@ -17,7 +17,7 @@ class SavedFilter extends Base
 
     public $table = 'cms_savedfilters';
 
-    public $fillable = ['name', 'user_id', 'url', 'filter', 'is_global'];
+    public $fillable = ['name', 'user_id', 'url', 'filter', 'is_global', 'is_default'];
 
     public $slug_source = 'name';
 
