@@ -9,10 +9,10 @@
     </div>
 
    
-    <div class="formpanel border-top" style="width: 400px">
+    <div class="auth-formpanel formpanel border-top">
 
 
-     <div class="p-2 mt-3 mb-3 border rounded bg-white font-medium text-sm" style="width: 400px;">
+     <div class="p-2 mt-3 mb-3 border rounded bg-white font-medium text-sm">
         @if (session('status'))
        
            {!! session('status') !!}
@@ -23,7 +23,7 @@
 
     </div>
 
-    <div class="formpanel border-top" style="width: 400px">
+    <div class="auth-formpanel formpanel border-top">
 
 
         <form action="/forgot-password" method="POST">

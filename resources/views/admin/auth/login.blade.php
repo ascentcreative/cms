@@ -8,7 +8,7 @@
         @includeFirst(['admin.login.header', 'cms::admin.login.header'])
         </div>
        
-        <div class="formpanel border-top" style="width: 400px">
+        <div class="auth-formpanel formpanel border-top">
 
             <form action="/login" method="POST" id="form_login">
 

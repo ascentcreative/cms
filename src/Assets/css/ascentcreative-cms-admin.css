@@ -250,6 +250,15 @@ A.dropdown-toggle.dropdown-toggle-dots::after {
 }
 
 
+.auth-formpanel  {
+
+    width: 90%;
+    max-width: 400px;
+    /* padding: 0 20px; */
+    box-sizing: border-box;
+
+}
+
 /* Bootstrap Overrides */
 
 /* MODAL - fade in only, not slide down */
