@@ -162,6 +162,29 @@ var ModalLink = {
                     headers: {
                         'Accept' : "application/json"
                     },
+                    // responseType: 'blob',
+                    xhr: function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+
+                        //   alert('here');
+                        if (xhr.readyState == 2) {
+                            
+                            // detect if we're getting a file in the response
+                            var disposition = xhr.getResponseHeader('content-disposition');
+                            if (disposition && disposition.indexOf('attachment') !== -1) {
+                                // if so, we'll interpret it as an arraybuffer (to create a BLOB to return to the user)
+                                xhr.responseType = "arraybuffer";
+                            } else {
+                                // no attachment? Must be text-based / json / html etc
+                                xhr.responseType = "text";
+                            }
+                           
+                        }
+                            
+                        };
+                        return xhr;
+                    },
                     data: formData,
                     statusCode: {
                         200: function(data, xhr, request) {
@@ -170,18 +193,12 @@ var ModalLink = {
                             
                             if (disposition && disposition.indexOf('attachment') !== -1) {
                                 /** INCOMING DOWNLOAD!  */
-                                var contentEncoding = request.getResponseHeader('content-encoding');
-                                
-                                let BOM = '';
-                                if(contentEncoding == 'UTF-8') {
-                                    BOM = new Uint8Array([0xEF,0xBB,0xBF]);
-                                }
-
+                                // convert to a blob and pass to the DOM as an object which gets downloaded.
+                               
                                 var contentType = request.getResponseHeader('content-type');
-                                
-                                var file = new Blob([BOM, data], { encoding: contentEncoding, type: contentType });
+                               
+                                var file = new Blob([data], { type: contentType });
 
-                                //console.log(request.getResponseHeader('content-disposition'));
                                 var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
                                 var matches = filenameRegex.exec(disposition);
                                 if (matches != null && matches[1]) { 
