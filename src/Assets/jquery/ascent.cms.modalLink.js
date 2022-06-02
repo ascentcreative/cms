@@ -170,8 +170,16 @@ var ModalLink = {
                             
                             if (disposition && disposition.indexOf('attachment') !== -1) {
                                 /** INCOMING DOWNLOAD!  */
+                                var contentEncoding = request.getResponseHeader('content-encoding');
+                                
+                                let BOM = '';
+                                if(contentEncoding == 'UTF-8') {
+                                    BOM = new Uint8Array([0xEF,0xBB,0xBF]);
+                                }
+
                                 var contentType = request.getResponseHeader('content-type');
-                                var file = new Blob([data], { type: contentType });
+                                
+                                var file = new Blob([BOM, data], { encoding: contentEncoding, type: contentType });
 
                                 //console.log(request.getResponseHeader('content-disposition'));
                                 var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
