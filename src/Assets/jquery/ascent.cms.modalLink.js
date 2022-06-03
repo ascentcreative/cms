@@ -335,9 +335,11 @@ var ModalLink = {
                 }).fail(function(data, xhr, request) {
                     alert('fail');
 
-                    console.log(data);
-                    console.log(xhr);
-                    console.log(request);
+                    console.log('data', data);
+                    console.log('xhr', xhr);
+                    console.log('req', request);
+
+                    console.log('headers', xhr.getAllResponseHeaders());
 
                     self.showResponseModal(data);
 
