@@ -334,6 +334,11 @@ var ModalLink = {
                     }
                 }).fail(function(data, xhr, request) {
                     alert('fail');
+
+                    console.log(data);
+                    console.log(xhr);
+                    console.log(request);
+
                     self.showResponseModal(data);
 
                 });
