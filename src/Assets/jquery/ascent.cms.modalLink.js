@@ -332,11 +332,11 @@ var ModalLink = {
 
                         }
                     }
-                }); /*.fail(function(data, xhr, request) {
+                }).fail(function(data, xhr, request) {
                     alert('fail');
                     self.showResponseModal(data);
 
-                }); */
+                });
             } catch(e) {
 
                 console.log(e);
