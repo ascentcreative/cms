@@ -23,10 +23,8 @@
     @else
 
 
-        <select name="{{$name}}" class="form-control">
+        <select name="{{$name}}" class="form-control" {{ $attr }} >
             <option value="">{{$nullItemLabel}}</option>
-
-            
 
             @foreach ($opts as $opt)
 
