@@ -31,6 +31,8 @@ class ForeignKeySelect extends Component
     public $wrapper;
     public $class;
 
+    public $attr;
+
 
     /**
      * Create a new component instance.
