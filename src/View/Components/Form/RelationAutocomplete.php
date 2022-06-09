@@ -53,8 +53,11 @@ class RelationAutocomplete extends Component
 
         $related = $relationship->getRelated();
 
-        if($old = old($this->name)) {
-            // dd($old);
+        // if the field has [] in, then we need to convert to dot notation
+        $oldname = str_replace(['[', ']'], ['.', ''], $this->name);
+
+        if($old = old($oldname)) {
+          
             $foreign = $related::find($old); //->first();
             // dd($foreign);
         } else {
