@@ -161,15 +161,15 @@ var MultiStepFormStep = {
             switch(data.status) {
                 case 422:
                     // validation fail
-                    // alert(data.responseJSON.errors);
-
-                    // console.log(data.responseJSON.errors);
-
-                    // console.log(flattenObject(data.responseJSON.errors));
-
                     let errors = flattenObject(data.responseJSON.errors);
 
                     for(fldname in errors) { 
+
+                        let undotArray = fldname.split('.');
+                        for(i=1;i<undotArray.length;i++) {
+                            undotArray[i] = '[' + undotArray[i] + ']';
+                        }
+                        aryname = undotArray.join('');
 
                         val = errors[fldname];
 
@@ -178,16 +178,9 @@ var MultiStepFormStep = {
                             val = Object.values(val).join('<BR/>');
                         }
 
-                        console.log(fldname);
-
-                        msg = val;
-
-                        // $('[name="' + fldname + '"], [name="' + fldname + '[]"]').parents('.element-wrapper').find('.error-display').last().append('<small class="validation-error alert alert-danger form-text" role="alert">' +
-                        //     msg + 
-                        // '</small>');
-
-                        $('.error-display[for="' + fldname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
-                        msg + 
+                        
+                        $('.error-display[for="' + aryname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
+                        val + 
                         '</small>');
 
                     }
