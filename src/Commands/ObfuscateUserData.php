@@ -48,8 +48,6 @@ class ObfuscateUserData extends Command
     public function handle()
     {
 
-        echo get_class($this->getLaravel());
-
         if (! $this->confirmToProceed()) {
             return 1;
         }
@@ -59,8 +57,6 @@ class ObfuscateUserData extends Command
         $users = User::whereDoesntHave('roles', function($q) {
             $q->where('name', 'admin');
         })->get();
-
-     
 
         foreach($users as $user) {
             $user->update([
