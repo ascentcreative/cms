@@ -332,19 +332,6 @@ var ModalLink = {
 
                         }
                     }
-                }).fail(function(data, xhr, request) {
-                    
-                    alert('fail');
-                    self.showResponseModal(data);
-
-                    console.log(data);
-                    console.log(xhr);
-                    console.log(request);
-
-                    console.log(xhr.getAllResponseHeaders());
-
-                    
-
                 });
             } catch(e) {
 
