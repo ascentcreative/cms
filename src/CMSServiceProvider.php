@@ -116,6 +116,7 @@ class CMSServiceProvider extends ServiceProvider
 
     $this->commands([
         \AscentCreative\CMS\Commands\CreateAdminUser::class,
+        \AscentCreative\CMS\Commands\ObfuscateUserData::class,
         \AscentCreative\CMS\Commands\RefreshMultiSizeImages::class,
     ]);
 
