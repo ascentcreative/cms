@@ -24,6 +24,7 @@
     scopeFieldName="menu_id"
     relationshipFieldName="context_type"
     relationFieldName="context_id"
+    relationLabel="itemTitle"
     :scopeData="AscentCreative\CMS\Models\Menu::query()"
     scopeKey="menu_id"
     :nestedSetData="AscentCreative\CMS\Models\MenuItem::query()"
