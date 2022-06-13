@@ -8,7 +8,7 @@
 <div class="border p-2 ml-5" style="flex-basis: 300px;">
     
     <div class="p-2">
-        <x-cms-form-checkbox type="" name="publishable" label="Published?" checkedValue="1" uncheckedValue="0" value="{{ old('publishable', $model->publishable) }}" wrapper="inline"></x-cms-form-checkbox>
+        <x-cms-form-checkbox type="" name="publishable" label="Ready to publish?" checkedValue="1" uncheckedValue="0" value="{{ old('publishable', $model->publishable) }}" wrapper="inline"></x-cms-form-checkbox>
     </div>
 
     <div class="p-2">
