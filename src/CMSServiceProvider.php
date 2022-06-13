@@ -50,6 +50,15 @@ class CMSServiceProvider extends ServiceProvider
         __DIR__.'/../config/cms.models.php', 'cms.models'
     );
 
+    $this->mergeConfigFrom(
+        __DIR__.'/../config/multiSizeImage.php', 'multiSizeImage'
+    );
+
+    $this->mergeConfigFrom(
+        __DIR__.'/../config/scout.php', 'scout'
+    );
+
+
     /* Model facades */
 
     $aliases = array();
@@ -361,6 +370,15 @@ class CMSServiceProvider extends ServiceProvider
       $this->publishes([
         __DIR__.'/../config/cms.models.php' => config_path('cms.models.php'),
       ]);
+
+      $this->publishes([
+        __DIR__.'/../config/multiSizeImage.php' => config_path('multiSizeImage.php'),
+      ]);
+
+      $this->publishes([
+        __DIR__.'/../config/scout.php' => config_path('scout.php'),
+      ]);
+
 
     }
 
