@@ -20,7 +20,13 @@
 
                 <x-cms-form-input type="password" name="password" label="Password" value="{{ old('password','') }}" wrapper="simple"/>
 
-                <div class="text-center p-4">
+                @if(env("APP_ENV") != "production")
+                    <div class="alert alert-warning mt-4 text-center rounded border" role="alert">
+                        <i class="bi-exclamation-triangle-fill"></i> You are logging into a development / staging site.
+                    </div>
+                @endif
+
+                <div class="text-center p-4 pt-2">
                     <x-cms-form-button name="login" label="Log In" value="" wrapper="none" class="button btn-primary btn" />
                 </div>
 
