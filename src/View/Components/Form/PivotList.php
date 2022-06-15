@@ -130,11 +130,14 @@ class PivotList extends Component
                     $lbl = $this->labelField;
                     $cls = $cls::find($itm->id);
 
+                 
+
                     if($cls) {
-                        
+
                         $row['id'] = $itm->id;
+                     
                         $row['label'] = $cls->$labelField;
-                        
+                       
                         $data[] = $row;
                     
                     }
@@ -154,13 +157,21 @@ class PivotList extends Component
             // Also applicable if the component is used on a stack block (i.e. data stored as json)
   
             $data = array();
+            // dd($value);
             foreach($value as $idx=>$row) {
+
+                if(!is_array($row)) {
+                    $row = [];
+                }
 
                 $cls = $this->optionModel;
                 $lbl = $this->labelField;
                 $cls = $cls::find($idx);
                     
                 if($cls) {
+
+                    // dump($idx);
+                    // dd($row);
 
                     //$row = //array();
                     $row['id'] = $idx;
