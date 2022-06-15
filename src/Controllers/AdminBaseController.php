@@ -35,7 +35,8 @@ abstract class AdminBaseController extends Controller
     public $indexEagerLoadCount = [];
 
     public $ignoreScopes = array();
-
+    public $applyScopes = array();
+    
     public $allowDeletions = true;
 
     public $_columns = array();
@@ -107,6 +108,10 @@ abstract class AdminBaseController extends Controller
         // remove any scopes as rewquested:
         foreach($this->ignoreScopes as $scopeName) {
             $qry->withoutGlobalScope($scopeName);
+        }
+
+        foreach($this->applyScopes as $scopeName) {
+            $qry->$scopeName();
         }
 
         return $qry;
