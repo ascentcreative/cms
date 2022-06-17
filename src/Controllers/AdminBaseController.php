@@ -151,28 +151,36 @@ abstract class AdminBaseController extends Controller
 
        if(isset($_GET['search'])) {
 
-            foreach($this->indexSearchFields as $srch) {
+            $val = $_GET['search'];
+            $flds = $this->indexSearchFields;
 
-                $val = $_GET['search'];
-               // echo $_GET['search'];
-                if (strstr($srch, '.') !== false) {
+            $items->where(function($q) use ($flds, $val) {
 
-                    // relationship...
-                    // Last part of the string is the property
-                    $parts = explode('.', $srch);
-                    $prop = array_pop($parts);
-                    $srch = join('.', $parts);
+                foreach($flds as $srch) {
 
-                    $items->orWhereHas($srch, function($query) use ($prop, $val) { 
-                        $query->where($prop, 'LIKE', '%' . $val . '%');
-                    });
+                    // echo $_GET['search'];
+                     if (strstr($srch, '.') !== false) {
+     
+                         // relationship...
+                         // Last part of the string is the property
+                         $parts = explode('.', $srch);
+                         $prop = array_pop($parts);
+                         $srch = join('.', $parts);
+     
+                         $q->orWhereHas($srch, function($query) use ($prop, $val) { 
+                             $query->where($prop, 'LIKE', '%' . $val . '%');
+                         });
+     
+                     } else {
+                         $q->orWhere($srch, 'LIKE', '%' . $val . '%');
+                     }
+     
+     
+                 }
 
-                } else {
-                    $items->orWhere($srch, 'LIKE', '%' . $val . '%');
-                }
+            });
 
-
-            }
+            
 
         } 
 
