@@ -25,7 +25,10 @@ var CharLimit = {
 		
 		var elm = self.element;
 		
+
 		var counter = $('<SPAN class="charlimit_display" id="charlimit_' + elm.attr('id') + '"><SPAN class="charlimit_count">0</SPAN>/' + opts.max + '</SPAN>');
+
+        elm.wrap('<div class="charlimit_wrap"></div>');
 		
 		elm.parent().append(counter);
 		
@@ -74,16 +77,6 @@ var CharLimit = {
 		} else {
 			$(counter).removeClass('full');
 		}
-		
-		var offset = {
-				top: (elm.offset().top + elm.outerHeight()) - (counter.outerHeight() + 1),
-				left: (elm.offset().left + elm.outerWidth()) - (counter.outerWidth() + 1),
-			};
-
-           
-			
-		counter.offset( offset );
-		
 		
 	}
 	

@@ -1,5 +1,13 @@
 
+.charlimit_wrap {
+    position: relative;
+}
+
 .charlimit_display {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    
 	padding: 5px;
 	border-radius: 5px;
 	box-sizing: border-box;
