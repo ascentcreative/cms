@@ -1,0 +1,12 @@
+
+.charlimit_display {
+	padding: 5px;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.charlimit_display.full {
+	
+	background: rgba(255,120,120,0.3);
+	
+}

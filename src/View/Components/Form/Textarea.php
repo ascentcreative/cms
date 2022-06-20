@@ -18,13 +18,15 @@ class Textarea extends Component
     public $wrapper;
     public $class;
 
+    public $charlimit;
+
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $name, $value, $rows=null, $cols=null, $wrapper="bootstrapformgroup", $class='')
+    public function __construct($label, $name, $value, $rows=null, $cols=null, $wrapper="bootstrapformgroup", $class='', $charlimit=null)
     {
         
         $this->label = $label;
@@ -36,6 +38,8 @@ class Textarea extends Component
 
         $this->wrapper = $wrapper;
         $this->class = $class;
+
+        $this->charlimit = $charlimit;
 
     }
 
