@@ -18,3 +18,5 @@
         @endif
     </div>
 </div> 
+
+@include('cms::components.form.support.charlimit')
