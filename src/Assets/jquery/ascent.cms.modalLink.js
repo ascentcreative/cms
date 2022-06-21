@@ -285,6 +285,11 @@ var ModalLink = {
                                 $(document).trigger(data.getResponseHeader('fireEvent'));
                             }
 
+                            if(data.responseJSON.hard) {
+                                window.location = data.responseJSON.url;
+                                return;
+                            } 
+
                             switch(data.responseJSON) {
 
                                 case 'reload':
