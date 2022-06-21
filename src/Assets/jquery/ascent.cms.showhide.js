@@ -18,7 +18,7 @@ var ShowHide = {
         // find all elements with data-showhide set and evaluate their rules.
         // more processor heavy than the incremental update on change...
         $('[data-showhide]').each(function(idx) {
-            self.evaluateRule(this);
+            self.evaluate(this);
         });
         
     },
@@ -46,13 +46,13 @@ var ShowHide = {
         $(elms).each(function(idx) {
 
             // console.log(self);
-            $(document).showhide('evaluateRule', this, value);
+            $(document).showhide('evaluate', this, value);
 
         });
 
     },
 
-    evaluateRule: function(elm, value=null) {
+    evaluate: function(elm, value=null) {
 
         if (value === null) {
             // lookup the value if not supplied from the event:
@@ -65,7 +65,7 @@ var ShowHide = {
 
         if($(elm).attr('data-hide-if')) {
 
-            if ($(elm).attr('data-hide-if') == value) {
+            if (this.valueMatch($(elm).attr('data-hide-if'), value)) {
                 
                 if($(elm).attr('data-showhide-animate') == 0) {
                     $(elm).hide();
@@ -83,7 +83,7 @@ var ShowHide = {
 
         } else if($(elm).attr('data-show-if')) {
 
-            if ($(elm).attr('data-show-if') == value) {
+            if (this.valueMatch($(elm).attr('data-show-if'), value)) {
                 
                 if($(elm).attr('data-showhide-animate') == 0) {
                     $(elm).show();
@@ -106,6 +106,18 @@ var ShowHide = {
 
 
 
+
+    }, 
+
+    valueMatch: function(rule, value) {
+
+        // first, is check an array (i.e. does it have | separators)
+        rule = rule.split('|');
+
+        console.log((rule.indexOf(value) !== -1));
+        return (rule.indexOf(value) !== -1);
+        // if()
+        // console.log(rule);
 
     }
 
