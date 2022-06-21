@@ -63,20 +63,48 @@ var ShowHide = {
             }
         }
 
+        if($(elm).attr('data-hide-if')) {
 
-        if ($(elm).attr('data-hide-if') == value) {
-            if($(elm).attr('data-showhide-animate') == 0) {
-                $(elm).hide();
+            if ($(elm).attr('data-hide-if') == value) {
+                
+                if($(elm).attr('data-showhide-animate') == 0) {
+                    $(elm).hide();
+                } else {
+                    $(elm).slideUp('fast');
+                }
+
             } else {
-                $(elm).slideUp('fast');
+                if($(elm).attr('data-showhide-animate') == 0) {
+                    $(elm).show();
+                } else {
+                    $(elm).slideDown('fast');
+                }
             }
-        } else {
-            if($(elm).attr('data-showhide-animate') == 0) {
-                $(elm).show();
+
+        } else if($(elm).attr('data-show-if')) {
+
+            if ($(elm).attr('data-show-if') == value) {
+                
+                if($(elm).attr('data-showhide-animate') == 0) {
+                    $(elm).show();
+                } else {
+                    $(elm).slideDown('fast');
+                }
+                
             } else {
-                $(elm).slideDown('fast');
+                if($(elm).attr('data-showhide-animate') == 0) {
+                    $(elm).hide();
+                } else {
+                    $(elm).slideUp('fast');
+                }
             }
+
+
         }
+
+
+
+
 
 
     }
