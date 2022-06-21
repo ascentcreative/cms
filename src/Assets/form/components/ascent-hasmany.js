@@ -86,7 +86,7 @@ var HasMany = {
 
                 data += '&blade=' + $(this).attr('data-blade');
 
-                console.log(data);
+                // console.log(data);
 
                 // e.preventDefault();
 
@@ -161,7 +161,7 @@ var HasMany = {
 
         updateIndexes: function() {
 
-            console.log('update');
+            // console.log('update');
           //  alert('update');
 
             fldname = ($(this.element).data('fieldname'));
@@ -170,7 +170,7 @@ var HasMany = {
 
                 var prefix = fldname + "[" + idx + "]";
 
-                console.log(prefix);
+                // console.log(prefix);
 
                 $(this).find('INPUT, TEXTAREA').each(function(fldidx) {
 

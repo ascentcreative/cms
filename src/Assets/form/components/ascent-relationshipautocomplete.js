@@ -16,7 +16,7 @@ var RelationshipAutocomplete = {
 
         var self = this;
 
-        console.log(this.options.source);
+        // console.log(this.options.source);
 
         $(this.element).find('.ra-input').autocomplete({
             source: this.options.source,

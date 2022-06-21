@@ -79,11 +79,11 @@ var PivotList = {
 			    minLength: 2,
 			    select: function( event, ui ) {
 
-                        console.log(self);
+                        // console.log(self);
 			    	
                         lblfld = self.options.labelField;
 
-			    		console.log(ui);
+			    		// console.log(ui);
 			    	
 			    		if (  $("#" + thisID + " #" + ui.item.id).length > 0 ) {
                             // check for duplicates (across all source fields)
@@ -205,13 +205,13 @@ var PivotList = {
 		
 		createBlock: function (idLink, idModel, display, item) {
 
-			console.log(idModel);
-			console.log(item);
+			// console.log(idModel);
+			// console.log(item);
             
             var thisID = (this.element)[0].id;
             var thisName = (this.element).attr('name');
 
-            console.log(thisName);
+            // console.log(thisName);
 
 			var fldName = thisID; //.split('-')[1];
 			var widget = this.widget;
