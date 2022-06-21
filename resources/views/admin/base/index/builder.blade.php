@@ -123,7 +123,17 @@
                     @else
                         @php $linkAction = $col->linkAction; @endphp
                     @endif
-                    <a href="{{ action([controller(), $linkAction], [$modelInject => $item->id]) }}">
+                    @if($col->linkParam) 
+                        @php
+                            $param = $col->linkParam;
+                        @endphp
+                    @else
+                        @php
+                            $param = $modelInject;
+                        @endphp
+                    @endif
+                        
+                    <a href="{{ action([controller(), $linkAction], [$param => $item->id]) }}">
                 @endif
             
                 @if($col->value instanceof Closure) 
