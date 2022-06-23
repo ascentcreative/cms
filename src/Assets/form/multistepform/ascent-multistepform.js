@@ -137,9 +137,6 @@ var MultiStepFormStep = {
         // clear any existing form errors
         $('.error-display').html('');
 
-        console.log($(this.element).parents('form').serialize());
-       
-        return true;
 
         $.ajax({
             url: '/msf-validate',
