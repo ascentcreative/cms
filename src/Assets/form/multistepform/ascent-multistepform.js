@@ -138,7 +138,9 @@ var MultiStepFormStep = {
         $('.error-display').html('');
 
         console.log($(this.element).parents('form').serialize());
-        
+       
+        return true;
+
         $.ajax({
             url: '/msf-validate',
             method: 'post',
@@ -218,10 +220,19 @@ var MultiStepFormStep = {
         $('ol li.current').removeClass('current');
         $('#progress-' + $(this.element).data('stepslug')).addClass('current');
         $(this.element).show(); //fadeIn('fast');
+  
+        $(this.element).trigger({
+            type: 'msf.show.step',
+            step: $(this.element).data('stepslug')
+        });
     },
 
     hide: function() {
         $(this.element).hide() //fadeOut('fast');
+        $(this.element).trigger({
+            type: 'msf.hide.step',
+            step: $(this.element).data('stepslug')
+        });
     }
 
 }
