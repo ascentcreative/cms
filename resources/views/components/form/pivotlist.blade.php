@@ -40,6 +40,9 @@
 
 @section('element')
 
+    {{-- Hidden element - ensures an empty field is processed --}}
+    <input type="hidden" value="" name="{{ $name }}" />
+
     <input name="{{$name}}" id="{{$id}}" value="" class="form-control"/>
 
 @overwrite
