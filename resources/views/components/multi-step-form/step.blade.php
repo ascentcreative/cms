@@ -18,7 +18,7 @@
 
     <div class="msf-nav">
 
-        <div class="m-5 text-right">
+        <div class="m-2 m-sm-5 text-right">
 
             {{-- Don't show this button on the first tab  --}}
             {{-- @if($idxStep != 0) --}}
