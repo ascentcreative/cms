@@ -2,7 +2,9 @@
 
 @push(\view()->shared('progress'))
     <li class="{{ $icon }}" id="progress-{{ Str::slug($label) }}">
+        <span class="d-none d-sm-inline">
         {{-- <A href="#" wire:click="$set('current_step', '{{ $id }}')"> --}} {{ $label }} {{-- </a> --}}
+        </span>
     </li>
 @endpush
 
