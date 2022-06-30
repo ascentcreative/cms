@@ -27,14 +27,16 @@
             $('input[name="{{ $name }}"]').val($out);
         });
 
-        $(document).on('keyup', '#{{ nameToId($name) }} .cd-day, #{{ nameToId($name) }} .cd-month', function() {
-            let len = 2;
-            if($(this).val().length == len) {
-                let next = $(this).nextAll('input')[0];
-                if(next) {
-                    next.focus();
+        $(document).on('keyup', '#{{ nameToId($name) }} .cd-day, #{{ nameToId($name) }} .cd-month', function(event) {
+            if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 65 && event.keyCode <= 90)){
+                let len = 2;
+                if($(this).val().length == len) {
+                    let next = $(this).nextAll('input')[0];
+                    if(next) {
+                        next.focus();
+                    }
+                    
                 }
-                
             }
         });
 
