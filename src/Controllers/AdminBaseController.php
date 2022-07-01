@@ -254,12 +254,21 @@ abstract class AdminBaseController extends Controller
 
         //\Log::info("*** INDEX QUERY(S) COMPLETE ***");
 
-        
+        // hook for something before the page renders
+        // (i.e. if you need to perform an API call against all the data the page will display)
+        $items = $this->processPage($items);        
 
         return view($this->resolveBlade('index'), $this->prepareViewData())
                         ->with('models', $items)
                         ->with('columns', $columns);
 
+    }
+
+    /**
+     * overridable function to pre-processing the Page items:
+     */
+    public function processPage($items) {
+        return $items;
     }
 
     /**
