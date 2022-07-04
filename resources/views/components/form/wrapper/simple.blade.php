@@ -6,9 +6,9 @@
 
     @yield('element')
     
-    @if($errors->first($name))
+    @if($errors->first(dotName($name)))
         <small class="validation-error alert alert-danger form-text" role="alert">
-            {!! $errors->first($name) !!}
+            {!! $errors->first(dotName($name)) !!}
         </small>
     @else
 
