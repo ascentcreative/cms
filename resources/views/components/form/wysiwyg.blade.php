@@ -11,7 +11,7 @@
 
    <div class="wysiwyg-editor @if($styled) wysiwyg-editor-styled @endif" style="width: 100%; height: 100%;">
 
-       <div contenteditable="true" id="edit-{{ $unid }}">{!! $value !!}</div>
+       <div @if(!$readonly) contenteditable="true" @else class="p-2" @endif id="edit-{{ $unid }}">{!! $value !!}</div>
 
     </div>
 
@@ -40,54 +40,43 @@
 
 @endpush --}}
 
-@push('scripts')
-<SCRIPT>
+@if(!$readonly)
+    @push('scripts')
+    <SCRIPT>
 
-   // $(document).ready(function() { 
 
-        var roxyFileman = '/ascentcore/fileman/index.html'; 
+            var roxyFileman = '/ascentcore/fileman/index.html'; 
 
-        CKEDITOR.disableAutoInline = true;
-        var ck = CKEDITOR.inline( 'edit-{{$unid}}',
+            CKEDITOR.disableAutoInline = true;
+            var ck = CKEDITOR.inline( 'edit-{{$unid}}',
+            
+            {  
+                extraAllowedContent : 'form; form[*]; form(*); input; input(*); input[*]; p[style]; script; script(*); script[*]; iframe; code; embed; iframe[*]; embed[*]; span(*); div(*); div(codesnippet)[*]; div[*]; codesnippet; codesnippet[contenteditable]; codesnippet[partial]; codesnippet[*]', filebrowserBrowseUrl:roxyFileman,
+                filebrowserImageBrowseUrl:roxyFileman+'?type=image',
+                removeDialogTabs: 'link:upload;image:upload',
+                removePlugins : 'elementspath',
+
+                extraPlugins: 'font,richcombo,snippet,photogallery,justify,panel,button,floatpanel,panelbutton,colorbutton,colordialog',
+                contentsCss: [ '/css/fck_editorarea.css','/css/buttons.css' ],
+                colorButton_colors: '{{ join(",", \AscentCreative\CMS\Models\Swatch::all()->transform(function($item, $key) { return str_replace('#', '', $item->hex); })->toArray()) }}',
+                entities_additional: '#009'
+            }   
+            
+            );
+
+            ck.on('change', function(e) {
+                    // update the Textarea and fire off a change event (used by Form Dirty checks);
+                    $('#output-{{$unid}}').val($('#edit-{{$unid}}').html());
+                    $('#output-{{$unid}}').change();
+
+                });
+
+
         
-        {  
-            extraAllowedContent : 'form; form[*]; form(*); input; input(*); input[*]; p[style]; script; script(*); script[*]; iframe; code; embed; iframe[*]; embed[*]; span(*); div(*); div(codesnippet)[*]; div[*]; codesnippet; codesnippet[contenteditable]; codesnippet[partial]; codesnippet[*]', filebrowserBrowseUrl:roxyFileman,
-            filebrowserImageBrowseUrl:roxyFileman+'?type=image',
-            removeDialogTabs: 'link:upload;image:upload',
-            removePlugins : 'elementspath',
 
-            extraPlugins: 'font,richcombo,snippet,photogallery,justify,panel,button,floatpanel,panelbutton,colorbutton,colordialog',
-            contentsCss: [ '/css/fck_editorarea.css','/css/buttons.css' ],
-            colorButton_colors: '{{ join(",", \AscentCreative\CMS\Models\Swatch::all()->transform(function($item, $key) { return str_replace('#', '', $item->hex); })->toArray()) }}',
-            entities_additional: '#009'
-        }   
         
-        );
+        
 
-        ck.on('change', function(e) {
-                // update the Textarea and fire off a change event (used by Form Dirty checks);
-                $('#output-{{$unid}}').val($('#edit-{{$unid}}').html());
-                $('#output-{{$unid}}').change();
-
-            });
-
-
-      
-  // });
-
-    
-    
-        // $(document).delegate('#edit-{{$unid}}', 'keydown', function(e) {
-        //     console.log('fwefewf');
-        //     var keyCode = e.keyCode || e.which;
-        //     if (keyCode == 9) {
-        //         e.preventDefault();
-
-        //         document.execCommand('insertHTML', false, '&#009');
-           
-        //     }
-        // });
-    
-
-    </SCRIPT>
-@endpush
+        </SCRIPT>
+    @endpush
+@endif
