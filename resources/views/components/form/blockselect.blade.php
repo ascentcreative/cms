@@ -28,7 +28,7 @@
     </div>
 
 @overwrite
-
+{{-- 
 @once
     @push('styles')
         @style('/vendor/ascent/cms/form/components/ascent-blockselect.css')
@@ -37,4 +37,4 @@
     @push('scripts')
         @script('/vendor/ascent/cms/form/components/ascent-blockselect.js')
     @endpush
-@endonce
+@endonce --}}
