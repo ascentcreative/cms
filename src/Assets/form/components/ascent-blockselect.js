@@ -10,10 +10,12 @@ var BlockSelect = {
 
     _init: function () {
 
-       
         var self = this;
         self.trackOrder = [];
-        
+
+        this.element.addClass('initialised');
+        // console.log('init BlockSelect');
+
         $(this.element).off('change', self.processChange); 
         $(this.element).on('change', '.cms-blockselect-option INPUT', {widget: self}, self.processChange);
 
@@ -37,6 +39,7 @@ var BlockSelect = {
     },
 
     processChange: function(evt) {   
+
 
         let self = evt.data.widget;
 
@@ -69,6 +72,19 @@ $.extend($.ascent.BlockSelect, {
 		
 }); 
 
+
+// init on document ready
 $(document).ready(function(){
-    $('.cms-blockselect').blockselect();
+    // alert('init blockselect');
+    $('.cms-blockselect').not('.initialised').blockselect();
+
 });
+
+if(Livewire) {
+// make livewire compatible (check for init after DOM update)
+document.addEventListener("DOMContentLoaded", () => {
+    Livewire.hook('message.processed', (message, component) => {
+        $('.cms-blockselect').not('.initialised').blockselect();
+    })
+});
+
