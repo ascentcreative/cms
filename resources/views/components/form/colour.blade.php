@@ -12,7 +12,7 @@
     <input name="{{$name}}" id="{{ $id }}" value="{!! $value !!}" class="form-control {{ $elementClass ?? ''}} " autocomplete="off"/>
 
 @overwrite
-
+{{-- 
 @once
 
     @push('styles')
@@ -23,7 +23,7 @@
         @script('/vendor/ascent/cms/spectrum/spectrum.min.js')
     @endpush
 
-@endonce
+@endonce --}}
 
 @push('scripts')
     <script>

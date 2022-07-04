@@ -14,8 +14,8 @@
     @style('/vendor/ascent/cms/js/jquery-ui.min.css') 
     @style('/vendor/ascent/cms/css/ascentcreative-cms-admin.css') 
     @style('/vendor/ascent/cms/css/ascent-cms-core.css') 
-
-    @style('/css/admin.css') 
+    @style('/vendor/ascent/cms/dist/css/ascent-cms-bundle.css')
+    
    
     @stack('styles')
    
@@ -40,7 +40,8 @@
     @script('/vendor/ascent/cms/js/jquery-3.5.1.min.js')
     @script('/vendor/ascent/cms/js/jquery-ui.min.js')
     @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
-    @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
+    {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js') --}}
+    @script('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
     @stack('lib')
     @stack('scripts')
     <script>

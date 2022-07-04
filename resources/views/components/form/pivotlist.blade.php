@@ -1,5 +1,5 @@
 @extends('cms::components.form.wrapper.' . $wrapper)
-
+{{-- 
 @once
     @push('styles')
         @style('/vendor/ascent/cms/form/components/ascent-pivotlist.css')
@@ -8,7 +8,7 @@
     @push('scripts')
         @script('/vendor/ascent/cms/form/components/ascent-pivotlist.js')
     @endpush
-@endonce
+@endonce --}}
 
 @push('scripts')
     <script language="javascript">

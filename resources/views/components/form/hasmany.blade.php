@@ -34,12 +34,12 @@
 @overwrite
 
 @section('label'){{$tmp_label}}@overwrite
-
+{{-- 
 @once
     @push('scripts')
         @script('/vendor/ascent/cms/form/components/ascent-hasmany.js')
     @endpush
-@endonce
+@endonce --}}
 
 @push('scripts')
 

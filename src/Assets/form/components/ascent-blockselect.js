@@ -80,11 +80,19 @@ $(document).ready(function(){
 
 });
 
-if(Livewire) {
+// alert('ok');
+
+
+
 // make livewire compatible (check for init after DOM update)
 document.addEventListener("DOMContentLoaded", () => {
-    Livewire.hook('message.processed', (message, component) => {
-        $('.cms-blockselect').not('.initialised').blockselect();
-    })
-});
+    try {
+        Livewire.hook('message.processed', (message, component) => {
+            $('.cms-blockselect').not('.initialised').blockselect();
+        })
+    } catch (e) {
+        
+    }
+})
+
 

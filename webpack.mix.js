@@ -11,9 +11,31 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.scripts(['src/Assets/form/components/*.js'], 'assets/js/ascent-cms-bundle.js', 'assets/js')
-    .styles(['src/Assets/form/components/*.css'], 'assets/css/ascent-cms-bundle.css', 'assets/css')
-    .minify(['assets/js/ascent-cms-bundle.js', 'assets/css/ascent-cms-bundle.css']);
+mix.scripts([
+                'src/Assets/form/components/*.js',
+                'src/Assets/form/components/croppie/*.js',
+                'src/Assets/form/components/charlimit/*.js',
+                'src/Assets/form/multistepform/*.js',
+                'src/Assets/jquery/*.js'
+            ], 
+            'src/Assets/dist/js/ascent-cms-bundle.js', 
+            'src/Assets/dist/js'
+            )
+
+    .styles([
+                'src/Assets/form/components/*.css',
+                'src/Assets/form/components/croppie/*.css',
+                'src/Assets/form/components/charlimit/*.css',
+                'src/Assets/form/multistepform/*.css'
+            ], 
+                'src/Assets/dist/css/ascent-cms-bundle.css', 
+                'src/Assets/dist/css'
+                );
+   
+   
+   
+   
+    // .minify(['assets/js/ascent-cms-bundle.js', 'assets/css/ascent-cms-bundle.css']);
     // .postCss('resources/css/app.css', 'public/css', [
     //     //
     // ]);

@@ -36,7 +36,7 @@
 
 
 @overwrite
-
+{{-- 
 @once
     @push('scripts')
         @script('/vendor/ascent/cms/form/components/ascent-ajaxuploadmulti.js')
@@ -44,7 +44,7 @@
     @push('styles')
         @style('/vendor/ascent/cms/form/components/ascent-ajaxuploadmulti.css')
     @endpush
-@endonce
+@endonce --}}
 
 @push('scripts')
     <script>

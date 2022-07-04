@@ -26,7 +26,7 @@
     @endif 
     
 @overwrite
-
+{{-- 
 @once
 
     @push('styles')
@@ -37,7 +37,7 @@
         @script('/vendor/ascent/cms/form/components/ascent-relationshipautocomplete.js')
     @endpush
 
-@endonce
+@endonce --}}
 
 
 @push('scripts')

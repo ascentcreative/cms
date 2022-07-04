@@ -23,6 +23,7 @@
         @style("/vendor/ascent/cms/css/bootstrap.min.css") 
         @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css") 
         @style("/vendor/ascent/cms/js/jquery-ui.min.css") 
+        @style('/vendor/ascent/cms/dist/css/ascent-cms-bundle.css')
         @style("/css/screen.css") 
         {{-- @style("/css/styles.css")  --}}
        
@@ -61,6 +62,8 @@
         @endif
         @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
         @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js')
+
+        @script('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
 
         @foreach(packageAssets()->getScripts() as $script)
             @script($script)

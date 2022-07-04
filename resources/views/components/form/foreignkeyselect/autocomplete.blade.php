@@ -47,7 +47,7 @@ if($value) {
 
 @overwrite
 
-
+{{-- 
 @once
 
     @push('styles')
@@ -59,7 +59,7 @@ if($value) {
     @endpush
 
 @endonce
-
+ --}}
 
 @push('scripts')
     <script>

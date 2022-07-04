@@ -3,7 +3,9 @@
 @section('label'){{$label}}@overwrite
 
 @push('scripts')
-    @script('/vendor/ascent/cms/jquery/ascent.cms.nestedset.js')
+    
+    {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.nestedset.js') --}}
+
     <script>
         $('#{{$name}}').nestedset({
 

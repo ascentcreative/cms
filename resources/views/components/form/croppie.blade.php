@@ -14,13 +14,13 @@
 
 @overwrite
 
-
+{{-- 
 @once
     @push('scripts')
         @script('/vendor/ascent/cms/form/components/croppie/croppie.min.js')
         @script('/vendor/ascent/cms/form/components/croppie/ascent-croppieupload.js')
     @endpush
-@endonce
+@endonce --}}
 
 @push('scripts')
     <script>
