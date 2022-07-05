@@ -575,6 +575,7 @@ abstract class AdminBaseController extends Controller
      */
     public function destroy($id)
     {
+
         
         if($this->allowDeletions) {
 
@@ -585,6 +586,10 @@ abstract class AdminBaseController extends Controller
             } else {
                 $qry = $this->prepareModelQuery();
                 $model = $qry->find($id);
+            }
+
+            if(in_array('delete', $this->authorize)) {
+                $this->authorize('delete', $model);
             }
 
             if($model) {
