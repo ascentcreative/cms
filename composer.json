@@ -20,7 +20,8 @@
     "jenssegers/agent": "^2.6",
     "laravel/scout": "^9.3",
     "yab/laravel-scout-mysql-driver": "^5.1",
-    "guizoxxv/laravel-multi-size-image": "^0.2.0" 
+    "guizoxxv/laravel-multi-size-image": "^0.2.0" ,
+    "ascentcreative/help": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -38,6 +39,9 @@
     {
         "type": "vcs",
         "url": "git@github.com:ascentcreative/laravel-instagram-feed.git"
+      },{
+        "type": "vcs",
+        "url": "git@github.com:ascentcreative/help.git"
       }
     ]
 }
