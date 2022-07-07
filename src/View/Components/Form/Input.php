@@ -11,7 +11,6 @@ class Input extends Component
     public $label;
     public $name;
     public $value;
-    public $readonly;
 
     public $accept;
     public $autocomplete;
@@ -51,15 +50,13 @@ class Input extends Component
                                     $placeholder='',
                                     $size='',
                                     $min=0,
-                                    $step=0.01,
-                                    $readonly=false
+                                    $step=0.01
                                     )
     {
         $this->type = $type;
         $this->label = $label;
         $this->name = $name;
         $this->value = $value;
-        $this->readonly = $readonly;
 
         $this->accept = $accept;
         $this->autocomplete = $autocomplete;

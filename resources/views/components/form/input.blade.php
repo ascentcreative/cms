@@ -13,7 +13,7 @@
     {{ $preelement }}&nbsp;
     @endif
 
-    @if($readonly)
+    @if($attributes['readonly'])
 
         <div class="col-form-label border-bottom p-2">
          {{ $value }}
