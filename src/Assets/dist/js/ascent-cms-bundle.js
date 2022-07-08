@@ -3402,20 +3402,14 @@ var ShowHide = {
 
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function (mutations, observer) {
-      // fired when a mutation occurs
-      // console.log(mutations, observer);
-      // ...
-      // $('.cms-blockselect').not('.initialised').blockselect();
       $('[data-showhide]').each(function (idx) {
         self.evaluate(this);
       });
-    }); // define what element should be observed by the observer
-    // and what types of mutations trigger the callback
+    }); // run on changes to the childList across the subtree
 
     observer.observe(document, {
       subtree: true,
-      childList: true //...
-
+      childList: true
     });
   },
   // Process an event and toggle the changes needed.
@@ -3445,6 +3439,15 @@ var ShowHide = {
     if (value === null) {
       // lookup the value if not supplied from the event:
       source = $('[name="' + $(elm).attr('data-showhide') + '"]').last();
+
+      if (source.attr('type') == 'checkbox') {
+        checked = $('[name="' + $(elm).attr('data-showhide') + '"]:checked')[0];
+
+        if (checked) {
+          source = checked;
+        }
+      }
+
       value = source.val();
 
       if (source.attr('type') == 'checkbox' && !source.is(":checked")) {
@@ -3484,10 +3487,23 @@ var ShowHide = {
   },
   valueMatch: function valueMatch(rule, value) {
     // first, is check an array (i.e. does it have | separators)
-    rule = rule.split('|'); // console.log((rule.indexOf(value) !== -1));
+    rule = rule.split('|'); // quick sweep for actual values:
 
-    return rule.indexOf(value) !== -1; // if()
-    // console.log(rule);
+    if (rule.indexOf(value) !== -1) {
+      return true;
+    } // null value matcher
+
+
+    if (rule.indexOf('@null') !== -1 && value == '') {
+      return true;
+    } // not null matcher
+
+
+    if (rule.indexOf('@notnull') !== -1 && value != '') {
+      return true;
+    }
+
+    return false;
   }
 };
 $.widget('ascent.showhide', ShowHide);
