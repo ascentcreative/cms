@@ -5,9 +5,9 @@
 }
 
 
-.cms-blockselect-grid .cms-blockselect-columns-2 {
+.cms-blockselect-grid.cms-blockselect-columns-2 {
     /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
-    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: 1fr 1fr;
     /* flex: 0 0 49%; */
 }
 
@@ -33,11 +33,13 @@
 
 
 
-.cms-blockselect.flex {
+.cms-blockselect-flex {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-wrap: nowrap;
+    /* justify-content: space-between; */
+    /* justify-content: center; */
     align-items: flex-start;
+    gap: 1em;
 }
 
 
@@ -52,6 +54,7 @@
     text-align: center;
     cursor: pointer;
     display: block;
+    box-sizing: border-box;
 
 }
 
