@@ -506,6 +506,20 @@ document.addEventListener("DOMContentLoaded", function () {
       $('.cms-blockselect').not('.initialised').blockselect();
     });
   } catch (e) {}
+});
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+var observer = new MutationObserver(function (mutations, observer) {
+  // fired when a mutation occurs
+  // console.log(mutations, observer);
+  // ...
+  $('.cms-blockselect').not('.initialised').blockselect();
+}); // define what element should be observed by the observer
+// and what types of mutations trigger the callback
+
+observer.observe(document, {
+  subtree: true,
+  childList: true //...
+
 }); // ******
 // ******
 // Code (c) Kieran Metcalfe / Ascent Creative 2022
@@ -3376,14 +3390,32 @@ $.ascent = $.ascent ? $.ascent : {}; // Show / Hide elements based on values of 
 var ShowHide = {
   self: null,
   _init: function _init() {
-    var self = this;
-    console.log('init ShowHide');
+    var self = this; // console.log('init ShowHide');
+
     $(document).on('change', this.process); // need a call here to run all rules to set default state.
     // find all elements with data-showhide set and evaluate their rules.
     // more processor heavy than the incremental update on change...
 
     $('[data-showhide]').each(function (idx) {
       self.evaluate(this);
+    }); // mutation observer to run on newly added elements:
+
+    MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    var observer = new MutationObserver(function (mutations, observer) {
+      // fired when a mutation occurs
+      // console.log(mutations, observer);
+      // ...
+      // $('.cms-blockselect').not('.initialised').blockselect();
+      $('[data-showhide]').each(function (idx) {
+        self.evaluate(this);
+      });
+    }); // define what element should be observed by the observer
+    // and what types of mutations trigger the callback
+
+    observer.observe(document, {
+      subtree: true,
+      childList: true //...
+
     });
   },
   // Process an event and toggle the changes needed.
@@ -3395,9 +3427,9 @@ var ShowHide = {
 
     if ($(e.target).attr('type') == 'checkbox' && !$(e.target).is(":checked")) {
       value = '';
-    }
+    } // console.log($(e.target).serialize());
+    // get all elements with a rule based on this field.
 
-    console.log($(e.target).serialize()); // get all elements with a rule based on this field.
 
     var elms = $('[data-showhide="' + field + '"]');
     console.log(elms.length + ' dependent elements'); // let self = this;
@@ -3452,8 +3484,8 @@ var ShowHide = {
   },
   valueMatch: function valueMatch(rule, value) {
     // first, is check an array (i.e. does it have | separators)
-    rule = rule.split('|');
-    console.log(rule.indexOf(value) !== -1);
+    rule = rule.split('|'); // console.log((rule.indexOf(value) !== -1));
+
     return rule.indexOf(value) !== -1; // if()
     // console.log(rule);
   }
