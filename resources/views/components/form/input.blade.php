@@ -6,7 +6,7 @@
 @section('element')
 
     @if($preelement || $postelement)
-        <div class="form-inline">
+        <div class="form-inline text-nowrap flex-nowrap">
     @endif
 
     @if($preelement)
@@ -42,7 +42,7 @@
     @endif
 
     @if($postelement)
-    &nbsp;{{ $postelement }}
+       {{ $postelement }}
     @endif
 
     @if($preelement || $postelement)
