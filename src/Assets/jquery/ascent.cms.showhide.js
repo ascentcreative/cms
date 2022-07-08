@@ -22,26 +22,19 @@ var ShowHide = {
         });
 
         // mutation observer to run on newly added elements:
+        MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-            MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-
-            var observer = new MutationObserver(function(mutations, observer) {
-                // fired when a mutation occurs
-                // console.log(mutations, observer);
-                // ...
-                // $('.cms-blockselect').not('.initialised').blockselect();
-                $('[data-showhide]').each(function(idx) {
-                    self.evaluate(this);
-                });
+        var observer = new MutationObserver(function(mutations, observer) {
+            $('[data-showhide]').each(function(idx) {
+                self.evaluate(this);
             });
+        });
 
-            // define what element should be observed by the observer
-            // and what types of mutations trigger the callback
-            observer.observe(document, {
+        // run on changes to the childList across the subtree
+        observer.observe(document, {
             subtree: true,
             childList: true
-            //...
-            });
+        });
                     
     },
 
@@ -79,7 +72,16 @@ var ShowHide = {
         if (value === null) {
             // lookup the value if not supplied from the event:
             source = $('[name="' + $(elm).attr('data-showhide') + '"]').last();
+
+            if(source.attr('type') == 'checkbox') {
+                checked = $('[name="' + $(elm).attr('data-showhide') + '"]:checked')[0];
+                if(checked) {
+                    source = checked;
+                }
+            }
+         
             value = source.val();
+            
             if(source.attr('type') == 'checkbox' && !source.is(":checked")) {
                 value = '';
             }
@@ -135,12 +137,24 @@ var ShowHide = {
 
         // first, is check an array (i.e. does it have | separators)
         rule = rule.split('|');
+        
+        // quick sweep for actual values:
+        if (rule.indexOf(value) !== -1) {
+            return true;
+        }
 
-        // console.log((rule.indexOf(value) !== -1));
-        return (rule.indexOf(value) !== -1);
-        // if()
-        // console.log(rule);
+        // null value matcher
+        if (rule.indexOf('@null') !== -1 && value == '') {
+            return true;
+        }
 
+        // not null matcher
+        if (rule.indexOf('@notnull') !== -1 && value != '') {
+            return true;
+        }
+
+        return false;
+        
     }
 
 
