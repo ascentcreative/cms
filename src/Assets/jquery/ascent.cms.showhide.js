@@ -11,7 +11,7 @@ var ShowHide = {
     _init: function () {
 
         let self = this;
-        console.log('init ShowHide');
+        // console.log('init ShowHide');
         $(document).on('change', this.process); 
 
         // need a call here to run all rules to set default state.
@@ -20,7 +20,29 @@ var ShowHide = {
         $('[data-showhide]').each(function(idx) {
             self.evaluate(this);
         });
-        
+
+        // mutation observer to run on newly added elements:
+
+            MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+            var observer = new MutationObserver(function(mutations, observer) {
+                // fired when a mutation occurs
+                // console.log(mutations, observer);
+                // ...
+                // $('.cms-blockselect').not('.initialised').blockselect();
+                $('[data-showhide]').each(function(idx) {
+                    self.evaluate(this);
+                });
+            });
+
+            // define what element should be observed by the observer
+            // and what types of mutations trigger the callback
+            observer.observe(document, {
+            subtree: true,
+            childList: true
+            //...
+            });
+                    
     },
 
     // Process an event and toggle the changes needed.
@@ -35,7 +57,7 @@ var ShowHide = {
         }
         
         
-        console.log($(e.target).serialize());
+        // console.log($(e.target).serialize());
         // get all elements with a rule based on this field.
 
         let elms = $('[data-showhide="' + field + '"]');
@@ -114,7 +136,7 @@ var ShowHide = {
         // first, is check an array (i.e. does it have | separators)
         rule = rule.split('|');
 
-        console.log((rule.indexOf(value) !== -1));
+        // console.log((rule.indexOf(value) !== -1));
         return (rule.indexOf(value) !== -1);
         // if()
         // console.log(rule);
