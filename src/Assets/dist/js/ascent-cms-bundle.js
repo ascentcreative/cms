@@ -2699,7 +2699,7 @@ var MultiStepFormStep = {
       switch (data.status) {
         case 422:
           // validation fail
-          var errors = flattenObject(data.responseJSON.errors);
+          var errors = self.flattenObject(data.responseJSON.errors);
 
           for (fldname in errors) {
             var undotArray = fldname.split('.');
@@ -2757,6 +2757,26 @@ var MultiStepFormStep = {
       type: 'msf.hide.step',
       step: $(this.element).data('stepslug')
     });
+  },
+  flattenObject: function flattenObject(ob) {
+    var toReturn = {};
+
+    for (var i in ob) {
+      if (!ob.hasOwnProperty(i)) continue;
+
+      if (_typeof(ob[i]) == 'object' && ob[i] !== null) {
+        var flatObject = this.flattenObject(ob[i]);
+
+        for (var x in flatObject) {
+          if (!flatObject.hasOwnProperty(x)) continue;
+          toReturn[i + '.' + x] = flatObject[x];
+        }
+      } else {
+        toReturn[i] = ob[i];
+      }
+    }
+
+    return toReturn;
   }
 };
 $.widget('ascent.multistepformstep', MultiStepFormStep);
@@ -2766,28 +2786,6 @@ $.extend($.ascent.MultiStepForm, {});
 $(document).ready(function () {
   $('form.multistepform').multistepform();
 });
-
-function flattenObject(ob) {
-  var toReturn = {};
-
-  for (var i in ob) {
-    if (!ob.hasOwnProperty(i)) continue;
-
-    if (_typeof(ob[i]) == 'object' && ob[i] !== null) {
-      var flatObject = flattenObject(ob[i]);
-
-      for (var x in flatObject) {
-        if (!flatObject.hasOwnProperty(x)) continue;
-        toReturn[i + '.' + x] = flatObject[x];
-      }
-    } else {
-      toReturn[i] = ob[i];
-    }
-  }
-
-  return toReturn;
-}
-
 $.ascent = $.ascent ? $.ascent : {};
 var AjaxLink = {
   self: null,
@@ -3255,16 +3253,26 @@ var ModalLink = {
 
             },
             422: function _(data, xhr, request) {
-              for (fldname in data.responseJSON.errors) {
-                val = data.responseJSON.errors[fldname];
+              console.log(422);
+              console.log(data.responseJSON.errors);
+              var errors = self.flattenObject(data.responseJSON.errors);
+
+              for (fldname in errors) {
+                var undotArray = fldname.split('.');
+
+                for (i = 1; i < undotArray.length; i++) {
+                  undotArray[i] = '[' + undotArray[i] + ']';
+                }
+
+                aryname = undotArray.join('');
+                val = errors[fldname];
 
                 if ((typeof val === "undefined" ? "undefined" : _typeof(val)) == 'object') {
                   //fldname = fldname + '[]';
                   val = Object.values(val).join('<BR/>');
                 }
 
-                msg = val;
-                $('[name="' + fldname + '"], [name="' + fldname + '[]"]').parents('.element-wrapper').find('.error-display').last().append('<small class="validation-error alert alert-danger form-text" role="alert">' + msg + '</small>');
+                $('.error-display[for="' + aryname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' + val + '</small>');
               }
             },
             500: function _(data, xhr, request) {
@@ -3279,6 +3287,26 @@ var ModalLink = {
 
       return false;
     });
+  },
+  flattenObject: function flattenObject(ob) {
+    var toReturn = {};
+
+    for (var i in ob) {
+      if (!ob.hasOwnProperty(i)) continue;
+
+      if (_typeof(ob[i]) == 'object' && ob[i] !== null) {
+        var flatObject = this.flattenObject(ob[i]);
+
+        for (var x in flatObject) {
+          if (!flatObject.hasOwnProperty(x)) continue;
+          toReturn[i + '.' + x] = flatObject[x];
+        }
+      } else {
+        toReturn[i] = ob[i];
+      }
+    }
+
+    return toReturn;
   }
 };
 $.widget('ascent.modalLink', ModalLink);

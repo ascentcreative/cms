@@ -313,19 +313,29 @@ var ModalLink = {
 
                         },
                         422: function(data, xhr, request) {
-                            for(fldname in data.responseJSON.errors) { 
 
-                                val = data.responseJSON.errors[fldname];
+                            console.log(422);
+                            console.log(data.responseJSON.errors);
+
+                            let errors = self.flattenObject(data.responseJSON.errors);
+
+                            for(fldname in errors) { 
+
+                                let undotArray = fldname.split('.');
+                                for(i=1;i<undotArray.length;i++) {
+                                    undotArray[i] = '[' + undotArray[i] + ']';
+                                }
+                                aryname = undotArray.join('');
+
+                                val = errors[fldname];
 
                                 if(typeof val == 'object') {
                                     //fldname = fldname + '[]';
                                     val = Object.values(val).join('<BR/>');
                                 }
-
-                                msg = val;
-
-                                $('[name="' + fldname + '"], [name="' + fldname + '[]"]').parents('.element-wrapper').find('.error-display').last().append('<small class="validation-error alert alert-danger form-text" role="alert">' +
-                                    msg + 
+                            
+                                $('.error-display[for="' + aryname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
+                                val + 
                                 '</small>');
 
                             }
@@ -354,6 +364,27 @@ var ModalLink = {
 
        
 
+    },
+
+    
+    flattenObject: function (ob) {
+        var toReturn = {};
+
+        for (var i in ob) {
+            if (!ob.hasOwnProperty(i)) continue;
+
+            if ((typeof ob[i]) == 'object' && ob[i] !== null) {
+                var flatObject = this.flattenObject(ob[i]);
+                for (var x in flatObject) {
+                    if (!flatObject.hasOwnProperty(x)) continue;
+
+                    toReturn[i + '.' + x] = flatObject[x];
+                }
+            } else {
+                toReturn[i] = ob[i];
+            }
+        }
+        return toReturn;
     }
 
 }

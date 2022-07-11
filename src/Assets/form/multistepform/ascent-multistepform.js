@@ -158,7 +158,7 @@ var MultiStepFormStep = {
             switch(data.status) {
                 case 422:
                     // validation fail
-                    let errors = flattenObject(data.responseJSON.errors);
+                    let errors = self.flattenObject(data.responseJSON.errors);
 
                     for(fldname in errors) { 
 
@@ -228,6 +228,26 @@ var MultiStepFormStep = {
             type: 'msf.hide.step',
             step: $(this.element).data('stepslug')
         });
+    },
+
+    flattenObject: function (ob) {
+        var toReturn = {};
+
+        for (var i in ob) {
+            if (!ob.hasOwnProperty(i)) continue;
+
+            if ((typeof ob[i]) == 'object' && ob[i] !== null) {
+                var flatObject = this.flattenObject(ob[i]);
+                for (var x in flatObject) {
+                    if (!flatObject.hasOwnProperty(x)) continue;
+
+                    toReturn[i + '.' + x] = flatObject[x];
+                }
+            } else {
+                toReturn[i] = ob[i];
+            }
+        }
+        return toReturn;
     }
 
 }
@@ -246,23 +266,3 @@ $(document).ready(function(){
     $('form.multistepform').multistepform();
 });
 
-
-function flattenObject(ob) {
-    var toReturn = {};
-
-    for (var i in ob) {
-        if (!ob.hasOwnProperty(i)) continue;
-
-        if ((typeof ob[i]) == 'object' && ob[i] !== null) {
-            var flatObject = flattenObject(ob[i]);
-            for (var x in flatObject) {
-                if (!flatObject.hasOwnProperty(x)) continue;
-
-                toReturn[i + '.' + x] = flatObject[x];
-            }
-        } else {
-            toReturn[i] = ob[i];
-        }
-    }
-    return toReturn;
-}
