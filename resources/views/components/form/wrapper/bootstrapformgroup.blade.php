@@ -2,7 +2,7 @@
     <label for="@yield('name')" class="col-{{ $labelcols ?? 2 }} col-form-label d-flex justify-content-between">
         @yield('label')
         @if($attributes['helpkey'])
-            <x-help-link :key="$attributes['helpkey']" />
+            <x-help-link :key="$attributes['helpkey']" title="@yield('label')"/>
         @endif
     </label>
 

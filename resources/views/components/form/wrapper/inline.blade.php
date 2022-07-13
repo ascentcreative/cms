@@ -4,7 +4,7 @@
         <label for="@yield('name')" class="inline-form-element-label mr-3">
             @yield('label')
             @if($attributes['helpkey'])
-                <x-help-link :key="$attributes['helpkey']" />
+                <x-help-link :key="$attributes['helpkey']" title="@yield('label')"/>
             @endif
         </label>
     @endif

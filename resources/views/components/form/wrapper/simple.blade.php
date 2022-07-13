@@ -4,7 +4,7 @@
         <label for="@yield('name')" class="simple-form-element-label d-flex justify-content-between">
             @yield('label')
             @if($attributes['helpkey'])
-                <x-help-link :key="$attributes['helpkey']" />
+                <x-help-link :key="$attributes['helpkey']" title="{{ $attributes['helptitle'] ?? $label }}" />
             @endif
         </label>
     @endif
