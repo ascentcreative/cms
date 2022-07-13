@@ -1,7 +1,10 @@
 <div class="form-group row element-wrapper {{ $class }}" id="{{$name}}-wrapper">
-    <label for="@yield('name')" class="col-{{ $labelcols ?? 2 }} col-form-label">@yield('label')</label>
-
-    
+    <label for="@yield('name')" class="col-{{ $labelcols ?? 2 }} col-form-label d-flex justify-content-between">
+        @yield('label')
+        @if($attributes['helpkey'])
+            <x-help-link :key="$attributes['helpkey']" />
+        @endif
+    </label>
 
     <div class="col">
         @yield('element')

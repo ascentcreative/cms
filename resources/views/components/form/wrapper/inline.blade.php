@@ -1,7 +1,12 @@
 <div class="inline-form-element inline-wrapper flex-align-center element-wrapper {{$class}} flex" id="{{$name}}-wrapper">
 
     @hasSection('label')
-        <label for="@yield('name')" class="inline-form-element-label mr-3">@yield('label')</label>
+        <label for="@yield('name')" class="inline-form-element-label mr-3">
+            @yield('label')
+            @if($attributes['helpkey'])
+                <x-help-link :key="$attributes['helpkey']" />
+            @endif
+        </label>
     @endif
 
     @yield('element')
