@@ -34,7 +34,7 @@ abstract class AdminBaseController extends Controller
     public $indexEagerLoadSum = [];
     public $indexEagerLoadCount = [];
 
-    public $indexItemSelectKey = null;
+    public $itemSelectKey = null;
 
     public $ignoreScopes = array();
     public $applyScopes = array();
@@ -304,7 +304,7 @@ abstract class AdminBaseController extends Controller
             array_unshift($cols,
                 Column::make()
                     ->titleBlade('cms::admin.ui.index.checkalltoggle')
-                    ->valueBlade('cms::admin.ui.index.selectcolumn', ['itemSelectKey' => $this->indexItemSelectKey])
+                    ->valueBlade('cms::admin.ui.index.selectcolumn', ['itemSelectKey' => $this->itemSelectKey])
                     ->width('1%')
             );
 
