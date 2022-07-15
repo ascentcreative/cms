@@ -15,6 +15,7 @@ class Column {
     public $filterable = false;
     public $filterBlade = '';
     public $filterOpts = '';
+    public $filterBladeProps = [];
 
 
     public $title = '';
@@ -230,9 +231,10 @@ class Column {
         return $this;
     }
 
-    public function filterBlade($blade, $opts=null) {
+    public function filterBlade($blade, $opts=null, $props=[]) {
         $this->filterBlade = $blade;
         $this->filterOpts = $opts;
+        $this->filterBladeProps = $props;
         return $this;
     }
 
@@ -243,6 +245,8 @@ class Column {
             'name' => $this->slug,
             'opts' => $this->filterOpts
         ];
+
+        $params = array_merge($params, $this->filterBladeProps);
 
         return $params;
 
