@@ -103,8 +103,10 @@ abstract class AdminBaseController extends Controller
      protected function prepareModelQuery() {
 
         $cls = $this::$modelClass;
+        $inst = new $cls();
 
-        $qry = $cls::query();
+        $qry = $cls::select($inst->getTable() . '.*');
+        // $qry = $cls::query();
         // remove any scopes as rewquested:
         foreach($this->ignoreScopes as $scopeName) {
             $qry->withoutGlobalScope($scopeName);
@@ -172,7 +174,9 @@ abstract class AdminBaseController extends Controller
                          });
      
                      } else {
-                         $q->orWhere($srch, 'LIKE', '%' . $val . '%');
+                        $cls = new $this::$modelClass();
+                        $tbl = $cls->getTable();
+                        $q->orWhere($tbl . '.' . $srch, 'LIKE', '%' . $val . '%');
                      }
      
      
