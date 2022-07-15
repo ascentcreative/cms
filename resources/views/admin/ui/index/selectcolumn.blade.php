@@ -1,1 +1,1 @@
-<input type="checkbox" name="items[]" value="{{ $itemSelectKey instanceof \Closure ? $itemSelectKey($item) : $item->id }}" class="item-select xform-control" />
+<input type="checkbox" name="items[]" value="{{ $itemSelectKey instanceof \Closure ? $itemSelectKey($item) : $item->id }}" class="item-select" />
