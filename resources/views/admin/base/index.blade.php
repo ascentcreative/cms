@@ -53,6 +53,10 @@
 
 <div class="cms-screenblock bg-white rounded shadow" style="">
 
+
+    @if($models->count() > 0)
+        @yield('post-indextable')
+    @endif
    
     {{-- @if($models->count() > 0) --}}
     <div class="cms-tablewrap">
