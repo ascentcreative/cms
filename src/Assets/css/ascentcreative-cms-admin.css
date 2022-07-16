@@ -173,9 +173,24 @@ button::before, A.btn::before {
     margin-right: 0.5em;
 }
 
+.table-hover tbody tr:hover td {
+    color: #212529;
+    /* background-color: #f7f7f7; */
+    background-color: rgba(0,0,0,0.035);
+}
+
 .table-hover tbody tr:hover {
     color: #212529;
-    background-color: #f7f7f7;
+    /* background-color: #f7f7f7; */
+    background-color: transparent;
+}
+
+.table tbody tr.item-row-selected {
+    background-color: #f4fcf4 !important;
+}
+
+.table tbody tr.item-row-selected:hover td {
+    /* background-color: rgba(0,0,0,0.1); */
 }
 
 table.menuitems {

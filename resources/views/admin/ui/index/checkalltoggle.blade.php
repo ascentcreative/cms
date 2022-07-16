@@ -6,14 +6,21 @@
 
     $('A#btn-select-toggle').click(function(e) {
         e.preventDefault();
+       
         if ( $('INPUT.item-select').not(':checked').length == 0 ) {
             // uncheck all
-            $('INPUT.item-select').prop('checked', false);
-            $('A#btn-select-toggle').removeClass('text-primary').addClass('text-dark');
+             $('tr.item-row').each(function() {
+                deselectRow($(this));
+             })
+            // $('INPUT.item-select').prop('checked', false);
+            // $('A#btn-select-toggle').removeClass('text-primary').addClass('text-dark');
         } else {
             // check all
-            $('INPUT.item-select').prop('checked', true);
-            $('A#btn-select-toggle').removeClass('text-dark').addClass('text-primary');
+            // $('INPUT.item-select').prop('checked', true);
+            $('tr.item-row').each(function() {
+                selectRow($(this));
+             })
+            // $('A#btn-select-toggle').removeClass('text-dark').addClass('text-primary');
         }
 
     });

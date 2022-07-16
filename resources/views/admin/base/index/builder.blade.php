@@ -104,7 +104,7 @@
             $classes[] = $fn($item);
         }
     @endphp
-    <tr class="{{ join(' ', $classes); }}">
+    <tr class="item-row {{ join(' ', $classes); }}">
      {{-- for each column, render the value cell --}}
      @foreach($columns as $col) 
 
@@ -210,6 +210,45 @@
 @push('scripts')
 
 <script>
+
+    function selectRow(row) {
+        console.log(row);
+        row.addClass('item-row-selected');
+        row.find('.item-select').prop('checked', true);
+    }
+
+    function deselectRow(row) {
+        row.removeClass('item-row-selected');
+        row.find('.item-select').prop('checked', false);
+    }
+
+    $(document).on('click', '.item-row td', function(e) {
+        // console.log(e.target);
+        // toggle select of row:
+        let row = $(e.target).parents('.item-row');
+        let cb = $(e.target).parents('.item-row').find('.item-select');
+        if($(cb).is(':checked')) {
+            console.log('unchecking');
+            deselectRow(row);
+        } else {
+            console.log('checking');
+            selectRow(row);
+        }
+    });
+
+    $(document).on('click', '.item-row td a, .item-row .item-select', function(e) {
+        e.stopPropagation();
+    });
+
+    $(document).on('change', '.item-row .item-select', function(e) {
+        let row = $(this).parents('.item-row');
+        if($(this).is(':checked')) {
+            selectRow(row);
+        } else {
+            deselectRow(row);
+        }
+    });
+
 
     //$('form#frm-indexparams .filter, #pageSize').on('change', function(e) {
     $('#pageSize').on('change', function(e) {
