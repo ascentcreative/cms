@@ -41,6 +41,24 @@
 
 @endsection
 
+@section('with-selected')
+
+    @hasSection('with-selected-actions')
+        <div class="btn-group mb-2">
+            <button type="button" id="with-selected" class="with-selected button btn-primary btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                With selected: 
+            </button>
+            <div class="dropdown-menu">
+
+               @yield('with-selected-actions')
+
+            </div>
+
+        </div>
+    @endif
+
+@endsection
+
 
 @section('screen')
 {{-- 
@@ -55,7 +73,7 @@
 
 
     @if($models->count() > 0)
-        @yield('post-indextable')
+        @yield('with-selected')
     @endif
    
     {{-- @if($models->count() > 0) --}}
@@ -90,7 +108,7 @@
     {{-- @endif --}}
 
     @if($models->count() > 0)
-        @yield('post-indextable')
+        @yield('with-selected')
     @endif
    
     
