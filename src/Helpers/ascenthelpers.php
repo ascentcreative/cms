@@ -88,6 +88,11 @@ function controller() {
 }
 
 
+function morphKey($model, $morph) {
+    return $model->{$morph . '_type'} . '_' . $model->{$morph . '_id'};
+}
+
+
 function obscure($str) {
 
     if (strstr($str, '@')) {
