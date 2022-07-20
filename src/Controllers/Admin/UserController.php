@@ -14,6 +14,7 @@ class UserController extends AdminBaseController
     static $modelClass = 'App\Models\User';
     //static $modelClass = 'AscentCreative\CMS\Models\User';
     static $bladePath = "cms::admin.users";
+    static $formClass = 'AscentCreative\CMS\Forms\Admin\User';
 
 
     public function commitModel(Request $request, Model $model) {

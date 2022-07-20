@@ -271,6 +271,10 @@ class CMSServiceProvider extends ServiceProvider
 
     Blade::component('cms-multisizeimage', 'AscentCreative\CMS\View\Components\Display\MultiSizeImage');
 
+    Blade::component('cms-forms-structure-screenblock', 'AscentCreative\CMS\View\Components\Forms\Structure\Screenblock');
+
+
+    //** Old - being phased out */
     
     Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
     Blade::component('cms-form-hidden', 'AscentCreative\CMS\View\Components\Form\Hidden');

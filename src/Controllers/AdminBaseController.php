@@ -19,6 +19,7 @@ abstract class AdminBaseController extends Controller
 
     static $modelClass = 'DEFINE_ME';
     static $bladePath = 'define.me';
+    static $formClass = null; //'DEFINE_ME';
 
     public $modelName = null; // override if the class name doesn't parse nicely.
     public $modelNameHuman = null;
@@ -88,10 +89,12 @@ abstract class AdminBaseController extends Controller
             'modelPlural' => (Str::pluralStudly($modelNameHuman) ?? $this->modelPlural),
 
             'rowClassResolvers' => $this->getRowClassResolvers(),
-
-            'form' => $this->buildForm(),
         );
 
+        if($this::$formClass) {
+            $formClass = $this::$formClass;
+            $out['form'] = new $formClass();
+        }
 
         headTitle()->add($out['modelPlural']);
 
@@ -326,17 +329,14 @@ abstract class AdminBaseController extends Controller
     }
 
 
-    public function buildForm() {
+    public function getForm() {
 
-        $form = new \AscentCreative\Forms\Form();
+        if($this::$formClass) {
+            $formClass = $this::$formClass;
+            return new $formClass();
+        }
 
-        $form->children([
-
-            \AscentCreative\Forms\Structure\Fieldset::make(),
-
-        ]);
-
-        return $form;
+        return null;
 
     }
 
@@ -369,7 +369,11 @@ abstract class AdminBaseController extends Controller
         $model = ($this::$modelClass)::make();
         $model->fill(request()->all());
 
-        return view($this::$bladePath . '.edit', $this->prepareViewData())->withModel($model);
+        $viewData = $this->prepareViewData();
+
+        $viewData['form']->action(action([controller(), 'store']));
+
+        return view($this::$bladePath . '.edit', $viewData)->withModel($model);
     }
 
     /**
@@ -385,10 +389,24 @@ abstract class AdminBaseController extends Controller
         //     $this->rules($request)
         // );
 
-        Validator::make($request->all(), 
-                    $this->rules($request),
-                    $this->messages($request)
-                    )->validate();
+        // Validator::make($request->all(), 
+        //             $this->rules($request),
+        //             $this->messages($request)
+        //             )->validate();
+
+        $form = $this->getForm();
+        if($form) {
+            $form->validate($request->all());
+        } else {
+
+            // Backwards compat: Old validation style
+            Validator::make($request->all(), 
+                $this->rules($request, $model),
+                $this->messages($request, $model)
+                )->validate();
+
+        }
+
 
        // $cls = $this::$modelClass;
         $model = ($this::$modelClass)::make(); //new $cls();
@@ -453,7 +471,13 @@ abstract class AdminBaseController extends Controller
             $this->authorize('update', $model);
         }
        
-        return view($this::$bladePath . '.edit', $this->prepareViewData())->withModel($model);
+        $viewData = $this->prepareViewData();
+
+        $viewData['form']->method('PUT')
+                         ->action(action([controller(), 'update'], [$viewData['modelInject'] => $model->id]))
+                         ->data($model);
+
+        return view($this::$bladePath . '.edit', $viewData)->withModel($model);
 
     }
 
@@ -477,12 +501,25 @@ abstract class AdminBaseController extends Controller
         // );
 
        
+        
 
-        Validator::make($request->all(), 
-                    $this->rules($request, $model),
-                    $this->messages($request, $model)
-                    )->validate();
+        // New Validation: via form class
+        $form = $this->getForm();
+        if($form) {
+            $form->validate($request->all());
+        } else {
 
+            // Backwards compat: Old validation style
+            Validator::make($request->all(), 
+                $this->rules($request, $model),
+                $this->messages($request, $model)
+                )->validate();
+
+        }
+
+        dump($form);
+        
+        dd('stop');
 
         // look out for arrays which should be JSON
         // foreach($request->all() as $key=>$tmp) {
