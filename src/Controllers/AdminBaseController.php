@@ -88,7 +88,10 @@ abstract class AdminBaseController extends Controller
             'modelPlural' => (Str::pluralStudly($modelNameHuman) ?? $this->modelPlural),
 
             'rowClassResolvers' => $this->getRowClassResolvers(),
+
+            'form' => $this->buildForm(),
         );
+
 
         headTitle()->add($out['modelPlural']);
 
@@ -105,7 +108,9 @@ abstract class AdminBaseController extends Controller
      protected function prepareModelQuery() {
 
         $cls = $this::$modelClass;
-        $inst = new $cls();
+        // $inst = new $cls();
+
+        $inst = ($this::$modelClass)::make();
 
         $qry = $cls::select($inst->getTable() . '.*');
         // $qry = $cls::query();
@@ -320,6 +325,20 @@ abstract class AdminBaseController extends Controller
 
     }
 
+
+    public function buildForm() {
+
+        $form = new \AscentCreative\Forms\Form();
+
+        $form->children([
+
+            \AscentCreative\Forms\Structure\Fieldset::make(),
+
+        ]);
+
+        return $form;
+
+    }
 
     public function buildActionMenuColumn() {
         return Column::make()

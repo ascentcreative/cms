@@ -1,6 +1,7 @@
-@extends('cms::admin.base.edit')
+{{-- @extends('cms::admin.base.edit') --}}
+@extends('cms::admin.base.edit.builder')
 
-
+{{-- 
 @section('editform')
 
 <div class="cms-screenblock cms-screenblock-main bg-white rounded shadow" style="">
@@ -38,4 +39,4 @@
 </div>
 
 
-@endsection
+@endsection --}}
