@@ -873,7 +873,7 @@ var ShowHide = {
         checked = $('[name="' + $(elm).attr('data-showhide') + '"]:checked')[0];
 
         if (checked) {
-          source = checked;
+          source = $(checked);
         }
       }
 

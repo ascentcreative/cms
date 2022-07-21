@@ -72,16 +72,13 @@ var ShowHide = {
         if (value === null) {
             // lookup the value if not supplied from the event:
             source = $('[name="' + $(elm).attr('data-showhide') + '"]').last();
-
             if(source.attr('type') == 'checkbox') {
                 checked = $('[name="' + $(elm).attr('data-showhide') + '"]:checked')[0];
                 if(checked) {
-                    source = checked;
+                    source = $(checked);
                 }
             }
-         
             value = source.val();
-            
             if(source.attr('type') == 'checkbox' && !source.is(":checked")) {
                 value = '';
             }
