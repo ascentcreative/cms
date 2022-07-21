@@ -71,6 +71,7 @@
 
 <div class="cms-screenblock bg-white rounded shadow" style="">
 
+    {{-- @yield('pre-indextable') --}}
 
     @if($models->count() > 0)
         @yield('with-selected')
