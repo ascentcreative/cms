@@ -25,7 +25,6 @@
 
 @section('indextable-head')
 
-  
         <tr>
             
            {{--}} <th colspan="2">Actions</th>--}}
