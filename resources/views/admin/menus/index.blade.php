@@ -1,5 +1,27 @@
 @extends('cms::admin.base.index')
 
+@section('screentitle') Site Structure @endsection
+
+
+{{-- 
+@section('screen')
+    
+    <div class="cms-screenblock bg-white rounded shadow">
+        <div class="border p-2 rounded mb-2 ">
+            <h4>Site Homepage</h4>
+        </div>
+    </div>
+
+    @parent
+
+@endsection --}}
+
+{{-- 
+@section('pre-indextable')
+
+  
+
+@endsection --}}
 
 @section('indextable-head')
 
