@@ -22,7 +22,7 @@
     "yab/laravel-scout-mysql-driver": "^5.1",
     "guizoxxv/laravel-multi-size-image": "^0.2.0" ,
     "ascentcreative/help": "dev-master",
-    "ascentcreative/forms": "dev-master"
+    "ascentcreative/forms": "dev-dev"
   },
   "autoload": {
     "psr-4": {
