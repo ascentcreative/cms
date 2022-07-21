@@ -8,9 +8,11 @@
     <title>{{ headTitle()->add('Admin')->render(' :: ') }}</title>
     <link rel="alternate icon" href="/storage/{!! AscentCreative\CMS\Models\File::find(app(AscentCreative\CMS\Settings\SiteSettings::class)->favicon)->filepath ?? '../vendor/ascent/cms/img/ascent-badge-trans.png' !!}">
 
+    
  
     @style('/vendor/ascent/cms/css/bootstrap.min.css') 
     @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css") 
+
 
     @style('/vendor/ascent/cms/js/jquery-ui.min.css') 
     @style('/vendor/ascent/cms/css/ascentcreative-cms-admin.css') 
@@ -21,7 +23,7 @@
     @stack('styles')
    
 </head>
-<body>
+<body id="admin">
 
     {{-- <header>
 
