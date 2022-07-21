@@ -19,6 +19,7 @@ abstract class AdminBaseController extends Controller
 
     static $modelClass = 'DEFINE_ME';
     static $bladePath = 'define.me';
+    static $formClass = null; //'DEFINE_ME';
 
     public $modelName = null; // override if the class name doesn't parse nicely.
     public $modelNameHuman = null;
@@ -64,7 +65,11 @@ abstract class AdminBaseController extends Controller
         if(view()->exists($overridePath)) {
             return $overridePath;
         } else {
-            return $path;
+            if(view()->exists($path)) {
+                return $path;
+            } else {
+                return 'cms::admin.base.' . $action . '.builder';
+            }
         }
 
     }
@@ -90,6 +95,7 @@ abstract class AdminBaseController extends Controller
             'rowClassResolvers' => $this->getRowClassResolvers(),
         );
 
+       
         headTitle()->add($out['modelPlural']);
 
         return $out;
@@ -105,7 +111,9 @@ abstract class AdminBaseController extends Controller
      protected function prepareModelQuery() {
 
         $cls = $this::$modelClass;
-        $inst = new $cls();
+        // $inst = new $cls();
+
+        $inst = ($this::$modelClass)::make();
 
         $qry = $cls::select($inst->getTable() . '.*');
         // $qry = $cls::query();
@@ -117,6 +125,10 @@ abstract class AdminBaseController extends Controller
         foreach($this->applyScopes as $scopeName) {
             $qry->$scopeName();
         }
+
+        // foreach($this->indexEagerLoad as $with) {
+        //     $qry->with($with);
+        // }
 
         return $qry;
         
@@ -321,6 +333,32 @@ abstract class AdminBaseController extends Controller
     }
 
 
+    public function getForm() {
+
+        if($this::$formClass) {
+            $formClass = $this::$formClass;
+
+            $model = ($this::$modelClass)::make();
+
+            $form = new $formClass();
+
+            $addTraits = false;
+            foreach(class_uses($model) as $trait) {
+                if (array_search('AscentCreative\CMS\Traits\Extender', class_uses($trait)) !== false) {
+                    $addTraits = true;
+                }
+            }
+
+            if($addTraits) {
+                $model->addModelTraitsToForm($form);
+            }
+            return $form;
+        }
+
+        return null;
+
+    }
+
     public function buildActionMenuColumn() {
         return Column::make()
                 ->titleBlade('cms::admin.ui.index.clearfilters')
@@ -339,10 +377,6 @@ abstract class AdminBaseController extends Controller
      */
     public function create()
     {
-       // $cls = $this->modelClass;
-        // return $this->edit(); //ew $cls());
-        // $cls = $this->modelClass;
-
         if(in_array('create', $this->authorize)) {
             $this->authorize('create', $this::$modelClass);
         }
@@ -350,7 +384,20 @@ abstract class AdminBaseController extends Controller
         $model = ($this::$modelClass)::make();
         $model->fill(request()->all());
 
-        return view($this::$bladePath . '.edit', $this->prepareViewData())->withModel($model);
+        $viewData = $this->prepareViewData();
+        if($form = $this->getForm()) {
+            $viewData['form'] = $form->action(action([controller(), 'store']))
+                                    ->populate($model);
+        }
+
+        // return view($this::$bladePath . '.edit', $viewData)->withModel($model);
+        $vw = $this::$bladePath . '.edit';
+        //if(view()->exists($vw)) {
+        if(!$this::$formClass) {
+            return view($this::$bladePath . '.edit', $viewData)->withModel($model);
+        } else {
+            return view('cms::admin.base.edit.builder', $viewData)->withModel($model);
+        }  
     }
 
     /**
@@ -362,14 +409,19 @@ abstract class AdminBaseController extends Controller
     public function store(Request $request)
     {
 
-        // $validatedData = $request->validate(
-        //     $this->rules($request)
-        // );
+        $form = $this->getForm();
+        if($form) {
+            $form->validate($request->all());
+        } else {
 
-        Validator::make($request->all(), 
-                    $this->rules($request),
-                    $this->messages($request)
-                    )->validate();
+            // Backwards compat: Old validation style
+            Validator::make($request->all(), 
+                $this->rules($request),
+                $this->messages($request)
+                )->validate();
+
+        }
+
 
        // $cls = $this::$modelClass;
         $model = ($this::$modelClass)::make(); //new $cls();
@@ -405,9 +457,16 @@ abstract class AdminBaseController extends Controller
             $model = $cls::find($id);
         }
 
-        // view()->share('accessmode', 'read');
-       
-        return view($this::$bladePath . '.show', $this->prepareViewData())->withModel($model);
+        $viewData = $this->prepareViewData();
+
+        if($form = $this->getForm()) {
+            $viewData['form'] = $form
+                                ->readonly(true)
+                                ->data($model);
+        }
+
+        return view($this->resolveBlade('show'), $viewData)->withModel($model);
+
     }
 
     /**
@@ -434,7 +493,22 @@ abstract class AdminBaseController extends Controller
             $this->authorize('update', $model);
         }
        
-        return view($this::$bladePath . '.edit', $this->prepareViewData())->withModel($model);
+        $viewData = $this->prepareViewData();
+
+        if($form = $this->getForm()) {
+            $viewData['form'] = $form
+                                ->method('PUT')
+                                ->action(action([controller(), 'update'], [$viewData['modelInject'] => $model->id]))
+                                ->data($model);
+        }
+
+        $vw = $this::$bladePath . '.edit';
+        // if(view()->exists($vw)) {
+        if(!$this::$formClass) {
+            return view($this::$bladePath . '.edit', $viewData)->withModel($model);
+        } else {
+            return view('cms::admin.base.edit.builder', $viewData)->withModel($model);
+        }   
 
     }
 
@@ -448,22 +522,22 @@ abstract class AdminBaseController extends Controller
     public function update(Request $request, $id)
     {
 
-        
-
         $qry = $this->prepareModelQuery();
         $model = $qry->find($id);
 
-        // $validatedData = $request->validate(
-        //     $this->rules($request, $model)
-        // );
+        // New Validation: via form class
+        $form = $this->getForm();
+        if($form) {
+            $form->validate($request->all());
+        } else {
 
-       
+            // Backwards compat: Old validation style
+            Validator::make($request->all(), 
+                $this->rules($request, $model),
+                $this->messages($request, $model)
+                )->validate();
 
-        Validator::make($request->all(), 
-                    $this->rules($request, $model),
-                    $this->messages($request, $model)
-                    )->validate();
-
+        }
 
         // look out for arrays which should be JSON
         // foreach($request->all() as $key=>$tmp) {

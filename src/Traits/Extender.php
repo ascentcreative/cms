@@ -27,6 +27,24 @@ trait Extender {
      *      
      */
 
+    // New code - uses code on the trait itself to adjust the form
+    public function addModelTraitsToForm($form) {
+
+        foreach(class_uses($this) as $trait) {
+            if (array_search('AscentCreative\CMS\Traits\Extender', class_uses($trait)) !== false) {
+                $fn = $this->getTraitFunction('adjustFormFor', $trait);
+                if(method_exists($this, $fn)) {
+                    $this->$fn($form);
+                }
+            }
+        }
+
+    }
+
+
+
+    // Below = Old code which used blades to insert trait fields
+
 
     protected $_requestedTraitBlades = [];
 
