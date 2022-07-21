@@ -16,6 +16,7 @@
     @style('/vendor/ascent/cms/css/ascentcreative-cms-admin.css') 
     @style('/vendor/ascent/cms/css/ascent-cms-core.css') 
     @style('/vendor/ascent/cms/dist/css/ascent-cms-bundle.css')
+    @style('/vendor/ascent/forms/dist/css/ascent-forms-bundle.css')
     
    
     @stack('styles')

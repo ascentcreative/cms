@@ -279,29 +279,29 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form', 'AscentCreative\CMS\View\Components\Form');
     Blade::component('cms-form-hidden', 'AscentCreative\CMS\View\Components\Form\Hidden');
     // Blade::component('cms-form-input', 'AscentCreative\CMS\View\Components\Form\Input');
-    Blade::component('cms-form-options', 'AscentCreative\CMS\View\Components\Form\Options');
+    // Blade::component('cms-form-options', 'AscentCreative\CMS\View\Components\Form\Options');
     Blade::component('cms-form-datetime', 'AscentCreative\CMS\View\Components\Form\DateTime');
-    Blade::component('cms-form-compound-date', 'AscentCreative\CMS\View\Components\Form\CompoundDate');
-    Blade::component('cms-form-button', 'AscentCreative\CMS\View\Components\Form\Button');
-    Blade::component('cms-form-checkbox', 'AscentCreative\CMS\View\Components\Form\Checkbox');
+    // Blade::component('cms-form-compound-date', 'AscentCreative\CMS\View\Components\Form\CompoundDate');
+    // Blade::component('cms-form-button', 'AscentCreative\CMS\View\Components\Form\Button');
+    // Blade::component('cms-form-checkbox', 'AscentCreative\CMS\View\Components\Form\Checkbox');
     Blade::component('cms-form-textarea', 'AscentCreative\CMS\View\Components\Form\Textarea');
     Blade::component('cms-form-code', 'AscentCreative\CMS\View\Components\Form\Code');
     Blade::component('cms-form-statictext', 'AscentCreative\CMS\View\Components\Form\StaticText');
     Blade::component('cms-form-colour', 'AscentCreative\CMS\View\Components\Form\Colour');
     Blade::component('cms-form-fileupload', 'AscentCreative\CMS\View\Components\Form\FileUpload');
 
-    Blade::component('cms-form-hasmany', 'AscentCreative\CMS\View\Components\Form\HasMany');
+    // Blade::component('cms-form-hasmany', 'AscentCreative\CMS\View\Components\Form\HasMany');
 
 
     Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
-    Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
+    // Blade::component('cms-form-foreignkeyselect', 'AscentCreative\CMS\View\Components\Form\ForeignKeySelect');
     Blade::component('cms-form-autocomplete', 'AscentCreative\CMS\View\Components\Form\Autocomplete');
-    Blade::component('cms-form-relationautocomplete', 'AscentCreative\CMS\View\Components\Form\RelationAutocomplete');
+    // Blade::component('cms-form-relationautocomplete', 'AscentCreative\CMS\View\Components\Form\RelationAutocomplete');
     Blade::component('cms-form-blockselect', 'AscentCreative\CMS\View\Components\Form\BlockSelect');
 
     Blade::component('cms-form-relatedtokens', 'AscentCreative\CMS\View\Components\Form\RelatedTokens');
     
-    Blade::component('cms-form-pivotlist', 'AscentCreative\CMS\View\Components\Form\PivotList');
+    // Blade::component('cms-form-pivotlist', 'AscentCreative\CMS\View\Components\Form\PivotList');
     Blade::component('cms-form-biblereflist', 'AscentCreative\CMS\View\Components\Form\BibleRefList');
 
     Blade::component('cms-form-menuposition', 'AscentCreative\CMS\View\Components\Form\MenuPosition');

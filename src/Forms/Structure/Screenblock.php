@@ -12,16 +12,8 @@ class Screenblock extends FormObjectBase implements FormComponent {
 
     public $component = 'cms-forms-structure-screenblock';
 
-    // static function make(...$args) {
-    //     $cls = get_called_class();
-    //     return new $cls(...$args);
-    // }
-
-
-    // public function buildAttributes() {
-    //     return new ComponentAttributeBag([
-    //         'children'=>$this->children,
-    //     ]);
-    // }
+    public function __construct($name) {
+        $this->name = $name;
+    }
 
 }

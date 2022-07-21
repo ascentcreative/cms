@@ -12,9 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.scripts([
-                'src/Assets/form/components/*.js',
-                'src/Assets/form/components/croppie/*.js',
-                'src/Assets/form/components/charlimit/*.js',
+                // 'src/Assets/form/components/*.js',
+                // 'src/Assets/form/components/croppie/*.js',
+                // 'src/Assets/form/components/charlimit/*.js',
                 'src/Assets/form/multistepform/*.js',
                 'src/Assets/jquery/*.js'
             ], 
@@ -23,9 +23,9 @@ mix.scripts([
             )
 
     .styles([
-                'src/Assets/form/components/*.css',
-                'src/Assets/form/components/croppie/*.css',
-                'src/Assets/form/components/charlimit/*.css',
+                // 'src/Assets/form/components/*.css',
+                // 'src/Assets/form/components/croppie/*.css',
+                // 'src/Assets/form/components/charlimit/*.css',
                 'src/Assets/form/multistepform/*.css'
             ], 
                 'src/Assets/dist/css/ascent-cms-bundle.css', 

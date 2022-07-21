@@ -383,3 +383,8 @@ th.filterable {
 .wysiwyg-editor-styled  .cke_editable {
     padding: 10px 15px 0;
 }
+
+
+.element-wrapper.required label {
+    font-weight: bold;
+}
