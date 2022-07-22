@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
+use AscentCreative\CMS\Admin\UI\Index\Column;
+
 class UserController extends AdminBaseController
 {
 
@@ -62,6 +64,38 @@ class UserController extends AdminBaseController
         }
 
         return $data;
+
+    }
+
+
+    public function getColumns() : array {
+
+        return [
+
+            Column::make('Name')
+                ->valueProperty('name')
+                ->isLink(true),
+
+            Column::make('Email')
+                ->value(function($item) {
+                    return obscure($item->email);
+                }),
+
+            Column::make('Roles')
+                ->value(function($item) {
+                    return join(', ', $item->getRoleNames()->toArray() ?? []);
+                }),
+
+            Column::make('Permissions')
+                ->value(function($item) {
+                    return join(', ', $item->getPermissionNames()->toArray() ?? []);
+                }),
+
+            Column::make("Last Login")
+                ->valueProperty('lastLogin'),
+
+
+        ];
 
     }
 

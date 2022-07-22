@@ -11,4 +11,6 @@ return [
     'page' => '\AscentCreative\CMS\Models\Page',
     'menu' => '\AscentCreative\CMS\Models\Menu',
     
+    'user-controller' => AscentCreative\CMS\Controllers\Admin\UserController::class,
+    
 ];

@@ -84,6 +84,17 @@ class CMSServiceProvider extends ServiceProvider
         return new $cls();
     });
 
+
+    foreach(config('cms.models') as $key => $cls) {
+        $this->app->bind($key, $cls);
+    }
+
+    // $this->app->bind('user-controller', function() {
+    //     $cls = config('cms.controllers.user');
+    //     return new $cls();
+    // });
+
+
     // print_r(config('cms.models'));
 
     // \Illuminate\Database\Eloquent\Relations\Relation::morphMap(config('cms.models'));

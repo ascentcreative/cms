@@ -1,7 +1,7 @@
-@extends('cms::admin.base.index')
+@extends('cms::admin.base.index.builder')
 
 
-@section('indextable-head')
+@section('indextable-head-old')
 
   
         <tr>
@@ -21,7 +21,7 @@
 
 @endsection
 
-@section('indextable-body')
+@section('indextable-body-old')
   
     
     @foreach ($models as $item)

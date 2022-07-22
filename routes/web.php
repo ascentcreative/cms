@@ -1,6 +1,14 @@
 <?php
 
 
+Route::prefix('admin')->middleware(['web', 'auth', 'can:administer'])->group(function() {
+
+    Route::get('/users/autocomplete', [config('cms.models.user-controller'), 'autocomplete']);
+    Route::get('/users/{user}/delete', [config('cms.models.user-controller'), 'delete']);
+    Route::resource('/users', config('cms.models.user-controller')); //AscentCreative\CMS\Facades\UserController::class);
+
+});
+
 Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(function () {
 
 
@@ -123,9 +131,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::get('/pages/{page}/delete', [AscentCreative\CMS\Controllers\Admin\PageController::class, 'delete']);
         Route::resource('/pages', PageController::class);
        
-        Route::get('/users/autocomplete', [AscentCreative\CMS\Controllers\Admin\UserController::class, 'autocomplete']);
-        Route::get('/users/{user}/delete', [AscentCreative\CMS\Controllers\Admin\UserController::class, 'delete']);
-        Route::resource('/users', UserController::class);
+       
 
         Route::get('/roles/{role}/delete', [AscentCreative\CMS\Controllers\Admin\RoleController::class, 'delete']);
         Route::resource('/roles', RoleController::class);
