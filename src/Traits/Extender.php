@@ -4,7 +4,7 @@ namespace AscentCreative\CMS\Traits;
 
 trait Extender {
 
-    private $extender_captured;
+    private $extender_captured = [];
     private $capturable = [];
     private $captureDeleteCallbacks = [];
 
