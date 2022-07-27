@@ -18,7 +18,7 @@ var ShowHide = {
         // find all elements with data-showhide set and evaluate their rules.
         // more processor heavy than the incremental update on change...
         $('[data-showhide]').each(function(idx) {
-            self.evaluate(this);
+            self.evaluate(this, null, false);
         });
 
         // mutation observer to run on newly added elements:
@@ -67,7 +67,7 @@ var ShowHide = {
 
     },
 
-    evaluate: function(elm, value=null) {
+    evaluate: function(elm, value=null, animate=true) {
 
         if (value === null) {
             // lookup the value if not supplied from the event:
@@ -84,21 +84,23 @@ var ShowHide = {
             }
         }
 
+        console.log('animate?', animate);
+
         if($(elm).attr('data-hide-if')) {
 
             if (this.valueMatch($(elm).attr('data-hide-if'), value)) {
                 
-                if($(elm).attr('data-showhide-animate') == 0) {
-                    $(elm).hide();
-                } else {
+                if(animate && $(elm).attr('data-showhide-animate') != 0) {
                     $(elm).slideUp('fast');
+                } else {
+                    $(elm).hide();
                 }
 
             } else {
-                if($(elm).attr('data-showhide-animate') == 0) {
-                    $(elm).show();
-                } else {
+                if(animate && $(elm).attr('data-showhide-animate') != 0) {
                     $(elm).slideDown('fast');
+                } else {
+                    $(elm).show();
                 }
             }
 
@@ -106,17 +108,17 @@ var ShowHide = {
 
             if (this.valueMatch($(elm).attr('data-show-if'), value)) {
                 
-                if($(elm).attr('data-showhide-animate') == 0) {
-                    $(elm).show();
-                } else {
+                if(animate && $(elm).attr('data-showhide-animate') != 0) {
                     $(elm).slideDown('fast');
+                } else {
+                    $(elm).show();
                 }
                 
             } else {
-                if($(elm).attr('data-showhide-animate') == 0) {
-                    $(elm).hide();
-                } else {
+                if(animate && $(elm).attr('data-showhide-animate') != 0) {
                     $(elm).slideUp('fast');
+                } else {
+                    $(elm).hide();
                 }
             }
 
