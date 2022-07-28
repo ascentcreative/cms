@@ -11,7 +11,7 @@
     
  
     @style('/vendor/ascent/cms/css/bootstrap.min.css') 
-    @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css") 
+    @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css") 
 
 
     @style('/vendor/ascent/cms/js/jquery-ui.min.css') 
