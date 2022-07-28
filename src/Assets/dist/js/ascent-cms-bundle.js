@@ -440,6 +440,7 @@ var ModalLink = {
         'Accept': "application/json"
       }
     }).done(function (data, xhr, request) {
+      $(self.element).parents(".dropdown-menu").dropdown('toggle');
       var cType = request.getResponseHeader('content-type');
 
       if (cType.indexOf('text/html') != -1) {

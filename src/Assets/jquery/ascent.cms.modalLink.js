@@ -51,6 +51,7 @@ var ModalLink = {
             }
         }).done(function(data, xhr, request) {
 
+            $(self.element).parents(".dropdown-menu").dropdown('toggle');
 
             var cType = request.getResponseHeader('content-type');
 
