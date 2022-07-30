@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
+
+use Illuminate\Support\Facades\Schema;
+
 use Illuminate\Routing\Router;
 use Laravel\Fortify\Fortify;
 
@@ -104,9 +107,49 @@ class CMSServiceProvider extends ServiceProvider
 
     //this->bootAliases();
 
+    $this->registerBlueprintMacros();
+
+    $this->registerRelationMacros();
+
   }
 
 
+  public function registerRelationMacros() {
+
+       
+
+  }
+
+
+  public function registerBlueprintMacros() {
+
+
+        \Illuminate\Database\Schema\Blueprint::macro('publishable', function() {
+            if(!Schema::hasColumn($this->table, 'publishable')) {
+                $this->boolean("publishable")->default(0)->index();
+            }
+            if(!Schema::hasColumn($this->table, 'publish_start')) {
+                $this->datetime("publish_start")->nullable()->index();
+            }
+            if(!Schema::hasColumn($this->table, 'publish_end')) {
+                $this->datetime("publish_end")->nullable()->index();
+            }
+        });
+
+        \Illuminate\Database\Schema\Blueprint::macro('dropPublishable', function() {
+            if(Schema::hasColumn($this->table,'publishable')) {
+                $this->dropColumn('publishable');
+            }
+            if(Schema::hasColumn($this->table,'publish_start')) {
+                $this->dropColumn('publish_start');
+            }
+            if(Schema::hasColumn($this->table,'publish_end')) {
+                $this->dropColumn('publish_end');
+            }
+        });
+
+
+  }
  
 
   public function boot()
