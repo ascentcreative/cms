@@ -35,7 +35,8 @@ class Column {
 
     public $width = null;
     public $noWrap = false;
-
+    public $titleSpan = 1;
+    public $showTitle = true;
 
     static function make($title = null, $value = null) {
         $col = new Column();
@@ -66,6 +67,16 @@ class Column {
 
     public function titleBlade($blade) {
         $this->titleBlade = $blade;
+        return $this;
+    }
+
+    public function titleSpan($span) {
+        $this->titleSpan = $span;
+        return $this;
+    }
+
+    public function showTitle($bool) {
+        $this->showTitle = $bool;
         return $this;
     }
 

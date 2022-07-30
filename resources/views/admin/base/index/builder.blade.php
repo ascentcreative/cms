@@ -5,8 +5,9 @@
     {{-- for each column, render the header --}}
     @foreach($columns as $col) 
 
-   
-        <th class="@if($col->align) text-{{$col->align}} @endif @if($col->filterable) filterable @endif" @if(!is_null($col->width)) width="{{ $col->width }}" @endif >
+        @if($col->showTitle)
+
+        <th class="@if($col->align) text-{{$col->align}} @endif @if($col->filterable) filterable @endif" @if(!is_null($col->width)) width="{{ $col->width }}" @endif colspan="{{ $col->titleSpan }}" >
             
             <div class="flex" style="flex-wrap: nowrap;">
 
@@ -87,6 +88,7 @@
 
 
         </th>
+        @endif
 
     @endforeach
 
@@ -138,9 +140,9 @@
             
                 @if($col->value instanceof Closure) 
                     @php $closure = $col->value; @endphp
-                    {{ $closure($item) }}
+                    {!! $closure($item) !!}
                 @else 
-                    {{ $col->value }}
+                    {!! $col->value !!}
                 @endif
                 
                 @if($col->isLink)
