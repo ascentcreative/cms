@@ -55,12 +55,12 @@
                    @include('cms::stackeditor.proxy')
                 @break
 
+                @case('pagebuilder')
+                    <x-pagebuilder :value="old('content', $model->content)" name="content">
+                    </x-pagebuilder>
+                @break
+
             @endswitch
-
-            {{-- 
-         --}}
-
-         
 
             {{-- <x-cms-form-wysiwyg label="TESTING" name="content{{uniqid()}}" :value="old('content', $model->content)" wrapper="none"/> --}}
 
