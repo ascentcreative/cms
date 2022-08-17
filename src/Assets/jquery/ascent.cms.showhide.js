@@ -40,7 +40,7 @@ var ShowHide = {
 
     // Process an event and toggle the changes needed.
     process: function(e) {
-        console.log("processing");
+        console.log("processing", e);
         console.log($(e.target).attr('name'));
         let field = $(e.target).attr('name');
 
