@@ -17,6 +17,12 @@
     @style('/vendor/ascent/cms/js/jquery-ui.min.css') 
     @style('/vendor/ascent/cms/css/ascentcreative-cms-admin.css') 
     @style('/vendor/ascent/cms/css/ascent-cms-core.css') 
+
+
+
+    @script('/vendor/ascent/cms/ckeditor/ckeditor.js', false)
+    @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js', false)
+
     @style('/vendor/ascent/cms/dist/css/ascent-cms-bundle.css')
     @style('/vendor/ascent/forms/dist/css/ascent-forms-bundle.css')
     
