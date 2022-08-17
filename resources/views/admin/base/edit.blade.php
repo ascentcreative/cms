@@ -3,7 +3,7 @@
 {{-- FORM DIRTY CHECKS: --}}
 @push('scripts')
 
-    @script('/vendor/ascent/cms/jquery/ascent.cms.showhide.js')
+    {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.showhide.js') --}}
 
     @script('/vendor/ascent/cms/jquery/areyousure/jquery.are-you-sure.js')
     @script('/vendor/ascent/cms/jquery/areyousure/ays-beforeunload-shim.js')
