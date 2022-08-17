@@ -757,8 +757,7 @@ var NestedSet = {
 
     $(obj).find('SELECT.ns_scopeselect').val(this.options.scopeVal).on("change", this.scopeChange).trigger('change');
     $(obj).find('INPUT.ns_scopefield').remove(); // init relations:
-
-    console.log('done INIT');
+    // console.log('done INIT');
   },
   scopeChange: function scopeChange() {
     console.log('scope change...');
@@ -844,7 +843,7 @@ var ShowHide = {
   },
   // Process an event and toggle the changes needed.
   process: function process(e) {
-    console.log("processing");
+    console.log("processing", e);
     console.log($(e.target).attr('name'));
     var field = $(e.target).attr('name');
     var value = $(e.target).val();
