@@ -52,7 +52,7 @@ var NestedSet = {
   
 
         // init relations:
-        console.log('done INIT');
+        // console.log('done INIT');
        
        
     },
