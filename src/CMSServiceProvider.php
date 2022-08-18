@@ -333,9 +333,7 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-datetime', 'AscentCreative\CMS\View\Components\Form\DateTime');
     Blade::component('cms-form-code', 'AscentCreative\CMS\View\Components\Form\Code');
     Blade::component('cms-form-statictext', 'AscentCreative\CMS\View\Components\Form\StaticText');
-    Blade::component('cms-form-colour', 'AscentCreative\CMS\View\Components\Form\Colour');
-    
-
+  
     Blade::component('cms-form-ckeditor', 'AscentCreative\CMS\View\Components\Form\CKEditor');
     Blade::component('cms-form-autocomplete', 'AscentCreative\CMS\View\Components\Form\Autocomplete');
     
