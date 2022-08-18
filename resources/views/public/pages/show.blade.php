@@ -25,6 +25,10 @@
                 @include('stackeditor::render', ['content' => $model->content])
             @break
 
+            @case('pagebuilder')
+                @include('pagebuilder::render', ['content' => $model->content])
+            @break
+
         @endswitch
        
     @endsection
