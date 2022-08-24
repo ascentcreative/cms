@@ -31,4 +31,8 @@ class Base extends Model
         return ($this->table ?? 'cms_' . Str::snake(Str::pluralStudly(class_basename($this))));
     }
 
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions {
+
+    }
+
 }
