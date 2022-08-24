@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 use Illuminate\Support\Str;
 
@@ -31,8 +32,8 @@ class Base extends Model
         return ($this->table ?? 'cms_' . Str::snake(Str::pluralStudly(class_basename($this))));
     }
 
-    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions {
-
+    public function getActivitylogOptions(): LogOptions {
+        return LogOptions::defaults();
     }
 
 }
