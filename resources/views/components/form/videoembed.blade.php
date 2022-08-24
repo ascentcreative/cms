@@ -49,7 +49,8 @@
             url: '/cms/video-embed/render',
             method: 'POST',
             data: {
-                url: url
+                url: url,
+                _token: '{{ csrf_token() }}'
             } 
         
         }).done(function(data, xhr, request) {
