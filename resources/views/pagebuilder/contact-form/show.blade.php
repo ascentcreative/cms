@@ -3,19 +3,24 @@
 
     @csrf
     
-    <x-cms-form-input type="text" label="Your name" name="name" value="{{old('name', '')}}" wrapper="simple"/>
+    <div class="pb-3">
+        <x-cms-form-input type="text" label="Your name" name="name" value="{{old('name', '')}}" wrapper="simple"/>
+    </div>
 
-    <x-cms-form-input type="text" label="Your Email Address" name="email" value="{{old('email', '')}}" wrapper="simple"/>
+    <div class="pb-3">
+        <x-cms-form-input type="text" label="Your Email Address" name="email" value="{{old('email', '')}}" wrapper="simple"/>
+    </div>
 
-    <x-cms-form-textarea label="Your Message" name="message" value="{{ old('message', '') }}" wrapper="simple" />
-
+    <div class="pb-3">
+        <x-cms-form-textarea label="Your Message" name="message" value="{{ old('message', '') }}" wrapper="simple" rows="10"/>
+    </div>
     {{-- <x-cms-form-button label="Send Message" name="submit" value="submit" wrapper="simple"/> --}}
     
     <div class="text-right">
-    <button class="g-recaptcha" 
+    <button class="btn button btn-primary g-recaptcha" 
         data-sitekey="{{ config('cms.recaptcha_sitekey') }}" 
         data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
+        data-action='submit'>Send Message</button>
     </div>
 
 </form>
