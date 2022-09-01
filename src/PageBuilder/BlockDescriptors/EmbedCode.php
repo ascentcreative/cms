@@ -1,8 +1,8 @@
 <?php
 
-namespace AscentCreative\CMS\StackEditor\TypeDescriptors;
+namespace AscentCreative\CMS\PageBuilder\BlockDescriptors;
 
-use AscentCreative\StackEditor\TypeDescriptors\AbstractDescriptor; 
+use AscentCreative\PageBuilder\BlockDescriptors\AbstractDescriptor; 
 
 class EmbedCode extends AbstractDescriptor { 
 
