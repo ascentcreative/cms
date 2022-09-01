@@ -41,6 +41,22 @@ return [
     ],
 
 
+    'theme_stylesheets' => [
+        "/vendor/ascent/cms/css/bootstrap.min.css",
+        // @style('/css/bootstrap_custom.css')
+        "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css",
+        "/vendor/ascent/cms/js/jquery-ui.min.css",
+        '/vendor/ascent/cms/dist/css/ascent-cms-bundle.css',
+        '/css/screen.css',
+    ],
+
+    'theme_scripts' => [
+
+
+    ],
+
+
+
 
 
     /**

@@ -20,13 +20,11 @@
             @style($style)
         @endforeach
 
-        @style("/vendor/ascent/cms/css/bootstrap.min.css") 
-        @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css") 
-        @style("/vendor/ascent/cms/js/jquery-ui.min.css") 
-        @style('/vendor/ascent/cms/dist/css/ascent-cms-bundle.css')
-        @style("/css/screen.css") 
-        {{-- @style("/css/styles.css")  --}}
-       
+       {{-- // need to put these in the config: --}}
+       @foreach(config('cms.theme_stylesheets') as $style)
+            @style($style)
+       @endforeach
+
         @stack('styles')
 
         @yield('site_head')
