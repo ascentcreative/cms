@@ -23,7 +23,8 @@
     "yab/laravel-scout-mysql-driver": "^5.1",
     "guizoxxv/laravel-multi-size-image": "^0.2.0" ,
     "ascentcreative/help": "dev-master",
-    "ascentcreative/forms": "dev-dev"
+    "ascentcreative/forms": "dev-dev",
+    "ascentcreative/pagebuilder": "dev-dev"
   },
   "autoload": {
     "psr-4": {
@@ -44,6 +45,9 @@
       },{
         "type": "vcs",
         "url": "git@github.com:ascentcreative/help.git"
+      },{
+        "type": "vcs",
+        "url": "git@github.com:ascentcreative/pagebuilder.git"
       }
     ]
 }
