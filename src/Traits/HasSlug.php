@@ -22,8 +22,6 @@ trait HasSlug {
 
     public function setSlug() {
 
-        echo 'setting slug on ' . $this->name;
-
         $source = $this->slug_source ?? 'title';
         $target = $this->slug_field ?? 'slug';
 
