@@ -8,30 +8,36 @@ use Illuminate\Support\Str;
 
 
 trait HasSlug {
+
     
     public static function bootHasSlug() {
 
         static::saving(function($model) { 
 
-            $source = $model->slug_source ?? 'title';
-            $target = $model->slug_field ?? 'slug';
-            
-            if (!isset($model->attributes[$target]) || $model->attributes[$target]==='') {
-        
-                $slug = Str::slug(($model->$source), '-');
-        
-                // check to see if any other slugs exist that are the same & count them
-                $count = static::whereRaw("$target RLIKE '^{$slug}(-[0-9]+)?$'")->count();
-        
-                $model->attributes[$target] = $count ? "{$slug}-{$count}" : $slug;
-        
-            }
-
+                $model->setSlug();
 
         });
   
     }
 
+    public function setSlug() {
+
+        echo 'setting slug on ' . $this->name;
+
+        $source = $this->slug_source ?? 'title';
+        $target = $this->slug_field ?? 'slug';
+
+        if (!isset($this->attributes[$target]) || $this->attributes[$target]==='') {
+
+            $slug = Str::slug(($this->$source), '-');
+    
+            // check to see if any other slugs exist that are the same & count them
+            $count = static::whereRaw("$target RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+    
+            $this->attributes[$target] = $count ? "{$slug}-{$count}" : $slug;
+
+        }
+
+    }
 
 }
-
