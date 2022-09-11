@@ -62,6 +62,7 @@
         @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js')
 
         @script('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
+        @script('/vendor/ascent/forms/dist/js/ascent-forms-bundle.js')
 
         @foreach(packageAssets()->getScripts() as $script)
             @script($script)
