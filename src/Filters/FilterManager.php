@@ -43,8 +43,6 @@ class FilterManager {
 
         $this->filters[$field] = $scope;
 
-        // dump($additional);
-
         $this->filter_additional[$field] = $additional;
 
         return $this;
@@ -97,6 +95,7 @@ class FilterManager {
         }
 
         foreach($this->filters as $key=>$scope) {
+
             if(isset($filter_data[$key])) {
 
                 // eager load for performance?
