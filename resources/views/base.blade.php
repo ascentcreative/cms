@@ -41,7 +41,6 @@
 
         @yield('site_layout')
         
-        
         <form id="logout-form" action="{{ route('logout') }}" method="POST">
             @csrf
             <input type="hidden" name="intended" value="{{ request()->path() }}" />
@@ -54,12 +53,14 @@
         @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
         @script('/vendor/ascent/cms/js/jquery.ui.touch-punch.min.js')
         @script('/vendor/ascent/cms/jquery/jquery.matchHeight-min.js')
+        
         @if(!Agent::isMobile() && !Agent::isTablet())
             {{-- Parallax is a bit buggy on mobiles... --}}
             @script('/vendor/ascent/cms/js/parallax.min.js')
         @endif
-        @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
-        @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js')
+
+        {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js') --}}
+        {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js') --}}
 
         @script('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
         @script('/vendor/ascent/forms/dist/js/ascent-forms-bundle.js')
