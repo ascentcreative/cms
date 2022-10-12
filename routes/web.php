@@ -164,9 +164,10 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
 
         /* Routes for HasMany component modal and validation */
+        /* TODO - Move this routes to the Forms package... */
 
         // load modal - either empty or with data values for editing
-        Route::get('/cms/components/hasmany/{source}/{target}/{fieldname}', function($source, $target, $fieldname) {
+        Route::get('/cms/components/hasmany/{package}/{source}/{target}/{fieldname}', function($package, $source, $target, $fieldname) {
             /* present the modal */
             // Not sure we need the source? would the dialog not be the same regardless of that (ini polymorphic sitautions?)
             //return view('admin.' . $source . '.hasmany.' . $target . '.modal');
@@ -187,12 +188,17 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             // divert to specified blade if given
             $blade = request()->blade ?? "modal";
             
-            return view('components.hasmany.' . $target . '.' . $blade, ['idx' =>  $idx, 'item' => (object) $item, 'action' => $action ] );
+            $pkg = $package == 'app' ? '' : $package . '::';
+
+            // return $pkg;
+
+            // need to be able to specify which package holds the relevant view.
+            return view($pkg . 'components.hasmany.' . $target . '.' . $blade, ['idx' =>  $idx, 'item' => (object) $item, 'action' => $action ] );
             
         })->name('cms.components.hasmany');
 
 
-        Route::post('/cms/components/hasmany/{source}/{target}/{fieldname}', function($source, $target, $fieldname) {
+        Route::post('/cms/components/hasmany/{package}/{source}/{target}/{fieldname}', function($package, $source, $target, $fieldname) {
             /* validate modal data */
             $cls = session()->get('modelTableCache.' . $target);
             $rules = $cls::$rules;
@@ -209,10 +215,19 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             // $obj->fill(request()->all());
             $obj = (object) request()->all();
 
-            return view('components.hasmany.' . $target . '.item', ['item' => $obj, 'name' => $fieldname . '[' . request()->idx . ']', 'idx' => request()->idx]);
+            $pkg = $package == 'app' ? '' : $package . '::';
+
+            // return $pkg;
+
+            // need to be able to specify which package holds the relevant view.
+            return view($pkg . 'components.hasmany.' . $target . '.item', ['item' => $obj, 'name' => $fieldname . '[' . request()->idx . ']', 'idx' => request()->idx]);
 
         })->name('cms.components.hasmany');
 
+
+        // HasManyImages... 
+        // need a route which accepts multiple files and returns a block for each?
+        // or maybe this is a future enhancement?
 
 
 
@@ -272,6 +287,8 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         ]);
 
     })->middleware('auth', 'can:upload-files');
+
+
 
 
 
