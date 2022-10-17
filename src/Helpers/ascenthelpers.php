@@ -269,23 +269,38 @@ function resolveAuthBladePaths($action) : array {
         $prefix = $route->action['prefix'];
     }
 
-
-    // chedck the cms config file for specified paths
+    // check the cms config file for specified paths
     $paths = config('cms.authpaths.' . $prefix);
 
     // if none found, create them from the prefix name
     // (but fallback to the App's main auth blades so that not every prefix needs an auth)
     if(is_null($paths)) {
 
+        // explode the prefix - we're going to handle multiple segments.
+        $pfxary = explode('/', $prefix);
+        $paths_custom = []; // the module / app specific paths
+        $paths_cms = []; // the cms module's global options
+      
+        // for each part of the path, create the various paths
+        foreach($pfxary as $pfx_part) {
+            if(trim($pfx_part) != '') {
+                $working_pfx[] = $pfx_part;
+                $pfx = join('.', $working_pfx);
+                $paths_custom[] = $pfx . '.auth';
+                $paths_cms[] = "cms::" . $pfx . '.auth';
+            }   
+           
+        }
+
         // use the prefix name in a path:
-        $paths = [
-            \str_replace('/', '', $prefix) . '.auth',
-            'cms::' . \str_replace('/', '', $prefix) . '.auth',
-            'auth' // fallback to basic login
-        ];
+        $paths = array_merge(
+            array_reverse($paths_custom), // need to reverse the array so the more specific path is first
+            array_reverse($paths_cms), // need to reverse the array so the more specific path is first
+            ['auth']
+        );  
 
     }
-    
+
     // appened the action / blade name to the paths
     $paths = collect($paths)->transform(function($item) use ($action) {
         return $item . '.' . $action;
