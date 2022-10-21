@@ -7,6 +7,7 @@ trait Extender {
     private $extender_captured = [];
     private $capturable = [];
     private $captureDeleteCallbacks = [];
+    private $captureSaveCallbacks = [];
 
     /**
      * 
@@ -110,13 +111,26 @@ trait Extender {
         static::saved(function($model) { 
 
            foreach(array_keys($model->extender_captured) as $key) {
-                $method = 'save' . ucfirst($key);
-                if(method_exists($model, $method)) {
-                     $model->$method($model->getCapture($key));
-                    //  $model->save
+
+                if(isset($model->captureSaveCallbacks[$key])) {
+                    $fn = $model->captureSaveCallbacks[$key];
+                    if ($fn instanceof \Closure) {
+                        $fn($key, $model->getCapture($key));
+                    } else {
+                        $model->$fn($key, $model->getCapture($key));
+                    }
                 } else {
-                    throw new \Exception('Extender method ' . $method . ' not found - data may be lost');
+
+                    $method = 'save' . ucfirst($key);
+                    if(method_exists($model, $method)) {
+                        $model->$method($model->getCapture($key));
+                        //  $model->save
+                    } else {
+                        throw new \Exception('Extender method ' . $method . ' not found - data may be lost');
+                    }
+
                 }
+
             }
 
         });
@@ -140,7 +154,8 @@ trait Extender {
      * 
      * @return [type]
      */
-    public function addCapturable($field, $deleteFunction=true) {
+    public function addCapturable($field, $deleteFunction=true, $saveFunction = null) {
+        
         $this->fillable[] = $field;
         $this->capturable[] = $field;
 
@@ -157,6 +172,10 @@ trait Extender {
             } else {
                 throw new \Exception('Unable to register delete callback "' . $fn . '" - Method not found');
             }
+        }
+
+        if(!is_null($saveFunction)) {
+                $this->captureSaveCallbacks[$field] = $saveFunction;
         }
 
     }
