@@ -40,8 +40,8 @@ var ShowHide = {
 
     // Process an event and toggle the changes needed.
     process: function(e) {
-        console.log("processing", e);
-        console.log($(e.target).attr('name'));
+        // console.log("processing", e);
+        // console.log($(e.target).attr('name'));
         let field = $(e.target).attr('name');
 
         let value = $(e.target).val();
@@ -55,7 +55,7 @@ var ShowHide = {
 
         let elms = $('[data-showhide="' + field + '"]');
 
-        console.log(elms.length + ' dependent elements');
+        // console.log(elms.length + ' dependent elements');
 
         // let self = this;
         $(elms).each(function(idx) {
@@ -84,7 +84,7 @@ var ShowHide = {
             }
         }
 
-        console.log('animate?', animate);
+        // console.log('animate?', animate);
 
         if($(elm).attr('data-hide-if')) {
 

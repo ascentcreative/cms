@@ -843,8 +843,8 @@ var ShowHide = {
   },
   // Process an event and toggle the changes needed.
   process: function process(e) {
-    console.log("processing", e);
-    console.log($(e.target).attr('name'));
+    // console.log("processing", e);
+    // console.log($(e.target).attr('name'));
     var field = $(e.target).attr('name');
     var value = $(e.target).val();
 
@@ -854,8 +854,8 @@ var ShowHide = {
     // get all elements with a rule based on this field.
 
 
-    var elms = $('[data-showhide="' + field + '"]');
-    console.log(elms.length + ' dependent elements'); // let self = this;
+    var elms = $('[data-showhide="' + field + '"]'); // console.log(elms.length + ' dependent elements');
+    // let self = this;
 
     $(elms).each(function (idx) {
       // console.log(self);
@@ -883,9 +883,8 @@ var ShowHide = {
       if (source.attr('type') == 'checkbox' && !source.is(":checked")) {
         value = '';
       }
-    }
+    } // console.log('animate?', animate);
 
-    console.log('animate?', animate);
 
     if ($(elm).attr('data-hide-if')) {
       if (this.valueMatch($(elm).attr('data-hide-if'), value)) {
