@@ -335,6 +335,8 @@ var ModalLink = {
                                     val = Object.values(val).join('<BR/>');
                                 }
                             
+                                console.log(aryname, val);
+
                                 $('.error-display[for="' + aryname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
                                 val + 
                                 '</small>');
