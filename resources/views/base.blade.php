@@ -24,6 +24,7 @@
         @style("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css") 
         @style("/vendor/ascent/cms/js/jquery-ui.min.css") 
         @style('/vendor/ascent/cms/dist/css/ascent-cms-bundle.css')
+        @style('/vendor/ascent/forms/dist/css/ascent-forms-bundle.css')
         @style("/css/screen.css") 
         {{-- @style("/css/styles.css")  --}}
        
