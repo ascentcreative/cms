@@ -47,7 +47,8 @@ var ModalLink = {
             type: 'GET',
             url: self.targetPath,
             headers: {
-                'Accept' : "application/json"
+                'Accept' : "application/json",
+                'ModalLink' : 1,
             }
         }).done(function(data, xhr, request) {
 
