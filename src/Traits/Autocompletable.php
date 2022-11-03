@@ -34,7 +34,7 @@ trait Autocompletable {
                 } else {
                     $q->where(function($q) use ($terms, $fld) {
                         foreach($terms as $term) {
-                            $q->orWhere($fld, 'like', '%' . $term . '%');
+                            $q->where($fld, 'like', '%' . $term . '%');
                         }
                     });
                 }
@@ -42,7 +42,20 @@ trait Autocompletable {
             }
             
         });
-        
+
+        // add some ordering where closer matches come higher up
+        // should we be using fulltext for this? order by match?
+        // requires specific fulltext indexes though... maybe not ideal
+
+        // BUT, in some cases, the results of many model autocoompletes will be combined.
+        // The sorting would break if all the itesm were returned as part of a single operation.
+
+        // Maybe we pass options make different queries (exact match, all words, any words)
+        // and these are executed in turn, and collated.
+
+
+        // Also - slight complication here if we have a compound label (i.e. a product name and SellableGroup title)
+        // - Just need to remember to add that to the autocomplete_search on the model
 
     }
 
