@@ -123,14 +123,16 @@ class FilterManager {
             $sorter_data = $data[$wrapper] ?? [];
         }
 
-     //   dd($this->sorters);
+        // dd($sorter_data);
 
         foreach($this->sorters as $key=>$scope) {
             
             if(isset($sorter_data[$key])) {
                 //$query = 
-                $query = $scope($query, $sorter_data[$key]);
+                // dd($sorter_data[$key]);
+                $query->$scope($sorter_data[$key]);
             }
+
         }
 
         return $query;
