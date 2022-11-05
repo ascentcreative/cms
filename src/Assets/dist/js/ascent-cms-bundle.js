@@ -431,16 +431,39 @@ var ModalLink = {
 
     if (this.element.data('serialiseForModal')) {
       self.targetPath += '?' + $(this.element.data('serialiseForModal')).serialize();
-    }
+    } // alert(this.element.prop("tagName"));
 
-    $.ajax({
-      type: 'GET',
-      url: self.targetPath,
+
+    ajaxConfig = {
       headers: {
         'Accept': "application/json",
         'ModalLink': 1
       }
-    }).done(function (data, xhr, request) {
+    };
+
+    try {
+      // allow the modal link to be used for a FORM POST as well as a link click:
+      if (this.element.prop("tagName") == "FORM") {
+        // alert('form process');
+        ajaxConfig = $.extend(ajaxConfig, {
+          type: 'POST',
+          url: this.element.attr('action'),
+          contentType: false,
+          processData: false,
+          data: new FormData(this.element[0])
+        });
+      } else {
+        // alert('link process');
+        ajaxConfig = $.extend(ajaxConfig, {
+          type: 'GET',
+          url: self.targetPath
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    $.ajax(ajaxConfig).done(function (data, xhr, request) {
       $(self.element).parents(".dropdown-menu").dropdown('toggle');
       var cType = request.getResponseHeader('content-type');
 
@@ -718,6 +741,13 @@ $.extend($.ascent.ModalLink, {});
 /* Assign this behaviour by link class */
 
 $(document).on('click', 'A.modalLink, A.modal-link', function (e) {
+  $(this).modalLink();
+  e.stopPropagation();
+  return false; // stop the link firing normally!
+});
+/* Assign this behaviour by link class */
+
+$(document).on('submit', 'form.modal-link', function (e) {
   $(this).modalLink();
   e.stopPropagation();
   return false; // stop the link firing normally!
