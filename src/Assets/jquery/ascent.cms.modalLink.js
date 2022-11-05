@@ -162,7 +162,8 @@ var ModalLink = {
                     processData: false,
                     url: $(this).attr('action'), 
                     headers: {
-                        'Accept' : "application/json"
+                        'Accept' : "application/json",
+                        'ModalLink' : 1
                     },
                     // responseType: 'blob',
                     xhr: function () {
