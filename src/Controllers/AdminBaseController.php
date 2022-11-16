@@ -188,8 +188,9 @@ abstract class AdminBaseController extends Controller
                          });
      
                      } else {
-                        $cls = new $this::$modelClass();
-                        $tbl = $cls->getTable();
+                        // $cls = new $this::$modelClass();
+                        $inst = ($this::$modelClass)::make();
+                        $tbl = $inst->getTable();
                         $q->orWhere($tbl . '.' . $srch, 'LIKE', '%' . $val . '%');
                      }
      
