@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Schema;
 
@@ -111,6 +112,8 @@ class CMSServiceProvider extends ServiceProvider
 
     $this->registerRelationMacros();
 
+    $this->registerRouteMacros();
+
   }
 
 
@@ -148,6 +151,42 @@ class CMSServiceProvider extends ServiceProvider
             }
         });
 
+
+  }
+
+
+  /**
+   * 
+   * Route macros to allow sites to create utility routes
+   * 
+   * @return [type]
+   */
+  public function registerRouteMacros() {
+
+    \Illuminate\Support\Facades\Route::macro('autocomplete', function($segment, $class, $label='title') {
+
+        Route::match(['post','get'], '/autocomplete/' . $segment, function() use ($class, $label) {
+
+            $term = request()->term;
+
+            // $cls = new $class();
+            $items = $class::autocomplete($term)->get();
+
+            $items->transform(function($item) use ($label) {
+                return [
+                    'label' => $item->$label, // may need to accept a closure here...
+                    'type' => get_class($item),
+                    'id' => $item->id
+                ];
+            });
+
+            return $items;
+
+            
+
+        })->name($segment . '.autocomplete');
+
+    });
 
   }
  
