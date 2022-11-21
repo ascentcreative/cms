@@ -90,7 +90,7 @@ abstract class AdminBaseController extends Controller
         $out = array(
             'modelInject' => Str::lower($modelName),
             'modelName' => $modelNameHuman,
-            'modelPlural' => (Str::pluralStudly($modelNameHuman) ?? $this->modelPlural),
+            'modelPlural' => ($this->modelPlural ?? Str::pluralStudly($modelNameHuman)),
 
             'rowClassResolvers' => $this->getRowClassResolvers(),
         );
