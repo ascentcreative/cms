@@ -18,7 +18,6 @@ class User extends BaseForm {
                 ->children([
                     Input::make('first_name', 'First Name')
                             ->description('The first name of the user')
-                            ->default('123')
                             ->required(true),
 
                     Input::make('last_name', 'Last Name')
