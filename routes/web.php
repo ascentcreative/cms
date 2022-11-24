@@ -201,7 +201,14 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
         Route::post('/cms/components/hasmany/{package}/{source}/{target}/{fieldname}', function($package, $source, $target, $fieldname) {
             /* validate modal data */
             $cls = session()->get('modelTableCache.' . $target);
-            $rules = $cls::$rules;
+            
+            if(method_exists($cls, 'getRules')) {
+                $inst = new $cls();
+                $rules = $inst->getRules();
+            } else {
+                $rules = $cls::$rules;
+            }
+        
             $messages = $cls::$messages;
             Validator::make(request()->all(), $rules, $messages)->validate();
 
@@ -211,9 +218,25 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
             /* Note - this doesn't actually create the new record in the database. The save process for the parent model needs to do that */
             //return view('admin.' . $source . '.hasmany.' . $target . '.item', ['item' => (object) request()->all(), 'name' => $target . '[' . uniqid() . ']']);
 
-            // $obj = new $cls();
-            // $obj->fill(request()->all());
-            $obj = (object) request()->all();
+            // // Original Option: simple StdClass
+            // $obj = (object) request()->all(); 
+            // // doing it this way means that any extra attributes are set (id, relationship values)
+            // // bypasses fillables etc as it's just an object not a model. 
+            // // But, it's reliant on the item blade to convert it to a Model instance
+            // // while handling the fact that when the parent form loads, the item will already be a Model instance...
+            // // In that regard, maybe it should be converted to a model...
+            
+
+            // New Approach: Make a model instance and fill it?
+            // NB - extender traits mean that the extended fields are fillable.
+            // - although they themselves won't be models, so why do we bother using a model here?
+            $obj = $cls::make(request()->all()); 
+            
+            // Need to set the ID as it's not normally fillable. 
+            // Otherwise, an edited item will be treated as new and will break references
+            $obj->id = request()->id; 
+
+            // dump($obj);
 
             $pkg = $package == 'app' ? '' : $package . '::';
 
