@@ -18,7 +18,9 @@
     @style('/vendor/ascent/cms/css/ascentcreative-cms-admin.css') 
     @style('/vendor/ascent/cms/css/ascent-cms-core.css') 
 
-
+    @if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/css/admin-custom.css'))
+        @style('/css/admin-custom.css')
+    @endif
 
     @script('/vendor/ascent/cms/ckeditor/ckeditor.js', false)
     @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js', false)
