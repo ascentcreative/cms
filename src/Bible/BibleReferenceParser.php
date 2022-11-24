@@ -122,7 +122,11 @@ class BibleReferenceParser {
         }
         
         function makeBibleRefFromArray($ary, $abbrev=true, $incBook=true, $incChap=true) {
-            
+
+            if($ary instanceof \StdClass) {
+                $ary = (array) $ary;
+            }
+
             $bookName = $this->aryBooks[$ary['book']][$abbrev?1:0];
             
             if ($bookName == "Psalms" && $ary['startChapter']) {
