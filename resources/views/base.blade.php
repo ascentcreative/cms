@@ -61,8 +61,8 @@
             {{-- Parallax is a bit buggy on mobiles... --}}
             @script('/vendor/ascent/cms/js/parallax.min.js')
         @endif
-        @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js')
-        @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js')
+        {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js') --}}
+        {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js') --}}
 
         @script('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
         @script('/vendor/ascent/forms/dist/js/ascent-forms-bundle.js')
