@@ -464,7 +464,7 @@ var ModalLink = {
     }
 
     $.ajax(ajaxConfig).done(function (data, xhr, request) {
-      $(self.element).parents(".dropdown-menu").dropdown('toggle');
+      // $(self.element).parents(".dropdown-menu").dropdown('hide');
       var cType = request.getResponseHeader('content-type');
 
       if (cType.indexOf('text/html') != -1) {
@@ -495,10 +495,12 @@ var ModalLink = {
           alert('An unexpected error occurred:\n' + data.responseJSON.message);
           break;
       }
-    });
-    return false;
+    }); // return false;
   },
   showResponseModal: function showResponseModal(data) {
+    // },
+    // oldshowResponseModal: function(data) {
+
     /* if we're already in a modal, detect it and remove the existing modal */
     inFlow = false;
 
@@ -741,8 +743,9 @@ $.extend($.ascent.ModalLink, {});
 /* Assign this behaviour by link class */
 
 $(document).on('click', 'A.modalLink, A.modal-link', function (e) {
-  $(this).modalLink();
-  e.stopPropagation();
+  console.log('ML firing');
+  $(this).modalLink(); // e.stopPropagation();
+
   return false; // stop the link firing normally!
 });
 /* Assign this behaviour by link class */

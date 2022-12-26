@@ -79,11 +79,13 @@ var ModalLink = {
             console.log(error);
         }
         
+       
+
         $.ajax(
             ajaxConfig
         ).done(function(data, xhr, request) {
 
-            $(self.element).parents(".dropdown-menu").dropdown('toggle');
+            // $(self.element).parents(".dropdown-menu").dropdown('hide');
 
             var cType = request.getResponseHeader('content-type');
 
@@ -128,13 +130,17 @@ var ModalLink = {
 
         });
            
-        return false;
+        // return false;
 
       
         
     },
 
     showResponseModal: function(data) {
+
+    // },
+
+    // oldshowResponseModal: function(data) {
 
         /* if we're already in a modal, detect it and remove the existing modal */
         inFlow = false;
@@ -435,8 +441,9 @@ $.extend($.ascent.ModalLink, {
 /* Assign this behaviour by link class */
 $(document).on('click', 'A.modalLink, A.modal-link', function(e) {
 
+    console.log('ML firing');
     $(this).modalLink();
-    e.stopPropagation();
+    // e.stopPropagation();
     return false; // stop the link firing normally!
 
 });
