@@ -85,8 +85,15 @@ var ModalLink = {
             ajaxConfig
         ).done(function(data, xhr, request) {
 
+            // BUGGY CODE:
             // $(self.element).parents(".dropdown-menu").dropdown('hide');
 
+            // The above removes all event handlers from the dropdown (annoyingly)
+            // so we'll fire a click from the document to force the DD to hide properly (if needed)
+            if($(self.element).parents(".dropdown-menu").length > 0) {
+                $(document).trigger('click');
+            }
+            
             var cType = request.getResponseHeader('content-type');
 
             if(cType.indexOf('text/html') != -1) {
@@ -441,9 +448,8 @@ $.extend($.ascent.ModalLink, {
 /* Assign this behaviour by link class */
 $(document).on('click', 'A.modalLink, A.modal-link', function(e) {
 
-    console.log('ML firing');
     $(this).modalLink();
-    // e.stopPropagation();
+    e.stopPropagation();
     return false; // stop the link firing normally!
 
 });
