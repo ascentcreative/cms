@@ -30,6 +30,7 @@ trait Publishable {
     public static function bootPublishable() {
 
         // apply a global scope which automatically wires in the publishing settings
+        // TODO: This needs to play better with the admin area (i.e. not apply there at all so hidden items still connect where needed)
         static::addGlobalScope('published', function (Builder $builder) {
             $builder->where('publishable', '=', '1') 
                     ->where(function($query) { 
@@ -58,6 +59,9 @@ trait Publishable {
             // dd(request()->publish_start);
             // dd($model->publish_start);
 
+            // TODO:
+            // This needs to be rewritten to allow for updates not coming from a request
+            // Probably more in line with the newer form of extender plugins
             if(is_null(request()->publish_start['date']))  { // == '') {
                 $model->publish_start = null;
             } else {
