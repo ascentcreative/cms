@@ -220,6 +220,7 @@ class CMSServiceProvider extends ServiceProvider
         \AscentCreative\CMS\Commands\CreateAdminUser::class,
         \AscentCreative\CMS\Commands\ObfuscateUserData::class,
         \AscentCreative\CMS\Commands\RefreshMultiSizeImages::class,
+        \AscentCreative\CMS\Commands\ZendImportUsers::class,
     ]);
 
     // for web requests, work out what the menu item might be.
