@@ -341,16 +341,13 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     })->middleware('auth', 'can:upload-files');
 
 
-});
-
-
-
-
-    // MultiStepForm Step Validation endpoint:
-    Route::post('/msf-validate', function() {
+     // MultiStepForm Step Validation endpoint:
+     Route::post('/msf-validate', function() {
 
         $input = [];
         parse_str(request()->input, $input);
+
+        // dd($input);
 
         $validatorSetup = (array) json_decode(Crypt::decryptString(request()->validators)) ?? [];
 
@@ -381,6 +378,14 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
         
     })->name('msf.validate');
+
+
+});
+
+
+
+
+   
 
 
 
