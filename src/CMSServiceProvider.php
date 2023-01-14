@@ -251,7 +251,7 @@ class CMSServiceProvider extends ServiceProvider
         // it can however go into the doc root and then back out. 
         // so, replace the storage path with that maneouver.
         // feels like a fudge and is specific to this app structure...
-        $path = str_replace(storage_path(''), $_SERVER['DOCUMENT_ROOT'] . '/..', $path);
+        $path = str_replace(storage_path(''), $_SERVER['DOCUMENT_ROOT'] . '/../storage', $path);
         
         return Response::make()   
             ->header("X-LiteSpeed-Location", $path)
