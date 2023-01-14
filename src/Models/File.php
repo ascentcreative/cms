@@ -42,7 +42,7 @@ class File extends Base
 
     public function download() {
 
-        if(env('x-litespeed') == 1) {
+        if(env('X_LITESPEED') == 1) {
             return response()->xlitespeed(Storage::disk($this->disk)->path($this->filepath)); 
         }
 
