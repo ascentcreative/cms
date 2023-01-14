@@ -239,6 +239,25 @@ class CMSServiceProvider extends ServiceProvider
     resolve(EngineManager::class)->extend('ascent', function () {
         return new \AscentCreative\CMS\Engines\AscentEngine;
     });
+
+
+    // x-litespeed file download response
+    Response::macro('xlitespeed', function ($path) {
+            
+        set_time_limit(0);
+
+        // the path can't be outside the document root.
+        // it can however go into the doc root and then back out. 
+        // so, replace the storage path with that maneouver.
+        // feels like a fudge and is specific to this app structure...
+        $path = str_replace(storage_path(''), $_SERVER['DOCUMENT_ROOT'] . '/..', $path);
+        
+        return Response::make()   
+            ->header("X-LiteSpeed-Location", $path)
+            // ->header("Content-type", mime_content_type($path))
+            ->header("Content-Disposition", 'attachment; filename="' . basename($path) . '"');
+
+    });
    
 
 
