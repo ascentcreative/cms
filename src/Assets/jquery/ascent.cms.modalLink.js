@@ -47,7 +47,8 @@ var ModalLink = {
         ajaxConfig = {
             headers: {
                 'Accept' : "application/json",
-                'ModalLink' : 1
+                'ModalLink' : 1,
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
         };
 
@@ -186,9 +187,9 @@ var ModalLink = {
 
         /* grab forms... */
         var self = this;
-
+        
         $('#ajaxModal FORM').not('.no-ajax').submit(function() {
-
+            
             try {
 
                 var form = this;
@@ -207,7 +208,8 @@ var ModalLink = {
                     url: $(this).attr('action'), 
                     headers: {
                         'Accept' : "application/json",
-                        'ModalLink' : 1
+                        'ModalLink' : 1,
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     // responseType: 'blob',
                     xhr: function () {
