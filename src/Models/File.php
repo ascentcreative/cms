@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\Storage;
 
+use Mostafaznv\PhpXsendfile\Facades\PhpXsendfile;
+
 class File extends Base
 {
     use HasFactory;
@@ -39,7 +41,13 @@ class File extends Base
     }
 
     public function download() {
+
+        return response()->xsendfile(Storage::disk($this->disk)->path($this->filepath));    
+
+        // return PhpXsendfile::download('//' . Storage::disk($this->disk)->path($this->filepath), $this->original_name);
+
         return Storage::disk($this->disk)->download($this->filepath, $this->original_name);
+
     }
 
     public function getMimetypeAttribute() {
