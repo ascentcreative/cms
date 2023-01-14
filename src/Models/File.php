@@ -42,7 +42,7 @@ class File extends Base
 
     public function download() {
 
-        return response()->xlitespeed('../storage/codeddownloads/Lords Prayer KJV Download.zip'); //Storage::disk($this->disk)->path($this->filepath));    
+        return response()->xlitespeed(Storage::disk($this->disk)->path($this->filepath));    
 
         // return PhpXsendfile::download('//' . Storage::disk($this->disk)->path($this->filepath), $this->original_name);
 
