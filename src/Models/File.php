@@ -42,9 +42,9 @@ class File extends Base
 
     public function download() {
 
-        return response()->xlitespeed(Storage::disk($this->disk)->path($this->filepath));    
-
-        // return PhpXsendfile::download('//' . Storage::disk($this->disk)->path($this->filepath), $this->original_name);
+        if(env('x-litespeed') == 1) {
+            return response()->xlitespeed(Storage::disk($this->disk)->path($this->filepath)); 
+        }
 
         return Storage::disk($this->disk)->download($this->filepath, $this->original_name);
 
