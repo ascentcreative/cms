@@ -243,9 +243,12 @@ class CMSServiceProvider extends ServiceProvider
 
 
     // x-litespeed file download response
-    Response::macro('xlitespeed', function ($path) {
-            
+    Response::macro('xlitespeed', function ($path, $file=null) {
+
         set_time_limit(0);
+
+        if(is_null($file))
+            $file = basename($path);
 
         // the path can't be outside the document root.
         // it can however go into the doc root and then back out. 
@@ -256,7 +259,7 @@ class CMSServiceProvider extends ServiceProvider
         return Response::make()   
             ->header("X-LiteSpeed-Location", $path)
             // ->header("Content-type", mime_content_type($path))
-            ->header("Content-Disposition", 'attachment; filename="' . basename($path) . '"');
+            ->header("Content-Disposition", 'attachment; filename="' . $file . '"');
 
     });
    
