@@ -269,7 +269,9 @@ class CMSServiceProvider extends ServiceProvider
     Activity::saving(function (Activity $activity) {
 
         $activity->properties = $activity->properties->put('session', session()->getId());
-        $activity->properties = $activity->properties->put('ip', request()->ip());
+        if(!$activity->properties->has('ip')) {
+            $activity->properties = $activity->properties->put('ip', request()->ip());
+        }
 
         $agent = new Agent();
         if(isset($_SERVER['HTTP_USER_AGENT'])) {
