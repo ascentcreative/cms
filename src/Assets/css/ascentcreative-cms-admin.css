@@ -385,6 +385,6 @@ th.filterable {
 }
 
 
-.element-wrapper.required label {
+.element-wrapper.required > label {
     font-weight: bold;
 }
