@@ -24,7 +24,6 @@ class SearchController extends Controller
         // search all the models and combine into a single collection
         foreach( app('Yab\MySQLScout\Services\IndexService')->getAllSearchableModels($modelDirectories) as $cls) {
             $hits = $cls::search($query)->get();
-            // got the $hits?
             if(!is_null($hits)) {
                 $results = $results->concat($hits);
             }
