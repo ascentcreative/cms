@@ -56,7 +56,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     /**
      * FULL TEXT SEARCH (Using Scout)
      */
-    Route::get('/search',  'SearchController@search');
+    Route::get('/cmssearch',  'SearchController@search');
 
 
     //Route::get('/contact', 'ContactController@showform'); // not needed as form can be placed in stacked page
