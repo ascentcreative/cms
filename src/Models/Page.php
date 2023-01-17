@@ -25,11 +25,38 @@ class Page extends Base
 
     public $fillable = ['title', 'content'];
 
-    public $indexable = ['title'];
-
     protected $casts = [
         'content' => 'array',
     ];
+
+    public function getIndexableAttribute() {
+        return [
+            'title',
+            function($model) {
+                switch(config('cms.content_editor')) {
+
+                    case 'ckeditor':
+                        return strip_tags_leaving_spaces($model->content);
+                    break;
+    
+                    case 'stackeditor':
+                        // @include('stackeditor::render', ['content' => $model->content])
+                        return \AscentCreative\StackEditor\StackIndexer::extract($model, 'content');
+                    break;
+    
+                    case 'pagebuilder': 
+                        return \AscentCreative\PageBuilder\PageIndexer::extract($model, 'content');
+                    break;
+
+                    default:
+                        throw new Exception('Illegal content editor type');
+
+                }
+
+                
+            }
+        ];
+    }
     
     // /*
     //  * MUTATORS

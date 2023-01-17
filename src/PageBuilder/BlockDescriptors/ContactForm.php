@@ -3,6 +3,7 @@
 namespace AscentCreative\CMS\PageBuilder\BlockDescriptors;
 
 use AscentCreative\PageBuilder\BlockDescriptors\AbstractDescriptor; 
+use Illuminate\Database\Eloquent\Model;
 
 class ContactForm extends AbstractDescriptor { 
 
@@ -13,5 +14,9 @@ class ContactForm extends AbstractDescriptor {
     public static $description = "Inserts a Contact Form";
 
     public static $category = "Functionality";
+
+    public function extractText(Model $model, array $block) {
+    
+    }
 
 }

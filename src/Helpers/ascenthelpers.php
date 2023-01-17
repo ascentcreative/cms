@@ -309,3 +309,10 @@ function resolveAuthBladePaths($action) : array {
     return $paths;
 
 }
+
+
+function strip_tags_leaving_spaces($input) {
+
+    return str_replace('  ', ' ', strip_tags(str_replace('<', ' <', $input)));
+
+}
