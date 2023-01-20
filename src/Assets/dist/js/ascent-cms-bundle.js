@@ -862,13 +862,14 @@ $.ascent = $.ascent ? $.ascent : {}; // Show / Hide elements based on values of 
 var ShowHide = {
   self: null,
   _init: function _init() {
-    var self = this; // console.log('init ShowHide');
-
+    var self = this;
+    console.log('init ShowHide');
     $(document).on('change', this.process); // need a call here to run all rules to set default state.
     // find all elements with data-showhide set and evaluate their rules.
     // more processor heavy than the incremental update on change...
 
     $('[data-showhide]').each(function (idx) {
+      // console.log("this");
       self.evaluate(this, null, false);
     }); // mutation observer to run on newly added elements:
 
@@ -913,7 +914,7 @@ var ShowHide = {
       // lookup the value if not supplied from the event:
       source = $('[name="' + $(elm).attr('data-showhide') + '"]').last();
 
-      if (source.attr('type') == 'checkbox') {
+      if (source.attr('type') == 'checkbox' || source.attr('type') == 'radio') {
         checked = $('[name="' + $(elm).attr('data-showhide') + '"]:checked')[0];
 
         if (checked) {

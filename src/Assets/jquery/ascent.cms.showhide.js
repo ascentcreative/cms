@@ -11,13 +11,14 @@ var ShowHide = {
     _init: function () {
 
         let self = this;
-        // console.log('init ShowHide');
+        console.log('init ShowHide');
         $(document).on('change', this.process); 
 
         // need a call here to run all rules to set default state.
         // find all elements with data-showhide set and evaluate their rules.
         // more processor heavy than the incremental update on change...
         $('[data-showhide]').each(function(idx) {
+            // console.log("this");
             self.evaluate(this, null, false);
         });
 
@@ -72,7 +73,7 @@ var ShowHide = {
         if (value === null) {
             // lookup the value if not supplied from the event:
             source = $('[name="' + $(elm).attr('data-showhide') + '"]').last();
-            if(source.attr('type') == 'checkbox') {
+            if(source.attr('type') == 'checkbox' || source.attr('type') == 'radio') {
                 checked = $('[name="' + $(elm).attr('data-showhide') + '"]:checked')[0];
                 if(checked) {
                     source = $(checked);
@@ -166,7 +167,7 @@ $.extend($.ascent.ShowHide, {
 }); 
 
 // $(document).ready(function() {
-    $(document).showhide();
+$(document).showhide();
 // });
 
 /* Assign this behaviour by link class */
