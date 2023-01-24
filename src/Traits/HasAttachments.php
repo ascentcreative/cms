@@ -8,6 +8,10 @@ use AscentCreative\CMS\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
+// @deprecated
+// NOTE - this is an older version, kept for back-compat.
+// New code should use the ascentcreative/fileupload package which is more fully featured
+// TODO: Migrate existing sites (i.e. Lightwave)
 trait HasAttachments {
 
     use Extender;
