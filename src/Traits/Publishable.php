@@ -51,36 +51,43 @@ trait Publishable {
                     ->orderBy(DB::raw('if(' . $table . '.publish_start is not null, ' . $table . '.publish_start, ' . $table . '.created_at)'), 'DESC');
         });
 
-
-        // when the model is being saved, migrate the field data...
-        // (this shoudln't be needed here - I need to find a way to wire this up to the field components)
-        static::saving(function($model) { 
-
-            // dd(request()->publish_start);
-            // dd($model->publish_start);
-
-            // TODO:
-            // This needs to be rewritten to allow for updates not coming from a request
-            // Probably more in line with the newer form of extender plugins
-            if(is_null(request()->publish_start['date']))  { // == '') {
-                $model->publish_start = null;
-            } else {
-                $model->publish_start = join(' ', request()->publish_start);// . ":00";
-            }
-
-           
-
-            if(is_null(request()->publish_end['date'])) {//  == '') {
-                $model->publish_end = null;
-            } else {
-                $model->publish_end = Carbon::create(join(' ', request()->publish_end)) ;// . ":00";
-            }
-
-           
-
-        });
-
     }
+
+
+
+    /**
+     * Publish dates are entered in split fields. Merge them
+     * 
+     * @return [type]
+     */
+    public function setPublishStartAttribute($val) {
+        if(is_array($val)) {
+            if(is_null($val['date'])) {
+                $val = null;
+            } else {
+                $val = join(' ', $val);// . ":00";
+            }
+        } 
+        $this->attributes['publish_start'] = $val;
+    }
+
+    
+    /**
+     * Publish dates are entered in split fields. Merge them
+     * 
+     * @return [type]
+     */
+    public function setPublishEndAttribute($val) {
+        if(is_array($val)) {
+            if(is_null($val['date'])) {
+                $val = null;
+            } else {
+                $val = join(' ', $val);// . ":00";
+            }
+        } 
+        $this->attributes['publish_end'] = $val;
+    }
+
     
     public function initializePublishable() {
 
