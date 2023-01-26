@@ -22,6 +22,10 @@
         @style('/css/admin-custom.css')
     @endif
 
+    @foreach(packageAssets()->getStylesheets() as $style)
+        @style($style)
+    @endforeach
+
     @script('/vendor/ascent/cms/ckeditor/ckeditor.js', false)
     @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js', false)
 
@@ -58,6 +62,11 @@
 
     @stack('lib')
     @stack('scripts')
+
+    @foreach(packageAssets()->getScripts() as $script)
+        @script($script)
+    @endforeach
+
     <script>
         $.ajaxSetup({
             headers: {
