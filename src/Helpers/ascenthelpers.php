@@ -239,6 +239,33 @@ function prevent_submit_on_enter() {
 
 
 
+function getRoutePrefix() {
+
+    $prefix = '';
+
+    $route = null;
+    
+    try {
+
+        $url = url()->current();
+
+        if($url) {
+            $route = app('router')->getRoutes()->match(app('request')->create($url));
+        }
+        
+    } catch (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
+        
+    } 
+
+    if($route) {
+        return $route->action['prefix'];
+    }
+
+    return 'No Prefix';
+}
+
+
+
 
 /**
  * 
