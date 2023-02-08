@@ -11,7 +11,6 @@ var ShowHide = {
     _init: function () {
 
         let self = this;
-        console.log('init ShowHide');
         $(document).on('change', this.process); 
 
         // need a call here to run all rules to set default state.

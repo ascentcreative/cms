@@ -863,7 +863,6 @@ var ShowHide = {
   self: null,
   _init: function _init() {
     var self = this;
-    console.log('init ShowHide');
     $(document).on('change', this.process); // need a call here to run all rules to set default state.
     // find all elements with data-showhide set and evaluate their rules.
     // more processor heavy than the incremental update on change...
