@@ -147,7 +147,7 @@ var ModalLink = {
                     }, 100);
                 }
 
-                // $('#ajaxModal').modal('hide');
+                $('#ajaxModal').modal('hide');
 
             } else {
 

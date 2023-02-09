@@ -521,8 +521,9 @@ var ModalLink = {
 
             window.URL.revokeObjectURL(data);
           }, 100);
-        } // $('#ajaxModal').modal('hide');
+        }
 
+        $('#ajaxModal').modal('hide');
       } else {
         // BUGGY CODE:
         // $(self.element).parents(".dropdown-menu").dropdown('hide');
