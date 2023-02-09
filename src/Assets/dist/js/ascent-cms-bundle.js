@@ -439,6 +439,27 @@ var ModalLink = {
         'Accept': "application/json",
         'ModalLink': 1,
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      xhr: function xhr() {
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          //   alert('here');
+          if (xhr.readyState == 2) {
+            // detect if we're getting a file in the response
+            var disposition = xhr.getResponseHeader('content-disposition');
+
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+              // if so, we'll interpret it as an arraybuffer (to create a BLOB to return to the user)
+              xhr.responseType = "arraybuffer";
+            } else {
+              // no attachment? Must be text-based / json / html etc
+              xhr.responseType = "text";
+            }
+          }
+        };
+
+        return xhr;
       }
     };
 
@@ -465,23 +486,62 @@ var ModalLink = {
     }
 
     $.ajax(ajaxConfig).done(function (data, xhr, request) {
-      // BUGGY CODE:
-      // $(self.element).parents(".dropdown-menu").dropdown('hide');
-      // The above removes all event handlers from the dropdown (annoyingly)
-      // so we'll fire a click from the document to force the DD to hide properly (if needed)
-      if ($(self.element).parents(".dropdown-menu").length > 0) {
-        $(document).trigger('click');
-      }
+      // check for incoming files.
+      var disposition = request.getResponseHeader('content-disposition');
 
-      var cType = request.getResponseHeader('content-type');
+      if (disposition && disposition.indexOf('attachment') !== -1) {
+        /** INCOMING DOWNLOAD!  */
+        // convert to a blob and pass to the DOM as an object which gets downloaded.
+        var contentType = request.getResponseHeader('content-type');
+        var file = new Blob([data], {
+          type: contentType
+        });
+        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+        var matches = filenameRegex.exec(disposition);
 
-      if (cType.indexOf('text/html') != -1) {
-        self.showResponseModal(data);
+        if (matches != null && matches[1]) {
+          filename = matches[1].replace(/['"]/g, '');
+        }
+
+        if ('msSaveOrOpenBlob' in window.navigator) {
+          window.navigator.msSaveOrOpenBlob(file, filename);
+        } // For Firefox and Chrome
+        else {
+          // Bind blob on disk to ObjectURL
+          var data = URL.createObjectURL(file);
+          var a = document.createElement("a");
+          a.style = "display: none";
+          a.href = data;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click(); // For Firefox
+
+          setTimeout(function () {
+            document.body.removeChild(a); // Release resource on disk after triggering the download
+
+            window.URL.revokeObjectURL(data);
+          }, 100);
+        } // $('#ajaxModal').modal('hide');
+
       } else {
-        //   alert(cType);
-        window.location.href = self.targetPath; // close any open modals!
+        // BUGGY CODE:
+        // $(self.element).parents(".dropdown-menu").dropdown('hide');
+        // The above removes all event handlers from the dropdown (annoyingly)
+        // so we'll fire a click from the document to force the DD to hide properly (if needed)
+        if ($(self.element).parents(".dropdown-menu").length > 0) {
+          $(document).trigger('click');
+        }
 
-        $('.modal').modal('hide');
+        var cType = request.getResponseHeader('content-type');
+
+        if (cType.indexOf('text/html') != -1) {
+          self.showResponseModal(data);
+        } else {
+          //   alert(cType);
+          window.location.href = self.targetPath; // close any open modals!
+
+          $('.modal').modal('hide');
+        }
       }
     }).fail(function (data) {
       // hopefully this won't ever fail as we did the HEAD first
