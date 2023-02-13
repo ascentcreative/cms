@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Schema;
 
@@ -224,17 +226,19 @@ class CMSServiceProvider extends ServiceProvider
         \AscentCreative\CMS\Commands\ZendImportUsers::class,
     ]);
 
-    // for web requests, work out what the menu item might be.
-    if (!app()->runningInConsole()) {
-        $this->resolveMenuItem();
-    }
-    
+   
 
     if(env('LOG_QUERIES')) {
         \DB::listen(function ($query) {
             \Log::info($query->sql . ' - Bind: [' . join(', ', $query->bindings) . '] - Time: ' . $query->time);
        });   
     }
+
+     // for web requests, work out what the menu item might be.
+     if (!app()->runningInConsole()) {
+        $this->resolveMenuItem();
+    }
+    
 
 
     resolve(EngineManager::class)->extend('ascent', function () {
@@ -300,7 +304,22 @@ class CMSServiceProvider extends ServiceProvider
      */
    // $result = $model;
 
-    $menuitem = \AscentCreative\CMS\Models\MenuItem::where('url', '/' . request()->path())->first();
+    
+    // Log::debug('resolve menu item');
+
+    // $menuitem = \AscentCreative\CMS\Models\MenuItem::where(DB::Raw('concat(url, "%")'), 'like', '/' . request()->path())->first();
+
+    $menuitem = \AscentCreative\CMS\Models\MenuItem::whereRaw('"/' . request()->path() . '" like concat(url, "%")')->first(); //DB::Raw('concat(url, "%")'), 'like', '/' . request()->path())->first();
+
+    // dd($menuitem);
+
+    // $menuitem = \AscentCreative\CMS\Models\MenuItem::where('url', '/' . request()->path())->first();
+    
+    // dd(\AscentCreative\CMS\Models\MenuItem::where('url', '/' . request()->path())->first());
+
+    // Log::debug('end resolve');
+
+    // dd($menuitem);
 
     view()->composer('*', function ($view) use ($menuitem) {
 
