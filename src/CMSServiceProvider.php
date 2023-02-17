@@ -437,6 +437,7 @@ class CMSServiceProvider extends ServiceProvider
     Blade::component('cms-form-stackblock-rowitem', 'AscentCreative\CMS\View\Components\Form\StackBlock\RowItem');
 
     Blade::component('cms-modal', 'AscentCreative\CMS\View\Components\Modal');
+    Blade::component('cms-toast', 'AscentCreative\CMS\View\Components\Toast');
 
   }
 
