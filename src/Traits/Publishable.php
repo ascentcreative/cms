@@ -54,6 +54,11 @@ trait Publishable {
     }
 
 
+    public function scopeWithUnpublished($q) {
+        return $q->withoutGlobalScope('published');
+    }
+
+
 
     /**
      * Publish dates are entered in split fields. Merge them
