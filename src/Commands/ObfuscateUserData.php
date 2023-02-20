@@ -52,18 +52,22 @@ class ObfuscateUserData extends Command
             return 1;
         }
 
-        $faker = \Faker\Factory::create();
+        $faker = \Faker\Factory::create(User::class, 4000);
 
         $users = User::whereDoesntHave('roles', function($q) {
             $q->where('name', 'admin');
         })->get();
 
         foreach($users as $user) {
-            $user->update([
-                'first_name'=>$faker->firstName,
-                'last_name'=>$faker->lastName,
-                'email'=>$faker->email,
-            ]);
+            try {
+                $user->update([
+                    'first_name'=>$faker->firstName,
+                    'last_name'=>$faker->lastName,
+                    'email'=>$faker->email,
+                ]);
+            } catch (\Exception $e) {
+
+            }
         }
 
         return 0;

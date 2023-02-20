@@ -26,6 +26,10 @@
         @style($style)
     @endforeach
 
+    @foreach(packageAssets()->getStylesheets('admin') as $style)
+        @style($style)
+    @endforeach
+
     @script('/vendor/ascent/cms/ckeditor/ckeditor.js', false)
     @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js', false)
 

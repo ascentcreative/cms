@@ -9,39 +9,39 @@ class PackageAssets {
 
    
 
-    public static function addStylesheet($val) {
+    public static function addStylesheet($val, $context='global') {
 
         $inst = app(PackageAssets::class);
 
-        $inst->_css[] = $val;
+        $inst->_css[$context][] = $val;
 
         return $inst;
 
     }
 
-    public static function addScript($val) {
+    public static function addScript($val, $context='global') {
 
         $inst = app(PackageAssets::class);
 
-        $inst->_js[] = $val;
+        $inst->_js[$context][] = $val;
 
         return $inst;
 
     }
 
-    public static function getStylesheets() {
+    public static function getStylesheets($context='global') {
 
         $inst = app(PackageAssets::class);
 
-        return $inst->_css;
+        return $inst->_css[$context];
 
     }
 
-    public static function getScripts() {
+    public static function getScripts($context='global') {
 
         $inst = app(PackageAssets::class);
 
-        return $inst->_js;
+        return $inst->_js[$context];
 
     }
 

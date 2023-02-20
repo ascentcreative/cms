@@ -31,6 +31,10 @@ class CMSServiceProvider extends ServiceProvider
   public function register()
   {
 
+    // Register the helpers php file which includes convenience functions:
+    require_once (__DIR__.'/Helpers/ascenthelpers.php');
+
+
     $this->app->register(\AscentCreative\CMS\Providers\EventServiceProvider::class);
 
     $this->app->register(\Jenssegers\Agent\AgentServiceProvider::class);
@@ -199,8 +203,6 @@ class CMSServiceProvider extends ServiceProvider
 
     $this->bootFortify();
 
-    // Register the helpers php file which includes convenience functions:
-    require_once (__DIR__.'/Helpers/ascenthelpers.php');
 
     $this->bootDirectives();
     $this->bootComponents();
