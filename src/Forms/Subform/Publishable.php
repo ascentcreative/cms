@@ -11,7 +11,7 @@ class Publishable extends Subform {
     public function initialise() {
         return $this->children([
 
-            HTML::make('<div class="border p-2 ml-5" style="flex-basis: 300px;">', '</div>')
+            HTML::make('<div class="xborder px-3 xml-5" style="xflex-basis: 300px;">', '</div>')
                 ->children([
 
                     Checkbox::make('publishable', 'Ready to Publish?')
