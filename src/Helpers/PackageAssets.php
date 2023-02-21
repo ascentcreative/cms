@@ -33,7 +33,7 @@ class PackageAssets {
 
         $inst = app(PackageAssets::class);
 
-        return $inst->_css[$context];
+        return $inst->_css[$context] ?? [];
 
     }
 
@@ -41,7 +41,7 @@ class PackageAssets {
 
         $inst = app(PackageAssets::class);
 
-        return $inst->_js[$context];
+        return $inst->_js[$context] ?? [];
 
     }
 
