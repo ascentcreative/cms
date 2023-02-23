@@ -30,10 +30,7 @@
         @style($style)
     @endforeach
 
-    {{-- @push('scripts')
-        @script('/vendor/ascent/cms/ckeditor/ckeditor.js', false)
-        @script('/vendor/ascent/cms/ckeditor/adapters/jquery.js', false)
-    @endpush --}}
+ 
 
     @style('/vendor/ascent/cms/dist/css/ascent-cms-bundle.css')
     @style('/vendor/ascent/forms/dist/css/ascent-forms-bundle.css')
