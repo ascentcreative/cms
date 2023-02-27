@@ -170,14 +170,21 @@ class CMSServiceProvider extends ServiceProvider
    */
   public function registerRouteMacros() {
 
-    \Illuminate\Support\Facades\Route::macro('autocomplete', function($segment, $class, $label='title') {
+    \Illuminate\Support\Facades\Route::macro('autocomplete', function($segment, $class, $label='title', $opts=[]) {
 
-        Route::match(['post','get'], '/autocomplete/' . $segment, function() use ($class, $label) {
+        Route::match(['post','get'], '/autocomplete/' . $segment, function() use ($class, $label, $opts) {
 
             $term = request()->term;
 
             // $cls = new $class();
-            $items = $class::autocomplete($term)->get();
+            $items = $class::autocomplete($term);
+            
+            if(isset($opts['scope'])) {
+                $scope = $opts['scope'];
+                $items->$scope();
+            }
+
+            $items= $items->get();
 
             $items->transform(function($item) use ($label) {
                 return [
