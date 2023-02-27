@@ -15,8 +15,9 @@ class Modal extends Component
 
     public $modalShowHeader = true;
     public $modalShowFooter = true;
+    public $fade = 'fade';
 
-    public function __construct($modalid='ajaxModal', $modalclass='', $title='', $closebutton=true, $centered=false, $showHeader=true, $showFooter=true, $size="modal-lg") {
+    public function __construct($modalid='ajaxModal', $modalclass='', $title='', $closebutton=true, $centered=false, $showHeader=true, $showFooter=true, $size="modal-lg", $fade=true) {
 
        // dd($modalid);
 
@@ -29,6 +30,8 @@ class Modal extends Component
         $this->modalShowHeader = $showHeader;
         $this->modalShowFooter = $showFooter;
         $this->size = $size;
+
+        $this->fade = $fade ? 'fade' : '';
 
     }
 
