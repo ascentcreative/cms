@@ -169,7 +169,7 @@ H1, H2 {
     margin-left: 10px;
 }
 
-button::before, A.btn::before {
+button:not(.btn-no-pad-icon)::before, A.btn:not(.btn-no-pad-icon)::before {
     margin-right: 0.5em;
 }
 
