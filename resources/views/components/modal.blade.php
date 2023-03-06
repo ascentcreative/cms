@@ -7,9 +7,11 @@
 
         @if($modalShowHeader ?? true)
           <div class="modal-header">
+            @if($title)
             <h5 class="modal-title" id="exampleModalLabel">
                 {{ $title }}
             </h5>
+            @endif
 
             @if($closebutton)
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
