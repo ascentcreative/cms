@@ -341,7 +341,8 @@ abstract class AdminBaseController extends Controller
 
             $model = ($this::$modelClass)::make();
 
-            $form = new $formClass();
+            // $form = new $formClass();
+            $form = ($this::$formClass)::make();
 
             $addTraits = false;
             foreach(class_uses($model) as $trait) {
