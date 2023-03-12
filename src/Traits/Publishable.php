@@ -32,15 +32,7 @@ trait Publishable {
         // apply a global scope which automatically wires in the publishing settings
         // TODO: This needs to play better with the admin area (i.e. not apply there at all so hidden items still connect where needed)
         static::addGlobalScope('published', function (Builder $builder) {
-            $builder->where('publishable', '=', '1') 
-                    ->where(function($query) { 
-                        $query->whereDate('publish_start', '<', date('Y-m-d H:i:s'))
-                            ->orWhereNull('publish_start');
-                    })
-                    ->where(function($query) { 
-                        $query->whereDate('publish_end', '>=', date('Y-m-d H:i:s'))
-                            ->orWhereNull('publish_end');
-                    });
+                $builder->published();
         });
 
         // apply a global scope for sorting publishable objects:
@@ -53,6 +45,18 @@ trait Publishable {
 
     }
 
+
+    public function scopePublished($builder) {
+        $builder->where($this->table . '.publishable', '=', '1') 
+            ->where(function($query) { 
+                $query->whereDate($this->table . '.publish_start', '<', date('Y-m-d H:i:s'))
+                    ->orWhereNull($this->table . '.publish_start');
+            })
+            ->where(function($query) { 
+                $query->whereDate($this->table . '.publish_end', '>=', date('Y-m-d H:i:s'))
+                    ->orWhereNull($this->table . '.publish_end');
+            });
+    }
 
     public function scopeWithUnpublished($q) {
         return $q->withoutGlobalScope('published');
