@@ -18,9 +18,9 @@
 
         @section('headactions')
             <BUTTON type="submit" class="btn btn-primary bi-check-circle-fill" class="button">Save {{$modelName}}</BUTTON>
-            <A href="{{ session('last_index') }}" class="btn btn-primary bi-x-circle-fill">{{-- Close {{$modelName}} --}} Exit Without Saving</A>
+            <A href="{{ getReturnUrl() }}" class="btn btn-primary bi-x-circle-fill">{{-- Close {{$modelName}} --}} Exit Without Saving</A>
         @show 
-        
+    
     </nav>
 
 @endsection

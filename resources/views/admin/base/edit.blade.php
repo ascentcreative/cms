@@ -49,7 +49,7 @@
 
 @section('screen-end')
 
-        <input type="hidden" name="_postsave" value="{{ old('_postsave', session('last_index')) }}" />
+        <input type="hidden" name="_postsave" value="{{ old('_postsave', getReturnUrl() ) }}" />
 
     {{-- ClOSE FORM TAG --}}
     </form>

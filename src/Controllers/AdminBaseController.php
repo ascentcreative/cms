@@ -450,6 +450,10 @@ abstract class AdminBaseController extends Controller
     {
 
         $cls = $this::$modelClass;
+
+        if(!session()->has('errors')) {
+            storeReturnUrl();
+        }
         
         if (is_null($id)) {
          
@@ -480,6 +484,10 @@ abstract class AdminBaseController extends Controller
     public function edit($id=null)
     {
         $cls = ($this::$modelClass);
+
+        if(!session()->has('errors')) {
+            storeReturnUrl();
+        }
         
         if (is_null($id)) {
 

@@ -343,3 +343,23 @@ function strip_tags_leaving_spaces($input) {
     return str_replace('  ', ' ', strip_tags(str_replace('<', ' <', $input)));
 
 }
+
+function storeReturnUrl() {
+    session(['return_url.' . md5(url()->current())=>$_SERVER['HTTP_REFERER']]);
+}
+
+function getReturnUrl($url=null) {
+    if (is_null($url)) {
+        $url = url()->current();
+    }
+
+    $key = md5($url);
+
+    if(session()->has('return_url')) {
+        $lookup = session()->get('return_url');
+        if(isset($lookup[$key])) {
+            return $lookup[$key];
+        }
+    }
+
+}

@@ -12,7 +12,7 @@ class BaseForm extends Form {
 
         $this->children([
             Input::make('_postsave', null, 'hidden')
-                    ->value(old('_postsave', session('last_index')))
+                    ->value(old('_postsave', getReturnUrl() ))
                     ->wrapper('none'),
         ]);
 
