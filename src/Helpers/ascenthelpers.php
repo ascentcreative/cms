@@ -12,6 +12,12 @@ function autoVersion($file, $min=true) {
 			return $file;
 		}
 		
+        if(env("DISABLE_AUTOMINIFICATION", false)) {
+            return $file;
+        }
+
+        
+
 		// if not a local file, or it just doesn't exist, bail
 		if(strpos($file, '/') !== 0 || !file_exists($_SERVER['DOCUMENT_ROOT'] . $file)) {
 			return $file;
