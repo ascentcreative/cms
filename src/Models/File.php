@@ -51,7 +51,11 @@ class File extends Base
     }
 
     public function getMimetypeAttribute() {
-        return mime_content_type($this->fullpath);
+        try {
+            return mime_content_type($this->fullpath);
+        } catch(\Exception $e) {
+            return '';
+        }
     }
 
 

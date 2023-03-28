@@ -42,7 +42,7 @@ trait HasAttachments {
 
     /* define the relationship */
     public function attachments() {
-        return $this->morphMany(\AscentCreative\CMS\Models\File::class, 'attachedto');
+        return $this->morphMany(\AscentCreative\CMS\Models\File::class, 'attachedto')->orderby('attachedto_sort');
      }
 
 
@@ -69,6 +69,13 @@ trait HasAttachments {
         // - save files which are (will consolidate existing and add new)
         $this->attachments()->saveMany(\AscentCreative\CMS\Models\File::whereIn('id', $ids)->get());
 
+        // FUDGE - due to the fact that the files are saved on upload, 
+        // they don't respect / capture their sort order in the UI field.
+        // So, we need to loop through and assign the index from the $ids array. 
+        foreach($this->attachments as $att) {
+            $att->attachedto_sort = array_search($att->id, $ids);
+            $att->save();
+        }
 
 
 
