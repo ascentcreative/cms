@@ -172,6 +172,11 @@ class CMSServiceProvider extends ServiceProvider
 
     \Illuminate\Support\Facades\Route::macro('autocomplete', function($segment, $class, $label='title', $opts=[]) {
 
+        $name = $segment . '.autocomplete';
+        if(isset($opts['routename'])) {
+            $name = $opts['routename'];
+        }
+
         Route::match(['post','get'], '/autocomplete/' . $segment, function() use ($class, $label, $opts) {
 
             $term = request()->term;
@@ -198,7 +203,7 @@ class CMSServiceProvider extends ServiceProvider
 
             
 
-        })->name($segment . '.autocomplete');
+        })->name($name);
 
     });
 
