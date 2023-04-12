@@ -380,8 +380,10 @@ abstract class AdminBaseController extends Controller
     public function create()
     {
 
-        storeReturnUrl();
-
+        if(!session()->has('errors')) {
+            storeReturnUrl();
+        }
+        
         if(in_array('create', $this->authorize)) {
             $this->authorize('create', $this::$modelClass);
         }
