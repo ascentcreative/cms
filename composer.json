@@ -23,7 +23,6 @@
     "guizoxxv/laravel-multi-size-image": "^0.2.0" ,
     "ascentcreative/help": "dev-master",
     "ascentcreative/forms": "dev-dev",
-    "ascentcreative/pagebuilder": "1.0",
     "ascentcreative/sitesearch": "dev-dev"
   },
   "autoload": {
