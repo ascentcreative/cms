@@ -20,9 +20,9 @@
 
             <div xclass="flex flex-between" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center">
                 
-                <x-filter-counter class="small text-small" unit="record"/>
+                <x-filter-counter filterManager="{{ $fm }}" class="small text-small" unit="record"/>
 
-                <x-filter-paginator blade="bootstrap-4" class="flex flex-center small text-small"/>
+                <x-filter-paginator filterManager="{{ $fm }}" blade="bootstrap-4" class="flex flex-center small text-small"/>
 
                 <x-filter-pagesize />
             
