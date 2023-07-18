@@ -380,6 +380,9 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     })->name('msf.validate');
 
 
+    Route::get('/cms/swatches.css', [AscentCreative\CMS\Controllers\SwatchesController::class, 'css']);
+    
+
 });
 
 
@@ -389,12 +392,12 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
 
 
-Route::get('/cms/welcomeemail/{order}', function (\App\Models\User $user) {
+// Route::get('/cms/welcomeemail/{order}', function (\App\Models\User $user) {
 
-    $mail = new AscentCreative\CMS\Notifications\WelcomeEmailNotification($user);
-    return $mail->toMail('a@b.com');
+//     $mail = new AscentCreative\CMS\Notifications\WelcomeEmailNotification($user);
+//     return $mail->toMail('a@b.com');
 
-});
+// });
 
 /**
  * for pathless page routing, put this line at teh end of the App's web.php
