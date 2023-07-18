@@ -71,6 +71,10 @@
         @script($script)
     @endforeach
 
+    @foreach(packageAssets()->getScripts('admin') as $script)
+        @script($script)
+    @endforeach
+
     <script>
         $.ajaxSetup({
             headers: {
