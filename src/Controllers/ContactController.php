@@ -100,9 +100,16 @@ class ContactController extends Controller
 
         // forward to confirmation page.
         // done either way so as not to let on to the spammers...
-
-        return redirect('/contact/confirm');
-
+        session()->flash('enquiry_received', 1);
+        $page_id = app(\AscentCreative\CMS\Settings\SiteSettings::class)->contact_confirm_page_id;
+        $page = \AscentCreative\CMS\Models\Page::find($page_id);
+            
+        if($page) {
+            return app()->make(\AscentCreative\CMS\Controllers\PageController::class)->show($page);
+        } else {
+            return redirect($_SERVER['HTTP_REFERER']);
+        }
+        
     }
 
 
