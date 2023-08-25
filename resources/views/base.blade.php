@@ -72,6 +72,14 @@
 
         @stack('scripts')
 
+        <script>
+             $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
+
         {!! app(AscentCreative\CMS\Settings\SiteSettings::class)->custom_body_tags_end !!}
 
     </body>
