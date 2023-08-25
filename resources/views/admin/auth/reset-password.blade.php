@@ -30,15 +30,15 @@
             @csrf
             
             <div class="pt-3">
-                <x-cms-form-input type="text" name="email" label="Email" value="{{ old('email', request()->email ) }}" wrapper="compound"/>
+                <x-cms-form-input type="text" name="email" label="Email" value="{{ old('email', request()->email ) }}" wrapper="simple"/>
             </div>
 
             <div class="pt-3">
-           <x-cms-form-input type="password" name="password" label="Password" value="{{ old('password','') }}"  wrapper="compound"/>
+           <x-cms-form-input type="password" name="password" label="Password" value="{{ old('password','') }}"  wrapper="simple"/>
         </div>
 
         <div class="pt-3">
-           <x-cms-form-input type="password" name="password_confirmation" label="Confirm password" value="{{ old('password_confirmation','') }}"  wrapper="compound"/>
+           <x-cms-form-input type="password" name="password_confirmation" label="Confirm password" value="{{ old('password_confirmation','') }}"  wrapper="simple"/>
               
         </div>
            

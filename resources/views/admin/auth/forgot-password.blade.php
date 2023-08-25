@@ -31,7 +31,7 @@
             @csrf
 
             <div class="pt-3">
-            <x-cms-form-input type="text" name="email" label="Email" value="{{ old('email','') }}" wrapper="compound"/>
+            <x-cms-form-input type="text" name="email" label="Email" value="{{ old('email','') }}" wrapper="simple"/>
             </div>
 
              {{-- <x-cms-form-input type="text" name="email" label="Email" value="{{ old('email','') }}" wrapper="simple"/> --}}
