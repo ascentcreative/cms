@@ -15,10 +15,10 @@
                 @csrf
 
                 <div class="pt-3 pb-3">
-                <x-cms-form-input type="text" name="email" label="Email" value="{{ old('email','') }}" wrapper="simple"/>
+                <x-cms-form-input type="text" name="email" label="Email" value="{{ old('email','') }}" wrapper="compound"/>
                 </div>
 
-                <x-cms-form-input type="password" name="password" label="Password" value="{{ old('password','') }}" wrapper="simple"/>
+                <x-cms-form-input type="password" name="password" label="Password" value="{{ old('password','') }}" wrapper="compound"/>
 
                 @if(env("APP_ENV") != "production")
                     <div class="alert alert-warning mt-4 text-center rounded border" role="alert">
