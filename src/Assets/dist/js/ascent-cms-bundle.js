@@ -33,15 +33,7 @@ var MultiStepForm = {
     $(this.element).on('step-back', function (e) {
       $(e.target).multistepformstep('hide');
       $(e.target).prevAll('.msf-step:not(.msf-disabled)').first().multistepformstep('show');
-    }); // Error Message removal - disabled
-    // $(this.element).on('change', 'input, select, textarea', function() {
-    //     // console.log($(this).attr('name'));
-    //     try {
-    //         $('.error-display[for="' + $(this).attr('name').replace(/\[/g, '.').replace(/\]/g, '') + '"]').html('');
-    //     } catch (e) {
-    //         // nevermind
-    //     }
-    // });
+    });
   },
   setOptions: function setOptions($opts) {// replace the existing options with the provided array
   },
@@ -59,6 +51,7 @@ var MultiStepForm = {
  */
 
 var MultiStepFormStep = {
+  validated: false,
   _init: function _init() {
     var self = this; // console.log(this);
     //    cosnsole.log($(this.element).data('validators'));
@@ -73,6 +66,15 @@ var MultiStepFormStep = {
     $(this.element).on('click', '.msf-back', function () {
       // return to previous step (note - no validation needed)
       $(self.element).trigger('step-back');
+    }); // if validation has already happened once, reattempt validation after every field change
+    // so the errors update in real time...
+    // alert('ok');
+
+    $(this.element).on('change', function () {
+      if (self.validated) {
+        self.validate();
+      } // alert('change');
+
     });
   },
   setOptions: function setOptions($opts) {// replace the existing options with the provided array
@@ -128,6 +130,7 @@ var MultiStepFormStep = {
           alert(data.statusText + " - " + data.responseJSON.message);
       }
     });
+    this.validated = true;
     return success;
   },
   // removes the step from the form flow

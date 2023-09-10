@@ -53,18 +53,6 @@ var MultiStepForm = {
         });
 
 
-        // Error Message removal - disabled
-        // $(this.element).on('change', 'input, select, textarea', function() {
-        //     // console.log($(this).attr('name'));
-        //     try {
-        //         $('.error-display[for="' + $(this).attr('name').replace(/\[/g, '.').replace(/\]/g, '') + '"]').html('');
-        //     } catch (e) {
-        //         // nevermind
-        //     }
-        // });
-
-       
-        
     }, 
 
     setOptions: function($opts) {
@@ -93,6 +81,8 @@ var MultiStepForm = {
 var MultiStepFormStep = {
 
 
+    validated: false,
+
     _init: function () {
 
        var self = this;
@@ -116,6 +106,15 @@ var MultiStepFormStep = {
         });
 
   
+        // if validation has already happened once, reattempt validation after every field change
+        // so the errors update in real time...
+        // alert('ok');
+        $(this.element).on('change', function() {
+            if(self.validated) {
+                self.validate();
+            }
+            // alert('change');
+        });
         
     }, 
 
@@ -191,6 +190,8 @@ var MultiStepFormStep = {
             }
 
         });
+
+        this.validated = true;
 
         return success;
 

@@ -19,6 +19,12 @@ class FormStep extends Component
     public $backLabel;
     public $backIcon;
 
+    // allows the buttons to be switched off so custom operation
+    // (especially on the 'commit' step) can be implemented
+    public $showButtons=true;
+    public $showBackButton=true;
+    public $showContinueButton=true;
+
 
     /**
      * Create a new component instance.
@@ -27,7 +33,8 @@ class FormStep extends Component
      */
     public function __construct($label, $icon = '', $validators = [], $validatormessages = [], 
                                     $continueLabel="Continue", $continueIcon="bi-caret-right-fill",
-                                    $backLabel="Back", $backIcon="bi-caret-left-fill"
+                                    $backLabel="Back", $backIcon="bi-caret-left-fill", 
+                                    $showButtons = true, $showBackButton = true, $showContinueButton = true
                         )
     {
         //
@@ -41,6 +48,10 @@ class FormStep extends Component
 
         $this->backLabel = $backLabel;
         $this->backIcon = $backIcon;
+
+        $this->showButtons = $showButtons;
+        $this->showBackButton = $showBackButton;
+        $this->showContinueButton = $showContinueButton;
 
     }
 

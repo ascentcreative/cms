@@ -18,23 +18,33 @@
 
     {{ $slot }}
 
+    @if($showButtons)
     <div class="msf-nav">
 
-        <div class="m-2 m-sm-5 text-right">
+        <div class="m-2 m-sm-5  flex flex-between">
 
             {{-- Don't show this button on the first tab  --}}
             {{-- @if($idxStep != 0) --}}
-                <button class="btn btn-secondary prevBtn pull-right msf-back {{ $backIcon }}" 
-                type="button"> {{ $backLabel }}</button>
+                <div>
+                    @if($showBackButton)
+                    <button class="btn btn-secondary prevBtn xpull-right msf-back {{ $backIcon }}" 
+                    type="button"> {{ $backLabel }}</button>
+                    @endif
+                </div>
             {{-- @endif --}}
 
-            <button class="btn btn-primary nextBtn pull-right msf-continue {{ $continueIcon }}" 
-            type="button"> {{ $continueLabel }}</button>
+                <div>
+                    @if($showContinueButton)
+                    <button class="btn btn-primary nextBtn pull-right msf-continue {{ $continueIcon }}" 
+                    type="button"> {{ $continueLabel }}</button>
+                    @endif
+                </div>
 
             {{-- Maybe the last step should have a different label? --}}
 
         </div>
 
     </div>
+    @endif
 
 </div>
