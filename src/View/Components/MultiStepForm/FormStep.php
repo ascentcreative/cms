@@ -15,6 +15,7 @@ class FormStep extends Component
 
     public $continueLabel;
     public $continueIcon;
+    public $continueIconAlign='left';
 
     public $backLabel;
     public $backIcon;
@@ -32,7 +33,7 @@ class FormStep extends Component
      * @return void
      */
     public function __construct($label, $icon = '', $validators = [], $validatormessages = [], 
-                                    $continueLabel="Continue", $continueIcon="bi-caret-right-fill",
+                                    $continueLabel="Continue", $continueIcon="bi-caret-right-fill", $continueIconAlign='left',
                                     $backLabel="Back", $backIcon="bi-caret-left-fill", 
                                     $showButtons = true, $showBackButton = true, $showContinueButton = true
                         )
@@ -45,6 +46,7 @@ class FormStep extends Component
 
         $this->continueLabel = $continueLabel;
         $this->continueIcon = $continueIcon;
+        $this->continueIconAlign = $continueIconAlign;
 
         $this->backLabel = $backLabel;
         $this->backIcon = $backIcon;

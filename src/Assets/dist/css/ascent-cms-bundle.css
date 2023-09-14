@@ -101,3 +101,11 @@ ol.step-display li.current ~ li:after {
 .msf-step {
     display: none;
 }
+
+
+button.msf-continue.icon-right {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 0.5rem;
+}

@@ -35,7 +35,7 @@
 
                 <div>
                     @if($showContinueButton)
-                    <button class="btn btn-primary nextBtn pull-right msf-continue {{ $continueIcon }}" 
+                    <button class="btn btn-primary nextBtn pull-right msf-continue icon-{{ strtolower($continueIconAlign) }} {{ $continueIcon }}" 
                     type="button"> {{ $continueLabel }}</button>
                     @endif
                 </div>
