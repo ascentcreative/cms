@@ -44,7 +44,9 @@
         
         <form id="logout-form" action="{{ route('logout') }}" method="POST">
             @csrf
-            <input type="hidden" name="intended" value="{{ request()->path() }}" />
+            @if(config('cms.logout.remember_path', 1))
+                <input type="hidden" name="intended" value="{{ request()->path() }}" />
+            @endif
          </form>
 
          {{ cookieManager() }}

@@ -77,6 +77,12 @@ return [
     //     '/admin' => ['admin.auth', 'cms::auth'],
     // ],
 
+    /**
+     * Logout options
+     */
+    'logout' => [
+        'remember_path' => 1,
+    ],
 
     /**
      * Social Media Account options:
