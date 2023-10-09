@@ -83,7 +83,8 @@ abstract class AdminBaseController extends Controller
         $ary = explode('\\', $this::$modelClass);
         $short = array_pop($ary);
 
-        $modelName = $short ?? $this->modelName;
+        // $modelName = $short ?? $this->modelName;
+        $modelName = $this->modelName ?? $short;
 
         $modelNameHuman = $this->modelNameHuman ?? trim(join(' ', preg_split('/(?=[A-Z])/',$modelName)));
 
