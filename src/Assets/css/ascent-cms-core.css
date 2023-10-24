@@ -415,3 +415,11 @@ body .ui-front {
 .inline-wrapper label {
     margin-bottom: 0;
 }
+
+/* text utilities */
+
+.text-ellipsis {
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+}
