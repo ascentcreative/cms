@@ -26,6 +26,8 @@ class FormStep extends Component
     public $showBackButton=true;
     public $showContinueButton=true;
 
+    public $liveRevalidate = true;
+
 
     /**
      * Create a new component instance.
@@ -35,7 +37,8 @@ class FormStep extends Component
     public function __construct($label, $icon = '', $validators = [], $validatormessages = [], 
                                     $continueLabel="Continue", $continueIcon="bi-caret-right-fill", $continueIconAlign='left',
                                     $backLabel="Back", $backIcon="bi-caret-left-fill", 
-                                    $showButtons = true, $showBackButton = true, $showContinueButton = true
+                                    $showButtons = true, $showBackButton = true, $showContinueButton = true,
+                                    $liveRevalidate = true
                         )
     {
         //
@@ -54,6 +57,8 @@ class FormStep extends Component
         $this->showButtons = $showButtons;
         $this->showBackButton = $showBackButton;
         $this->showContinueButton = $showContinueButton;
+
+        $this->liveRevalidate = $liveRevalidate;
 
     }
 

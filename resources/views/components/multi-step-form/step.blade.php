@@ -12,7 +12,7 @@
 
 <div class="msf-step" id="msf-step-{{ Str::slug($label) }}" data-stepslug="{{ Str::slug($label) }}" data-validators="{{
     Crypt::encryptString(json_encode(['validators'=>$validators, 'messages'=>$validatormessages]));        
-}}">
+}}" data-live-revalidate="{{ $liveRevalidate }}">
 
   
 

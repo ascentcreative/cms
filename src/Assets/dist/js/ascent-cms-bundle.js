@@ -68,10 +68,11 @@ var MultiStepFormStep = {
       $(self.element).trigger('step-back');
     }); // if validation has already happened once, reattempt validation after every field change
     // so the errors update in real time...
+    //  - added ability to disable this on a given step
     // alert('ok');
 
-    $(this.element).on('change', function () {
-      if (self.validated) {
+    $(this.element).on('change', function (e) {
+      if (self.validated && $(self.element).data('live-revalidate') != false) {
         self.validate();
       } // alert('change');
 
