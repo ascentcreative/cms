@@ -465,9 +465,12 @@ class CMSServiceProvider extends ServiceProvider
   // create custom / convenience Blade @Directives 
   public function bootDirectives() {
 
+    Blade::directive('module', function ($file, $min=true) {
+        return '<SCRIPT type="module" src="<?php echo autoVersion(' . $file . ', ' . $min . '); ?>"></SCRIPT>';
+    });
 
-    Blade::directive('script', function ($file, $min=true, $module=false) {
-      return '<SCRIPT' . ($module ? ' type="module"' : '') . ' src="<?php echo autoVersion(' . $file . ', ' . $min . '); ?>"></SCRIPT>';
+    Blade::directive('script', function ($file, $min=true) {
+      return '<SCRIPT src="<?php echo autoVersion(' . $file . ', ' . $min . '); ?>"></SCRIPT>';
     });
 
     Blade::directive('style', function ($file) {
