@@ -14,7 +14,13 @@ class HeadTitle {
         //$this->_elements[] = config('app.name');
 
     }
+    
 
+    public static function rebase($val) {
+        $inst = app(HeadTitle::class);
+        $inst->_elements[0] = $val;
+        return $inst;
+    }
 
     public static function add($val) {
 
