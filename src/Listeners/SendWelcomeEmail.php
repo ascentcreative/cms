@@ -30,7 +30,9 @@ class SendWelcomeEmail
     public function handle($event)
     {
         //
-        Notification::send($event->user, new WelcomeEmailNotification($event->user));   
+        if(config('cms.send_welcome_email', 1)) {
+            Notification::send($event->user, new WelcomeEmailNotification($event->user));   
+        }
 
     }
 }

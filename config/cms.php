@@ -59,6 +59,7 @@ return [
 
 
 
+    'send_welcome_email' => 1,
 
     /**
      * CONTACT FORM SETTINGS
