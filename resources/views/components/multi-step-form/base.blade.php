@@ -1,5 +1,5 @@
 
-<form class="multistepform" method="{{ $method }}" action="{{ $action }}">
+<form class="multistepform" method="{{ $method }}" action="{{ $action }}" @if($id) id="{{ $id }}" @endif>
 
     @csrf
 

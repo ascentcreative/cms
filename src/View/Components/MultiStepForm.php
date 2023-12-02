@@ -10,17 +10,19 @@ class MultiStepForm extends Component
     public $progress;
     public $action;
     public $method;
+    public $id;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($action, $method='POST')
+    public function __construct($action, $method='POST', $id='')
     {
         //
         $this->action = $action;
         $this->method = $method;
+        $this->id = $id;
        
 
     }
