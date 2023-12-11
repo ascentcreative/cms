@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 
 /**
  * Used a convenient jumping off point for all models in the package.
- * Essentially just prefixes all child models' table names with 'checkout_'. 
  */
 class Base extends Model
 {
