@@ -73,7 +73,7 @@ var MultiStepFormStep = {
 
     $(this.element).on('change', function (e) {
       if (self.validated && $(self.element).data('live-revalidate') != false) {
-        self.validate();
+        self.validate(false);
       } // alert('change');
 
     });
@@ -81,6 +81,7 @@ var MultiStepFormStep = {
   setOptions: function setOptions($opts) {// replace the existing options with the provided array
   },
   validate: function validate() {
+    var scrollToFirst = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
     var success = false;
     var self = this; // clear any existing form errors
 
@@ -104,6 +105,7 @@ var MultiStepFormStep = {
         case 422:
           // validation fail
           var errors = self.flattenObject(data.responseJSON.errors);
+          var scrollToName = '';
 
           for (fldname in errors) {
             var undotArray = fldname.split('.');
@@ -121,6 +123,17 @@ var MultiStepFormStep = {
             }
 
             $('.error-display[for="' + aryname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' + val + '</small>');
+
+            if (scrollToName == '' && scrollToFirst) {
+              scrollToName = aryname;
+              console.log(aryname);
+              var position = $('input[name="' + aryname + '"')[0].getBoundingClientRect();
+              window.scrollTo({
+                top: position.top + window.scrollY - 100,
+                left: position.left,
+                behavior: 'smooth'
+              });
+            }
           } // need to display these errors:
 
 

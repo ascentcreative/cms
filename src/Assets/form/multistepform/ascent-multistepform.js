@@ -113,7 +113,7 @@ var MultiStepFormStep = {
         $(this.element).on('change', function(e) {
     
             if(self.validated && $(self.element).data('live-revalidate') != false) {
-                self.validate();
+                self.validate(false);
             }
             // alert('change');
         });
@@ -127,7 +127,7 @@ var MultiStepFormStep = {
     },
 
 
-    validate: function() {
+    validate: function(scrollToFirst=true) {
 
         let success = false;
 
@@ -161,6 +161,9 @@ var MultiStepFormStep = {
                     // validation fail
                     let errors = self.flattenObject(data.responseJSON.errors);
 
+
+                    let scrollToName = '';
+
                     for(fldname in errors) { 
 
                         let undotArray = fldname.split('.');
@@ -180,6 +183,23 @@ var MultiStepFormStep = {
                         $('.error-display[for="' + aryname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' +
                         val + 
                         '</small>');
+
+                        if(scrollToName == '' && scrollToFirst) {
+
+                            scrollToName = aryname;
+
+                            console.log(aryname);
+
+                            let position = $('input[name="' + aryname + '"')[0].getBoundingClientRect();
+ 
+                            window.scrollTo({
+                                top: position.top + window.scrollY - 100,
+                                left:  position.left, 
+                                behavior: 'smooth'
+                            });
+
+                        }
+                        
 
                     }
 
@@ -229,13 +249,13 @@ var MultiStepFormStep = {
         // });
 
         // const moveToBlue = () => {
-            let position = $('ol.step-display')[0].getBoundingClientRect();
+        let position = $('ol.step-display')[0].getBoundingClientRect();
  
-            window.scrollTo({
-                top: position.top + window.scrollY - 100,
-                left:  position.left, 
-                behavior: 'smooth'
-            });
+        window.scrollTo({
+            top: position.top + window.scrollY - 100,
+            left:  position.left, 
+            behavior: 'smooth'
+        });
         //   };
     },
 
