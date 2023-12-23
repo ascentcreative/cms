@@ -153,7 +153,17 @@ var MultiStepFormStep = {
     $(this.element).trigger({
       type: 'msf.show.step',
       step: $(this.element).data('stepslug')
-    });
+    }); // $('ol.step-display')[0].scrollIntoView({
+    //     'behavior': 'smooth'
+    // });
+    // const moveToBlue = () => {
+
+    var position = $('ol.step-display')[0].getBoundingClientRect();
+    window.scrollTo({
+      top: position.top + window.scrollY - 100,
+      left: position.left,
+      behavior: 'smooth'
+    }); //   };
   },
   hide: function hide() {
     $(this.element).hide(); //fadeOut('fast');

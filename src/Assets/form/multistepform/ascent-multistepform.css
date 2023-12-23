@@ -17,6 +17,8 @@ ol.step-display {
   padding: 0;
   display: flex;
   justify-content: center;
+
+  /* scroll-padding-top: 150px; */
   
 }
 
