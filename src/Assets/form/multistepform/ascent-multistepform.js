@@ -235,6 +235,9 @@ var MultiStepFormStep = {
     },
 
     show: function() {
+
+        // alert('showing');
+
         $('ol li.current').removeClass('current');
         $('#progress-' + $(this.element).data('stepslug')).addClass('current');
         $(this.element).show(); //fadeIn('fast');
@@ -250,12 +253,17 @@ var MultiStepFormStep = {
 
         // const moveToBlue = () => {
         let position = $('ol.step-display')[0].getBoundingClientRect();
+
+        // only scroll if it's off the top of the screen 
+        if(position.top < 0) {
  
-        window.scrollTo({
-            top: position.top + window.scrollY - 100,
-            left:  position.left, 
-            behavior: 'smooth'
-        });
+            window.scrollTo({
+                top: position.top + window.scrollY - 100,
+                left:  position.left, 
+                behavior: 'smooth'
+            });
+
+        }
         //   };
     },
 

@@ -159,6 +159,7 @@ var MultiStepFormStep = {
     $('#progress-' + $(this.element).data('stepslug')).removeClass('msf-disabled');
   },
   show: function show() {
+    // alert('showing');
     $('ol li.current').removeClass('current');
     $('#progress-' + $(this.element).data('stepslug')).addClass('current');
     $(this.element).show(); //fadeIn('fast');
@@ -171,12 +172,16 @@ var MultiStepFormStep = {
     // });
     // const moveToBlue = () => {
 
-    var position = $('ol.step-display')[0].getBoundingClientRect();
-    window.scrollTo({
-      top: position.top + window.scrollY - 100,
-      left: position.left,
-      behavior: 'smooth'
-    }); //   };
+    var position = $('ol.step-display')[0].getBoundingClientRect(); // only scroll if it's off the top of the screen 
+
+    if (position.top < 0) {
+      window.scrollTo({
+        top: position.top + window.scrollY - 100,
+        left: position.left,
+        behavior: 'smooth'
+      });
+    } //   };
+
   },
   hide: function hide() {
     $(this.element).hide(); //fadeOut('fast');
