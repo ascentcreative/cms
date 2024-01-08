@@ -75,10 +75,12 @@ class ContactController extends Controller
         //  log the request either way, along with the returned score. 
         $cr = new ContactRequest();
         $cr->fill(request()->all());
-        $cr->recaptcha_score = $response['score'];
+        if(isset($response)) {
+            $cr->recaptcha_score = $response['score'];
+        }
         $cr->save();
 
-        if ($response['score'] < app(SiteSettings::class)->contact_recaptcha_threshold) { //config('cms.recaptcha_threshold')) {
+        if (isset($response) && ($response['score'] < app(SiteSettings::class)->contact_recaptcha_threshold)) { //config('cms.recaptcha_threshold')) {
            
            // echo 'Ya BA-SIC';
             
