@@ -101,6 +101,16 @@ class Column {
         return $this;
     }
 
+    public function valueDate($prop, $format="j M Y") {
+        $this->value = function ($item) use ($prop, $format) {
+            if($item->$prop) {
+                return $item->$prop->format($format);
+            }
+        };
+       
+        return $this;
+    }
+
     public function valueRelationshipProperty($rel, $prop, $isLink=false) {
         $this->value = function ($item) use ($rel, $prop) {
 
@@ -143,13 +153,13 @@ class Column {
     
     }
 
-
     public function valueBlade($blade, $props=[]) {
         $this->isBlade = true;
         $this->value = $blade;
         $this->bladeProps = $props;
         return $this;
     }
+
 
     public function align($align) {
         $this->align = $align;
