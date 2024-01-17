@@ -1,7 +1,7 @@
 @push('scripts')
     {{-- Load the cookie manager code --}}
     @script('/vendor/ascent/cms/jquery/jquery.cookie.js')
-    @script('/vendor/ascent/cms/jquery/ascent.cms.cookiemanager.js')
+    {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.cookiemanager.js') --}}
 @endpush
 
 @php 
@@ -65,12 +65,12 @@
 >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Cookie Settings</h5>
-    
-        </div>
+        {{-- <div class="modal-header">
+          
+        </div> --}}
         <div class="modal-body">
 
+            <h5 class="modal-title mb-3" id="exampleModalLabel">Cookie Settings</h5>
 
             @foreach(\AscentCreative\CMS\Models\CookieType::all() as $cType)
 
@@ -90,14 +90,16 @@
 
             @endforeach
 
+            <div class="flex flex-between">
+        
+                <button type="button" class="btn btn-sm btn-secondary acm_acceptselected">Accept Selected</button>
+                <button type="button" class="btn btn-sm btn-primary acm_acceptall">Accept All</button>
+                
+              </div>
+
 
         </div>
-        <div class="modal-footer flex flex-between">
         
-          <button type="button" class="btn btn-secondary acm_acceptselected">Accept Selected</button>
-          <button type="button" class="btn btn-primary acm_acceptall">Accept All</button>
-          
-        </div>
       </div>
     </div>
   </div>

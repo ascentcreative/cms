@@ -323,7 +323,12 @@ var CookieManager = {
     $(window).on('resize', function () {//	self.layout();
     }); //self.layout();
 
-    $('.acm_manage').on('click', function () {
+    $('.acm_manage').on('click', function (e) {
+      e.preventDefault();
+      $('#acm_modal').modal('show');
+    });
+    $('a[href$="manage-cookies"]').on('click', function (e) {
+      e.preventDefault();
       $('#acm_modal').modal('show');
     });
   },
