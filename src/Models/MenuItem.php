@@ -46,7 +46,11 @@ class MenuItem extends Base
 
     public function getItemUrlAttribute() {
         if (is_null($this->url)) {
-            return $this->linkable->url;
+            if($this->linkable) {
+                return $this->linkable->url;
+            } else {
+                return null;
+            }
         } else {
             return $this->url;
         }
