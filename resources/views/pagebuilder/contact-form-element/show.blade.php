@@ -26,7 +26,7 @@
     {{-- <x-cms-form-button label="Send Message" name="submit" value="submit" wrapper="simple"/> --}}
     
     <div class="text-right">
-    <button class="btn button xbtn-primary g-recaptcha" 
+    <button class="btn button btn-primary g-recaptcha" 
         data-sitekey="{{ config('cms.recaptcha_sitekey') }}" 
         data-callback='onSubmit' 
         data-action='submit'>Send Message</button>
