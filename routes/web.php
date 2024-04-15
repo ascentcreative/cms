@@ -163,89 +163,7 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
 
 
 
-        /* Routes for HasMany component modal and validation */
-        /* TODO - Move this routes to the Forms package... */
-
-        // load modal - either empty or with data values for editing
-        Route::get('/cms/components/hasmany/{package}/{source}/{target}/{fieldname}', function($package, $source, $target, $fieldname) {
-            /* present the modal */
-            // Not sure we need the source? would the dialog not be the same regardless of that (ini polymorphic sitautions?)
-            //return view('admin.' . $source . '.hasmany.' . $target . '.modal');
-
-            // dd($fieldname);
-
-            // extract incoming data
-            if(request()->$fieldname) {
-                $idx = array_key_first(request()->$fieldname);
-                $item = request()->$fieldname[$idx];
-                $action = 'Edit';
-            } else {
-                $idx = '0';
-                $item = [];
-                $action = 'New';
-            }
-
-            // divert to specified blade if given
-            $blade = request()->blade ?? "modal";
-            
-            $pkg = $package == 'app' ? '' : $package . '::';
-
-            // return $pkg;
-
-            // need to be able to specify which package holds the relevant view.
-            return view($pkg . 'components.hasmany.' . $target . '.' . $blade, ['idx' =>  $idx, 'item' => (object) $item, 'action' => $action ] );
-            
-        })->name('cms.components.hasmany');
-
-
-        Route::post('/cms/components/hasmany/{package}/{source}/{target}/{fieldname}', function($package, $source, $target, $fieldname) {
-            /* validate modal data */
-            $cls = session()->get('modelTableCache.' . $target);
-            
-            if(method_exists($cls, 'getRules')) {
-                $inst = new $cls();
-                $rules = $inst->getRules();
-            } else {
-                $rules = $cls::$rules;
-            }
-        
-            $messages = $cls::$messages;
-            Validator::make(request()->all(), $rules, $messages)->validate();
-
-            /* If pass, return the new item to add to the field */
-            /* Item = the data submitted (converted to an object for compatibility) */
-            /* Name = the field name and a new unique index (replaced by a numeric ID on save) */
-            /* Note - this doesn't actually create the new record in the database. The save process for the parent model needs to do that */
-            //return view('admin.' . $source . '.hasmany.' . $target . '.item', ['item' => (object) request()->all(), 'name' => $target . '[' . uniqid() . ']']);
-
-            // // Original Option: simple StdClass
-            // $obj = (object) request()->all(); 
-            // // doing it this way means that any extra attributes are set (id, relationship values)
-            // // bypasses fillables etc as it's just an object not a model. 
-            // // But, it's reliant on the item blade to convert it to a Model instance
-            // // while handling the fact that when the parent form loads, the item will already be a Model instance...
-            // // In that regard, maybe it should be converted to a model...
-            
-
-            // New Approach: Make a model instance and fill it?
-            // NB - extender traits mean that the extended fields are fillable.
-            // - although they themselves won't be models, so why do we bother using a model here?
-            $obj = $cls::make(request()->all()); 
-            
-            // Need to set the ID as it's not normally fillable. 
-            // Otherwise, an edited item will be treated as new and will break references
-            $obj->id = request()->id; 
-
-            // dump($obj);
-
-            $pkg = $package == 'app' ? '' : $package . '::';
-
-            // return $pkg;
-
-            // need to be able to specify which package holds the relevant view.
-            return view($pkg . 'components.hasmany.' . $target . '.item', ['item' => $obj, 'name' => $fieldname . '[' . request()->idx . ']', 'idx' => request()->idx]);
-
-        })->name('cms.components.hasmany');
+      
 
 
         // HasManyImages... 
@@ -312,6 +230,90 @@ Route::middleware(['web'])->namespace('AscentCreative\CMS\Controllers')->group(f
     })->middleware('auth', 'can:upload-files');
 
 
+
+      /* Routes for HasMany component modal and validation */
+        /* TODO - Move this routes to the Forms package... */
+
+        // load modal - either empty or with data values for editing
+        Route::get('/cms/components/hasmany/{package}/{source}/{target}/{fieldname}', function($package, $source, $target, $fieldname) {
+            /* present the modal */
+            // Not sure we need the source? would the dialog not be the same regardless of that (ini polymorphic sitautions?)
+            //return view('admin.' . $source . '.hasmany.' . $target . '.modal');
+
+            // dd($fieldname);
+
+            // extract incoming data
+            if(request()->$fieldname) {
+                $idx = array_key_first(request()->$fieldname);
+                $item = request()->$fieldname[$idx];
+                $action = 'Edit';
+            } else {
+                $idx = '0';
+                $item = [];
+                $action = 'New';
+            }
+
+            // divert to specified blade if given
+            $blade = request()->blade ?? "modal";
+            
+            $pkg = $package == 'app' ? '' : $package . '::';
+
+            // return $pkg;
+
+            // need to be able to specify which package holds the relevant view.
+            return view($pkg . 'components.hasmany.' . $target . '.' . $blade, ['idx' =>  $idx, 'item' => (object) $item, 'action' => $action ] );
+            
+        })->middleware('auth')->name('cms.components.hasmany');
+
+
+        Route::post('/cms/components/hasmany/{package}/{source}/{target}/{fieldname}', function($package, $source, $target, $fieldname) {
+            /* validate modal data */
+            $cls = session()->get('modelTableCache.' . $target);
+            
+            if(method_exists($cls, 'getRules')) {
+                $inst = new $cls();
+                $rules = $inst->getRules();
+            } else {
+                $rules = $cls::$rules;
+            }
+        
+            $messages = $cls::$messages;
+            Validator::make(request()->all(), $rules, $messages)->validate();
+
+            /* If pass, return the new item to add to the field */
+            /* Item = the data submitted (converted to an object for compatibility) */
+            /* Name = the field name and a new unique index (replaced by a numeric ID on save) */
+            /* Note - this doesn't actually create the new record in the database. The save process for the parent model needs to do that */
+            //return view('admin.' . $source . '.hasmany.' . $target . '.item', ['item' => (object) request()->all(), 'name' => $target . '[' . uniqid() . ']']);
+
+            // // Original Option: simple StdClass
+            // $obj = (object) request()->all(); 
+            // // doing it this way means that any extra attributes are set (id, relationship values)
+            // // bypasses fillables etc as it's just an object not a model. 
+            // // But, it's reliant on the item blade to convert it to a Model instance
+            // // while handling the fact that when the parent form loads, the item will already be a Model instance...
+            // // In that regard, maybe it should be converted to a model...
+            
+
+            // New Approach: Make a model instance and fill it?
+            // NB - extender traits mean that the extended fields are fillable.
+            // - although they themselves won't be models, so why do we bother using a model here?
+            $obj = $cls::make(request()->all()); 
+            
+            // Need to set the ID as it's not normally fillable. 
+            // Otherwise, an edited item will be treated as new and will break references
+            $obj->id = request()->id; 
+
+            // dump($obj);
+
+            $pkg = $package == 'app' ? '' : $package . '::';
+
+            // return $pkg;
+
+            // need to be able to specify which package holds the relevant view.
+            return view($pkg . 'components.hasmany.' . $target . '.item', ['item' => $obj, 'name' => $fieldname . '[' . request()->idx . ']', 'idx' => request()->idx]);
+
+        })->middleware('auth')->name('cms.components.hasmany');
 
 
 
