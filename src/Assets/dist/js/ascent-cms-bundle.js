@@ -966,7 +966,8 @@ var ShowHide = {
     // more processor heavy than the incremental update on change...
 
     $('[data-showhide]').each(function (idx) {
-      // console.log("this");
+      // console.log(this);
+      // console.log($(e.target).attr('name') + ": " + $(e.target).val());
       self.evaluate(this, null, false);
     }); // mutation observer to run on newly added elements:
 
@@ -1016,13 +1017,20 @@ var ShowHide = {
 
         if (checked) {
           source = $(checked);
+        } else {
+          source = null;
         }
-      }
+      } // console.log($(source).attr('name') + ": " + $(source).val());
 
-      value = source.val();
 
-      if (source.attr('type') == 'checkbox' && !source.is(":checked")) {
+      if (source == null) {
         value = '';
+      } else {
+        value = source.val();
+
+        if (source.attr('type') == 'checkbox' && !source.is(":checked")) {
+          value = '';
+        }
       }
     } // console.log('animate?', animate);
 

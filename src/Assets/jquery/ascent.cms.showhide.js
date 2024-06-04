@@ -17,7 +17,10 @@ var ShowHide = {
         // find all elements with data-showhide set and evaluate their rules.
         // more processor heavy than the incremental update on change...
         $('[data-showhide]').each(function(idx) {
-            // console.log("this");
+            // console.log(this);
+
+            // console.log($(e.target).attr('name') + ": " + $(e.target).val());
+
             self.evaluate(this, null, false);
         });
 
@@ -50,6 +53,7 @@ var ShowHide = {
         }
         
         
+        
         // console.log($(e.target).serialize());
         // get all elements with a rule based on this field.
 
@@ -72,15 +76,25 @@ var ShowHide = {
         if (value === null) {
             // lookup the value if not supplied from the event:
             source = $('[name="' + $(elm).attr('data-showhide') + '"]').last();
+
             if(source.attr('type') == 'checkbox' || source.attr('type') == 'radio') {
                 checked = $('[name="' + $(elm).attr('data-showhide') + '"]:checked')[0];
                 if(checked) {
                     source = $(checked);
+                } else {
+                    source = null;
                 }
             }
-            value = source.val();
-            if(source.attr('type') == 'checkbox' && !source.is(":checked")) {
+
+            // console.log($(source).attr('name') + ": " + $(source).val());
+
+            if(source == null) {
                 value = '';
+            } else {
+                value = source.val();
+                if(source.attr('type') == 'checkbox' && !source.is(":checked")) {
+                    value = '';
+                }
             }
         }
 
