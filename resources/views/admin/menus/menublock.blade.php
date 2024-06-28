@@ -39,7 +39,7 @@
 
                         $tree = [];
 
-                        $tree = \AscentCreative\CMS\Models\Page::whereDoesntHave('menuitem')->orderBy('title')->get();
+                        $tree = \AscentCreative\CMS\Models\Page::whereDoesntHave('menuitem')->orderBy('title')->withoutGlobalScope('published')->get();
                       //  $tree = \AscentCreative\CMS\Models\MenuItem::scoped(['menu_id'=>$item->id])->withDepth()->defaultOrder()->get();
                     }
 
@@ -47,7 +47,20 @@
 
                 <table class="menuitems">
                 @foreach($tree as $mi)
-                    <tr>
+
+                @php
+                    $linkable = null;
+                    if($mi->linkable_type != null) {
+                        $linkable = $mi->linkable()->withoutGlobalScope('published')->first();
+                        // dump($linkable->isPublished);
+                    } else {
+                
+                    }
+
+                    // dump(get_class($mi));
+                @endphp 
+                
+                    <tr class="@if($linkable) @if(!$linkable->isPublished) hidden @endif @endif">
 
 
                         @php
@@ -70,10 +83,11 @@
 
                             @if($item)
 
+
                                 @switch($mi->linkable_type)
 
                                     @case(\AscentCreative\CMS\Models\Page::class)
-                                        <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->linkable_id]) }}">{{ $mi->itemTitle }}</A>
+                                        <A href="{{ action([AscentCreative\CMS\Controllers\Admin\PageController::class, 'edit'], ['page' => $mi->linkable_id]) }}">{{ $linkable->title }}</A>
                                     @break
 
                                     @default
@@ -93,9 +107,10 @@
                             
                         </td>
                         <td> 
-                            @if($mi->linkable) {{ $mi->linkable->url }} @else {{ $mi->url }} @endif
+                        
+                            @if($linkable) {{ $linkable->url }} @else {{ $mi->url }} @endif
                        
-                            &nbsp;<A href="@if($mi->linkable) {{ $mi->linkable->url }} @else {{ $mi->url }} @endif" class="bi-box-arrow-up-right" target="_blank"></A>
+                            &nbsp;<A href="@if($linkable) {{ $linkable->url }} @else {{ $mi->url }} @endif" class="bi-box-arrow-up-right" target="_blank"></A>
                         
                         </td>
                         <td>

@@ -47,7 +47,8 @@ class Menu extends Base
      */
     public function render($maxDepth = 0, $classes='') {
 
-        $items = MenuItem::scoped(['menu_id'=>$this->id])->defaultOrder()->get()->toTree();
+        $items = MenuItem::scoped(['menu_id'=>$this->id])->defaultOrder()
+                        ->get()->toTree();
 
         return $this->traverse($items, $maxDepth, 0, $classes);
 

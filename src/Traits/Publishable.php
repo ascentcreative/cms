@@ -49,11 +49,11 @@ trait Publishable {
     public function scopePublished($builder) {
         $builder->where($this->table . '.publishable', '=', '1') 
             ->where(function($query) { 
-                $query->whereDate($this->table . '.publish_start', '<', DB::Raw('now()'))
+                $query->where($this->table . '.publish_start', '<', DB::Raw('now()'))
                     ->orWhereNull($this->table . '.publish_start');
             })
             ->where(function($query) { 
-                $query->whereDate($this->table . '.publish_end', '>=', DB::Raw('now()'))
+                $query->where($this->table . '.publish_end', '>=', DB::Raw('now()'))
                     ->orWhereNull($this->table . '.publish_end');
             });
     }

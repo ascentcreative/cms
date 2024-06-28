@@ -19,6 +19,8 @@ class PageController extends AdminBaseController
     public $indexSort = 'title';
     public $indexSearchFields = ['title', 'content'];
 
+    public $ignoreScopes = ['published'];
+
     public function commitModel(Request $request, Model $model)
     {
 

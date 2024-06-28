@@ -3,12 +3,23 @@
 @section('editform')
 
 <div class="cms-screenblock cms-screenblock-main bg-white rounded shadow" style="">
-   
-    <x-cms-form-input type="text" name="title" label="Title" value="{{ old('title', $model->title) }}">
-        The title of the page
-    </x-cms-form-input>
 
-    @includeFirst($model->getTraitBlades('HasMenuItem'))
+    <div class="flex">
+
+        <div style="flex-grow: 1">
+        
+            <x-cms-form-input type="text" name="title" label="Title" value="{{ old('title', $model->title) }}">
+                The title of the page
+            </x-cms-form-input>
+
+            @includeFirst($model->getTraitBlades('HasMenuItem'))
+
+        </div>
+
+        @includeFirst($model->getTraitBlades('Publishable'))
+
+
+    </div>
 
 
 

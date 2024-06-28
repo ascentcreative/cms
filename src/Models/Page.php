@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 
 class Page extends Base
 {
-    use HasFactory, HasMetadata, HasImages, HasMenuItem, HasSlug, Indexable; //Searchable; //, Publishable; 
+    use HasFactory, HasMetadata, HasImages, HasMenuItem, HasSlug, Indexable, Publishable; //Searchable; //, Publishable; 
 
     public $fillable = ['title', 'content'];
 
