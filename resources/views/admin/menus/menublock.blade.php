@@ -53,8 +53,8 @@
                     if($mi->linkable_type != null) {
                         $linkable = $mi->linkable()->withoutGlobalScope('published')->first();
                         // dump($linkable->isPublished);
-                    } else {
-                
+                    } else if (!$item) {
+                        $linkable = $mi;
                     }
 
                     // dump(get_class($mi));
