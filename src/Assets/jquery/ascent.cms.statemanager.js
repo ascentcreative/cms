@@ -20,7 +20,7 @@ var StateManager = {
 
        });
 
-       window.onpopstate = function(e) {
+       window.addEventListener('popstate', (e) => {
                
             console.log('state manager pop', e);
 
@@ -42,7 +42,7 @@ var StateManager = {
             // self.setState(state);
             // self.setState(e.state);
 
-        };
+        });
 
     },
 
