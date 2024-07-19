@@ -969,7 +969,7 @@ var ShowHide = {
       // console.log(this);
       // console.log($(e.target).attr('name') + ": " + $(e.target).val());
       self.evaluate(this, null, false);
-    }); // mutation observer to run on newly added elements:
+    }); // mutation observer to run on newly added elements: (Also covers popstate)
 
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function (mutations, observer) {
@@ -1002,6 +1002,12 @@ var ShowHide = {
     $(elms).each(function (idx) {
       // console.log(self);
       $(document).showhide('evaluate', this, value);
+    });
+  },
+  evaluateAll: function evaluateAll() {
+    var self = this;
+    $('[data-showhide]').each(function (idx) {
+      self.evaluate(this);
     });
   },
   evaluate: function evaluate(elm) {
@@ -1097,23 +1103,25 @@ $(document).showhide(); // });
 //     e.stopPropagation();
 //     return false; // stop the link firing normally!
 // });
+// // jQuery widget to manage state items for history API
+// // Idea is that it allows any item to request a new pushstate, 
+// // but then all other items/widgets can chuck in their data too
+// // but, who governs the URL that the state is pushed against? Darn.
+// $.ascent = $.ascent?$.ascent:{};
+// var StateClient = {
+//     self: null,
+//     _init: function () {
+//        $(document).on('push-state', function(e) {
+//        });
+//     },
+// }
+// $.widget('ascent.stateclient', StateClient);
+// $.extend($.ascent.StateClient, {
+// }); 
+// $(document).ready(function() {
+//     $(document).stateclient();
+// });
 // jQuery widget to manage state items for history API
-// Idea is that it allows any item to request a new pushstate, 
-// but then all other items/widgets can chuck in their data too
-// but, who governs the URL that the state is pushed against? Darn.
-
-$.ascent = $.ascent ? $.ascent : {};
-var StateClient = {
-  self: null,
-  _init: function _init() {
-    $(document).on('push-state', function (e) {});
-  }
-};
-$.widget('ascent.stateclient', StateClient);
-$.extend($.ascent.StateClient, {});
-$(document).ready(function () {
-  $(document).stateclient();
-}); // jQuery widget to manage state items for history API
 // Idea is that it allows any item to request a new pushstate, 
 // but then all other items/widgets can chuck in their data too
 // but, who governs the URL that the state is pushed against? Darn.
@@ -1127,8 +1135,7 @@ var StateManager = {
       console.log(e);
       console.log(data);
     });
-
-    window.onpopstate = function (e) {
+    window.addEventListener('popstate', function (e) {
       console.log('state manager pop', e); // update the content of the 'stateful-components'
       // for each, fireoff a non-bubbling 'state-updated' event - the actual component will decide if it needs to handle it.
 
@@ -1143,7 +1150,7 @@ var StateManager = {
       // self.setState(state);
       // self.setState(e.state);
 
-    };
+    });
   },
   pushState: function pushState(uri) {
     var replace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;

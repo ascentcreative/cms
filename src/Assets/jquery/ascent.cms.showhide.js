@@ -24,7 +24,7 @@ var ShowHide = {
             self.evaluate(this, null, false);
         });
 
-        // mutation observer to run on newly added elements:
+        // mutation observer to run on newly added elements: (Also covers popstate)
         MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
         var observer = new MutationObserver(function(mutations, observer) {
@@ -71,9 +71,16 @@ var ShowHide = {
 
     },
 
+    evaluateAll: function() {
+        let self = this;
+        $('[data-showhide]').each(function(idx) {
+            self.evaluate(this);
+        }); 
+    },
+
     evaluate: function(elm, value=null, animate=true) {
 
-        if (value === null) {
+          if (value === null) {
             // lookup the value if not supplied from the event:
             source = $('[name="' + $(elm).attr('data-showhide') + '"]').last();
 
