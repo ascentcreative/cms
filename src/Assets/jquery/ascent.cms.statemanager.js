@@ -33,6 +33,22 @@ var StateManager = {
                 $('#' + id).trigger('state-updated');
             }
 
+            // restor values from inputs
+            for(input in e.state.inputs) {
+                let control = $('#' + input);      
+                switch (control.attr('type')) {
+                    case 'radio':
+                    case 'checkbox':
+                       let checked = e.state.inputs[input];
+                       console.log(control, checked);
+                       $(control).prop('checked', checked);
+                       break;
+                    
+                    default:
+                        control.val(e.state.inputs[input]);
+                        break;
+                }
+            }
 
             // $(document).trigger('state-manager-pop', {key: e.state});
 
@@ -50,11 +66,46 @@ var StateManager = {
     pushState: function(uri, replace=false) {
 
         let data = {};
+        let inputStore = {};
         // capture the content of every '.stateful-component'
          // store in an array, keyed by ID of the element
         $('.stateful-component').each(function(idx) {
 
             data[$(this).attr('id')] = $(this).html();
+
+
+            // test - grab the values / states of any inputs in the component
+            // (These don't get picked up in the HTML but we'll need to restore them)
+            
+            let inputs = $(this).find("input, select, textarea");
+            for(input of inputs) {
+
+                if($(input).attr('id')) {
+
+                    // console.log(input);
+
+                    switch($(input).attr('type')) {
+
+                        case 'radio':
+                        case 'checkbox':
+                            console.log($(input).attr('id'), $(input).is(':checked'));
+                            inputStore[$(input).attr('id')] = $(input).is(':checked');
+                        break;
+
+                        default:
+                            inputStore[$(input).attr('id')] = $(input).val();
+                            break;
+
+                    } 
+
+                }
+
+            }
+
+            console.log(inputStore);
+
+            data['inputs'] = inputStore;
+
             
         });
         

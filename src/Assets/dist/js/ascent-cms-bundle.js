@@ -1,3 +1,9 @@
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 // ******
@@ -1143,6 +1149,24 @@ var StateManager = {
         // console.log('setting #' + id, e.state[id]);
         $('#' + id).html(e.state[id]);
         $('#' + id).trigger('state-updated');
+      } // restor values from inputs
+
+
+      for (input in e.state.inputs) {
+        var control = $('#' + input);
+
+        switch (control.attr('type')) {
+          case 'radio':
+          case 'checkbox':
+            var _checked = e.state.inputs[input];
+            console.log(control, _checked);
+            $(control).prop('checked', _checked);
+            break;
+
+          default:
+            control.val(e.state.inputs[input]);
+            break;
+        }
       } // $(document).trigger('state-manager-pop', {key: e.state});
       // load state from local storage
       // let state = self.loadState(); 
@@ -1154,11 +1178,46 @@ var StateManager = {
   },
   pushState: function pushState(uri) {
     var replace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var data = {}; // capture the content of every '.stateful-component'
+    var data = {};
+    var inputStore = {}; // capture the content of every '.stateful-component'
     // store in an array, keyed by ID of the element
 
     $('.stateful-component').each(function (idx) {
-      data[$(this).attr('id')] = $(this).html();
+      data[$(this).attr('id')] = $(this).html(); // test - grab the values / states of any inputs in the component
+      // (These don't get picked up in the HTML but we'll need to restore them)
+
+      var inputs = $(this).find("input, select, textarea");
+
+      var _iterator = _createForOfIteratorHelper(inputs),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          input = _step.value;
+
+          if ($(input).attr('id')) {
+            // console.log(input);
+            switch ($(input).attr('type')) {
+              case 'radio':
+              case 'checkbox':
+                console.log($(input).attr('id'), $(input).is(':checked'));
+                inputStore[$(input).attr('id')] = $(input).is(':checked');
+                break;
+
+              default:
+                inputStore[$(input).attr('id')] = $(input).val();
+                break;
+            }
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      console.log(inputStore);
+      data['inputs'] = inputStore;
     }); // push / replace state.
 
     console.log('pushing state: ', data);
