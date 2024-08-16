@@ -122,7 +122,7 @@ class Column {
                 } else {
                     return ''; //"bailed at " . $rel;
                 }
-            }
+            } 
 
             return $item->$prop ?? '';
         };
@@ -160,6 +160,15 @@ class Column {
         return $this;
     }
 
+    public function valueMax($rel, $prop) {
+        $this->value = function($item) use ($rel, $prop) {
+            // dd($item->$prop);
+            return $item->$rel->max($prop); 
+        };
+        // should also add this to the withCount for the view?
+        return $this;
+    }
+
 
     public function align($align) {
         $this->align = $align;
@@ -191,6 +200,14 @@ class Column {
         $this->sortable();
         $this->sortQuery = function ($q, $dir='asc') use ($prop) {
             return $q->orderby($prop, $dir);
+        };
+        return $this;
+    }
+
+    public function sortableByMax($relation, $prop) {
+        $this->sortable();
+        $this->sortQuery = function ($q, $dir='asc') use ($relation, $prop) {
+            return $q->withMax($relation, $prop)->orderby($relation . '_max_' . $prop, $dir);
         };
         return $this;
     }

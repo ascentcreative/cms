@@ -523,7 +523,11 @@ abstract class AdminBaseController extends Controller
         if(!$this::$formClass) {
             return view($this::$bladePath . '.edit', $viewData)->withModel($model);
         } else {
-            return view('cms::admin.base.edit.builder', $viewData)->withModel($model);
+            if(view()->exists($vw)) {
+                return view($this::$bladePath . '.edit', $viewData)->withModel($model);
+            } else {
+                return view('cms::admin.base.edit.builder', $viewData)->withModel($model);
+            }
         }   
 
     }
