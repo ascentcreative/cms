@@ -5,6 +5,7 @@
     <div class="modal-dialog modal-dialog-scrollable @if($modalCenterVertical ?? true) modal-dialog-centered @endif {{$modalSize ?? ''}}" role="document">
       <div class="modal-content">
 
+      
         @if($modalShowHeader ?? false)
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">@yield('modalTitle')</h5>
@@ -21,7 +22,6 @@
             @if(!($modalShowHeader ?? false))
                 <A class="bi-x" style="position: absolute; top: 10px; right: 10px; font-size: 30px; color: #777; cursor: pointer;" data-dismiss="modal"></a>
             @endif
-
 
             @yield('modalContent')
            

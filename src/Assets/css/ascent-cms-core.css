@@ -374,6 +374,9 @@ BODY .modal.fade .modal-dialog {
     transform: none;
 }
 
+BODY .modal-dialog > form {
+    width: 100%;
+}
 
 
 /* Layout Grid */
