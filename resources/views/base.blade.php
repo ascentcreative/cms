@@ -56,6 +56,7 @@
         @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
         @script('/vendor/ascent/cms/js/jquery.ui.touch-punch.min.js')
         @script('/vendor/ascent/cms/jquery/jquery.matchHeight-min.js')
+
         
         @if(!Agent::isMobile() && !Agent::isTablet())
             {{-- Parallax is a bit buggy on mobiles... --}}
