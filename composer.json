@@ -19,7 +19,6 @@
     "kalnoy/nestedset": "^6.0",
     "jenssegers/agent": "^2.6",
     "laravel/scout": "^9.3",
-    "yab/laravel-scout-mysql-driver": "^5.1",
     "guizoxxv/laravel-multi-size-image": "^0.2.0" ,
     "ascentcreative/help": "dev-master",
     "ascentcreative/forms": "dev-dev",
