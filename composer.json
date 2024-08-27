@@ -18,7 +18,7 @@
     "spatie/laravel-settings": "^2.1",
     "kalnoy/nestedset": "^6.0",
     "jenssegers/agent": "^2.6",
-    "laravel/scout": "^9.3",
+    "laravel/scout": "^10.11",
     "guizoxxv/laravel-multi-size-image": "^0.2.0" ,
     "ascentcreative/help": "dev-master",
     "ascentcreative/forms": "dev-dev",
