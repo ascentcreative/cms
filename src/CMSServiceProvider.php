@@ -475,7 +475,7 @@ class CMSServiceProvider extends ServiceProvider
 
     Blade::directive('scripttag', function ($file, $min=true) {
         return '<SCRIPT src="<?php echo autoVersion(' . $file . ', ' . $min . '); ?>"></SCRIPT>';
-      });
+    });
 
     Blade::directive('style', function ($file) {
       return '<LINK rel="stylesheet" href="<?php echo autoVersion(' . $file . '); ?>"/>';
