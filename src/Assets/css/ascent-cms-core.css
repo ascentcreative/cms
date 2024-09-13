@@ -376,6 +376,7 @@ BODY .modal.fade .modal-dialog {
 
 BODY .modal-dialog > form {
     width: 100%;
+    border: 10px solid white;
 }
 
 
