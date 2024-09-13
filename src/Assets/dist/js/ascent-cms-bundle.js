@@ -447,24 +447,11 @@ var ModalLink = {
   self: null,
   loginPath: '/modal/cms/modals.login',
   targetPath: '',
-  backdrop: true,
-  keyboard: true,
   _init: function _init() {
     var self = this;
     this.widget = this;
     var thisID = this.element[0].id;
-    var obj = this.element;
-    /* I think, actually, we should read these from the loaded Modal... 
-        Makes it more flexible in a run of dialogs so each can be specified individually */
-
-    if (this.element.data('backdrop') != null) {
-      this.backdrop = this.element.data('backdrop');
-    }
-
-    if (this.element.data('keyboard') != null) {
-      this.keyboard = this.element.data('keyboard');
-    } // We're calling this on click, so just launch straight into the business end...
-
+    var obj = this.element; // We're calling this on click, so just launch straight into the business end...
 
     if (this.options.target) {
       this.targetPath = this.options.target;
@@ -632,10 +619,7 @@ var ModalLink = {
     } // fire up the new modal
 
 
-    $('#ajaxModal').modal({
-      backdrop: this.backdrop,
-      keyboard: this.keyboard
-    }); // if we removed the fade class, re-add it now so this one fades out nicely!
+    $('#ajaxModal').modal({}); // if we removed the fade class, re-add it now so this one fades out nicely!
 
     if (inFlow) {
       $('body .modal').addClass('fade');

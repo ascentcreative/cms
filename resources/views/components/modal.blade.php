@@ -1,4 +1,7 @@
-<div class="modal text-left {{ $fade }} {{ $modalclass }}" id="{{ $modalid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal text-left {{ $fade }} {{ $modalclass }}" id="{{ $modalid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-backdrop="{{ $backdropclose ? 'true' : 'static' }}"
+        data-keyboard="{{ $keyboardclose ? 'true' : 'false' }}"
+    >
     <div class="modal-dialog @if($scrollable) modal-dialog-scrollable @endif @if($centered) modal-dialog-centered @endif  {{$size ?? 'modal-lg'}}" role="document">
 
         {{ $formstart ?? '' }}
