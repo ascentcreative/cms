@@ -20,17 +20,23 @@ trait HasSlug {
   
     }
 
-    public function setSlug() {
+    public function setSlug($force=false) {
 
         $source = $this->slug_source ?? 'title';
         $target = $this->slug_field ?? 'slug';
 
-        if (!isset($this->attributes[$target]) || $this->attributes[$target]==='') {
+        if ($force || (!isset($this->attributes[$target]) || $this->attributes[$target]==='')) {
 
             $slug = Str::slug(($this->$source), '-');
     
             // check to see if any other slugs exist that are the same & count them
-            $count = static::whereRaw("$target RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+            $query = static::withoutGlobalScopes()
+                        ->whereRaw("$target RLIKE '^{$slug}(-[0-9]+)?$'");
+
+            if($this->id) {
+               $query->where('id', '<', $this->id);
+            }
+            $count = $query->count();
     
             $this->attributes[$target] = $count ? "{$slug}-{$count}" : $slug;
 
