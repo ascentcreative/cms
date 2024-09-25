@@ -238,6 +238,7 @@ class CMSServiceProvider extends ServiceProvider
         \AscentCreative\CMS\Commands\ObfuscateUserData::class,
         \AscentCreative\CMS\Commands\RefreshMultiSizeImages::class,
         \AscentCreative\CMS\Commands\ZendImportUsers::class,
+        \AscentCreative\CMS\Commands\ReslugModel::class,
     ]);
 
    
