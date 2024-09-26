@@ -91,6 +91,12 @@ body > section {
     font-size: 1rem;
 }
 
+
+.cms-sidebar-content UL LI UL LI i {
+    padding: 1px 3px;
+    font-size: 1rem;
+}
+
 .cms-sidebar-content > .cms-sidebar-menu-sectionlabel {
 
     font-weight: 500;
