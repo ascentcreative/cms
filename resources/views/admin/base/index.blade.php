@@ -25,8 +25,11 @@
 
         @section('headactions')
 
-            <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary bi-plus-circle-fill">Create</a>
+            <?php try { ?>
+                <a href="{{ action([controller(), 'create']) }}" class="btn btn-primary bi-plus-circle-fill">Create</a>
+            <?php } catch(\Exception $e) { 
 
+            } ?>
         @show
 
     </nav>
