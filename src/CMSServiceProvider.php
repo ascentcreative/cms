@@ -474,6 +474,7 @@ class CMSServiceProvider extends ServiceProvider
       return '<SCRIPT src="<?php echo autoVersion(' . $file . ', ' . $min . '); ?>"></SCRIPT>';
     });
 
+    // for forwards compat with Laravel 11 (or rather Livewire 3.4 which nicked the script directive!)
     Blade::directive('scripttag', function ($file, $min=true) {
         return '<SCRIPT src="<?php echo autoVersion(' . $file . ', ' . $min . '); ?>"></SCRIPT>';
     });
