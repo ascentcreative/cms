@@ -51,26 +51,26 @@
 
          {{ cookieManager() }}
 
-        @script('/vendor/ascent/cms/js/jquery-3.5.1.min.js')
-        @script('/vendor/ascent/cms/js/jquery-ui.min.js')
-        @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
-        @script('/vendor/ascent/cms/js/jquery.ui.touch-punch.min.js')
-        @script('/vendor/ascent/cms/jquery/jquery.matchHeight-min.js')
+        @scripttag('/vendor/ascent/cms/js/jquery-3.5.1.min.js')
+        @scripttag('/vendor/ascent/cms/js/jquery-ui.min.js')
+        @scripttag('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
+        @scripttag('/vendor/ascent/cms/js/jquery.ui.touch-punch.min.js')
+        @scripttag('/vendor/ascent/cms/jquery/jquery.matchHeight-min.js')
 
         
         @if(!Agent::isMobile() && !Agent::isTablet())
             {{-- Parallax is a bit buggy on mobiles... --}}
-            @script('/vendor/ascent/cms/js/parallax.min.js')
+            @scripttag('/vendor/ascent/cms/js/parallax.min.js')
         @endif
 
-        {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js') --}}
-        {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js') --}}
+        {{-- @scripttag('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js') --}}
+        {{-- @scripttag('/vendor/ascent/cms/jquery/ascent.cms.ajaxLink.js') --}}
 
-        @script('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
-        @script('/vendor/ascent/forms/dist/js/ascent-forms-bundle.js')
+        @scripttag('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
+        @scripttag('/vendor/ascent/forms/dist/js/ascent-forms-bundle.js')
 
         @foreach(packageAssets()->getScripts() as $script)
-            @script($script)
+            @scripttag($script)
         @endforeach
 
         @stack('scripts')

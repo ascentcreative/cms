@@ -2,7 +2,7 @@
 @if(isset($charlimit)) 
 {{-- @once
     @push('scripts')
-        @script('/vendor/ascent/cms/form/components/charlimit/ascent.jquery.charlimit.js')
+        @scripttag('/vendor/ascent/cms/form/components/charlimit/ascent.jquery.charlimit.js')
     @endpush
     @push('styles')
         @style('/vendor/ascent/cms/form/components/charlimit/ascent.jquery.charlimit.css')

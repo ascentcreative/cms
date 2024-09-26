@@ -20,7 +20,7 @@
     @endpush
 
     @push('scripts')
-        @script('/vendor/ascent/cms/spectrum/spectrum.min.js')
+        @scripttag('/vendor/ascent/cms/spectrum/spectrum.min.js')
     @endpush
 
 @endonce --}}

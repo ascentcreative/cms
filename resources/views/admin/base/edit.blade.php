@@ -3,10 +3,10 @@
 {{-- FORM DIRTY CHECKS: --}}
 @push('scripts')
 
-    {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.showhide.js') --}}
+    {{-- @scripttag('/vendor/ascent/cms/jquery/ascent.cms.showhide.js') --}}
 
-    @script('/vendor/ascent/cms/jquery/areyousure/jquery.are-you-sure.js')
-    @script('/vendor/ascent/cms/jquery/areyousure/ays-beforeunload-shim.js')
+    @scripttag('/vendor/ascent/cms/jquery/areyousure/jquery.are-you-sure.js')
+    @scripttag('/vendor/ascent/cms/jquery/areyousure/ays-beforeunload-shim.js')
 
     <script language="javascript">
         $(document).ready(function() {
