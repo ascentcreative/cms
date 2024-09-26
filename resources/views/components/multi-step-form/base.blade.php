@@ -26,6 +26,6 @@
     @endpush
 
     @push('scripts')
-        @script('/vendor/ascent/cms/form/multistepform/ascent-multistepform.js')
+        @scripttag('/vendor/ascent/cms/form/multistepform/ascent-multistepform.js')
     @endpush
 @endonce --}}

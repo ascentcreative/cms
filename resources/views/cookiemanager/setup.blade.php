@@ -1,7 +1,7 @@
 @push('scripts')
     {{-- Load the cookie manager code --}}
-    @script('/vendor/ascent/cms/jquery/jquery.cookie.js')
-    {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.cookiemanager.js') --}}
+    @scripttag('/vendor/ascent/cms/jquery/jquery.cookie.js')
+    {{-- @scripttag('/vendor/ascent/cms/jquery/ascent.cms.cookiemanager.js') --}}
 @endpush
 
 @php 

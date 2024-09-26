@@ -57,22 +57,22 @@
 
     </footer> --}}
 
-    @script('/vendor/ascent/cms/js/jquery-3.5.1.min.js')
-    @script('/vendor/ascent/cms/js/jquery-ui.min.js')
-    @script('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
-    {{-- @script('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js') --}}
-    @script('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
-    @script('/vendor/ascent/forms/dist/js/ascent-forms-bundle.js')
+    @scripttag('/vendor/ascent/cms/js/jquery-3.5.1.min.js')
+    @scripttag('/vendor/ascent/cms/js/jquery-ui.min.js')
+    @scripttag('/vendor/ascent/cms/js/bootstrap.bundle.min.js')
+    {{-- @scripttag('/vendor/ascent/cms/jquery/ascent.cms.modalLink.js') --}}
+    @scripttag('/vendor/ascent/cms/dist/js/ascent-cms-bundle.js')
+    @scripttag('/vendor/ascent/forms/dist/js/ascent-forms-bundle.js')
 
     @stack('lib')
     @stack('scripts')
 
     @foreach(packageAssets()->getScripts() as $script)
-        @script($script)
+        @scripttag($script)
     @endforeach
 
     @foreach(packageAssets()->getScripts('admin') as $script)
-        @script($script)
+        @scripttag($script)
     @endforeach
 
     <script>
