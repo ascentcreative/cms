@@ -249,11 +249,37 @@ var AjaxLink = {
 
 
     console.log(self.targetPath);
+
+    if (this.element.data('serialiseForAjax')) {
+      self.targetPath += '?' + $(this.element.data('serialiseForAjax')).serialize();
+    }
+
     $.ajax({
       type: 'GET',
       url: self.targetPath,
       headers: {
         'Accept': "application/json"
+      },
+      xhr: function xhr() {
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+          //   alert('here');
+          if (xhr.readyState == 2) {
+            // detect if we're getting a file in the response
+            var disposition = xhr.getResponseHeader('content-disposition');
+
+            if (disposition && disposition.indexOf('attachment') !== -1) {
+              // if so, we'll interpret it as an arraybuffer (to create a BLOB to return to the user)
+              xhr.responseType = "arraybuffer";
+            } else {
+              // no attachment? Must be text-based / json / html etc
+              xhr.responseType = "text";
+            }
+          }
+        };
+
+        return xhr;
       }
     }).done(function (data, xhr, request) {
       console.log(self.responseTarget);
