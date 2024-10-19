@@ -69,9 +69,20 @@ class MenuItem extends Base
             if ($this->getPrevSibling() == null) {
             
                 if ($this->getParentId() == null) {
+
+                    if($this->getNextSibling() == null) {
+
+                        $pos = null;
+                        $ref = null;
+
+                    } else {
+
+                        $pos = 'before';
+                        $ref = $this->getNextSibling()->id;
+
+                    }
                     
-                    $pos = 'before';
-                    $ref = $this->getNextSibling()->id;
+                    
                     
                 } else {
                     $pos = 'first-child';
