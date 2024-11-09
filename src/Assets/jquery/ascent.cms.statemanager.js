@@ -40,7 +40,7 @@ var StateManager = {
                     case 'radio':
                     case 'checkbox':
                        let checked = e.state.inputs[input];
-                       console.log(control, checked);
+                    //    console.log(control, checked);
                        $(control).prop('checked', checked);
                        break;
                     
@@ -88,7 +88,7 @@ var StateManager = {
 
                         case 'radio':
                         case 'checkbox':
-                            console.log($(input).attr('id'), $(input).is(':checked'));
+                            // console.log($(input).attr('id'), $(input).is(':checked'));
                             inputStore[$(input).attr('id')] = $(input).is(':checked');
                         break;
 
@@ -102,7 +102,7 @@ var StateManager = {
 
             }
 
-            console.log(inputStore);
+            // console.log(inputStore);
 
             data['inputs'] = inputStore;
 

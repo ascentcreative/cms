@@ -1168,8 +1168,8 @@ var StateManager = {
         switch (control.attr('type')) {
           case 'radio':
           case 'checkbox':
-            var _checked = e.state.inputs[input];
-            console.log(control, _checked);
+            var _checked = e.state.inputs[input]; //    console.log(control, checked);
+
             $(control).prop('checked', _checked);
             break;
 
@@ -1210,7 +1210,7 @@ var StateManager = {
             switch ($(input).attr('type')) {
               case 'radio':
               case 'checkbox':
-                console.log($(input).attr('id'), $(input).is(':checked'));
+                // console.log($(input).attr('id'), $(input).is(':checked'));
                 inputStore[$(input).attr('id')] = $(input).is(':checked');
                 break;
 
@@ -1219,14 +1219,14 @@ var StateManager = {
                 break;
             }
           }
-        }
+        } // console.log(inputStore);
+
       } catch (err) {
         _iterator.e(err);
       } finally {
         _iterator.f();
       }
 
-      console.log(inputStore);
       data['inputs'] = inputStore;
     }); // push / replace state.
 
