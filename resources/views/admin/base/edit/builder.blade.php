@@ -36,7 +36,16 @@
 
 
 @section('screen')
-    
+
+    @if($errors->any())
+    <div class="alert alert-danger">
+        Please correct the following issues:
+        <ul class="m-0">
+        {!! implode('', $errors->all('<li>:message</li>')) !!}
+        </ul>
+    </div>
+    @endif
+
     @formbody($form)
 
 @endsection
