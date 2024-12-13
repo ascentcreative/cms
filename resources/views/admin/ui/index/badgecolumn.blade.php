@@ -1,3 +1,9 @@
 <div class="badge {{ $valueclasses[$item->$property] ?? '' }} w-100">
-    {{ $item->$property }}
+
+    @isset($display[($val = $item->$property)])
+        {{ $display[$val] }}
+    @else
+        {{ $val }}
+    @endif
+
 </div>
