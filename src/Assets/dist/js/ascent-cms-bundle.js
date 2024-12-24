@@ -824,7 +824,7 @@ var ModalLink = {
                   val = Object.values(val).join('<BR/>');
                 }
 
-                $('.error-display[for="' + aryname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' + val + '</small>');
+                $(form).find('.error-display[for="' + aryname + '"]').append('<small class="validation-error alert alert-danger form-text" role="alert">' + val + '</small>');
               }
             },
             500: function _(data, xhr, request) {
