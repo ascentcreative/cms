@@ -11,8 +11,8 @@ return [
     'traitbladepaths' => ['admin.trait', 'cms::trait', 'geo::trait', 'charts::trait'],
 
     // recaptcha keys
-    'recaptcha_sitekey' => env('RECAPTCHA_SITEKEY', ''), //6Lf_PYsaAAAAANe6Uv_tzWjLVO-qwgfC9WWKkQ2u'),
-    'recaptcha_secret' => env('RECAPTCHA_SECRET', ''), //6Lf_PYsaAAAAAAm5qVKdE95rI3YYc7yMSzY3ce0U'),
+    'recaptcha_sitekey' => env('RECAPTCHA_SITEKEY', ''),
+    'recaptcha_secret' => env('RECAPTCHA_SECRET', ''), 
     'recaptcha_threshold' => env('RECAPTCHA_THRESHOLD', 0.5),
 
     // content editor
