@@ -52,7 +52,7 @@ class ObfuscateUserData extends Command
             return 1;
         }
 
-        $faker = \Faker\Factory::create(User::class, 4000);
+        $faker = \Faker\Factory::create(User::class, 10000);
 
         $users = User::whereDoesntHave('roles', function($q) {
             $q->where('name', 'admin');
@@ -66,7 +66,16 @@ class ObfuscateUserData extends Command
                     'email'=>$faker->email,
                 ]);
             } catch (\Exception $e) {
-
+                try {
+                    $user->update([
+                        'first_name'=>$faker->firstName,
+                        'last_name'=>$faker->lastName,
+                        'email'=>$faker->email,
+                    ]);
+                } catch(\Exception $e) {
+                    $this->error('Failed twice to update ' . $user->email);
+                }
+                
             }
         }
 
