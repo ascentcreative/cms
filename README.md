@@ -131,12 +131,20 @@ foreach($this->multifile_fields as $file) {
 In this instance we're registering multiple fields and the incoming data for each field will be passed to the saveMultiFiles method. Note that in these cases, the Extender trait changes the callback signature from `saveField($data)` to `saveMultiFiles($field, $data)` so that we have the context of where the data is coming from.
 
 
-
-
-
-
-
-
-
-
 ### Show-Hide Toggles
+
+Ths javascript widget allows for simple front-end manipulation of element display based on the values of form elements.
+
+ - To make an element's visibility respond to field values, add `data-showhide="[field]"` to the tag, along with a `data-show-if` or `data-hide-if` with the value to operate on. 
+
+`<div data-showhide="hasBillingAddress" data-show-if="1"/>`
+
+ - `data-show-if` and `data-hide-if` can also take:
+    - Lists of values, separated with a | `data-show-if="apple|orange"
+    - A null indicator: `data-hide-if="@null"`
+    - A not null indicator: `data-hide-if="@notnull"`
+  
+  - Animation can be used or surpressed with `data-showhide-animate="1"` or `data-showhide-animate="0"`
+
+
+
