@@ -24,7 +24,7 @@ Throughout the development of websites and applications it is common to need to 
 
  - Any link can be given the 'modal-link' css class. When clicked, the URL willbe requested via AJAX, and the widget expects an HTML fragment in return. This fragment should be in the format of a [Bootstrap 4 modal](https://getbootstrap.com/docs/4.0/components/modal/)
 
- - To make this slightly easier, the <x-cms-modal modalId="ajaxModal"> blade component provides a shortcut to returning the modal code
+ - To make this slightly easier, the `<x-cms-modal modalId="ajaxModal">` blade component provides a shortcut to returning the modal code
 
  - Buttons and links within the Modal can also be given the `modal-link` class, meaning that clicking these can then move to another modal
 
