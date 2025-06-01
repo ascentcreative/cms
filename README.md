@@ -20,6 +20,21 @@ Being a little blinkered at first, I have built some utilties and elements which
 
 ### Modal Links
 
+Throughout the development of websites and applications it is common to need to use Modal dialogs whether singly or as a flow through a particular process. The "Modal Link" feature is a reusable javascript (jQuery) widget which links with the CMS to make this as simple as possible.
+
+ - Any link can be given the 'modal-link' css class. When clicked, the URL willbe requested via AJAX, and the widget expects an HTML fragment in return. This fragment should be in the format of a [Bootstrap 4 modal](https://getbootstrap.com/docs/4.0/components/modal/)
+
+ - To make this slightly easier, the <x-cms-modal modalId="ajaxModal"> blade component provides a shortcut to returning the modal code
+
+ - Buttons and links within the Modal can also be given the `modal-link` class, meaning that clicking these can then move to another modal
+
+ - If a Modal contains a Form, it will be captured and converted to an Ajax submission automatically. This allows for various response types:
+    -  If validation fails, the modal-link widget will write the failure messages to the form elements on the open modal (if ascentcreative/forms components are being used)
+    -  If the form post results in an attachment / file being returned, this will be passed on to the browser as a download
+    -  Otherwise, another modal is expected and will be displayed
+
+- One slightly fuzzy aspect is performing an action on successful completion of the modal flow - such as refreshing the underlying after a form submission. This can be done through some simple javascript using the `hidden.bs.modal` event from Bootstrap, or by setting `data-onsuccess="refresh"` on the <form> tag within your modal.
+
 
 ### Extender Traits
 
