@@ -10,8 +10,25 @@ If you're reading this, my guess is that the CMS is already set up on your site.
 
 `php artisan migrate` should then allow all the necessary tables to be created.
 
+### Setting up an admin user
 
 ## Core Concepts
+
+### AdminBaseController
+#### Columns
+
+### Customising the Sidebar
+
+### Site Settings
+
+### Public sites
+
+#### Blade Template
+#### Package Assets
+#### @Styles
+#### @ScriptTag
+#### Minification
+#### PaeBuilder integration
 
 
 ## Items which really should be their own packages
