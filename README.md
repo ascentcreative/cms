@@ -28,7 +28,9 @@ If you're reading this, my guess is that the CMS is already set up on your site.
 #### @Styles
 #### @ScriptTag
 #### Minification
-#### PaeBuilder integration
+#### PageBuilder integration
+
+#### Publishable Trait
 
 
 ## Items which really should be their own packages
@@ -164,4 +166,4 @@ Ths javascript widget allows for simple front-end manipulation of element displa
   - Animation can be used or surpressed with `data-showhide-animate="1"` or `data-showhide-animate="0"`
 
 
-
+### Autocompletable Trait and Route::autocomplete()
